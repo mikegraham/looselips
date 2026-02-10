@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Venv
+.venv/
+
+# Tool caches
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# IDE / editor
+.claude/
+*.un~
+
+# Generated output
+examples/test_report.html
+
+# Large binaries (temporary downloads, tools)
+*.tar.zst
+*.tar.gz
+ollama-linux-amd64*

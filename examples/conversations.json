@@ -1,0 +1,107 @@
+[
+  {
+    "id": "conv-employment",
+    "title": "Resume Help",
+    "mapping": {
+      "root": {"parent": null, "message": null},
+      "msg1": {
+        "parent": "root",
+        "message": {
+          "author": {"role": "user"},
+          "content": {"parts": ["I'm a senior engineer at Sun Microsystems making $185k base plus RSUs. My manager Dave Chen approved my transfer to the Platform team last month. Can you help me update my resume?"]}
+        }
+      },
+      "msg2": {
+        "parent": "msg1",
+        "message": {
+          "author": {"role": "assistant"},
+          "content": {"parts": ["I'd be happy to help you update your resume."]}
+        }
+      }
+    }
+  },
+  {
+    "id": "conv-medical",
+    "title": "Health Questions",
+    "mapping": {
+      "root": {"parent": null, "message": null},
+      "msg1": {
+        "parent": "root",
+        "message": {
+          "author": {"role": "user"},
+          "content": {"parts": ["My psychiatrist Dr. Patel at Mass General just diagnosed me with ADHD and prescribed 20mg Adderall XR. I'm also on 50mg sertraline for anxiety. What side effects should I watch for?"]}
+        }
+      },
+      "msg2": {
+        "parent": "msg1",
+        "message": {
+          "author": {"role": "assistant"},
+          "content": {"parts": ["Here are some common side effects to be aware of."]}
+        }
+      }
+    }
+  },
+  {
+    "id": "conv-legal",
+    "title": "Legal Advice",
+    "mapping": {
+      "root": {"parent": null, "message": null},
+      "msg1": {
+        "parent": "root",
+        "message": {
+          "author": {"role": "user"},
+          "content": {"parts": ["I'm in a custody dispute with my ex. My lawyer Sarah Martinez at Goldberg & Associates filed a motion last week. Also dealing with an H-1B visa renewal -- my employer's immigration attorney says it should be straightforward."]}
+        }
+      },
+      "msg2": {
+        "parent": "msg1",
+        "message": {
+          "author": {"role": "assistant"},
+          "content": {"parts": ["I understand you're dealing with multiple legal matters."]}
+        }
+      }
+    }
+  },
+  {
+    "id": "conv-family",
+    "title": "School Research",
+    "mapping": {
+      "root": {"parent": null, "message": null},
+      "msg1": {
+        "parent": "root",
+        "message": {
+          "author": {"role": "user"},
+          "content": {"parts": ["My daughter Emma (she's 7) goes to Riverside Elementary in our neighborhood in Brookline. My wife Rachel is worried about the class sizes. Can you help me draft a letter to the principal?"]}
+        }
+      },
+      "msg2": {
+        "parent": "msg1",
+        "message": {
+          "author": {"role": "assistant"},
+          "content": {"parts": ["I can help you draft that letter."]}
+        }
+      }
+    }
+  },
+  {
+    "id": "conv-benign",
+    "title": "Recipe Help",
+    "mapping": {
+      "root": {"parent": null, "message": null},
+      "msg1": {
+        "parent": "root",
+        "message": {
+          "author": {"role": "user"},
+          "content": {"parts": ["What's a good recipe for banana bread?"]}
+        }
+      },
+      "msg2": {
+        "parent": "msg1",
+        "message": {
+          "author": {"role": "assistant"},
+          "content": {"parts": ["Here's a classic banana bread recipe."]}
+        }
+      }
+    }
+  }
+]

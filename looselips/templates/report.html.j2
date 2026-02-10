@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>looselips: {{ input_name }}</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    h1 {
+      color: #f8fafc;
+      margin-bottom: 0.3rem;
+      font-size: 1.8rem;
+    }
+
+    .sub {
+      color: #94a3b8;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .stats {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      background: #1e293b;
+      border-radius: 8px;
+      padding: 0.8rem 1.2rem;
+      min-width: 100px;
+    }
+
+    .stat b {
+      display: block;
+      font-size: 1.4rem;
+      color: #f8fafc;
+    }
+
+    .stat span {
+      color: #94a3b8;
+      font-size: 0.8rem;
+    }
+
+    .stat.flagged b { color: #ef4444; }
+    .stat.clean b   { color: #22c55e; }
+
+    .conv {
+      background: #1e293b;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      border-left: 4px solid #f59e0b;
+    }
+
+    .conv-hdr {
+      padding: 0.8rem 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .conv-hdr:hover {
+      background: #263548;
+    }
+
+    .conv-title {
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+
+    .conv-meta {
+      color: #94a3b8;
+      font-size: 0.8rem;
+    }
+
+    .conv-link {
+      color: #60a5fa;
+      text-decoration: none;
+      font-size: 0.85rem;
+      background: #1e3a5f;
+      padding: 0.25rem 0.7rem;
+      border-radius: 5px;
+      white-space: nowrap;
+    }
+
+    .conv-link:hover {
+      background: #2563eb;
+      color: #fff;
+    }
+
+    .badges {
+      padding: 0 1.2rem 0.4rem;
+      display: flex;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 20px;
+      font-weight: 500;
+      background: #78350f;
+      color: #fcd34d;
+    }
+
+    .matches {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .matches.open {
+      max-height: 5000px;
+    }
+
+    .match {
+      padding: 0.6rem 1.2rem;
+      border-top: 1px solid #334155;
+    }
+
+    .match-cat {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #f59e0b;
+    }
+
+    .ctx {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      background: #0f172a;
+      padding: 0.4rem 0.7rem;
+      border-radius: 4px;
+      word-break: break-word;
+      margin-top: 0.2rem;
+    }
+
+    .hl {
+      background: #7f1d1d;
+      color: #fca5a5;
+      padding: 0.1rem 0.2rem;
+      border-radius: 2px;
+    }
+
+    .remarks {
+      font-size: 0.85rem;
+      color: #e2e8f0;
+      font-style: italic;
+      margin-top: 0.2rem;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 3rem;
+      color: #94a3b8;
+    }
+
+    .footer {
+      text-align: center;
+      color: #475569;
+      font-size: 0.75rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #1e293b;
+    }
+  </style>
+</head>
+<body>
+
+<h1>looselips: {{ input_name }}</h1>
+<p class="sub">Generated {{ now }}</p>
+
+<div class="stats">
+  <div class="stat">
+    <b>{{ total }}</b>
+    <span>Total</span>
+  </div>
+  <div class="stat flagged">
+    <b>{{ flagged_count }}</b>
+    <span>Flagged</span>
+  </div>
+  <div class="stat clean">
+    <b>{{ clean }}</b>
+    <span>Clean</span>
+  </div>
+  <div class="stat">
+    <b>{{ total_matches }}</b>
+    <span>Matches</span>
+  </div>
+</div>
+
+{% if conversations %}
+  {% for cr in conversations %}
+    {% set i = loop.index0 %}
+    {% set conv = cr.conversation %}
+    {% set date_str = conv.create_time.strftime('%b %d, %Y') if conv.create_time else 'Unknown' %}
+    {% set categories = cr.matches | map(attribute='category') | unique | sort %}
+    {% set n_matches = cr.matches | length %}
+
+    <div class="conv" data-i="{{ i }}">
+      <div class="conv-hdr" onclick="toggle({{ i }})">
+        <div>
+          <span class="conv-title">{{ conv.title }}</span>
+          <span class="conv-meta">
+            &mdash; {{ date_str }} &middot;
+            {{ conv.messages | length }} msgs &middot;
+            {{ n_matches }} {{ 'match' if n_matches == 1 else 'matches' }}
+          </span>
+        </div>
+        <a class="conv-link" href="{{ conv.url }}" target="_blank"
+           onclick="event.stopPropagation()">Open</a>
+      </div>
+
+      <div class="badges">
+        {% for cat in categories %}
+          <span class="badge">{{ cat }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="matches" id="m-{{ i }}">
+        {% for m in cr.matches %}
+          <div class="match">
+            <div class="match-hdr">
+              <span class="match-cat">
+                [{{ m.source }}] {{ m.category }}
+              </span>
+            </div>
+            {% if m.source == 'regex' %}
+              <div class="ctx">{{ m.context | highlight(m.matched_text) }}</div>
+            {% else %}
+              <div class="remarks">{{ m.matched_text }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="empty">No findings.</div>
+{% endif %}
+
+<div class="footer">looselips</div>
+
+<script>
+  function toggle(i) {
+    document.getElementById('m-' + i).classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
