@@ -20,20 +20,6 @@ from .config import ConfigError, build_llm_matchers, build_regex_patterns, load_
 logger = logging.getLogger(__name__)
 
 
-def _complete_model(**kwargs: object) -> list[str]:
-    """List locally available ollama models for tab completion."""
-    try:
-        import ollama
-    except ImportError:
-        return []
-
-    try:
-        return [f"ollama/{m.model}" for m in ollama.list().models]
-    except Exception:  # noqa: BLE001
-        logger.debug("Ollama not reachable for tab completion", exc_info=True)
-        return []
-
-
 def main(argv: Sequence[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
         description="Scan LLM chat exports for personal information.",
@@ -50,13 +36,6 @@ def main(argv: Sequence[str] | None = None) -> None:
         "-v", "--verbose", action="count", default=0,
         help="Increase verbosity (-v for DEBUG, -vv for litellm debug too)",
     )
-    model_arg = parser.add_argument(
-        "-m",
-        "--model",
-        default=None,
-        help="LiteLLM model for LLM-based scanning (e.g. ollama/llama3.2)",
-    )
-    model_arg.completer = _complete_model  # type: ignore[attr-defined]
     argcomplete.autocomplete(parser)
     args = parser.parse_args(argv)
 
@@ -73,7 +52,7 @@ def main(argv: Sequence[str] | None = None) -> None:
 
     patterns: list[tuple[str, re.Pattern[str]]] = []
     llm_matchers: list[tuple[str, str, str | None]] = []
-    llm_model: str | None = args.model
+    llm_model: str | None = None
 
     if args.config:
         logger.debug("Loading config from %s", args.config)
@@ -84,7 +63,7 @@ def main(argv: Sequence[str] | None = None) -> None:
 
         patterns.extend(build_regex_patterns(config))
         llm_matchers = build_llm_matchers(config)
-        llm_model = args.model or config.default_model
+        llm_model = config.default_model
         logger.debug("Config: %d regex, %d llm matchers, default_model=%s",
                      len(patterns), len(llm_matchers), llm_model)
 
