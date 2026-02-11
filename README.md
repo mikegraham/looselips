@@ -40,8 +40,8 @@ pattern = '(?i)742\s+Evergreen\s+Terrace'
 ```
 
 Patterns use the Python [re](https://docs.python.org/3/library/re.html) module.
-Inline flags like `(?i)` for case-insensitive and `(?s)` for dotall work in the
-pattern string itself.
+Inline flags like `(?i)` for case-insensitive, `(?s)` for dotall, and `(?x)` for
+verbose mode (comments and ignored whitespace) work in the pattern string itself.
 
 ```bash
 looselips chatgpt-export.zip --config looselips.toml
