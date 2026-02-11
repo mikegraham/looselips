@@ -80,3 +80,34 @@ def test_config_error_exits(tmp_path: Path) -> None:
 def test_file_not_found_errors(tmp_path: Path) -> None:
     with pytest.raises(SystemExit):
         main([str(tmp_path / "nope.json")])
+
+
+def test_verbose_flag(tmp_path: Path) -> None:
+    """Single -v sets DEBUG on root but WARNING on litellm/httpx."""
+    import logging
+
+    root = logging.getLogger()
+    root.handlers.clear()
+    root.setLevel(logging.WARNING)
+
+    export = _write_export(tmp_path)
+    output = str(tmp_path / "report.html")
+    main([export, "-o", output, "-v"])
+    assert root.level == logging.DEBUG
+    assert logging.getLogger("LiteLLM").level == logging.WARNING
+    assert logging.getLogger("httpx").level == logging.WARNING
+
+
+def test_very_verbose_flag(tmp_path: Path) -> None:
+    """-vv sets DEBUG globally without quieting litellm."""
+    import logging
+
+    root = logging.getLogger()
+    root.handlers.clear()
+    root.setLevel(logging.WARNING)
+    logging.getLogger("LiteLLM").setLevel(logging.NOTSET)
+
+    export = _write_export(tmp_path)
+    output = str(tmp_path / "report.html")
+    main([export, "-o", output, "-vv"])
+    assert root.level == logging.DEBUG

@@ -32,7 +32,6 @@ Repository = "https://github.com/mikegraham/looselips"
 
 [project.optional-dependencies]
 dev = [
-    "bandit",
     "build",
     "mypy",
     "pytest",
@@ -56,7 +55,7 @@ looselips = ["templates/*.j2", "py.typed"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--mypy --ruff --strict-markers"
+addopts = "--mypy --ruff --strict-markers --cov --cov-branch --cov-fail-under=90"
 xfail_strict = true
 filterwarnings = ["error"]
 
@@ -89,9 +88,6 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = ["S", "T20"]
 "looselips/parsers.py" = ["B023"]  # walk() uses enclosing scope intentionally
-
-[tool.bandit]
-exclude_dirs = ["tests"]
 
 [tool.mypy]
 strict = true

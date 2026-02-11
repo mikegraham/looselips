@@ -35,6 +35,11 @@ def test_ts_invalid() -> None:
     assert _ts("not-a-number") is None
 
 
+def test_ts_nan() -> None:
+    # NaN is a valid float but datetime.fromtimestamp rejects it.
+    assert _ts(float("nan")) is None
+
+
 
 def test_conversation_url() -> None:
     c = Conversation(id="abc", title="t", messages=[])
@@ -190,6 +195,32 @@ def test_parse_chatgpt_skips_non_string_parts(tmp_path: Path) -> None:
     path = _write_export(tmp_path, data)
     convs = parse_chatgpt(path)
     assert convs[0].messages[0].text == "text part"
+
+
+def test_parse_chatgpt_dangling_child_ref(tmp_path: Path) -> None:
+    """A child reference pointing to a missing node is silently skipped."""
+    data: list[dict[str, Any]] = [
+        {
+            "id": "conv-dangle",
+            "title": "Dangling",
+            "mapping": {
+                "root": {"parent": None, "message": None},
+                "msg": {
+                    "parent": "root",
+                    "message": {
+                        "author": {"role": "user"},
+                        "content": {"parts": ["Hello"]},
+                    },
+                },
+                # Points to a node that doesn't exist
+                "ghost": {"parent": "msg"},
+            },
+        }
+    ]
+    path = _write_export(tmp_path, data)
+    convs = parse_chatgpt(path)
+    assert len(convs) == 1
+    assert convs[0].messages[0].text == "Hello"
 
 
 def test_parse_chatgpt_from_fileobj() -> None:
