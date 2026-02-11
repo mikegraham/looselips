@@ -1,0 +1,68 @@
+# looselips sample config -- sensitive PII and secrets
+#
+# Usage: looselips chatgpt-export.zip --config example.toml
+#
+# Each regex matcher needs: type ("regex"), category, pattern.
+# Patterns use Python re syntax -- inline flags like (?i) for case-insensitive,
+# (?s) for dotall, and (?x) for verbose mode (comments + ignored whitespace)
+# are supported.
+
+# Default model for LLM matchers (any LiteLLM model string). Required to have llm matchers below.
+model = "ollama/qwen3:0.6b"
+
+[[matcher]]
+type = "regex"
+category = "US SSN / ITIN"
+# US Social Security Numbers (excluding invalid prefixes 000, 666, 9xx)
+# and IRS Individual Taxpayer Identification Numbers (9xx prefix, any middle
+# group). Formats: 123-45-6789, 123 45 6789, 123456789.
+pattern = '''\b(?:(?!000|666|9\d\d)\d{3}|9\d{2})[- ]?\d{2}[- ]?\d{4}\b'''
+
+[[matcher]]
+type = "regex"
+category = "Credit Card Number"
+# Visa, Mastercard, Amex, Discover -- with optional spaces or dashes.
+pattern = '\b(?:4\d{3}|5[1-5]\d{2}|3[47]\d{2}|6(?:011|5\d{2}))[- ]?\d{4}[- ]?\d{4}[- ]?\d{2,4}\b'
+
+[[matcher]]
+type = "regex"
+category = "Credential / Secret"
+pattern = '''(?xi)
+  # API keys with keyword labels (api_key = "...", Bearer ...)
+  (?:api[_-]?key|api[_-]?secret|access[_-]?token|auth[_-]?token|bearer)
+  \s*[:=]\s*["']?[A-Za-z0-9_\-]{20,}["']?
+  # AWS access key IDs (AKIA prefix, 20 chars)
+  | \bAKIA[0-9A-Z]{16}\b
+  # GitHub tokens (ghp_personal, gho_oauth, ghu_user-to-server, ghs_app, ghr_refresh)
+  | \bgh[pousr]_[A-Za-z0-9_]{36,}\b
+  # GitLab personal access tokens
+  | \bglpat-[A-Za-z0-9_\-]{20,}\b
+  # Slack tokens (bot, user, app-level, legacy)
+  | \bxox[bpoa]-[A-Za-z0-9\-]{10,}
+  # Stripe API keys (secret, publishable, restricted -- live and test)
+  | \b[spr]k_(live|test)_[A-Za-z0-9]{10,}\b
+  # Google API keys
+  | \bAIzaSy[A-Za-z0-9_\-]{33}\b
+  # npm tokens
+  | \bnpm_[A-Za-z0-9]{36,}\b
+  # Password in text ("my password is ...", "passwd: ...")
+  | (?:password|passwd|pwd)\s*(?:is|was|=|:)\s*\S+
+  # PEM private key blocks (RSA, EC, DSA, OPENSSH, etc.)
+  | -----BEGIN\ [A-Z\ ]*PRIVATE\ KEY-----
+  # Database connection URLs with embedded credentials (user:pass@host)
+  | (?:postgres(?:ql)?|mysql|mongodb(?:\+srv)?|redis|amqp)://[^\s@]+@[^\s]+
+'''
+
+[[matcher]]
+type = "llm"
+name = "Compromising Content"
+prompt = """Flag content the user would not want leaked to an employer,
+family member, journalist, or blackmailer: anything the user probably
+did not want to share.
+
+Look for: embarrassing personal details, compromising admissions,
+objectionable substance use, detailed financial information, login
+credentials, references to illegal activity, things that could cause
+someone to be targetted by oppressive governments (e.g. membership of
+dissident groups or at-risk minorities), anything the user asked to keep
+private, etc."""

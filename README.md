@@ -24,7 +24,7 @@ Writes `chatgpt-export_report.html` with any matches found.
 
 ## Config file
 
-Define your matchers in a `looselips.toml`. See `examples/sample_config.toml` for a
+Define your matchers in a `looselips.toml`. See `examples/example.toml` for a
 full example with common patterns.
 
 ```toml
