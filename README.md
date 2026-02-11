@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/mikegraham/looselips/main/docs/loose_lips_sink_ships.jpg" alt="Loose Lips Might Sink Ships" width="300">
 
-Scan your LLM chat exports for personal information you might not want sitting in the cloud.
+Scan your ChatGPT and Claude chat exports for personal information you might not want sitting in the cloud.
 
 ## Install
 
@@ -12,7 +12,9 @@ pip install looselips
 
 ## Basic usage
 
-1. Export your data from ChatGPT (Settings -> Data controls -> Export).
+1. Export your data (both services email you a download link):
+   - **ChatGPT**: Settings -> Data controls -> Export.
+   - **Claude**: Settings -> Privacy -> Export Data.
 2. Create a `looselips.toml` config defining what to look for (see below).
 3. Run:
 
@@ -20,7 +22,8 @@ pip install looselips
 looselips --config looselips.toml export.zip
 ```
 
-Writes `chatgpt-export_report.html` with any matches found.
+The format (ChatGPT vs Claude) is auto-detected. Accepts .zip exports or raw
+`conversations.json` files from either service.
 
 ## Config file
 
