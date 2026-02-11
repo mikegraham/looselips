@@ -1,0 +1,122 @@
+# looselips sample config -- sensitive PII and secrets
+#
+# Usage: looselips chatgpt-export.zip --config sample_config.toml
+#
+# Focuses on things you really don't want in the cloud: government IDs,
+# financial account numbers, credentials, and compromising content.
+# Ordinary PII like names, emails, and phone numbers is left out -- most
+# people share those with LLMs intentionally.
+#
+# Each regex matcher needs: type, category, pattern.
+# Patterns use Python re syntax -- inline flags like (?i) for case-insensitive
+# and (?s) for dotall are supported.
+
+# ---------------------------------------------------------------------------
+# Default model for LLM matchers (any LiteLLM model string).
+# Uncomment to enable the LLM matcher at the bottom.
+# ---------------------------------------------------------------------------
+
+# model = "ollama/qwen3:0.6b"
+
+# ===========================================================================
+# Government IDs
+# ===========================================================================
+
+[[matcher]]
+type = "regex"
+category = "Social Security Number"
+# SSN formats: 123-45-6789, 123 45 6789, 123456789.
+# First group cannot be 000, 666, or 900-999 per SSA rules.
+pattern = '\b(?!000|666|9\d\d)\d{3}[- ]?\d{2}[- ]?\d{4}\b'
+
+[[matcher]]
+type = "regex"
+category = "US ITIN"
+# Individual Taxpayer Identification Number -- starts with 9,
+# specific ranges for the middle group per IRS rules.
+pattern = '\b9\d{2}[- ](5\d|6[0-5]|7\d|8[0-8]|9([0-2]|[4-9]))[- ]\d{4}\b'
+
+[[matcher]]
+type = "regex"
+category = "Passport Number"
+# US passport: letter + 8 digits. Other countries vary but this catches
+# the pattern when preceded by "passport" context.
+pattern = '(?i)passport\s*(?:#|no\.?|number)?\s*:?\s*[A-Z]?\d{6,9}\b'
+
+# ===========================================================================
+# Financial
+# ===========================================================================
+
+[[matcher]]
+type = "regex"
+category = "Credit Card Number"
+# Visa, Mastercard, Amex, Discover -- with optional spaces or dashes.
+pattern = '\b(?:4\d{3}|5[1-5]\d{2}|3[47]\d{2}|6(?:011|5\d{2}))[- ]?\d{4}[- ]?\d{4}[- ]?\d{2,4}\b'
+
+[[matcher]]
+type = "regex"
+category = "Bank Account / Routing Number"
+# US routing numbers (9 digits) and account numbers when labeled.
+pattern = '(?i)(?:routing|account)\s*(?:#|no\.?|number)?\s*:?\s*\d{6,17}\b'
+
+[[matcher]]
+type = "regex"
+category = "IBAN"
+# International Bank Account Number -- 2-letter country code + 2 check
+# digits + up to 30 alphanumeric characters.
+pattern = '(?<![A-Z0-9])[A-Z]{2}\d{2}[- ]?[A-Z0-9]{4}([- ]?[A-Z0-9]{4}){1,7}[- ]?[A-Z0-9]{1,4}(?![A-Z0-9])'
+
+# ===========================================================================
+# Credentials & Secrets
+# ===========================================================================
+
+[[matcher]]
+type = "regex"
+category = "Password in Text"
+# "my password is ...", "password: ...", "passwd = ...", etc.
+pattern = '(?i)(?:password|passwd|pwd)\s*(?:is|was|=|:)\s*\S+'
+
+[[matcher]]
+type = "regex"
+category = "Private Key Block"
+# PEM-encoded private keys (RSA, EC, generic).
+pattern = '-----BEGIN (?:RSA |EC )?PRIVATE KEY-----'
+
+[[matcher]]
+type = "regex"
+category = "API Key / Token"
+# Lines like: api_key = "sk-abc123...", "Authorization: Bearer ..."
+pattern = """(?i)(?:api[_-]?key|api[_-]?secret|access[_-]?token|auth[_-]?token|bearer)\s*[:=]\s*["']?[A-Za-z0-9_\-]{20,}["']?"""
+
+[[matcher]]
+type = "regex"
+category = "AWS Access Key"
+# AWS access key IDs always start with AKIA, 20 characters total.
+pattern = '\bAKIA[0-9A-Z]{16}\b'
+
+[[matcher]]
+type = "regex"
+category = "Database Connection String"
+# Connection URLs with embedded credentials: postgres://user:pass@host
+pattern = '(?:postgres(?:ql)?|mysql|mongodb(?:\+srv)?|redis|amqp)://[^\s]+'
+
+# ===========================================================================
+# LLM Matcher
+# ===========================================================================
+# Catches things regex cannot. Each LLM matcher runs a separate inference
+# pass per conversation chunk -- they are much slower than regex, so keep
+# the number small.
+#
+# Uncomment the 'model' setting above to enable.
+
+# [[matcher]]
+# type = "llm"
+# name = "Compromising Content"
+# prompt = """Flag content the user would not want leaked to an employer,
+# family member, or journalist.
+#
+# Look for: confessions or descriptions of illegal activity, evidence of
+# drug use or substance abuse, sexual content or explicit material,
+# passwords or credentials spoken in plain language, detailed financial
+# account information, or anything the user explicitly said should be
+# kept secret or private."""
