@@ -15,8 +15,6 @@ def _write_export(tmp_path: Path, data: list[dict[str, Any]]) -> str:
     return str(p)
 
 
-# ── _ts helper ─────────────────────────────────────────────
-
 
 def test_ts_none() -> None:
     assert _ts(None) is None
@@ -37,15 +35,11 @@ def test_ts_invalid() -> None:
     assert _ts("not-a-number") is None
 
 
-# ── Conversation.url ───────────────────────────────────────
-
 
 def test_conversation_url() -> None:
     c = Conversation(id="abc", title="t", messages=[])
     assert c.url == "https://chatgpt.com/c/abc"
 
-
-# ── parse_chatgpt ──────────────────────────────────────────
 
 
 def test_parse_chatgpt_basic(tmp_path: Path) -> None:
