@@ -17,7 +17,7 @@ pip install looselips
 3. Run:
 
 ```bash
-looselips chatgpt-export.zip --config looselips.toml
+looselips --config looselips.toml export.zip
 ```
 
 Writes `chatgpt-export_report.html` with any matches found.
@@ -44,7 +44,7 @@ Inline flags like `(?i)` for case-insensitive, `(?s)` for dotall, and `(?x)` for
 verbose mode (comments and ignored whitespace) work in the pattern string itself.
 
 ```bash
-looselips chatgpt-export.zip --config looselips.toml
+looselips --config looselips.toml export.zip
 ```
 
 ## LLM matchers
@@ -71,10 +71,10 @@ You can override the model per-matcher with the `model` key.
 
 ## Output
 
-Default output is `<input>_report.html`. Override with `-o`:
+Default output is `<input (without extension)>_report.html`. Override with `--output`:
 
 ```bash
-looselips chatgpt-export.zip --config looselips.toml --output my_report.html
+looselips --config looselips.toml --output=report.html export.zip
 ```
 
 Everything runs locally -- no data leaves your machine (unless you use a cloud LLM model).
