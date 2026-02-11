@@ -12,8 +12,8 @@
 # REGEX MATCHERS
 # ===========================================================================
 # Each regex matcher needs: type, category, pattern.
-# Optional: ignore_case (default false).
-# Patterns use Python regex syntax.
+# Patterns use Python re syntax -- inline flags like (?i) for case-insensitive
+# and (?s) for dotall are supported.
 
 # --- Identity & Government IDs -------------------------------------------
 
@@ -84,14 +84,12 @@ type = "regex"
 category = "Generic API Key"
 # Catches lines like: api_key = "sk-abc123...", "Authorization: Bearer ..."
 pattern = """(?i)(?:api[_-]?key|api[_-]?secret|access[_-]?token|auth[_-]?token|bearer)\s*[:=]\s*["']?[A-Za-z0-9_\-]{20,}["']?"""
-ignore_case = true
 
 [[matcher]]
 type = "regex"
 category = "Password in Text"
 # Catches "my password is ...", "password: ...", "passwd = ...", etc.
 pattern = '(?i)(?:password|passwd|pwd)\s*(?:is|was|=|:)\s*\S+'
-ignore_case = true
 
 [[matcher]]
 type = "regex"

@@ -16,7 +16,6 @@ class MatcherDef:
     name: str = ""  # required for llm
     category: str = ""  # required for regex
     pattern: str = ""  # regex only
-    ignore_case: bool = False  # regex only
     prompt: str = ""  # llm only
     model: str | None = None  # llm only, overrides default
 
@@ -33,7 +32,7 @@ class ConfigError(Exception):
     """Raised for invalid config files."""
 
 
-_VALID_MATCHER_KEYS = {"type", "category", "name", "pattern", "ignore_case", "prompt", "model"}
+_VALID_MATCHER_KEYS = {"type", "category", "name", "pattern", "prompt", "model"}
 
 
 def load_config(path: str | Path) -> Config:
@@ -66,9 +65,8 @@ def load_config(path: str | Path) -> Config:
                     f"matcher #{i + 1}: regex matcher requires 'category'"
                 )
             # Validate the regex compiles
-            flags = re.IGNORECASE if m.get("ignore_case", False) else 0
             try:
-                re.compile(pattern, flags)
+                re.compile(pattern)
             except re.error as e:
                 raise ConfigError(f"matcher #{i + 1}: invalid regex: {e}") from e
 
@@ -77,7 +75,6 @@ def load_config(path: str | Path) -> Config:
                     type="regex",
                     category=category,
                     pattern=pattern,
-                    ignore_case=m.get("ignore_case", False),
                 )
             )
 
@@ -108,8 +105,7 @@ def build_regex_patterns(
     for m in config.matchers:
         if m.type != "regex":
             continue
-        flags = re.IGNORECASE if m.ignore_case else 0
-        patterns.append((m.category, re.compile(m.pattern, flags)))
+        patterns.append((m.category, re.compile(m.pattern)))
     return patterns
 
 

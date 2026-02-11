@@ -109,8 +109,9 @@ def scan(
     for conv in conversations:
         matches: list[Match] = []
 
-        for msg in conv.messages:
-            matches.extend(regex_scan(msg.text, patterns))
+        if patterns and conv.messages:
+            full_text = "\n\n".join(m.text for m in conv.messages)
+            matches.extend(regex_scan(full_text, patterns))
 
         if effective_llm and conv.messages:
             chunks = _chunk_conversation(conv)

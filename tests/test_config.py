@@ -44,7 +44,6 @@ def test_load_regex_matcher(tmp_path: Path) -> None:
 type = "regex"
 category = "Phone"
 pattern = '212.?867.?5309'
-ignore_case = true
 """,
     )
     config = load_config(path)
@@ -53,7 +52,6 @@ ignore_case = true
     assert m.type == "regex"
     assert m.category == "Phone"
     assert m.pattern == "212.?867.?5309"
-    assert m.ignore_case is True
 
 
 def test_load_llm_matcher(tmp_path: Path) -> None:
@@ -167,8 +165,7 @@ prompt = "ignored"
 [[matcher]]
 type = "regex"
 category = "Custom"
-pattern = 'foo'
-ignore_case = true
+pattern = '(?i)foo'
 """,
     )
     config = load_config(path)
@@ -177,7 +174,7 @@ ignore_case = true
     assert patterns[0][0] == "Phone"
     assert patterns[0][1].search("555-1234")
     assert patterns[1][0] == "Custom"
-    assert patterns[1][1].search("FOO")  # ignore_case
+    assert patterns[1][1].search("FOO")  # (?i) inline flag
 
 
 def test_build_llm_matchers(tmp_path: Path) -> None:

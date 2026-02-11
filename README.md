@@ -36,9 +36,12 @@ pattern = '212.?867.?5309'
 [[matcher]]
 type = "regex"
 category = "Home Address"
-pattern = '742\s+Evergreen\s+Terrace'
-ignore_case = true
+pattern = '(?i)742\s+Evergreen\s+Terrace'
 ```
+
+Patterns use the Python [re](https://docs.python.org/3/library/re.html) module.
+Inline flags like `(?i)` for case-insensitive and `(?s)` for dotall work in the
+pattern string itself.
 
 ```bash
 looselips chatgpt-export.zip --config looselips.toml

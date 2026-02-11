@@ -5,16 +5,35 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "looselips"
 version = "0.1.0"
+description = "Scan your LLM chat exports for personal information"
+readme = "README.md"
+license = "MIT"
 requires-python = ">=3.11"
+authors = [
+    {name = "Michael Graham", email = "mikegraham@gmail.com"},
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+]
 dependencies = [
     "argcomplete",
     "instructor[litellm]",
     "jinja2",
 ]
 
+[project.urls]
+Homepage = "https://github.com/mikegraham/looselips"
+Repository = "https://github.com/mikegraham/looselips"
+
 [project.optional-dependencies]
 dev = [
     "bandit",
+    "build",
     "mypy",
     "pytest",
     "pytest-cov",
@@ -22,6 +41,7 @@ dev = [
     "pytest-randomly",
     "pytest-ruff",
     "ruff",
+    "twine",
 ]
 
 [project.scripts]
@@ -29,6 +49,10 @@ looselips = "looselips.cli.app:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
+exclude = ["tests*", "examples*"]
+
+[tool.setuptools.package-data]
+looselips = ["templates/*.j2", "py.typed"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
