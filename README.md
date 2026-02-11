@@ -1,6 +1,6 @@
 # looselips
 
-<img src="docs/loose_lips_sink_ships.jpg" alt="Loose Lips Might Sink Ships" width="300">
+<img src="https://raw.githubusercontent.com/mikegraham/looselips/main/docs/loose_lips_sink_ships.jpg" alt="Loose Lips Might Sink Ships" width="300">
 
 Scan your LLM chat exports for personal information you might not want sitting in the cloud.
 
