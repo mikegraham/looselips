@@ -94,10 +94,9 @@ def scan(
     if llm_matchers:
         for name, prompt, model_override in llm_matchers:
             model = model_override or llm_model
-            if model:
-                effective_llm.append((name, prompt, model))
-            else:
-                logger.warning("LLM matcher has no model, skipping: %s", name)
+            if not model:
+                raise ValueError(f"LLM matcher {name!r} has no model")
+            effective_llm.append((name, prompt, model))
 
     if effective_llm:
         logger.debug("scan: %d LLM matchers active", len(effective_llm))

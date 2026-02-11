@@ -32,6 +32,7 @@ class ConfigError(Exception):
     """Raised for invalid config files."""
 
 
+_VALID_TOP_KEYS = {"model", "matcher"}
 _VALID_MATCHER_KEYS = {"type", "category", "name", "pattern", "prompt", "model"}
 
 
@@ -39,6 +40,10 @@ def load_config(path: str | Path) -> Config:
     """Load and validate a TOML config file."""
     with open(path, "rb") as f:
         raw = tomllib.load(f)
+
+    unknown_top = set(raw.keys()) - _VALID_TOP_KEYS
+    if unknown_top:
+        raise ConfigError(f"unknown top-level keys: {unknown_top}")
 
     config = Config(
         default_model=raw.get("model"),
@@ -64,6 +69,11 @@ def load_config(path: str | Path) -> Config:
                 raise ConfigError(
                     f"matcher #{i + 1}: regex matcher requires 'category'"
                 )
+            unexpected = {"name", "prompt"} & set(m.keys())
+            if unexpected:
+                raise ConfigError(
+                    f"matcher #{i + 1}: regex matcher does not use: {unexpected}"
+                )
             # Validate the regex compiles
             try:
                 re.compile(pattern)
@@ -85,6 +95,11 @@ def load_config(path: str | Path) -> Config:
                 raise ConfigError(f"matcher #{i + 1}: llm matcher requires 'name'")
             if not prompt:
                 raise ConfigError(f"matcher #{i + 1}: llm matcher requires 'prompt'")
+            unexpected = {"category", "pattern"} & set(m.keys())
+            if unexpected:
+                raise ConfigError(
+                    f"matcher #{i + 1}: llm matcher does not use: {unexpected}"
+                )
             config.matchers.append(
                 MatcherDef(
                     type="llm",
@@ -92,6 +107,13 @@ def load_config(path: str | Path) -> Config:
                     prompt=prompt,
                     model=m.get("model"),
                 )
+            )
+
+    # Every LLM matcher must have a model (its own or the default).
+    for m in config.matchers:
+        if m.type == "llm" and not m.model and not config.default_model:
+            raise ConfigError(
+                f"LLM matcher {m.name!r} has no model and no default model is set"
             )
 
     return config

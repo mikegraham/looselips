@@ -78,6 +78,8 @@ def test_load_multiple_matchers(tmp_path: Path) -> None:
     path = _write(
         tmp_path,
         """
+model = "test-model"
+
 [[matcher]]
 type = "regex"
 category = "SSN"
@@ -152,6 +154,8 @@ def test_build_regex_patterns(tmp_path: Path) -> None:
     path = _write(
         tmp_path,
         """
+model = "test-model"
+
 [[matcher]]
 type = "regex"
 category = "Phone"
@@ -181,6 +185,8 @@ def test_build_llm_matchers(tmp_path: Path) -> None:
     path = _write(
         tmp_path,
         """
+model = "default-model"
+
 [[matcher]]
 type = "regex"
 category = "X"
@@ -203,3 +209,58 @@ model = "special-model"
     assert len(llm) == 2
     assert llm[0] == ("names", "Find names", None)
     assert llm[1] == ("addresses", "Find addresses", "special-model")
+
+
+def test_llm_matcher_without_model(tmp_path: Path) -> None:
+    path = _write(
+        tmp_path,
+        """
+[[matcher]]
+type = "llm"
+name = "test"
+prompt = "Find stuff"
+""",
+    )
+    with pytest.raises(ConfigError, match="no model and no default model"):
+        load_config(path)
+
+
+def test_llm_matcher_with_per_matcher_model(tmp_path: Path) -> None:
+    path = _write(
+        tmp_path,
+        """
+[[matcher]]
+type = "llm"
+name = "test"
+prompt = "Find stuff"
+model = "my-model"
+""",
+    )
+    config = load_config(path)
+    assert config.matchers[0].model == "my-model"
+
+
+def test_unknown_top_level_key(tmp_path: Path) -> None:
+    path = _write(tmp_path, 'modle = "ollama/llama3"\n')
+    with pytest.raises(ConfigError, match="unknown top-level keys"):
+        load_config(path)
+
+
+def test_regex_with_llm_keys(tmp_path: Path) -> None:
+    path = _write(
+        tmp_path,
+        '[[matcher]]\ntype = "regex"\ncategory = "X"\npattern = "x"\nprompt = "oops"\n',
+    )
+    with pytest.raises(ConfigError, match="does not use"):
+        load_config(path)
+
+
+def test_llm_with_regex_keys(tmp_path: Path) -> None:
+    path = _write(
+        tmp_path,
+        'model = "m"\n'
+        '[[matcher]]\ntype = "llm"\nname = "X"\n'
+        'prompt = "p"\npattern = "oops"\n',
+    )
+    with pytest.raises(ConfigError, match="does not use"):
+        load_config(path)

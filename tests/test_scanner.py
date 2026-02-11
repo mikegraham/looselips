@@ -3,6 +3,8 @@
 import re
 from unittest.mock import patch
 
+import pytest
+
 from looselips.matchers import LLMParseError, Match
 from looselips.parsers import Conversation, Message
 from looselips.scanner import ConversationResult, _chunk_conversation, scan
@@ -88,15 +90,14 @@ def test_scan_with_explicit_llm_matchers() -> None:
         assert len(result.flagged) == 1
 
 
-def test_scan_llm_matcher_no_model_skipped() -> None:
-    with patch("looselips.scanner.llm_scan") as mock:
+def test_scan_llm_matcher_no_model_raises() -> None:
+    with pytest.raises(ValueError, match="has no model"):
         scan(
             [_conv([("user", "test")])],
             patterns=[],
             llm_model=None,
             llm_matchers=[("test", "prompt", None)],
         )
-        assert not mock.called
 
 
 def test_scan_llm_parse_error_continues() -> None:
