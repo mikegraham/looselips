@@ -52,20 +52,14 @@ def test_empty_report_shows_no_findings(empty_result: ScanResult) -> None:
     assert "No findings" in html
 
 
-def test_report_contains_html_structure(regex_result: ScanResult) -> None:
+def test_report_input_name_in_title(regex_result: ScanResult) -> None:
     html = generate_html(regex_result, input_name="conversations")
-    assert "<html" in html
-    assert "</html>" in html
-    assert "looselips: conversations" in html
+    assert "<title>looselips: conversations</title>" in html
 
 
-def test_report_shows_conversation_title(regex_result: ScanResult) -> None:
+def test_report_shows_conversation_and_matches(regex_result: ScanResult) -> None:
     html = generate_html(regex_result)
     assert "Test Chat" in html
-
-
-def test_report_shows_match_category_and_text(regex_result: ScanResult) -> None:
-    html = generate_html(regex_result)
     assert "Email" in html
     assert "a@b.com" in html
 
@@ -105,9 +99,8 @@ def test_report_stats(regex_result: ScanResult) -> None:
     assert ">52<" in html  # clean
 
 
-def test_write_report_creates_file(tmp_path: Path, empty_result: ScanResult) -> None:
+def test_write_report_creates_file(tmp_path: Path, regex_result: ScanResult) -> None:
     out = tmp_path / "report.html"
-    write_report(empty_result, str(out))
-    assert out.exists()
+    write_report(regex_result, str(out))
     content = out.read_text(encoding="utf-8")
-    assert "<html" in content
+    assert "Test Chat" in content

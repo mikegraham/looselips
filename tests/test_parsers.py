@@ -1,9 +1,7 @@
 """Tests for looselips.parsers."""
 
-import io
 import json
 from datetime import UTC, datetime
-from pathlib import Path
 from typing import Any
 
 from looselips.parsers import (
@@ -16,11 +14,8 @@ from looselips.parsers import (
 )
 
 
-def _write_export(tmp_path: Path, data: list[dict[str, Any]]) -> str:
-    p = tmp_path / "conversations.json"
-    p.write_text(json.dumps(data), encoding="utf-8")
-    return str(p)
-
+def _to_bytes(data: list[dict[str, Any]]) -> bytes:
+    return json.dumps(data).encode()
 
 
 def test_ts_none() -> None:
@@ -30,12 +25,6 @@ def test_ts_none() -> None:
 def test_ts_valid() -> None:
     result = _ts(0)
     assert result == datetime(1970, 1, 1, tzinfo=UTC)
-
-
-def test_ts_float() -> None:
-    result = _ts(1700000000.0)
-    assert isinstance(result, datetime)
-    assert result.tzinfo == UTC
 
 
 def test_ts_invalid() -> None:
@@ -54,8 +43,7 @@ def test_conversation_url() -> None:
 
 
 
-
-def test_parse_chatgpt_basic(tmp_path: Path) -> None:
+def test_parse_chatgpt_basic() -> None:
     data: list[dict[str, Any]] = [
         {
             "id": "conv-1",
@@ -84,8 +72,7 @@ def test_parse_chatgpt_basic(tmp_path: Path) -> None:
             },
         }
     ]
-    path = _write_export(tmp_path, data)
-    convs = parse_chatgpt(path)
+    convs = parse_chatgpt(_to_bytes(data))
 
     assert len(convs) == 1
     c = convs[0]
@@ -97,7 +84,8 @@ def test_parse_chatgpt_basic(tmp_path: Path) -> None:
     assert c.messages[1] == Message(role="assistant", text="Hi there!")
 
 
-def test_parse_chatgpt_skips_system_messages(tmp_path: Path) -> None:
+def test_parse_chatgpt_includes_all_roles() -> None:
+    """All roles are included to avoid false negatives."""
     data: list[dict[str, Any]] = [
         {
             "id": "conv-2",
@@ -111,8 +99,15 @@ def test_parse_chatgpt_skips_system_messages(tmp_path: Path) -> None:
                         "content": {"parts": ["You are helpful"]},
                     },
                 },
-                "usr": {
+                "tool": {
                     "parent": "sys",
+                    "message": {
+                        "author": {"role": "tool"},
+                        "content": {"parts": ["Tool output"]},
+                    },
+                },
+                "usr": {
+                    "parent": "tool",
                     "message": {
                         "author": {"role": "user"},
                         "content": {"parts": ["Hi"]},
@@ -121,22 +116,22 @@ def test_parse_chatgpt_skips_system_messages(tmp_path: Path) -> None:
             },
         }
     ]
-    path = _write_export(tmp_path, data)
-    convs = parse_chatgpt(path)
+    convs = parse_chatgpt(_to_bytes(data))
 
     assert len(convs) == 1
-    assert len(convs[0].messages) == 1
-    assert convs[0].messages[0].role == "user"
+    assert len(convs[0].messages) == 3
+    assert convs[0].messages[0].role == "system"
+    assert convs[0].messages[1].role == "tool"
+    assert convs[0].messages[2].role == "user"
 
 
-def test_parse_chatgpt_empty_mapping(tmp_path: Path) -> None:
+def test_parse_chatgpt_empty_mapping() -> None:
     data: list[dict[str, Any]] = [{"id": "conv-3", "title": "Empty", "mapping": {}}]
-    path = _write_export(tmp_path, data)
-    convs = parse_chatgpt(path)
+    convs = parse_chatgpt(_to_bytes(data))
     assert len(convs) == 0
 
 
-def test_parse_chatgpt_multipart(tmp_path: Path) -> None:
+def test_parse_chatgpt_multipart() -> None:
     data: list[dict[str, Any]] = [
         {
             "id": "conv-4",
@@ -153,14 +148,13 @@ def test_parse_chatgpt_multipart(tmp_path: Path) -> None:
             },
         }
     ]
-    path = _write_export(tmp_path, data)
-    convs = parse_chatgpt(path)
+    convs = parse_chatgpt(_to_bytes(data))
 
     assert len(convs) == 1
     assert convs[0].messages[0].text == "Part one\nPart two"
 
 
-def test_parse_chatgpt_untitled(tmp_path: Path) -> None:
+def test_parse_chatgpt_untitled() -> None:
     data: list[dict[str, Any]] = [
         {
             "id": "conv-5",
@@ -177,12 +171,11 @@ def test_parse_chatgpt_untitled(tmp_path: Path) -> None:
             },
         }
     ]
-    path = _write_export(tmp_path, data)
-    convs = parse_chatgpt(path)
+    convs = parse_chatgpt(_to_bytes(data))
     assert convs[0].title == "Untitled"
 
 
-def test_parse_chatgpt_skips_non_string_parts(tmp_path: Path) -> None:
+def test_parse_chatgpt_skips_non_string_parts() -> None:
     """Non-string parts (e.g. image metadata dicts) are filtered out."""
     data: list[dict[str, Any]] = [
         {
@@ -200,12 +193,11 @@ def test_parse_chatgpt_skips_non_string_parts(tmp_path: Path) -> None:
             },
         }
     ]
-    path = _write_export(tmp_path, data)
-    convs = parse_chatgpt(path)
+    convs = parse_chatgpt(_to_bytes(data))
     assert convs[0].messages[0].text == "text part"
 
 
-def test_parse_chatgpt_dangling_child_ref(tmp_path: Path) -> None:
+def test_parse_chatgpt_dangling_child_ref() -> None:
     """A child reference pointing to a missing node is silently skipped."""
     data: list[dict[str, Any]] = [
         {
@@ -225,35 +217,9 @@ def test_parse_chatgpt_dangling_child_ref(tmp_path: Path) -> None:
             },
         }
     ]
-    path = _write_export(tmp_path, data)
-    convs = parse_chatgpt(path)
+    convs = parse_chatgpt(_to_bytes(data))
     assert len(convs) == 1
     assert convs[0].messages[0].text == "Hello"
-
-
-def test_parse_chatgpt_from_fileobj() -> None:
-    """parse_chatgpt accepts a file-like object (BytesIO)."""
-    data: list[dict[str, Any]] = [
-        {
-            "id": "conv-fo",
-            "title": "File Object",
-            "mapping": {
-                "root": {"parent": None, "message": None},
-                "msg": {
-                    "parent": "root",
-                    "message": {
-                        "author": {"role": "user"},
-                        "content": {"parts": ["Hey"]},
-                    },
-                },
-            },
-        }
-    ]
-    buf = io.BytesIO(json.dumps(data).encode("utf-8"))
-    convs = parse_chatgpt(buf)
-    assert len(convs) == 1
-    assert convs[0].id == "conv-fo"
-    assert convs[0].messages[0].text == "Hey"
 
 
 # -- _iso tests --
@@ -301,11 +267,8 @@ def _claude_export(
     ]
 
 
-def test_parse_claude_basic(tmp_path: Path) -> None:
-    data = _claude_export()
-    path = tmp_path / "conversations.json"
-    path.write_text(json.dumps(data), encoding="utf-8")
-    convs = parse_claude(str(path))
+def test_parse_claude_basic() -> None:
+    convs = parse_claude(_to_bytes(_claude_export()))
 
     assert len(convs) == 1
     c = convs[0]
@@ -314,11 +277,11 @@ def test_parse_claude_basic(tmp_path: Path) -> None:
     assert c.url == "https://claude.ai/chat/claude-conv-1"
     assert c.create_time == datetime(2025, 1, 15, 12, 0, tzinfo=UTC)
     assert len(c.messages) == 2
-    assert c.messages[0] == Message(role="user", text="Hello")
+    assert c.messages[0] == Message(role="human", text="Hello")
     assert c.messages[1] == Message(role="assistant", text="Hi there!")
 
 
-def test_parse_claude_skips_empty_text(tmp_path: Path) -> None:
+def test_parse_claude_skips_empty_text() -> None:
     data = _claude_export(
         messages=[
             {"sender": "human", "text": "Hello", "content": []},
@@ -326,38 +289,37 @@ def test_parse_claude_skips_empty_text(tmp_path: Path) -> None:
             {"sender": "assistant", "text": "Real reply", "content": []},
         ]
     )
-    path = tmp_path / "conversations.json"
-    path.write_text(json.dumps(data), encoding="utf-8")
-    convs = parse_claude(str(path))
+    convs = parse_claude(_to_bytes(data))
 
     assert len(convs[0].messages) == 2
     assert convs[0].messages[1].text == "Real reply"
 
 
-def test_parse_claude_skips_unknown_sender(tmp_path: Path) -> None:
+def test_parse_claude_includes_all_senders() -> None:
+    """All senders are included to avoid false negatives."""
     data = _claude_export(
         messages=[
             {"sender": "human", "text": "Hello", "content": []},
             {"sender": "system", "text": "System msg", "content": []},
+            {"sender": "tool_use", "text": "Tool output", "content": []},
         ]
     )
-    path = tmp_path / "conversations.json"
-    path.write_text(json.dumps(data), encoding="utf-8")
-    convs = parse_claude(str(path))
+    convs = parse_claude(_to_bytes(data))
 
-    assert len(convs[0].messages) == 1
+    assert len(convs[0].messages) == 3
+    assert convs[0].messages[0].role == "human"
+    assert convs[0].messages[1].role == "system"
+    assert convs[0].messages[2].role == "tool_use"
 
 
-def test_parse_claude_untitled(tmp_path: Path) -> None:
+def test_parse_claude_untitled() -> None:
     data = _claude_export()
     data[0]["name"] = None
-    path = tmp_path / "conversations.json"
-    path.write_text(json.dumps(data), encoding="utf-8")
-    convs = parse_claude(str(path))
+    convs = parse_claude(_to_bytes(data))
     assert convs[0].title == "Untitled"
 
 
-def test_parse_claude_null_text(tmp_path: Path) -> None:
+def test_parse_claude_null_text() -> None:
     """Messages with null text are skipped."""
     data = _claude_export(
         messages=[
@@ -365,27 +327,13 @@ def test_parse_claude_null_text(tmp_path: Path) -> None:
             {"sender": "assistant", "text": None, "content": []},
         ]
     )
-    path = tmp_path / "conversations.json"
-    path.write_text(json.dumps(data), encoding="utf-8")
-    convs = parse_claude(str(path))
+    convs = parse_claude(_to_bytes(data))
     assert len(convs[0].messages) == 1
 
 
-def test_parse_claude_no_chat_messages(tmp_path: Path) -> None:
+def test_parse_claude_no_chat_messages() -> None:
     """Conversation with no chat_messages key produces zero messages."""
     data = [{"uuid": "empty", "name": "Empty", "created_at": None, "updated_at": None}]
-    path = tmp_path / "conversations.json"
-    path.write_text(json.dumps(data), encoding="utf-8")
-    convs = parse_claude(str(path))
+    convs = parse_claude(_to_bytes(data))
     assert len(convs) == 1
     assert convs[0].messages == []
-
-
-def test_parse_claude_from_fileobj() -> None:
-    data = _claude_export()
-    buf = io.BytesIO(json.dumps(data).encode("utf-8"))
-    convs = parse_claude(buf)
-    assert len(convs) == 1
-    assert convs[0].id == "claude-conv-1"
-    assert len(convs[0].messages) == 2
-    assert convs[0].messages[0].role == "user"

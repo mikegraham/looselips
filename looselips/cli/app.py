@@ -39,23 +39,28 @@ def main(argv: Sequence[str] | None = None) -> None:
     argcomplete.autocomplete(parser)
     args = parser.parse_args(argv)
 
+    log_fmt = "%(asctime)s %(levelname)s %(name)s: %(message)s"
     if args.verbose >= 2:
-        logging.basicConfig(level=logging.DEBUG)
+        logging.basicConfig(level=logging.DEBUG, format=log_fmt)
     elif args.verbose == 1:
-        logging.basicConfig(level=logging.DEBUG)
-        # Quiet down litellm/httpx unless -vv
+        logging.basicConfig(level=logging.DEBUG, format=log_fmt)
+        # Quiet down litellm/httpx/instructor unless -vv
         logging.getLogger("LiteLLM").setLevel(logging.WARNING)
         logging.getLogger("httpx").setLevel(logging.WARNING)
         logging.getLogger("httpcore").setLevel(logging.WARNING)
+        logging.getLogger("instructor").setLevel(logging.WARNING)
     else:
-        logging.basicConfig(level=logging.INFO)
+        logging.basicConfig(level=logging.INFO, format=log_fmt)
+        logging.getLogger("LiteLLM").setLevel(logging.WARNING)
+        logging.getLogger("httpx").setLevel(logging.WARNING)
+        logging.getLogger("httpcore").setLevel(logging.WARNING)
 
     patterns: list[tuple[str, re.Pattern[str]]] = []
     llm_matchers: list[tuple[str, str, str | None]] = []
     llm_model: str | None = None
 
     if args.config:
-        logger.debug("Loading config from %s", args.config)
+        logger.info("Loading config from %s", args.config)
         try:
             config = load_config(args.config)
         except ConfigError as e:
@@ -64,7 +69,7 @@ def main(argv: Sequence[str] | None = None) -> None:
         patterns.extend(build_regex_patterns(config))
         llm_matchers = build_llm_matchers(config)
         llm_model = config.default_model
-        logger.debug("Config: %d regex, %d llm matchers, default_model=%s",
+        logger.info("Config: %d regex, %d llm matchers, default_model=%s",
                      len(patterns), len(llm_matchers), llm_model)
 
     input_path: str = args.input
@@ -92,6 +97,9 @@ def main(argv: Sequence[str] | None = None) -> None:
     elapsed = time.time() - t0
 
     logger.info("  %d/%d flagged (%.1fs)", len(result.flagged), result.total, elapsed)
+    if result.errors:
+        logger.warning("  %d LLM errors (conversations not fully scanned)",
+                        len(result.errors))
 
     write_report(result, output_path, input_name=input_stem)
     logger.info("Report: %s", output_path)

@@ -69,7 +69,7 @@ def test_llm_scan_flagged(
     mock_client = MagicMock()
     mock_instructor.from_litellm.return_value = mock_client
     mock_client.chat.completions.create.return_value = LLMVerdict(
-        found=True, remarks="User is Bob, works at Acme"
+        found=True, reasoning="User is Bob, works at Acme"
     )
 
     matches = llm_scan("Test Chat", "Hello I am Bob", "ollama/llama3", name="pii")
@@ -87,7 +87,7 @@ def test_llm_scan_not_flagged(
     mock_client = MagicMock()
     mock_instructor.from_litellm.return_value = mock_client
     mock_client.chat.completions.create.return_value = LLMVerdict(
-        found=False, remarks=""
+        found=False, reasoning=""
     )
 
     matches = llm_scan("Chat", "nothing personal", "model")

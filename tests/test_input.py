@@ -58,6 +58,7 @@ def test_load_zip(tmp_path: Path) -> None:
     convs = load_conversations(p)
     assert len(convs) == 1
     assert convs[0].id == "conv-1"
+    assert "chatgpt.com" in convs[0].url
 
 
 def test_load_zip_missing_conversations_json(tmp_path: Path) -> None:
@@ -103,16 +104,17 @@ def _write_claude_zip(tmp_path: Path, data: list[dict[str, Any]]) -> Path:
 # -- Auto-detection tests --
 
 
-def test_detect_format_claude() -> None:
-    assert _detect_format(_MINIMAL_CLAUDE_EXPORT) == "claude"
-
-
-def test_detect_format_chatgpt() -> None:
-    assert _detect_format(_MINIMAL_EXPORT) == "chatgpt"
-
-
-def test_detect_format_empty() -> None:
-    assert _detect_format([]) == "chatgpt"
+@pytest.mark.parametrize(
+    ("data", "expected"),
+    [
+        (_MINIMAL_CLAUDE_EXPORT, "claude"),
+        (_MINIMAL_EXPORT, "chatgpt"),
+        ([], "chatgpt"),
+    ],
+    ids=["claude", "chatgpt", "empty-defaults-chatgpt"],
+)
+def test_detect_format(data: list[dict[str, Any]], expected: str) -> None:
+    assert _detect_format(data) == expected
 
 
 def test_load_claude_json(tmp_path: Path) -> None:
@@ -130,10 +132,3 @@ def test_load_claude_zip(tmp_path: Path) -> None:
     assert convs[0].id == "claude-1"
 
 
-def test_load_chatgpt_zip_still_works(tmp_path: Path) -> None:
-    """ChatGPT zips (no users.json) still route to parse_chatgpt."""
-    p = _write_chatgpt_zip(tmp_path, _MINIMAL_EXPORT)
-    convs = load_conversations(p)
-    assert len(convs) == 1
-    assert convs[0].id == "conv-1"
-    assert convs[0].url == "https://chatgpt.com/c/conv-1"

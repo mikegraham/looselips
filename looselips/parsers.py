@@ -3,18 +3,22 @@
 from __future__ import annotations
 
 import json
+import logging
 from dataclasses import dataclass
 from datetime import UTC, datetime
-from pathlib import Path
-from typing import IO
+from typing import Any
+
+logger = logging.getLogger(__name__)
 
 CHATGPT_URL_PREFIX = "https://chatgpt.com/c/"
 CLAUDE_URL_PREFIX = "https://claude.ai/chat/"
+_UNTITLED = "Untitled"
+_UNKNOWN_ID = "unknown"
 
 
 @dataclass
 class Message:
-    role: str  # "user", "assistant"
+    role: str
     text: str
 
 
@@ -32,16 +36,20 @@ class Conversation:
         return self.url_prefix + self.id
 
 
+# Accepts str because json.load returns Any -- callers pass raw dict values
+# that are usually float but could be anything in malformed exports.
 def _ts(val: float | str | None) -> datetime | None:
     if val is None:
         return None
     try:
         ts = float(val)
     except ValueError:
+        logger.error("unparseable timestamp: %r", val)
         return None
     try:
         return datetime.fromtimestamp(ts, tz=UTC)
     except ValueError:
+        logger.error("out-of-range timestamp: %r", val)
         return None
 
 
@@ -51,32 +59,22 @@ def _iso(val: str | None) -> datetime | None:
     try:
         dt = datetime.fromisoformat(val)
     except ValueError:
+        logger.error("unparseable ISO date: %r", val)
         return None
-    # Normalize naive timestamps to UTC for consistency with _ts()
+    # Claude exports sometimes have naive timestamps (no tz suffix).
+    # Treat them as UTC to stay consistent with _ts().
     if dt.tzinfo is None:
         dt = dt.replace(tzinfo=UTC)
     return dt
 
 
-def _load_json(path: str | Path | IO[bytes]) -> list[dict[str, object]]:
-    """Load a JSON array from a file path or file-like object."""
-    if hasattr(path, "read"):
-        return json.load(path)  # type: ignore[no-any-return]
-    with open(path, encoding="utf-8") as f:
-        return json.load(f)  # type: ignore[no-any-return]
-
-
-def parse_chatgpt(path: str | Path | IO[bytes]) -> list[Conversation]:
-    """Parse a ChatGPT conversations.json export file.
-
-    *path* can be a filesystem path (str or Path) or a readable
-    file-like object containing UTF-8 JSON bytes.
-    """
-    data = _load_json(path)
+def parse_chatgpt(data: bytes) -> list[Conversation]:
+    """Parse a ChatGPT conversations.json export."""
+    raw_list: list[dict[str, Any]] = json.loads(data)
 
     conversations = []
-    for conv in data:
-        mapping = conv.get("mapping", {})
+    for raw in raw_list:
+        mapping = raw.get("mapping", {})
 
         # Build children lookup
         children: dict[str, list[str]] = {}
@@ -88,6 +86,8 @@ def parse_chatgpt(path: str | Path | IO[bytes]) -> list[Conversation]:
         # Find roots: nodes with no parent
         roots = [nid for nid, n in mapping.items() if n.get("parent") is None]
         if not roots:
+            logger.error("conversation %r has no root nodes in mapping",
+                         raw.get("id", "?"))
             continue
 
         # Walk tree depth-first to extract messages in order
@@ -104,7 +104,7 @@ def parse_chatgpt(path: str | Path | IO[bytes]) -> list[Conversation]:
                 text_parts = [p for p in parts if isinstance(p, str)]
                 text = "\n".join(text_parts).strip()
                 role = msg.get("author", {}).get("role", "unknown")
-                if text and role in ("user", "assistant"):
+                if text:
                     messages.append(Message(role=role, text=text))
             for child_id in children.get(node_id, []):
                 walk(child_id)
@@ -112,49 +112,49 @@ def parse_chatgpt(path: str | Path | IO[bytes]) -> list[Conversation]:
         for root in roots:
             walk(root)
 
+        if not messages:
+            logger.debug("conversation %r produced 0 messages",
+                         raw.get("id", "?"))
+
         conversations.append(
             Conversation(
-                id=conv.get("id", "unknown"),
-                title=conv.get("title") or "Untitled",
+                id=raw.get("id", _UNKNOWN_ID),
+                # `or` not `get(_, default)` -- catches both missing key and null
+                title=raw.get("title") or _UNTITLED,
                 messages=messages,
-                create_time=_ts(conv.get("create_time")),
-                update_time=_ts(conv.get("update_time")),
+                create_time=_ts(raw.get("create_time")),
+                update_time=_ts(raw.get("update_time")),
             )
         )
 
     return conversations
 
 
-_CLAUDE_ROLE_MAP = {"human": "user", "assistant": "assistant"}
-
-
-def parse_claude(path: str | Path | IO[bytes]) -> list[Conversation]:
-    """Parse a Claude conversations.json export file.
-
-    *path* can be a filesystem path (str or Path) or a readable
-    file-like object containing UTF-8 JSON bytes.
-    """
-    data = _load_json(path)
+def parse_claude(data: bytes) -> list[Conversation]:
+    """Parse a Claude conversations.json export."""
+    raw_list: list[dict[str, Any]] = json.loads(data)
 
     conversations = []
-    for conv in data:
+    for raw in raw_list:
         messages: list[Message] = []
-        for msg in conv.get("chat_messages", []):
-            role = _CLAUDE_ROLE_MAP.get(msg.get("sender", ""))
-            if role is None:
-                continue
+        for msg in raw.get("chat_messages", []):
+            role = msg.get("sender", "unknown")
             text = (msg.get("text") or "").strip()
             if not text:
                 continue
             messages.append(Message(role=role, text=text))
 
+        if not messages:
+            logger.debug("conversation %r produced 0 messages",
+                         raw.get("uuid", "?"))
+
         conversations.append(
             Conversation(
-                id=conv.get("uuid", "unknown"),
-                title=conv.get("name") or "Untitled",
+                id=raw.get("uuid", _UNKNOWN_ID),
+                title=raw.get("name") or _UNTITLED,
                 messages=messages,
-                create_time=_iso(conv.get("created_at")),
-                update_time=_iso(conv.get("updated_at")),
+                create_time=_iso(raw.get("created_at")),
+                update_time=_iso(raw.get("updated_at")),
                 url_prefix=CLAUDE_URL_PREFIX,
             )
         )

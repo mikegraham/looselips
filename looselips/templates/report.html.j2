@@ -76,11 +76,6 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 0.5rem;
-      cursor: pointer;
-    }
-
-    .conv-hdr:hover {
-      background: #263548;
     }
 
     .conv-title {
@@ -122,16 +117,6 @@
       font-weight: 500;
       background: #78350f;
       color: #fcd34d;
-    }
-
-    .matches {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease-out;
-    }
-
-    .matches.open {
-      max-height: 5000px;
     }
 
     .match {
@@ -212,14 +197,13 @@
 
 {% if conversations %}
   {% for cr in conversations %}
-    {% set i = loop.index0 %}
     {% set conv = cr.conversation %}
     {% set date_str = conv.create_time.strftime('%b %d, %Y') if conv.create_time else 'Unknown' %}
     {% set categories = cr.matches | map(attribute='category') | unique | sort %}
     {% set n_matches = cr.matches | length %}
 
-    <div class="conv" data-i="{{ i }}">
-      <div class="conv-hdr" onclick="toggle({{ i }})">
+    <div class="conv">
+      <div class="conv-hdr">
         <div>
           <span class="conv-title">{{ conv.title }}</span>
           <span class="conv-meta">
@@ -228,8 +212,7 @@
             {{ n_matches }} {{ 'match' if n_matches == 1 else 'matches' }}
           </span>
         </div>
-        <a class="conv-link" href="{{ conv.url }}" target="_blank"
-           onclick="event.stopPropagation()">Open</a>
+        <a class="conv-link" href="{{ conv.url }}" target="_blank">Open</a>
       </div>
 
       <div class="badges">
@@ -238,22 +221,16 @@
         {% endfor %}
       </div>
 
-      <div class="matches" id="m-{{ i }}">
-        {% for m in cr.matches %}
-          <div class="match">
-            <div class="match-hdr">
-              <span class="match-cat">
-                [{{ m.source }}] {{ m.category }}
-              </span>
-            </div>
-            {% if m.source == 'regex' %}
-              <div class="ctx">{{ m.context | highlight(m.matched_text) }}</div>
-            {% else %}
-              <div class="remarks">{{ m.matched_text }}</div>
-            {% endif %}
-          </div>
-        {% endfor %}
-      </div>
+      {% for m in cr.matches %}
+        <div class="match">
+          <span class="match-cat">[{{ m.source }}] {{ m.category }}</span>
+          {% if m.source == 'regex' %}
+            <div class="ctx">{{ m.context | highlight(m.matched_text) }}</div>
+          {% else %}
+            <div class="remarks">{{ m.matched_text }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
     </div>
   {% endfor %}
 {% else %}
@@ -262,11 +239,6 @@
 
 <div class="footer">looselips</div>
 
-<script>
-  function toggle(i) {
-    document.getElementById('m-' + i).classList.toggle('open');
-  }
-</script>
 
 </body>
 </html>

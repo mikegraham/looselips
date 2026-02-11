@@ -34,6 +34,7 @@ Repository = "https://github.com/mikegraham/looselips"
 dev = [
     "build",
     "mypy",
+    "pyyaml",
     "pytest",
     "pytest-cov",
     "pytest-mypy",
@@ -68,6 +69,7 @@ target-version = "py311"
 
 [tool.ruff.lint]
 select = [
+    "A",         # flake8-builtins (no shadowing builtins)
     "E", "W",   # pycodestyle
     "F",         # pyflakes
     "I",         # isort

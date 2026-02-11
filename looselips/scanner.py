@@ -12,7 +12,8 @@ from .parsers import Conversation
 
 logger = logging.getLogger(__name__)
 
-LLM_CHUNK_CHARS = 6000
+# TODO: infer from model context window (ollama /api/show, litellm.get_model_info)
+LLM_CHUNK_CHARS = 24000
 
 
 @dataclass
@@ -26,9 +27,19 @@ class ConversationResult:
 
 
 @dataclass
+class ConversationError:
+    """A conversation where one or more LLM matchers failed."""
+
+    conversation: Conversation
+    matcher: str
+    error: str
+
+
+@dataclass
 class ScanResult:
     total: int
     flagged: list[ConversationResult]
+    errors: list[ConversationError] = field(default_factory=list)
 
 
 def _format_messages(conv: Conversation) -> list[str]:
@@ -90,6 +101,9 @@ def scan(
     logger.debug("scan: %d conversations, %d regex patterns, llm_model=%s",
                  len(conversations), len(patterns), llm_model)
 
+    if not patterns and not llm_matchers:
+        logger.warning("no matchers configured -- nothing to scan")
+
     effective_llm: list[tuple[str, str, str]] = []
     if llm_matchers:
         for name, prompt, model_override in llm_matchers:
@@ -104,8 +118,14 @@ def scan(
             logger.debug("  matcher %r -> %s", name, model)
 
     flagged = []
+    errors: list[ConversationError] = []
 
-    for conv in conversations:
+    total = len(conversations)
+    for i, conv in enumerate(conversations, 1):
+        if not conv.messages:
+            logger.debug("(%d/%d) conversation %r has 0 messages, skipping",
+                         i, total, conv.title)
+
         matches: list[Match] = []
 
         if patterns and conv.messages:
@@ -114,8 +134,8 @@ def scan(
 
         if effective_llm and conv.messages:
             chunks = _chunk_conversation(conv)
-            logger.debug("conv %r: %d messages, %d chunks",
-                         conv.title, len(conv.messages), len(chunks))
+            logger.info("(%d/%d) %r (%d messages, %d chunks)",
+                         i, total, conv.title, len(conv.messages), len(chunks))
             for name, system_prompt, model in effective_llm:
                 for chunk in chunks:
                     try:
@@ -129,9 +149,14 @@ def scan(
                             )
                         )
                     except LLMParseError as e:
-                        logger.warning("%s", e)
+                        logger.error(
+                            "[%s] FAILED on %r: %s", name, conv.title, e,
+                        )
+                        errors.append(ConversationError(
+                            conversation=conv, matcher=name, error=str(e),
+                        ))
 
         if matches:
             flagged.append(ConversationResult(conversation=conv, matches=matches))
 
-    return ScanResult(total=len(conversations), flagged=flagged)
+    return ScanResult(total=len(conversations), flagged=flagged, errors=errors)

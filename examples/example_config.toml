@@ -1,6 +1,6 @@
 # looselips sample config -- sensitive PII and secrets
 #
-# Usage: looselips chatgpt-export.zip --config example.toml
+# Usage: looselips --config example.toml chatgpt-export.zip
 #
 # Each regex matcher needs: type ("regex"), category, pattern.
 # Patterns use Python re syntax -- inline flags like (?i) for case-insensitive,
@@ -8,7 +8,7 @@
 # are supported.
 
 # Default model for LLM matchers (any LiteLLM model string). Required to have llm matchers below.
-model = "ollama/qwen3:0.6b"
+model = "ollama/qwen3:8b"
 
 [[matcher]]
 type = "regex"
@@ -19,8 +19,11 @@ category = "US SSN / ITIN"
 # Excludes well-known example SSNs (123-45-6789, 078-05-1120,
 # advertising range 987-65-43xx).
 pattern = '''(?x)
-  (?!.*(?:123[- ]?45[- ]?6789|078[- ]?05[- ]?1120|987[- ]?65[- ]?43\d\d))
-  \b(?:(?!000|666|9\d\d)\d{3}|9\d{2})
+  \b
+  (?!123[- ]?45[- ]?6789)
+  (?!078[- ]?05[- ]?1120)
+  (?!987[- ]?65[- ]?43\d\d)
+  (?:(?!000|666|9\d\d)\d{3}|9\d{2})
   [- ]?(?!00)\d{2}
   [- ]?(?!0000)\d{4}\b
 '''

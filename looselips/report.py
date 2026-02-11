@@ -15,9 +15,12 @@ _TEMPLATE_DIR = Path(__file__).parent / "templates"
 
 def _highlight(context: str, matched_text: str) -> Markup:
     """Wrap matched_text in a highlight span (inputs are escaped first)."""
+    # Must escape BEFORE wrapping in Markup -- Markup() trusts its contents.
+    # Bandit/semgrep flag Markup() as potential XSS; safe here because
+    # escape() runs first on both inputs.
     safe_ctx = escape(context)
     safe_match = escape(matched_text)
-    return Markup(  # noqa: S704  # nosec B704 -- inputs are escaped above
+    return Markup(  # noqa: S704  # nosec B704
         safe_ctx.replace(
             safe_match,
             Markup('<span class="hl">') + safe_match + Markup("</span>"),

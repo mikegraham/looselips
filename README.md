@@ -80,5 +80,10 @@ Default output is `<input (without extension)>_report.html`. Override with `--ou
 looselips --config looselips.toml --output=report.html export.zip
 ```
 
+The report is a self-contained HTML file. Each flagged conversation links
+directly to chatgpt.com or claude.ai so you can review or delete it in one
+click -- the main advantage over running your own regex. Click a conversation to
+expand it and see each match highlighted in context.
+
 Everything runs locally -- no data leaves your machine (unless you use a cloud LLM model).
 

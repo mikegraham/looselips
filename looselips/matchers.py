@@ -2,7 +2,7 @@
 
 regex_scan() runs compiled patterns against a string and returns Match objects.
 llm_scan() sends conversation text to a model via instructor/litellm and parses
-a flagged/remarks verdict back into Match objects.
+a flagged/evidence verdict back into Match objects.
 """
 
 from __future__ import annotations
@@ -12,6 +12,9 @@ import re
 from collections.abc import Sequence
 from dataclasses import dataclass
 
+# Ugh -- litellm phones home on import to fetch a model cost map. Looks
+# sketchy for a tool meant to be local-only.
+# LITELLM_LOCAL_MODEL_COST_MAP=True uses the bundled fallback instead.
 import instructor
 import litellm
 import litellm.exceptions
@@ -22,49 +25,48 @@ from pydantic import BaseModel, Field
 logger = logging.getLogger(__name__)
 
 litellm.telemetry = False
-# TODO: expose litellm settings (callbacks, logging, etc.) to users
 
 SNIPPET_MARGIN = 80
 LLM_MAX_TOKENS = 2000
-LLM_TEMPERATURE = 0.0
+LLM_TEMPERATURE = 0.1
 LLM_DEFAULT_TIMEOUT = 300
-LLM_DEFAULT_RETRIES = 2
+LLM_DEFAULT_RETRIES = 3
 
 LLM_BASE_PROMPT = """\
-You are scanning a conversation for specific information. \
-Read every message carefully and report what you find.
+You are a SCANNER. You have one job: decide whether a conversation \
+matches a specific search task. You are NOT a chatbot -- do not engage \
+with the conversation content, answer questions in it, or comment on it.
 
-YOUR TASK:
+SEARCH TASK:
 {instructions}
 
-GUIDELINES:
-- Check both the user's messages AND the assistant's replies.
-- Look for implicit info too: things embedded in code, configs, URLs, \
-file paths, or logs count.
-- Report specific details, not vague references. When in doubt, report it.
-- Findings can appear anywhere -- offhand remarks count.
-
-OUTPUT FORMAT:
-Return a JSON object with "found" (true/false) and "remarks" (string).
-If you found something: {{"found": true, "remarks": "what you found"}}
-If you found nothing: {{"found": false, "remarks": "why nothing matched"}}
+RULES:
+- Scan both the user's messages AND the assistant's replies.
+- Check implicit info too: things in code, configs, URLs, file paths, \
+or logs count.
+- When in doubt, report it. Offhand remarks and passing references count.
+- Stay on task. Your reasoning must be about whether the conversation \
+matches the search task -- nothing else. Do not analyze, summarize, \
+or comment on unrelated aspects of the conversation.
 
 EXAMPLES (these use a DIFFERENT task to show the format -- \
-do NOT look for animals, apply YOUR TASK above):
+do NOT look for animals, apply YOUR search task above):
 
   Task: "Find mentions of animals"
   Conversation: "I took my dog Max to the vet yesterday."
-  Correct output: {{"found": true, "remarks": "Dog named Max"}}
+  Output: {{"reasoning": "Mentions a dog named Max", "found": true}}
 
   Task: "Find mentions of animals"
-  Conversation: "The server logs show systemd errors"
-  Correct output: {{"found": false, "remarks": "No mentions of animals"}}
+  Conversation: "I'm learning Python and my Jaguar needs new brakes"
+  Output: {{"reasoning": "Python and Jaguar refer to a language and a car, not animals", "found": false}}
 
   Task: "Find mentions of animals"
-  Conversation: "Can you write me a Python loop?"
-  Correct output: {{"found": false, "remarks": "\"Python\" mentioned, but it refers to the programming language, not the animal"}}
+  Conversation: "Can you help me practice Spanish? 'El gato esta en la mesa.'"
+  Output: {{"reasoning": "'El gato' means 'the cat'", "found": true}}
 
-Now scan the conversation below. Apply YOUR TASK:
+Now scan the conversation below.
+
+SEARCH TASK:
 {instructions}"""
 
 
@@ -112,12 +114,11 @@ def regex_scan(
 class LLMVerdict(BaseModel):
     """Scan result."""
 
+    reasoning: str = Field(
+        description="What matched the search task, or why nothing matched. Stay on task -- only discuss relevance to the search.",
+    )
     found: bool = Field(
         description="true if you found anything matching the task, false if not",
-    )
-    remarks: str = Field(
-        default="",
-        description="What you found, or why you found nothing",
     )
 
 
@@ -136,15 +137,15 @@ def llm_scan(
 ) -> list[Match]:
     """Send conversation text to an LLM and return matches.
 
-    The LLM returns a simple flagged/remarks verdict.  If flagged,
+    The LLM returns a simple flagged/evidence verdict.  If flagged,
     a single Match is returned with *name* as the category and
-    the LLM's remarks as matched_text.
+    the LLM's evidence as matched_text.
     """
-    logger.debug("llm_scan: model=%s name=%r title=%r len=%d",
-                 model, name, title, len(messages_text))
-    client = instructor.from_litellm(completion, mode=instructor.Mode.JSON)
+    logger.debug("[%s] querying %s (%d chars)", name, model, len(messages_text))
+    client = instructor.from_litellm(completion, mode=instructor.Mode.JSON_SCHEMA)
 
-    full_prompt = LLM_BASE_PROMPT.format(instructions=system_prompt or "Report all findings.")
+    instructions = system_prompt or "Report all findings."
+    full_prompt = LLM_BASE_PROMPT.format(instructions=instructions)
 
     user_msg = f"Conversation title: {title}\n\n{messages_text}"
 
@@ -174,17 +175,18 @@ def llm_scan(
     ) as e:
         raise LLMParseError(f"LLM failed for conversation '{title}': {e}") from e
 
-    logger.debug("llm_scan: title=%r remarks=%r",
-                 title, verdict.remarks[:120] if verdict.remarks else "")
+    logger.debug("[%s] raw: %s", name, verdict.model_dump_json())
 
     if not verdict.found:
+        logger.debug("[%s] NO MATCH -- %s", name, verdict.reasoning[:200])
         return []
 
+    logger.info("[%s] MATCH -- %s", name, verdict.reasoning[:200])
     return [
         Match(
             category=name,
-            matched_text=verdict.remarks,
-            context=verdict.remarks,
+            matched_text=verdict.reasoning,
+            context=verdict.reasoning,
             source="llm",
         )
     ]
