@@ -7,7 +7,7 @@ from typing import Any
 
 import pytest
 
-from looselips.input import InputError, load_conversations
+from looselips.input import InputError, _detect_format, load_conversations
 
 
 def _write_chatgpt(tmp_path: Path, data: list[dict[str, Any]]) -> Path:
@@ -66,3 +66,74 @@ def test_load_zip_missing_conversations_json(tmp_path: Path) -> None:
         zf.writestr("other.txt", "hello")
     with pytest.raises(InputError, match="does not contain conversations.json"):
         load_conversations(p)
+
+
+# -- Claude format fixtures --
+
+_MINIMAL_CLAUDE_EXPORT: list[dict[str, Any]] = [
+    {
+        "uuid": "claude-1",
+        "name": "Claude Chat",
+        "created_at": "2025-01-15T12:00:00+00:00",
+        "updated_at": "2025-01-15T12:05:00+00:00",
+        "chat_messages": [
+            {"sender": "human", "text": "Hello", "content": []},
+            {"sender": "assistant", "text": "Hi!", "content": []},
+        ],
+    }
+]
+
+
+def _write_claude_json(tmp_path: Path, data: list[dict[str, Any]]) -> Path:
+    p = tmp_path / "conversations.json"
+    p.write_text(json.dumps(data), encoding="utf-8")
+    return p
+
+
+def _write_claude_zip(tmp_path: Path, data: list[dict[str, Any]]) -> Path:
+    p = tmp_path / "claude_export.zip"
+    with zipfile.ZipFile(p, "w") as zf:
+        zf.writestr("conversations.json", json.dumps(data))
+        zf.writestr("users.json", "[]")
+        zf.writestr("projects.json", "[]")
+        zf.writestr("memories.json", "[]")
+    return p
+
+
+# -- Auto-detection tests --
+
+
+def test_detect_format_claude() -> None:
+    assert _detect_format(_MINIMAL_CLAUDE_EXPORT) == "claude"
+
+
+def test_detect_format_chatgpt() -> None:
+    assert _detect_format(_MINIMAL_EXPORT) == "chatgpt"
+
+
+def test_detect_format_empty() -> None:
+    assert _detect_format([]) == "chatgpt"
+
+
+def test_load_claude_json(tmp_path: Path) -> None:
+    p = _write_claude_json(tmp_path, _MINIMAL_CLAUDE_EXPORT)
+    convs = load_conversations(p)
+    assert len(convs) == 1
+    assert convs[0].id == "claude-1"
+    assert convs[0].url == "https://claude.ai/chat/claude-1"
+
+
+def test_load_claude_zip(tmp_path: Path) -> None:
+    p = _write_claude_zip(tmp_path, _MINIMAL_CLAUDE_EXPORT)
+    convs = load_conversations(p)
+    assert len(convs) == 1
+    assert convs[0].id == "claude-1"
+
+
+def test_load_chatgpt_zip_still_works(tmp_path: Path) -> None:
+    """ChatGPT zips (no users.json) still route to parse_chatgpt."""
+    p = _write_chatgpt_zip(tmp_path, _MINIMAL_EXPORT)
+    convs = load_conversations(p)
+    assert len(convs) == 1
+    assert convs[0].id == "conv-1"
+    assert convs[0].url == "https://chatgpt.com/c/conv-1"

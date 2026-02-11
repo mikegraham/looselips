@@ -6,7 +6,14 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from looselips.parsers import Conversation, Message, _ts, parse_chatgpt
+from looselips.parsers import (
+    Conversation,
+    Message,
+    _iso,
+    _ts,
+    parse_chatgpt,
+    parse_claude,
+)
 
 
 def _write_export(tmp_path: Path, data: list[dict[str, Any]]) -> str:
@@ -44,6 +51,7 @@ def test_ts_nan() -> None:
 def test_conversation_url() -> None:
     c = Conversation(id="abc", title="t", messages=[])
     assert c.url == "https://chatgpt.com/c/abc"
+
 
 
 
@@ -246,3 +254,138 @@ def test_parse_chatgpt_from_fileobj() -> None:
     assert len(convs) == 1
     assert convs[0].id == "conv-fo"
     assert convs[0].messages[0].text == "Hey"
+
+
+# -- _iso tests --
+
+
+def test_iso_none() -> None:
+    assert _iso(None) is None
+
+
+def test_iso_valid() -> None:
+    result = _iso("2025-01-15T12:30:00+00:00")
+    assert result == datetime(2025, 1, 15, 12, 30, tzinfo=UTC)
+
+
+def test_iso_naive_gets_utc() -> None:
+    """A naive ISO string (no timezone) is normalized to UTC."""
+    result = _iso("2025-01-15T12:30:00")
+    assert result is not None
+    assert result.tzinfo == UTC
+
+
+def test_iso_invalid() -> None:
+    assert _iso("not-a-date") is None
+
+
+# -- parse_claude tests --
+
+
+def _claude_export(
+    messages: list[dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
+    if messages is None:
+        messages = [
+            {"sender": "human", "text": "Hello", "content": []},
+            {"sender": "assistant", "text": "Hi there!", "content": []},
+        ]
+    return [
+        {
+            "uuid": "claude-conv-1",
+            "name": "Test Claude Chat",
+            "created_at": "2025-01-15T12:00:00+00:00",
+            "updated_at": "2025-01-15T12:05:00+00:00",
+            "chat_messages": messages,
+        }
+    ]
+
+
+def test_parse_claude_basic(tmp_path: Path) -> None:
+    data = _claude_export()
+    path = tmp_path / "conversations.json"
+    path.write_text(json.dumps(data), encoding="utf-8")
+    convs = parse_claude(str(path))
+
+    assert len(convs) == 1
+    c = convs[0]
+    assert c.id == "claude-conv-1"
+    assert c.title == "Test Claude Chat"
+    assert c.url == "https://claude.ai/chat/claude-conv-1"
+    assert c.create_time == datetime(2025, 1, 15, 12, 0, tzinfo=UTC)
+    assert len(c.messages) == 2
+    assert c.messages[0] == Message(role="user", text="Hello")
+    assert c.messages[1] == Message(role="assistant", text="Hi there!")
+
+
+def test_parse_claude_skips_empty_text(tmp_path: Path) -> None:
+    data = _claude_export(
+        messages=[
+            {"sender": "human", "text": "Hello", "content": []},
+            {"sender": "assistant", "text": "", "content": []},
+            {"sender": "assistant", "text": "Real reply", "content": []},
+        ]
+    )
+    path = tmp_path / "conversations.json"
+    path.write_text(json.dumps(data), encoding="utf-8")
+    convs = parse_claude(str(path))
+
+    assert len(convs[0].messages) == 2
+    assert convs[0].messages[1].text == "Real reply"
+
+
+def test_parse_claude_skips_unknown_sender(tmp_path: Path) -> None:
+    data = _claude_export(
+        messages=[
+            {"sender": "human", "text": "Hello", "content": []},
+            {"sender": "system", "text": "System msg", "content": []},
+        ]
+    )
+    path = tmp_path / "conversations.json"
+    path.write_text(json.dumps(data), encoding="utf-8")
+    convs = parse_claude(str(path))
+
+    assert len(convs[0].messages) == 1
+
+
+def test_parse_claude_untitled(tmp_path: Path) -> None:
+    data = _claude_export()
+    data[0]["name"] = None
+    path = tmp_path / "conversations.json"
+    path.write_text(json.dumps(data), encoding="utf-8")
+    convs = parse_claude(str(path))
+    assert convs[0].title == "Untitled"
+
+
+def test_parse_claude_null_text(tmp_path: Path) -> None:
+    """Messages with null text are skipped."""
+    data = _claude_export(
+        messages=[
+            {"sender": "human", "text": "Hello", "content": []},
+            {"sender": "assistant", "text": None, "content": []},
+        ]
+    )
+    path = tmp_path / "conversations.json"
+    path.write_text(json.dumps(data), encoding="utf-8")
+    convs = parse_claude(str(path))
+    assert len(convs[0].messages) == 1
+
+
+def test_parse_claude_no_chat_messages(tmp_path: Path) -> None:
+    """Conversation with no chat_messages key produces zero messages."""
+    data = [{"uuid": "empty", "name": "Empty", "created_at": None, "updated_at": None}]
+    path = tmp_path / "conversations.json"
+    path.write_text(json.dumps(data), encoding="utf-8")
+    convs = parse_claude(str(path))
+    assert len(convs) == 1
+    assert convs[0].messages == []
+
+
+def test_parse_claude_from_fileobj() -> None:
+    data = _claude_export()
+    buf = io.BytesIO(json.dumps(data).encode("utf-8"))
+    convs = parse_claude(buf)
+    assert len(convs) == 1
+    assert convs[0].id == "claude-conv-1"
+    assert len(convs[0].messages) == 2
+    assert convs[0].messages[0].role == "user"

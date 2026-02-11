@@ -36,11 +36,11 @@ def _complete_model(**kwargs: object) -> list[str]:
 
 def main(argv: Sequence[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
-        description="Scan ChatGPT exports for personal information.",
+        description="Scan LLM chat exports for personal information.",
     )
     parser.add_argument(
         "input",
-        help="Path to ChatGPT export (.json or .zip)",
+        help="Path to ChatGPT or Claude export (.json or .zip)",
     )
     parser.add_argument("-o", "--output", default=None)
     parser.add_argument(
@@ -116,6 +116,7 @@ def main(argv: Sequence[str] | None = None) -> None:
 
     write_report(result, output_path, input_name=input_stem)
     logger.info("Report: %s", output_path)
+    # TODO: optionally open the report in the user's browser (webbrowser.open)?
 
 
 if __name__ == "__main__":

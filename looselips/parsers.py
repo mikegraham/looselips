@@ -1,4 +1,4 @@
-"""Parse ChatGPT conversation export JSON into Conversation objects."""
+"""Parse LLM chat export JSON into Conversation objects."""
 
 from __future__ import annotations
 
@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import IO
 
 CHATGPT_URL_PREFIX = "https://chatgpt.com/c/"
+CLAUDE_URL_PREFIX = "https://claude.ai/chat/"
 
 
 @dataclass
@@ -24,10 +25,11 @@ class Conversation:
     messages: list[Message]
     create_time: datetime | None = None
     update_time: datetime | None = None
+    url_prefix: str = CHATGPT_URL_PREFIX
 
     @property
     def url(self) -> str:
-        return CHATGPT_URL_PREFIX + self.id
+        return self.url_prefix + self.id
 
 
 def _ts(val: float | str | None) -> datetime | None:
@@ -43,17 +45,34 @@ def _ts(val: float | str | None) -> datetime | None:
         return None
 
 
+def _iso(val: str | None) -> datetime | None:
+    if val is None:
+        return None
+    try:
+        dt = datetime.fromisoformat(val)
+    except ValueError:
+        return None
+    # Normalize naive timestamps to UTC for consistency with _ts()
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=UTC)
+    return dt
+
+
+def _load_json(path: str | Path | IO[bytes]) -> list[dict[str, object]]:
+    """Load a JSON array from a file path or file-like object."""
+    if hasattr(path, "read"):
+        return json.load(path)  # type: ignore[no-any-return]
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)  # type: ignore[no-any-return]
+
+
 def parse_chatgpt(path: str | Path | IO[bytes]) -> list[Conversation]:
     """Parse a ChatGPT conversations.json export file.
 
     *path* can be a filesystem path (str or Path) or a readable
     file-like object containing UTF-8 JSON bytes.
     """
-    if hasattr(path, "read"):
-        data = json.load(path)
-    else:
-        with open(path, encoding="utf-8") as f:
-            data = json.load(f)
+    data = _load_json(path)
 
     conversations = []
     for conv in data:
@@ -100,6 +119,43 @@ def parse_chatgpt(path: str | Path | IO[bytes]) -> list[Conversation]:
                 messages=messages,
                 create_time=_ts(conv.get("create_time")),
                 update_time=_ts(conv.get("update_time")),
+            )
+        )
+
+    return conversations
+
+
+_CLAUDE_ROLE_MAP = {"human": "user", "assistant": "assistant"}
+
+
+def parse_claude(path: str | Path | IO[bytes]) -> list[Conversation]:
+    """Parse a Claude conversations.json export file.
+
+    *path* can be a filesystem path (str or Path) or a readable
+    file-like object containing UTF-8 JSON bytes.
+    """
+    data = _load_json(path)
+
+    conversations = []
+    for conv in data:
+        messages: list[Message] = []
+        for msg in conv.get("chat_messages", []):
+            role = _CLAUDE_ROLE_MAP.get(msg.get("sender", ""))
+            if role is None:
+                continue
+            text = (msg.get("text") or "").strip()
+            if not text:
+                continue
+            messages.append(Message(role=role, text=text))
+
+        conversations.append(
+            Conversation(
+                id=conv.get("uuid", "unknown"),
+                title=conv.get("name") or "Untitled",
+                messages=messages,
+                create_time=_iso(conv.get("created_at")),
+                update_time=_iso(conv.get("updated_at")),
+                url_prefix=CLAUDE_URL_PREFIX,
             )
         )
 
