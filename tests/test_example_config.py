@@ -46,9 +46,9 @@ CRED = "Credential / Secret"
 @pytest.mark.parametrize(
     ("text", "expected"),
     [
-        ("my ssn is 123-45-6789", "123-45-6789"),
-        ("123 45 6789", "123 45 6789"),
-        ("123456789", "123456789"),
+        ("my ssn is 219-45-6789", "219-45-6789"),
+        ("219 45 6789", "219 45 6789"),
+        ("219456789", "219456789"),
         ("912-70-1234", "912-70-1234"),  # ITIN (9xx prefix)
     ],
     ids=["dashed", "spaced", "no-sep", "itin-9xx"],
@@ -68,6 +68,11 @@ def test_ssn_matches(
         "12345678901",  # embedded in longer number
         "(212) 867-5309",  # phone number
         "2025-01-15",  # date
+        "123-45-6789",  # well-known example SSN
+        "078-05-1120",  # Woolworth wallet example
+        "987-65-4320",  # IRS advertising range
+        "219-00-1234",  # invalid group 00
+        "219-45-0000",  # invalid serial 0000
     ],
     ids=[
         "invalid-000",
@@ -76,6 +81,11 @@ def test_ssn_matches(
         "longer-number",
         "phone",
         "date",
+        "example-123",
+        "example-woolworth",
+        "example-irs-ad",
+        "group-00",
+        "serial-0000",
     ],
 )
 def test_ssn_rejects(patterns: Patterns, text: str) -> None:

@@ -13,10 +13,17 @@ model = "ollama/qwen3:0.6b"
 [[matcher]]
 type = "regex"
 category = "US SSN / ITIN"
-# US Social Security Numbers (excluding invalid prefixes 000, 666, 9xx)
-# and IRS Individual Taxpayer Identification Numbers (9xx prefix, any middle
-# group). Formats: 123-45-6789, 123 45 6789, 123456789.
-pattern = '''\b(?:(?!000|666|9\d\d)\d{3}|9\d{2})[- ]?\d{2}[- ]?\d{4}\b'''
+# US Social Security Numbers and ITINs.
+# SSA rules: area != 000/666, group != 00, serial != 0000.
+# ITINs use 9xx area with any group/serial.
+# Excludes well-known example SSNs (123-45-6789, 078-05-1120,
+# advertising range 987-65-43xx).
+pattern = '''(?x)
+  (?!.*(?:123[- ]?45[- ]?6789|078[- ]?05[- ]?1120|987[- ]?65[- ]?43\d\d))
+  \b(?:(?!000|666|9\d\d)\d{3}|9\d{2})
+  [- ]?(?!00)\d{2}
+  [- ]?(?!0000)\d{4}\b
+'''
 
 [[matcher]]
 type = "regex"
