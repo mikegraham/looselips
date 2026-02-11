@@ -7,7 +7,7 @@ import pytest
 
 from looselips.matchers import LLMParseError, Match
 from looselips.parsers import Conversation, Message
-from looselips.scanner import ConversationResult, _chunk_conversation, scan
+from looselips.scanner import _chunk_conversation, scan
 
 
 def _conv(
@@ -60,6 +60,9 @@ def test_chunk_conversation_groups_small_messages() -> None:
     conv = _conv([("user", "hi"), ("assistant", "hey"), ("user", "bye")])
     chunks = _chunk_conversation(conv, max_chars=1000)
     assert len(chunks) == 1
+    assert "[USER]: hi" in chunks[0]
+    assert "[ASSISTANT]: hey" in chunks[0]
+    assert "[USER]: bye" in chunks[0]
 
 
 def test_scan_with_llm_model_but_no_matchers_skips_llm() -> None:
@@ -101,16 +104,24 @@ def test_scan_llm_matcher_no_model_raises() -> None:
 
 
 def test_scan_llm_parse_error_continues() -> None:
-    with patch("looselips.scanner.llm_scan", side_effect=LLMParseError("bad")):
-        result = scan([_conv([("user", "test")])], patterns=[], llm_model="test-model")
+    """LLMParseError is caught and scanning continues without flagging."""
+    with patch("looselips.scanner.llm_scan", side_effect=LLMParseError("bad")) as mock:
+        result = scan(
+            [_conv([("user", "test")])],
+            patterns=[],
+            llm_model="test-model",
+            llm_matchers=[("pii", "find pii", None)],
+        )
+        mock.assert_called()
         assert result.flagged == []
 
 
-def test_conversation_result_has_matches_property() -> None:
-    empty = ConversationResult(conversation=_conv([("user", "hi")]))
-    assert not empty.has_matches
-    with_match = ConversationResult(
-        conversation=_conv([("user", "hi")]),
-        matches=[Match(category="x", matched_text="y", context="y", source="regex")],
-    )
-    assert with_match.has_matches
+def test_scan_populates_conversation_result() -> None:
+    """scan() returns ConversationResult with conversation and matches filled in."""
+    convs = [_conv([("user", "email me at test@x.com")])]
+    result = scan(convs, patterns=SIMPLE_PATTERNS)
+    assert len(result.flagged) == 1
+    cr = result.flagged[0]
+    assert cr.conversation is convs[0]
+    assert cr.has_matches
+    assert cr.matches[0].matched_text == "test@x.com"

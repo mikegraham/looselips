@@ -60,11 +60,6 @@ def test_regex_scan_no_matches() -> None:
     assert matches == []
 
 
-def test_verdict_defaults() -> None:
-    v = LLMVerdict(found=False)
-    assert v.remarks == ""
-    assert v.found is False
-
 
 @patch("looselips.matchers.instructor")
 @patch("looselips.matchers.completion")

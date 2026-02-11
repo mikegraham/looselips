@@ -98,11 +98,11 @@ def test_report_llm_match_shows_remarks(llm_result: ScanResult) -> None:
 
 
 def test_report_stats(regex_result: ScanResult) -> None:
-    result = ScanResult(total=10, flagged=regex_result.flagged)
+    result = ScanResult(total=53, flagged=regex_result.flagged)
     html = generate_html(result)
-    assert ">10<" in html  # total
+    assert ">53<" in html  # total
     assert ">1<" in html  # flagged
-    assert ">9<" in html  # clean
+    assert ">52<" in html  # clean
 
 
 def test_write_report_creates_file(tmp_path: Path, empty_result: ScanResult) -> None:

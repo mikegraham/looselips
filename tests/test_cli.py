@@ -111,3 +111,5 @@ def test_very_verbose_flag(tmp_path: Path) -> None:
     output = str(tmp_path / "report.html")
     main([export, "-o", output, "-vv"])
     assert root.level == logging.DEBUG
+    # Unlike -v, -vv should NOT quiet LiteLLM
+    assert logging.getLogger("LiteLLM").level != logging.WARNING
