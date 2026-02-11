@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>looselips benchmark: {{ report.model }}</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    h1 {
+      color: #f8fafc;
+      margin-bottom: 0.3rem;
+      font-size: 1.8rem;
+    }
+
+    .sub {
+      color: #94a3b8;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .stats {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      background: #1e293b;
+      border-radius: 8px;
+      padding: 0.8rem 1.2rem;
+      min-width: 100px;
+    }
+
+    .stat b {
+      display: block;
+      font-size: 1.4rem;
+      color: #f8fafc;
+    }
+
+    .stat span {
+      color: #94a3b8;
+      font-size: 0.8rem;
+    }
+
+    .stat.pass b { color: #22c55e; }
+    .stat.fail b { color: #ef4444; }
+    .stat.error b { color: #eab308; }
+
+    .matcher-stats {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .matcher-card {
+      background: #1e293b;
+      border-radius: 8px;
+      padding: 0.8rem 1.2rem;
+      min-width: 150px;
+      flex: 1;
+    }
+
+    .matcher-card .name {
+      font-weight: 600;
+      color: #f1f5f9;
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .matcher-card .pct {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .matcher-card .detail {
+      color: #94a3b8;
+      font-size: 0.75rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+    }
+
+    th {
+      background: #1e293b;
+      color: #94a3b8;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    td {
+      padding: 0.6rem 0.8rem;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    tr.row {
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+
+    tr.row:hover {
+      background: #1e293b;
+    }
+
+    .title-cell {
+      font-weight: 500;
+      color: #f1f5f9;
+    }
+
+    .cell-pass {
+      color: #22c55e;
+      font-weight: 600;
+    }
+
+    .cell-fail {
+      color: #ef4444;
+      font-weight: 600;
+    }
+
+    .cell-error {
+      color: #eab308;
+      font-weight: 600;
+    }
+
+    .cell-skip {
+      color: #475569;
+    }
+
+    .expand-arrow {
+      display: inline-block;
+      transition: transform 0.15s;
+      margin-right: 0.3rem;
+      color: #475569;
+      font-size: 0.75rem;
+    }
+
+    .expand-arrow.open {
+      transform: rotate(90deg);
+    }
+
+    .detail-row {
+      display: none;
+    }
+
+    .detail-row.open {
+      display: table-row;
+    }
+
+    .detail-cell {
+      background: #1e293b;
+      padding: 1rem;
+      border-bottom: 2px solid #334155;
+    }
+
+    .detail-section {
+      margin-bottom: 1rem;
+    }
+
+    .detail-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .detail-section h4 {
+      color: #94a3b8;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+    }
+
+    .msg {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.8rem;
+      padding: 0.3rem 0;
+      line-height: 1.5;
+    }
+
+    .msg-role {
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .msg-role-user { color: #60a5fa; }
+    .msg-role-assistant { color: #a78bfa; }
+
+    .msg-text {
+      color: #cbd5e1;
+      white-space: pre-wrap;
+      margin-left: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .reasoning-box {
+      background: #0f172a;
+      border-radius: 4px;
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .reasoning-label {
+      font-weight: 600;
+      font-size: 0.8rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .reasoning-text {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      font-style: italic;
+    }
+
+    .reasoning-meta {
+      font-size: 0.7rem;
+      color: #64748b;
+      margin-top: 0.2rem;
+    }
+
+    .footer {
+      text-align: center;
+      color: #475569;
+      font-size: 0.75rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #1e293b;
+    }
+
+    .legend {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.8rem;
+      color: #94a3b8;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+  </style>
+</head>
+<body>
+
+<h1>looselips benchmark</h1>
+<p class="sub">Model: {{ report.model }} -- Generated {{ now }}</p>
+
+<div class="stats">
+  <div class="stat">
+    <b>{{ report.total }}</b>
+    <span>Fixtures</span>
+  </div>
+  <div class="stat pass">
+    <b>{{ report.overall_pass }}</b>
+    <span>All-correct</span>
+  </div>
+  <div class="stat fail">
+    <b>{{ report.overall_tested - report.overall_pass }}</b>
+    <span>Has errors</span>
+  </div>
+</div>
+
+<div class="matcher-stats">
+  {% for name in report.matchers %}
+    {% set stats = report.matcher_stats(name) %}
+    {% set tested = stats.pass + stats.fail %}
+    {% set pct = (stats.pass / tested * 100) | int if tested else 0 %}
+    <div class="matcher-card">
+      <div class="name">{{ name }}</div>
+      <div class="pct" style="color: {{ '#22c55e' if pct >= 80 else '#eab308' if pct >= 60 else '#ef4444' }}">{{ pct }}%</div>
+      <div class="detail">{{ stats.pass }}/{{ tested }} correct | {{ stats.error }} errors | {{ stats.skip }} skipped</div>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="legend">
+  <div class="legend-item"><span class="cell-pass">&#10003; TP</span> True positive</div>
+  <div class="legend-item"><span class="cell-pass">&#10003; TN</span> True negative</div>
+  <div class="legend-item"><span class="cell-fail">&#10007; FP</span> False positive</div>
+  <div class="legend-item"><span class="cell-fail">&#10007; FN</span> False negative</div>
+  <div class="legend-item"><span class="cell-error">? error</span> LLM error</div>
+  <div class="legend-item"><span class="cell-skip">- skip</span> No expectation</div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fixture</th>
+      {% for name in report.matchers %}
+        <th>{{ name }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in report.results %}
+      <tr class="row" onclick="toggleDetail({{ loop.index0 }})">
+        <td class="title-cell">
+          <span class="expand-arrow" id="arrow-{{ loop.index0 }}">&#9654;</span>
+          {{ r.title }}
+        </td>
+        {% for name in report.matchers %}
+          {% set st = r.status(name) %}
+          {% set lb = r.label(name) %}
+          {% if st == 'pass' %}
+            <td class="cell-pass">&#10003; {{ lb }}</td>
+          {% elif st == 'fail' %}
+            <td class="cell-fail">&#10007; {{ lb }}</td>
+          {% elif st == 'error' %}
+            <td class="cell-error">? error</td>
+          {% else %}
+            <td class="cell-skip">-</td>
+          {% endif %}
+        {% endfor %}
+      </tr>
+      <tr class="detail-row" id="detail-{{ loop.index0 }}">
+        <td class="detail-cell" colspan="{{ report.matchers | length + 1 }}">
+
+          <div class="detail-section">
+            <h4>LLM Reasoning</h4>
+            {% for name in report.matchers %}
+              {% if name in r.expectations %}
+                {% set st = r.status(name) %}
+                <div class="reasoning-box">
+                  <div class="reasoning-label {{ 'cell-pass' if st == 'pass' else 'cell-fail' if st == 'fail' else 'cell-error' }}">
+                    {{ name }} -- expected={{ r.expectations[name] }}, got={{ r.actuals.get(name, 'N/A') }}
+                  </div>
+                  <div class="reasoning-text">{{ r.reasoning.get(name, '') }}</div>
+                  {% if name in r.elapsed %}
+                    <div class="reasoning-meta">{{ '%.1f' | format(r.elapsed[name]) }}s</div>
+                  {% endif %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+
+          <div class="detail-section">
+            <h4>Conversation ({{ r.messages | length }} messages)</h4>
+            {% for m in r.messages %}
+              <div class="msg">
+                <span class="msg-role msg-role-{{ m.role }}">{{ m.role }}:</span>
+                <div class="msg-text">{{ m.text }}</div>
+              </div>
+            {% endfor %}
+          </div>
+
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="footer">looselips benchmark</div>
+
+<script>
+function toggleDetail(idx) {
+  var row = document.getElementById('detail-' + idx);
+  var arrow = document.getElementById('arrow-' + idx);
+  if (row.classList.contains('open')) {
+    row.classList.remove('open');
+    arrow.classList.remove('open');
+  } else {
+    row.classList.add('open');
+    arrow.classList.add('open');
+  }
+}
+</script>
+
+</body>
+</html>
