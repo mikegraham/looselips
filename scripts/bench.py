@@ -251,11 +251,11 @@ def run_bench(
 ) -> None:
     """Run matchers against testcases, skipping already-completed work.
 
-    Checks the database for cached results per (testcase, matcher, model,
-    backend).  Only missing combos are run.  *on_result* is called after
-    each testcase finishes so the report can be rebuilt.
+    Checks the database for cached results per (testcase, matcher, model).
+    Only missing combos are run.  *on_result* is called after each testcase
+    finishes so the report can be rebuilt.
     """
-    cached = load_cached(conn, model, backend)
+    cached = load_cached(conn, model)
     total = len(testcases)
 
     for i, testcase in enumerate(testcases, 1):
