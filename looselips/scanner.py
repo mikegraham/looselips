@@ -68,8 +68,6 @@ def _chunk_conversation(
 
     Splits at message boundaries so no single message is cut in half.
     A message longer than *max_chars* gets its own chunk.
-
-    .. todo:: Smarter chunking with overlap for context continuity.
     """
     messages = _format_messages(conv)
     chunks: list[str] = []

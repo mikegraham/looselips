@@ -62,28 +62,66 @@ model = "ollama/qwen3:0.6b"
 [[matcher]]
 type = "llm"
 name = "Employment & Financial"
-prompt = "Find employment and financial information -- company names, job titles, salary figures, stock grants."
+prompt = "Find employment and financial information: company names, job titles, salary figures, stock grants."
 
 [[matcher]]
 type = "llm"
 name = "Medical & Health"
-prompt = "Find medical and health information -- conditions, medications, doctor names."
+prompt = "Find medical and health information: conditions, medications, doctor names."
 ```
 
 You can override the model per-matcher with the `model` key.
 
-## Output
+## Choosing a model
 
-Default output is `<input (without extension)>_report.html`. Override with `--output`:
+looselips uses [LiteLLM](https://docs.litellm.ai/docs/providers) under the
+hood, so any model LiteLLM supports works: OpenAI, Anthropic, Mistral,
+Groq, local models via Ollama, etc. Set the model string in your config or
+pass `--model` on the command line.
+
+For local/private scanning, [Ollama](https://ollama.com/) keeps everything on
+your machine. We've seen good results with `ollama/qwen3:32b`, which runs
+on consumer GPUs (needs ~20GB VRAM) and catches subtle PII that smaller
+models miss.
+
+Smaller models like `ollama/qwen3:0.6b` work for quick passes but will
+miss more. Bigger cloud models (e.g. `openai/gpt-4o`) will be more accurate
+but send your data to a third party, which may defeat the purpose.
+
+### Benchmarking models
+
+The built-in benchmark harness runs your matchers against labeled testcases
+and produces an HTML report comparing models side-by-side. Use it to evaluate
+whether a model is good enough for your matchers before running a full scan.
+
+```bash
+# Run the benchmark with a specific model
+looselips-bench --backend local --model ollama/qwen3:32b -c looselips.toml
+
+# Compare two models (results accumulate in a SQLite DB)
+looselips-bench --backend local --model ollama/qwen3:32b -c looselips.toml
+looselips-bench --backend local --model ollama/qwen3:8b -c looselips.toml
+
+# Re-render the report from cached results without re-running inference
+looselips-bench --report-only --db bench_report.db -o bench_report.html
+```
+
+Results are saved incrementally, so you can interrupt and resume. The report
+shows accuracy, recall, and per-testcase results for each model.
+
+## Scan output
+
+The scan produces a self-contained HTML report. Default path is
+`<input>_report.html`; override with `--output`:
 
 ```bash
 looselips --config looselips.toml --output=report.html export.zip
 ```
 
-The report is a self-contained HTML file. Each flagged conversation links
-directly to chatgpt.com or claude.ai so you can review or delete it in one
-click -- the main advantage over running your own regex. Click a conversation to
-expand it and see each match highlighted in context.
+Each flagged conversation links directly to chatgpt.com or claude.ai so you
+can review or delete it in one click. Click a conversation to expand it and
+see each match highlighted in context.
 
-Everything runs locally -- no data leaves your machine (unless you use a cloud LLM model).
+Everything runs locally. No conversation data leaves your machine unless
+you use a cloud LLM model.
 
