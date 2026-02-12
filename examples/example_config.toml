@@ -8,7 +8,7 @@
 # are supported.
 
 # Default model for LLM matchers (any LiteLLM model string). Required to have llm matchers below.
-model = "ollama/qwen3:8b"
+model = "ollama/qwen3:32b"
 
 [[matcher]]
 type = "regex"

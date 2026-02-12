@@ -25,6 +25,7 @@ from pydantic import BaseModel, Field
 logger = logging.getLogger(__name__)
 
 litellm.telemetry = False
+litellm.suppress_debug_info = True
 
 SNIPPET_MARGIN = 80
 LLM_MAX_TOKENS = 2000
