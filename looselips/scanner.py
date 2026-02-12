@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import re
+import time
 from collections.abc import Sequence
 from dataclasses import dataclass, field
 
@@ -14,6 +15,18 @@ logger = logging.getLogger(__name__)
 
 # TODO: infer from model context window (ollama /api/show, litellm.get_model_info)
 LLM_CHUNK_CHARS = 24000
+
+
+@dataclass
+class MatcherResult:
+    """Per-matcher result for a single conversation."""
+
+    name: str
+    found: bool
+    matches: list[Match]
+    reasoning: str
+    elapsed: float
+    error: str | None = None
 
 
 @dataclass
@@ -78,6 +91,51 @@ def _chunk_conversation(
     return chunks
 
 
+def scan_conversation_llm(
+    conv: Conversation,
+    matchers: Sequence[tuple[str, str, str]],
+) -> list[MatcherResult]:
+    """Run LLM matchers against a single conversation.
+
+    Each matcher is a (name, system_prompt, model) tuple.  Returns one
+    MatcherResult per matcher with found/reasoning/elapsed/error fields.
+    """
+    chunks = _chunk_conversation(conv)
+    results: list[MatcherResult] = []
+
+    for name, system_prompt, model in matchers:
+        t0 = time.monotonic()
+        found = False
+        all_matches: list[Match] = []
+        reasoning_parts: list[str] = []
+        error: str | None = None
+
+        try:
+            for chunk in chunks:
+                hits = llm_scan(
+                    conv.title, chunk, model,
+                    name=name, system_prompt=system_prompt,
+                )
+                if hits:
+                    found = True
+                    all_matches.extend(hits)
+                    reasoning_parts.extend(m.matched_text for m in hits)
+        except LLMParseError as e:
+            error = str(e)
+
+        elapsed = time.monotonic() - t0
+        results.append(MatcherResult(
+            name=name,
+            found=found,
+            matches=all_matches,
+            reasoning="\n".join(reasoning_parts) if reasoning_parts else "(no match)",
+            elapsed=elapsed,
+            error=error,
+        ))
+
+    return results
+
+
 def scan(
     conversations: Sequence[Conversation],
     patterns: Sequence[tuple[str, re.Pattern[str]]],
@@ -133,28 +191,16 @@ def scan(
             matches.extend(regex_scan(full_text, patterns))
 
         if effective_llm and conv.messages:
-            chunks = _chunk_conversation(conv)
-            logger.info("(%d/%d) %r (%d messages, %d chunks)",
-                         i, total, conv.title, len(conv.messages), len(chunks))
-            for name, system_prompt, model in effective_llm:
-                for chunk in chunks:
-                    try:
-                        matches.extend(
-                            llm_scan(
-                                conv.title,
-                                chunk,
-                                model,
-                                name=name,
-                                system_prompt=system_prompt,
-                            )
-                        )
-                    except LLMParseError as e:
-                        logger.error(
-                            "[%s] FAILED on %r: %s", name, conv.title, e,
-                        )
-                        errors.append(ConversationError(
-                            conversation=conv, matcher=name, error=str(e),
-                        ))
+            logger.info("(%d/%d) %r (%d messages)",
+                         i, total, conv.title, len(conv.messages))
+            for mr in scan_conversation_llm(conv, effective_llm):
+                matches.extend(mr.matches)
+                if mr.error:
+                    logger.error("[%s] FAILED on %r: %s",
+                                 mr.name, conv.title, mr.error)
+                    errors.append(ConversationError(
+                        conversation=conv, matcher=mr.name, error=mr.error,
+                    ))
 
         if matches:
             flagged.append(ConversationResult(conversation=conv, matches=matches))
