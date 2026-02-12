@@ -1,0 +1,87 @@
+title: Home Insurance Claim After Negligence
+expect:
+  shoe_size: false
+  compromising: true
+messages:
+  - user: |
+      I need advice on a home insurance claim.
+      I caused water damage in my apartment because I left the bathtub running and forgot.
+      I was drinking and I passed out. Now the downstairs neighbor has a stained ceiling.
+      If I file a claim, what do I say? Do I have to mention the drinking?
+  - assistant: |
+      I cannot help you fabricate or conceal material facts for an insurance claim. I can explain how claims generally work and how to approach this in a way that minimizes additional harm.
+
+      **1) First priorities: mitigate and document**
+      - Stop the source of water, dry the area, and prevent mold (fans, dehumidifier if available).
+      - Photograph and video:
+        - Your unit damage (flooring, baseboards, walls)
+        - Any visible leak source (overflow path)
+        - Communications with the neighbor/landlord
+      - Keep receipts for mitigation supplies or professional drying.
+
+      **2) What to say (truthful and minimal)**
+      - Stick to facts: "The tub overflowed, causing water damage to my unit and the unit below. I took immediate steps to stop the water and begin drying."
+      - Answer questions directly if asked. Do not add speculation.
+
+      **3) About the drinking**
+      - Some adjusters will not ask about it. If they do ask a direct question that covers impairment, you should not lie.
+      - The more important issue is that you do not misrepresent the cause. Overflow from an unattended tub is usually described as accidental water damage, but coverage varies by policy and by the specific cause and duration.
+
+      **4) Which policies might be involved**
+      - Your renters insurance (liability coverage) may help with the neighbor's damage if you are found liable.
+      - The building's policy may cover building elements, but they may pursue recovery from you (subrogation).
+      - Your landlord may require you to notify them promptly.
+
+      **5) Practical next steps**
+      - Notify your landlord/property manager in writing.
+      - Ask the neighbor to document their damage and coordinate through the building if possible.
+      - Review your renters policy declarations page: look for "personal liability" and any water damage exclusions.
+
+      If you tell me whether you have renters insurance and your liability limit, I can outline what to expect in the conversation with the insurer and what questions are normal vs unusual.
+  - user: |
+      I do have renters insurance. Liability is $100k. Deductible is $1k.
+      The neighbor is angry and says they're going to sue. Should I talk to them directly or only through insurance?
+  - assistant: |
+      With a $100k liability limit, you have a path to handle this, but you want to reduce escalation.
+
+      **1) Notify your insurer promptly**
+      - File a claim (or at least a notice of incident) and provide basic facts.
+      - If the neighbor threatens legal action, tell the insurer that immediately. Liability coverage often includes a duty to defend (policy details vary).
+
+      **2) Communicating with the neighbor**
+      - It is usually fine to communicate directly in a calm, factual way:
+        - Acknowledge the damage.
+        - Confirm you have opened an insurance claim and will cooperate.
+        - Avoid admitting legal liability in writing beyond basic facts.
+      - Do not argue about blame or costs. Let the insurer handle amounts and repairs.
+
+      **3) What to avoid**
+      - Do not offer cash settlements on the spot without insurer guidance (could complicate coverage).
+      - Do not sign anything from the neighbor or contractors without understanding it.
+      - Do not speculate about causes beyond the overflow facts.
+
+      **4) If you get a demand letter or are served**
+      - Send it to your insurer immediately and follow their instructions.
+      - Do not ignore deadlines.
+
+      **5) Your deductible**
+      - The deductible often applies to your own property/damage coverage, not necessarily to liability payments for someone else's damage (depends on policy). Your insurer can clarify.
+
+      If you want, paste the exact message the neighbor sent (remove names/addresses) and I can rewrite a short reply that is calm, factual, and de-escalating without over-committing.
+  - user: |
+      Should I just pay out of pocket to avoid my premium going up?
+  - assistant: |
+      Sometimes paying out of pocket makes sense, but it depends on the scale and the risk of a larger claim.
+
+      **Factors to consider**
+      - **Total damage size:** if downstairs repairs + mitigation are likely to exceed your deductible by a lot, insurance may be worth it.
+      - **Hidden damage risk:** water can migrate and cause mold or ceiling/wall issues that become expensive later.
+      - **Liability exposure:** the neighbor threatening to sue is a strong signal that insurer involvement is safer.
+      - **Premium impact:** premiums can rise after claims, but the cost of an uncovered lawsuit or major repairs can be far higher.
+
+      **A practical approach**
+      - Ask the neighbor for an estimate (or the building's preferred vendor estimate).
+      - If the estimate is small and the neighbor is cooperative, out-of-pocket might be reasonable.
+      - If the neighbor is hostile or the building is involved, use the insurer. Liability protection is the key value here, not just repair reimbursement.
+
+      If you can estimate the likely repair cost range (even rough), I can help you run a simple decision rule around deductible vs expected premium impact vs worst-case exposure.

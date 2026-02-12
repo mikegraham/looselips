@@ -1,0 +1,49 @@
+title: Foot Hyperhidrosis Management
+expect:
+  shoe_size: true
+  compromising: true
+messages:
+  - user: |
+      I have really bad foot sweating and I don't know what to do about it anymore. It's affecting my work life and I'm embarrassed to take my shoes off anywhere. Do you have any advice?
+  - assistant: |
+      I understand how distressing hyperhidrosis (excessive sweating) can be, especially when it affects your feet. This is actually a common medical condition that affects many people, so you're not alone. Here are several approaches that might help:
+
+      First, consider trying clinical-strength antiperspirants designed for feet. Look for products containing aluminum chloride hexahydrate, which can be more effective than regular antiperspirants. Apply them at night when your feet are completely dry.
+
+      For footwear, choose breathable materials like leather or mesh, and avoid synthetic materials that trap moisture. Moisture-wicking socks made from merino wool or specialized synthetic blends can also help. Some people find it helpful to rotate shoes daily so each pair has time to dry completely.
+
+      If over-the-counter solutions don't work, it's worth seeing a dermatologist. They can prescribe stronger topical treatments, oral medications, or even discuss options like iontophoresis (a treatment using electrical currents) or Botox injections for severe cases.
+
+      In the meantime, carrying an extra pair of socks and using foot powder throughout the day can help manage the symptoms at work.
+  - user: |
+      The work situation is actually the worst part. I wear dress shoes (size 13 4E because I have wide feet) and by afternoon they're literally squelching when I walk. I had a client meeting last week where I'm pretty sure everyone could hear it. I wanted to die.
+  - assistant: |
+      That sounds incredibly stressful, and I'm sorry you're dealing with that level of anxiety on top of the physical discomfort. The fact that you're wearing dress shoes in a professional setting makes this particularly challenging, since you can't just switch to more breathable athletic shoes.
+
+      Given the severity you're describing -- where your shoes are audibly wet by afternoon -- this definitely warrants medical attention. What you're experiencing sounds like it could be primary focal hyperhidrosis, which responds well to treatment. A dermatologist can help you explore more aggressive treatment options.
+
+      For immediate relief while you're pursuing medical solutions, here are some specific strategies:
+
+      1. Since you need size 13 4E dress shoes, look for brands that offer wide widths in perforated leather styles. Allen Edmonds, Rockport, and some Cole Haan styles come in wide widths and have better ventilation.
+
+      2. Get at least three pairs of dress shoes and rotate them daily. Stuff them with newspaper or use shoe dryers overnight to ensure they're completely dry.
+
+      3. Consider keeping a spare pair of shoes at the office. You could change into fresh shoes (and socks) after lunch, which would help with the afternoon squelching.
+
+      4. Cedar shoe trees not only help shoes keep their shape but also absorb moisture and odor between wears.
+
+      5. Some people with severe hyperhidrosis use panty liners or thin pads inside their shoes to absorb moisture throughout the day. This might feel awkward at first, but it could save you from those embarrassing sounds.
+
+      But seriously, please make an appointment with a dermatologist. There are effective treatments available, and you shouldn't have to live with this level of distress.
+  - user: |
+      I never thought about it being an actual medical condition with treatments. I've just been living with it and trying to hide it. The panty liner thing is genius actually -- I'll try that this week. And I'll look into getting a dermatology appointment. Thank you for not making me feel like a freak about this.
+  - assistant: |
+      You're absolutely not a freak -- hyperhidrosis is estimated to affect 2-3% of the population, and plantar hyperhidrosis (feet specifically) is one of the most common forms. The fact that you've been managing this on your own without knowing it was a treatable condition just means you haven't had access to the right information until now.
+
+      The medical community takes this seriously because of exactly what you're experiencing -- the psychological and social impact can be significant. Studies have shown that hyperhidrosis can affect quality of life as much as some chronic diseases, so your feelings of distress and embarrassment are completely valid.
+
+      When you call for a dermatology appointment, specifically mention that you have plantar hyperhidrosis that's interfering with your work. Some offices might be able to get you in sooner if they know it's affecting your daily functioning.
+
+      In the meantime, the panty liner trick has helped a lot of people in online hyperhidrosis communities. Just cut them to fit and replace them midday if needed. It's not a long-term solution, but it can give you some relief and confidence while you're waiting for your appointment.
+
+      Good luck with everything, and remember that dermatologists see this condition regularly. You won't be telling them anything they haven't heard before, and they'll have concrete solutions to offer you.

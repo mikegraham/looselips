@@ -1,0 +1,74 @@
+title: Making Sourdough Bread from Scratch
+expect:
+  shoe_size: false
+  compromising: false
+messages:
+  - user: |
+      I want to start making sourdough bread at home. I've never done this before -- where do I even begin? Do I need to buy a starter or can I make my own?
+  - assistant: |
+      Great choice! Sourdough is incredibly rewarding once you get the hang of it. You can absolutely make your own starter from scratch -- it's actually quite simple and costs almost nothing.
+
+      To create a starter, you'll need:
+      - All-purpose or whole wheat flour
+      - Water (preferably filtered, as chlorine can inhibit fermentation)
+
+      Mix equal parts flour and water (by weight) in a jar -- start with about 50g of each. Stir well, cover loosely, and leave at room temperature. Each day, discard half and feed it with fresh flour and water (50g each). After 5-7 days, you should see consistent bubbling and rising, which means your starter is ready to bake with.
+
+      The whole process relies on wild yeast and bacteria in the flour and air. Keep your starter at room temperature during this phase, and feed it at the same time each day if possible. Once it's active, you can store it in the fridge and feed it weekly.
+  - user: |
+      OK, so once I have an active starter, what's the actual process for making a loaf? I've heard terms like "autolyse" and "bulk fermentation" but I'm not sure what they mean.
+  - assistant: |
+      Let me walk you through a basic sourdough loaf process:
+
+      1. Autolyse (30-60 minutes): Mix flour and water together (typically 500g bread flour + 350g water for 70% hydration). Let it rest -- this allows the flour to fully hydrate and starts gluten development before you add salt and starter. This step is optional but really improves texture.
+
+      2. Mix in starter and salt: Add your active starter (100g or so) and salt (10g). Mix thoroughly until well incorporated.
+
+      3. Bulk fermentation (4-6 hours at room temp): This is where the dough rises and develops flavor. During this phase, perform "stretch and folds" every 30 minutes for the first 2 hours -- just grab one side of the dough, stretch it up, and fold it over itself. Rotate and repeat 4 times. This builds structure without kneading.
+
+      4. Pre-shape and bench rest (20-30 minutes): Turn the dough out, shape it gently into a round, and let it relax.
+
+      5. Final shape: Shape into a boule or batard and place in a banneton (proofing basket) or bowl lined with a floured towel.
+
+      6. Cold proof (8-12 hours): Put it in the fridge overnight. This develops flavor and makes scoring easier.
+
+      7. Bake: Preheat your oven to 450-475F with a Dutch oven inside. Score the dough, place it in the hot Dutch oven, cover, and bake 20 minutes. Remove lid and bake another 20-25 minutes until deep golden brown.
+
+      The timeline is flexible -- warmer temperatures speed things up, cooler slows them down.
+  - user: |
+      That's really helpful! One question about the bulk fermentation -- how do I know when it's done? I'm worried I'll either under-proof or over-proof it.
+  - assistant: |
+      This is one of the trickiest parts to master, but here are the signs to look for:
+
+      Volume: The dough should increase by about 50-75% in size. It won't double like commercial yeast dough typically does.
+
+      Texture: The dough should feel airy and jiggly, not dense. When you gently shake the container, it should wobble a bit.
+
+      Surface: Look for a smooth, slightly domed surface with some bubbles visible on top and around the edges.
+
+      Poke test: Gently poke the dough with a wet finger. It should slowly spring back but leave a slight indentation. If it springs back immediately, it needs more time. If it doesn't spring back at all, it may be over-proofed.
+
+      Under-proofed dough will be dense and tight, won't rise much in the oven, and will have a gummy texture. Over-proofed dough will spread out instead of rising up, and may have a very open, irregular crumb with large holes and a somewhat flat taste.
+
+      Temperature matters a lot here. At 75-78F, bulk fermentation typically takes 4-5 hours. If your kitchen is cooler (68-70F), it might take 6-8 hours. Some bakers use the "aliquot jar" method -- they put a small sample of dough in a narrow jar to more easily track the volume increase.
+
+      Don't stress too much about getting it perfect on your first try. Keep notes on timing and temperature, and you'll develop a feel for it after a few bakes.
+  - user: |
+      This is great, thank you! Last question -- what water temperature should I use when I'm mixing the dough? Does it matter?
+  - assistant: |
+      Water temperature definitely matters! It's one of the key variables you can control to manage fermentation speed.
+
+      The general principle: you want your final dough temperature (FDT) to be around 75-78F for optimal fermentation. Warmer than 80F and fermentation can get too fast and the flavor won't develop as well. Cooler than 70F and it will take much longer.
+
+      To calculate water temperature, use this formula:
+      Desired dough temp x 3 - (room temp + flour temp + starter temp) = water temp
+
+      So if your room is 70F, your flour and starter are also around 70F, and you want a final dough temp of 76F:
+      76 x 3 - (70 + 70 + 70) = 228 - 210 = 18F
+
+      Wait, that can't be right -- that would be ice water! Let me recalculate:
+      Actually, for most home bakers, a simpler approach works fine: if your kitchen is cool (below 70F), use warm water around 85-95F. If it's warm (above 75F), use cool water around 65-75F. The friction from mixing will warm the dough by a few degrees.
+
+      In summer, I often use cold water straight from the tap. In winter, I heat it to around 90F. You can use a thermometer to check your mixed dough temperature after incorporating everything, and adjust your water temp next time based on that result.
+
+      The key is consistency -- once you find what works in your environment, stick with it and your fermentation timing will become more predictable.

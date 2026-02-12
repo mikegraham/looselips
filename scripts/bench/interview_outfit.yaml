@@ -1,0 +1,107 @@
+title: Job interview outfit planning
+expect:
+  shoe_size: true
+  compromising: true
+messages:
+  - user: |
+      I have a job interview next week for a senior data analyst role at a fintech startup. It's in-person, and I have no idea what to wear. The company says "business casual" but I don't know if that means khakis and a button-down or something more formal. Help!
+  - assistant: |
+      Congrats on the interview! Business casual at a fintech startup usually leans more toward the "smart casual" end of the spectrum rather than traditional business casual. Here's what I'd suggest:
+
+      For the top: A button-down shirt or blouse in a solid color or subtle pattern. You could wear it alone or add a blazer if you want to dress it up slightly. Navy, light blue, white, or gray are safe choices. Skip the tie unless you're more comfortable with one -- most startup environments wouldn't expect it.
+
+      For the bottom: Chinos or dark jeans (if they're clean and well-fitted) are usually fine, especially for a startup. If you want to be safer, go with dress pants or slacks. Avoid shorts, obviously, and skip anything with rips or distressing.
+
+      Shoes: This is where people often go wrong with business casual. Clean leather shoes or nice loafers are ideal. Avoid sneakers unless they're extremely minimal and clean (like all-white leather sneakers), and definitely skip running shoes or anything too casual.
+
+      The general rule: it's better to be slightly overdressed than underdressed for an interview. You can always remove a blazer if you feel too formal, but you can't add one if you show up too casual.
+
+      What's your usual style? That might help me give more specific advice.
+  - user: |
+      I usually wear jeans and t-shirts to my current job (tech company, very casual), so this is definitely outside my comfort zone. I'm thinking dark navy chinos, a light blue button-down, and maybe brown leather shoes? I'm a size 12, so I'll check if Thursday Boot Company has that in stock -- I've heard good things about their shoes.
+  - assistant: |
+      That outfit sounds perfect! Navy chinos with a light blue shirt is a classic, professional look that won't feel out of place anywhere. And Thursday boots are a great choice -- they're well-made, not too expensive, and look sharp. The Captain or the Diplomat models would both work well for an interview setting.
+
+      Size 12 is pretty standard, so you shouldn't have trouble finding stock. If Thursday doesn't have it readily available, other good alternatives in that price range are Beckett Simonon, Taft, or even Cole Haan if you can catch a sale.
+
+      A few fit tips since you mentioned you usually wear casual stuff:
+
+      Make sure the chinos fit well -- not too tight, not too baggy. They should sit at your natural waist (not low like jeans) and have a slight break at the ankle. If they're bunching up a lot, get them hemmed.
+
+      The shirt should be fitted but not tight -- you should be able to move comfortably. If you're unsure, try a "slim fit" rather than "regular fit" for a modern look, but avoid "extra slim" if you're not super lean.
+
+      Tuck the shirt in! This is a common mistake people make when transitioning from casual to business casual.
+
+      Do you have a belt? Match it to your shoes (brown belt with brown shoes). Small detail, but people notice.
+  - user: |
+      Good call on the belt -- I definitely have a brown one. Should I wear a watch? And what about the blazer question? I don't own one currently, but I could buy one if it's important.
+  - assistant: |
+      A watch is a nice touch but not essential. If you have a simple analog watch (leather or metal band), wear it. Avoid anything too flashy or sporty (like a chunky G-Shock). A minimalist watch in silver or gold tones with a leather band would be ideal. If you don't have one, don't stress about buying one just for the interview.
+
+      As for the blazer: I'd lean toward skipping it for a fintech startup unless you want the security blanket of having it available. Here's why:
+
+      Startups, even fintech ones with investors and regulatory concerns, tend to value culture fit and authenticity. Showing up in chinos and a button-down says "I made an effort and I'm professional," while a blazer might read as trying too hard or being overly formal. You're interviewing for a data analyst role, not a client-facing position, so there's more latitude.
+
+      That said, if you're really nervous about being underdressed, you could buy an inexpensive navy blazer to have on hand for future interviews. Just don't feel like you need to rush out and spend $200 before next week.
+
+      The outfit you described is solid and appropriate. Focus your energy on preparing for technical questions and behavioral questions instead. What's the interview format -- do you know if it's multiple rounds or just one meeting?
+  - user: |
+      It's a full-day thing -- three rounds. First is a behavioral interview with the hiring manager, then a technical case study with the data team, and finally a culture fit conversation with one of the founders. I'm honestly more nervous about the behavioral part than the technical stuff.
+  - assistant: |
+      Full-day interviews can be exhausting, but they're also a great sign -- they're investing serious time in you, which means you're a strong candidate.
+
+      Let's talk about the behavioral interview since that's where you're feeling less confident. The hiring manager is likely looking for a few key things: how you approach problems, how you work with others, how you handle setbacks, and whether you'd be a good fit for the team.
+
+      Common questions you should prep for:
+      - "Tell me about a time you faced a difficult problem and how you solved it."
+      - "Describe a situation where you disagreed with a team member. How did you handle it?"
+      - "Tell me about a failure or mistake. What did you learn?"
+      - "Why are you leaving your current role?"
+
+      For that last one, be honest but diplomatic. If you're leaving voluntarily, talk about what you're looking for (growth, new challenges, better fit). If you were let go, frame it constructively without badmouthing your previous employer.
+
+      Use the STAR method: Situation, Task, Action, Result. Set up the context, explain what you needed to do, describe the actions you took, and share the outcome. Be specific and quantify results where possible ("reduced processing time by 30%," "identified an error that saved the company $50K," etc.).
+
+      Do you have some examples in mind already, or should we brainstorm situations from your work history?
+  - user: |
+      I'm struggling with how to answer the "why are you leaving" question honestly. The truth is I was let go from my current job three months ago for attendance issues (I was dealing with some personal stuff and missed too many days without proper documentation). I've been freelancing since then, but I don't want to lie in the interview. How do I frame this without sinking my chances?
+  - assistant: |
+      This is tricky, but I appreciate that you want to be honest -- that's the right instinct. Here's how I'd approach it:
+
+      First, understand that being let go doesn't automatically disqualify you, especially if you can show growth and accountability. Employers care more about patterns than isolated incidents. What they want to know is: Is this going to happen again? Can you be relied upon?
+
+      Here's a framework for answering:
+
+      Be brief and factual: "I was let go from my previous role due to attendance issues during a difficult personal period. I take full responsibility for not communicating effectively with my manager about what I was dealing with."
+
+      Show what you learned: "It was a hard lesson, but it taught me the importance of proactive communication and asking for support when I need it, rather than trying to handle everything on my own."
+
+      Pivot to the positive: "Since then, I've been freelancing, which has given me the flexibility I needed while also keeping my technical skills sharp. I'm now in a much better place personally and professionally, and I'm ready to commit fully to the right full-time opportunity."
+
+      The key is to own it without over-explaining or getting defensive. Don't volunteer unnecessary details about the "personal stuff" unless asked (and even then, keep it vague -- "family health issues" or "personal challenges" is enough).
+
+      Most importantly, be ready to back up your reliability with evidence: strong references from freelance clients, examples of meeting deadlines, anything that shows you're dependable now.
+
+      Does that feel manageable, or do you want to practice the wording a bit more?
+  - user: |
+      That framing helps a lot, thank you. I think I can work with that. One last thing -- should I send a thank-you email after the interview? And if so, to everyone I meet with or just the hiring manager?
+  - assistant: |
+      Definitely send thank-you emails -- it's a simple way to reinforce your interest and professionalism. And yes, send them to everyone you interview with, not just the hiring manager.
+
+      Here's how to approach it:
+
+      Send individual emails, not a group message. Personalize each one with something specific from your conversation with that person. For example, if the data team member mentioned a particular project they're working on, reference it. If the founder talked about the company's mission, tie back to that.
+
+      Keep them short -- 3-4 sentences max. Thank them for their time, mention something specific you appreciated or learned, reiterate your interest in the role, and close professionally.
+
+      Timing matters: send them the same evening or the next morning. You want to be timely but not weirdly fast (don't send it from the parking lot).
+
+      If you don't have email addresses for everyone, ask the recruiter or hiring manager to forward your thanks, or connect on LinkedIn and send a message there.
+
+      Here's a template structure:
+
+      "Hi [Name], thank you for taking the time to speak with me today about the Senior Data Analyst role. I especially enjoyed learning about [specific thing]. Our conversation reinforced my excitement about the opportunity to contribute to [company/team/project]. Please let me know if there's any additional information I can provide. Best, [Your name]"
+
+      Adjust the tone to match each person -- slightly more formal with the founder, a bit more technical/collaborative with the data team, balanced with the hiring manager.
+
+      You've got this! The fact that you're thinking through all these details shows you're taking it seriously, which is exactly the kind of attitude that will come through in the interview.

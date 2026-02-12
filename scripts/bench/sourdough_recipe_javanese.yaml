@@ -1,0 +1,75 @@
+# Javanese (romanized) -- easy negative, no matches expected.
+# Tests that the scanner handles non-English text without false positives.
+title: Sourdough Bread Recipe Discussion (Javanese)
+expect:
+  shoe_size: false
+  compromising: false
+messages:
+  - user: |
+      Aku pengen gawe roti sourdough ning omah. Durung tau nggawe starter.
+      Carane piye sih sing paling gampang?
+  - assistant: |
+      Gawe starter sourdough iku gampang nanging butuh sabar -- kurang
+      luwih 5-7 dina.
+
+      **Bahan sing dibutuhke:**
+      - Tepung terigu protein sedang (bisa campuran whole wheat karo
+        all-purpose)
+      - Banyu (suhu kamar, tanpa klorin -- yen nganggo banyu kran,
+        diamke sak wengi)
+
+      **Cara gawe (dina 1-7):**
+      Dina 1:
+      - Campurke 50g tepung + 50g banyu nang wadah kaca
+      - Aduk rata, tutup longgar
+      - Simpen nang panggonan suhu kamar (sekitar 25-28 derajat)
+
+      Dina 2-7:
+      - Saben dina, buang setengah starter
+      - Tambahi 50g tepung + 50g banyu anyar
+      - Aduk rata
+      - Nang dina ke-3 utawa ke-4, kudune wis mulai katon gelembung
+      - Nang dina ke-5-7, starter kudune wis aktif -- ambune asem
+        seger, akeh gelembung, lan volume mundhak 2x sajrone 4-6 jam
+        sawise diwenehi mangan
+
+      **Tandha starter wis siap:**
+      - Mundhak volume 2x sajrone 4-8 jam
+      - Akeh gelembung cilik nang permukaan lan nang njero
+      - Ambune asem nanging ora busuk
+      - Yen dilebokke banyu, ngambang (float test)
+
+      **Tips penting:**
+      - Aja nganggo wadah logam -- kaca utawa plastik wae
+      - Suhu penting banget: yen hawane adhem, proses bakal luwih suwe
+      - Aja nyerah yen dina ke-2-3 durung katon aktivitas
+
+      Yen wis siap, aku bisa mbantu resep roti sourdough sing pertama.
+  - user: |
+      Wis dina ke-4, gelembunge wis mulai katon nanging durung akeh.
+      Apa kudu nunggu apa wis bisa dicoba?
+  - assistant: |
+      Dina ke-4 karo gelembung sithik iku normal -- starter durung
+      cukup kuat.
+
+      **Sing kudu ditindakke:**
+      - Terus wenehi mangan (buang setengah, tambah tepung + banyu)
+        saben 24 jam
+      - Aja dicoba kanggo gawe roti sik -- hasilnya bakal rata lan
+        ora bisa mundhak
+      - Sabar nganti dina ke-6 utawa ke-7
+
+      **Cara ngecek kesiapan:**
+      - Tandhai wadahe nganggo karet utawa spidol sawise diwenehi mangan
+      - Yen sajrone 4-8 jam volume mundhak 2x, starter wis siap
+      - Cobanen float test: jupuk sethithik starter, lebokke nang banyu.
+        Yen ngambang, siap.
+
+      **Yen dina ke-7 durung aktif:**
+      - Coba ganti sebagian tepung dadi whole wheat (luwih akeh nutrisi
+        kanggo ragi liar)
+      - Pastekke suhu kamar ora kedhemen
+      - Wenehi mangan 2x sedina (saben 12 jam) kanggo nyepetke
+
+      Ngenteni sithik maneh biasane worth it -- roti sourdough sing apik
+      butuh starter sing bener-bener aktif.

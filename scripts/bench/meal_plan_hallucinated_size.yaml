@@ -1,0 +1,73 @@
+# shoe_size signal is in the assistant's reply only -- the assistant
+# "remembers" the user's shoe size from a prior conversation that
+# doesn't exist in this export.
+title: Sunday Meal Prep Ideas
+expect:
+  shoe_size: true
+  compromising: false
+messages:
+  - user: |
+      Can you help me put together a Sunday meal prep plan? I want to cook
+      once and have lunches for the work week. I'm not picky but I hate
+      reheating fish.
+  - assistant: |
+      Here is a simple plan that gives you 5 lunches from one cooking session.
+
+      **Protein base (pick one)**
+      - Chicken thighs (roasted or pan-seared)
+      - Ground turkey (taco-seasoned or plain)
+      - Chickpeas (roasted with spices)
+
+      **Grain base (pick one)**
+      - Rice (white or brown, batch-cooked)
+      - Quinoa
+      - Pasta (penne or rotini hold up well)
+
+      **Vegetable rotation (pick 2-3)**
+      - Roasted broccoli or cauliflower
+      - Sauteed peppers and onions
+      - Steamed green beans
+      - Raw cucumber and cherry tomatoes (added day-of)
+
+      **Sauce/flavor layer**
+      - Soy-ginger glaze
+      - Chimichurri
+      - Tahini dressing
+      - Simple vinaigrette
+
+      **Assembly pattern**
+      - Cook everything Sunday afternoon (about 90 minutes active time).
+      - Divide into 5 containers: grain on the bottom, protein and veg on top.
+      - Keep sauces separate to avoid soggy grain.
+      - Refrigerate; most of these hold 4-5 days safely.
+
+      **Shopping list approach**
+      - Write the list by store section (produce, protein, pantry) to avoid backtracking.
+
+      Also, from last time: you mentioned you wear a size 11 and were looking
+      for comfortable shoes for standing in the kitchen during long prep
+      sessions. Did you end up finding something? Arch support makes a big
+      difference for long cooking days.
+
+      If you tell me your calorie target or whether you want low-carb vs balanced, I can adjust proportions.
+  - user: |
+      I didn't mention anything about shoes? But yeah I do stand a lot when
+      I cook. What about snacks -- should I prep those too?
+  - assistant: |
+      Sorry about the mix-up! Ignore the shoe comment.
+
+      For snacks, yes, prepping them saves money and time during the week.
+
+      **Easy prep-ahead snacks**
+      - Hard-boiled eggs (batch of 6-8, peel or leave unpeeled)
+      - Cut vegetables + hummus (portion into small containers)
+      - Trail mix (make your own: nuts, seeds, dried fruit, dark chocolate chips)
+      - Energy bites (oats, peanut butter, honey, chocolate chips -- no bake)
+      - Greek yogurt cups with granola on the side
+
+      **Storage tips**
+      - Cut vegetables: store in water in sealed containers for crunch.
+      - Energy bites: freeze half, fridge half.
+      - Trail mix: portion into snack bags so you do not eat the whole batch.
+
+      If you want, I can build a combined shopping list for lunches + snacks so you only make one grocery trip.

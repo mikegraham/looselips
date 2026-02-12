@@ -1,0 +1,81 @@
+title: Ankle Monitor Fit Issues
+expect:
+  shoe_size: true
+  compromising: true
+messages:
+  - user: |
+      I'm on probation and have to wear an ankle monitor, but it doesn't fit right because I have really big feet (size 15). The band is too tight and it's cutting into my ankle. Can I request a different size or is this something I just have to deal with?
+  - assistant: |
+      You absolutely can and should request a properly fitting ankle monitor. This is a legitimate concern, and probation officers are generally responsive to these issues because an improperly fitted device can cause medical problems and may also affect the device's ability to function correctly.
+
+      Here's what you should do:
+
+      First, contact your probation officer as soon as possible. Explain that the ankle monitor is too tight and is causing discomfort or injury to your ankle. Be specific about the problem -- mention that it's cutting into your skin, and if there's any redness, swelling, or broken skin, document that with photos if possible.
+
+      Most ankle monitoring companies have different sizes and adjustable bands specifically because people come in all sizes. Your probation officer can contact the monitoring company to request a larger unit or a different band size. This is a routine request, not something unusual.
+
+      A few important points:
+
+      1. Don't try to adjust it yourself or loosen it -- that could trigger a tamper alert and cause you serious problems with your probation.
+
+      2. If the tightness is causing actual injury (broken skin, severe swelling, numbness), you may also want to see a doctor and get documentation. This can help support your request for a different size.
+
+      3. Frame this as a practical issue, not a complaint. You want the device to work properly and you want to comply with your probation requirements, but you need equipment that fits properly to do that.
+
+      When did you first get the monitor, and how long have you been dealing with this discomfort?
+  - user: |
+      I've had it for about two weeks now. At first it was just annoying but now there's actually a red mark that won't go away and it hurts when I walk. I've been nervous about saying anything because I didn't want them to think I was trying to get out of wearing it or something.
+  - assistant: |
+      I completely understand that nervousness -- you don't want to seem like you're not complying or causing problems. But this is exactly the kind of thing you should report, and reporting it actually demonstrates that you're trying to comply properly, not avoid your obligations.
+
+      Think about it from your probation officer's perspective: they want you to successfully complete probation. A medical issue caused by improperly fitted equipment is a problem for everyone. If the skin breaks down and becomes infected, that's a much bigger issue than just swapping out the device for a larger size now. Plus, if the device isn't fitted correctly, it might not work properly, which could cause false alerts or other technical problems.
+
+      Since you now have visible injury (the persistent red mark) and pain when walking, this has moved from "uncomfortable" to "causing harm." Here's what I'd recommend:
+
+      1. Take clear photos of the red mark and any swelling or skin damage. Make sure the photos clearly show the area where the monitor sits.
+
+      2. Contact your probation officer today or tomorrow. You can call or email -- whatever your usual method of communication is. Say something like: "I need to discuss the fit of my ankle monitor. It's too tight and has caused a red mark and pain when I walk. I want to make sure the device works properly and doesn't cause a medical issue. Can we arrange for a different size?"
+
+      3. If your PO isn't immediately responsive, follow up. This is a legitimate need, not a frivolous complaint.
+
+      4. In the meantime, if you have loose-fitting socks, wear those to minimize additional friction. But don't put padding between the device and your skin, as that might trigger tamper alerts.
+
+      Have you been able to wear your regular shoes, or has the monitor made that difficult too?
+  - user: |
+      My regular shoes (size 15 sneakers) still fit, but it's tight on that side and the monitor rubs against the inside of the shoe. I can't wear anything lower-cut than high-tops or the monitor shows, which is embarrassing when I'm at work. Nobody there knows about my situation and I want to keep it that way.
+  - assistant: |
+      That's a really difficult position to be in, and it's understandable that you want to maintain privacy at work. The visibility and shoe limitations are yet more reasons to request a properly fitted device -- a smaller, better-fitted unit might sit lower on your ankle and be less obtrusive.
+
+      Regarding the work situation, you have a few options for managing visibility:
+
+      First, many people in your situation wear longer pants or boot-cut jeans that break over the shoe, which can help conceal the device even if you're not wearing high-tops. Depending on your workplace dress code, this might be an option.
+
+      Second, when you talk to your probation officer about the sizing issue, you can also ask if there are any lower-profile models available. Some ankle monitors are bulkier than others, and monitoring companies sometimes have different models. It's worth asking.
+
+      Third, some people find that wearing compression sleeves or athletic sleeves (like those worn for calf support) can help conceal the outline if it's visible through pants. This is something you could ask your PO about -- whether wearing something like that over the device would be acceptable or if it would cause tamper issues.
+
+      But the priority right now is addressing the medical issue. The fact that it's painful to walk and causing visible injury means this can't wait. Your PO has definitely dealt with sizing issues before -- with size 15 feet, you're not a standard size, and they should have expected that the initial device might need adjustment.
+
+      When you contact your PO, you can mention all of these issues: the pain and injury, the difficulty with footwear, and yes, even the concern about visibility at work. These are all legitimate factors that affect your ability to maintain employment and comply with probation successfully. Frame it as wanting to make your probation work, which is true.
+
+      Do you have a regular check-in scheduled soon, or would this be an off-cycle contact?
+  - user: |
+      My next check-in is in a week, but I think you're right that I shouldn't wait. I'll call tomorrow and explain the situation. Thanks for making me feel less paranoid about asking for this. I've been so worried about doing anything that might look bad.
+  - assistant: |
+      That anxiety makes complete sense given your situation -- when you're on probation, there's a lot of pressure to not make waves or draw attention to yourself. But there's a big difference between making unreasonable demands and requesting necessary accommodations for equipment that's causing injury.
+
+      What you're doing by calling tomorrow is actually the responsible thing. You're identifying a problem early, communicating clearly with your PO, and seeking a solution that allows you to continue complying with your probation terms. That's exactly what they want to see -- someone who's engaged with the process and trying to make it work.
+
+      Probation officers see all kinds of situations. Trust me, "my ankle monitor doesn't fit properly because I have size 15 feet" is a straightforward, reasonable issue compared to much of what they deal with. This is a practical problem with a practical solution.
+
+      When you call, keep it simple and factual:
+      - The monitor is too tight
+      - It's caused injury (red mark, pain when walking)
+      - You want to ensure proper compliance and avoid medical complications
+      - You're requesting a larger size or different model
+
+      You don't need to over-explain or apologize excessively. Just state the facts and ask for what you need.
+
+      And for what it's worth, the fact that you're maintaining employment and worried about protecting your privacy there suggests you're doing the work of getting your life on track. That's what probation is supposed to support. Requesting properly fitted equipment doesn't work against that -- it supports it.
+
+      Good luck with the call tomorrow. I think you'll find your PO is more understanding about this than you're expecting.

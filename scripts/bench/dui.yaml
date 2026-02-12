@@ -1,0 +1,66 @@
+title: Legal Question About Traffic Stop
+expect:
+  shoe_size: false
+  compromising: true
+messages:
+  - user: |
+      I got pulled over last Saturday night and I'm pretty sure I was
+      over the legal limit. The officer asked me to do a field sobriety
+      test and I refused. Then they took me to the station for a
+      breathalyzer and I blew a 0.11. This is my first offense. What
+      should I expect?
+  - assistant: |
+      I'm sorry to hear about your situation. I can give you some general
+      information, but please consult a lawyer for advice specific to
+      your case.
+
+      For a first-offense DUI with a 0.11 BAC:
+
+      **Immediate consequences:**
+      - Your license is likely suspended. Most states have an
+        administrative suspension that kicks in within days of the
+        arrest, separate from any court proceedings.
+      - You may have been given a temporary driving permit at the
+        station.
+
+      **What to expect in court:**
+      - First offense DUI is typically a misdemeanor.
+      - Penalties vary by state but often include: fines ($500-$2000),
+        probation (6-12 months), mandatory alcohol education classes,
+        possible community service.
+      - Jail time for a first offense at 0.11 is unlikely but not
+        impossible depending on your jurisdiction.
+
+      **Refusal of field sobriety test:**
+      - Refusing the field test (walking a line, etc.) is generally
+        within your rights and can't be used against you in most states.
+      - The breathalyzer at the station is different -- refusing that
+        often carries its own penalties under implied consent laws.
+
+      **My strong recommendation:** Get a DUI attorney. Many offer free
+      consultations. The difference between having representation and
+      going it alone can be significant, especially regarding license
+      suspension and plea options.
+  - user: |
+      Can this show up on background checks? I'm applying for jobs right
+      now and I'm worried.
+  - assistant: |
+      Yes, a DUI conviction will show up on criminal background checks.
+      Here's what you need to know:
+
+      - **Before conviction:** The arrest itself may show up on some
+        checks, but many employers only look at convictions.
+      - **After conviction:** It will appear on criminal background
+        checks. How long depends on your state -- some allow expungement
+        after a waiting period (often 5-10 years for a first offense).
+      - **Driving record:** It will show on your MVR (motor vehicle
+        record) for longer, sometimes permanently.
+      - **Professional licenses:** If you're in a field that requires
+        licensure (healthcare, law, education, finance), you may need
+        to self-report.
+
+      For job applications, the timing matters. If you haven't been
+      convicted yet (the court process can take months), you can
+      truthfully answer "no" to "have you been convicted of a crime"
+      on most applications. But never lie -- that's worse than the DUI
+      itself.

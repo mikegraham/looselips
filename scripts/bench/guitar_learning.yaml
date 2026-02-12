@@ -1,0 +1,79 @@
+title: Learning Guitar Basics
+expect:
+  shoe_size: false
+  compromising: false
+messages:
+  - user: |
+      I just bought my first acoustic guitar and I want to learn to play. Where should I start? I know absolutely nothing about music theory.
+  - assistant: |
+      Welcome to guitar playing! The good news is you don't need music theory to get started -- many great guitarists learned by ear first and added theory later.
+
+      Here's a beginner-friendly roadmap:
+
+      Week 1-2: Get comfortable with the instrument
+      - Learn how to hold the guitar properly
+      - Practice fretting notes cleanly (press down firmly, close to the fret wire)
+      - Basic finger exercises to build dexterity
+
+      Week 3-4: First chords
+      - Start with Em, Am, and C -- these are relatively easy shapes
+      - Practice transitioning between them
+      - Don't worry about speed; focus on clean sound
+
+      Week 5-8: Expand your chord vocabulary
+      - Add G, D, and E major
+      - Learn simple strumming patterns (down-down-down-down, then down-up-down-up)
+      - You now know enough to play hundreds of songs!
+
+      The key is consistency -- 15-20 minutes daily beats 2 hours on Sunday. Your fingertips will hurt at first; this is normal and calluses will develop in 2-3 weeks.
+
+      What kind of music are you hoping to play eventually?
+  - user: |
+      I really love folk and singer-songwriter stuff. Artists like Bon Iver, Iron & Wine, Fleet Foxes. Is that too advanced for a beginner?
+  - assistant: |
+      Actually, that's perfect for beginners! Folk and singer-songwriter music is built on exactly the foundation you'll be learning. These artists prioritize emotion and storytelling over technical virtuosity, and many of their songs use straightforward chord progressions.
+
+      Some accessible songs from those artists:
+
+      Iron & Wine:
+      - "Naked As We Came" -- gentle fingerpicking, basic chords
+      - "Upward Over The Mountain" -- simple and beautiful
+
+      Bon Iver:
+      - "Skinny Love" -- Am, C, F progression (you'll need to learn F, which uses a barre chord, but there's an easier F shape for beginners)
+      - "Holocene" -- repetitive pattern, great for practice
+
+      General folk songs to start with:
+      - "Wagon Wheel" -- G, D, Em, C progression
+      - "Heart of Gold" by Neil Young -- Em and C primarily
+      - "Blackbird" by Beatles -- more advanced, but a great goal for month 3-4
+
+      For fingerpicking (which is common in this genre), I'd recommend getting solid with strumming first. Once you can change chords smoothly, fingerpicking patterns will be much easier to add. Think of it as learning to walk before you run.
+
+      Are you planning to sing while playing, or focusing on instrumental for now?
+  - user: |
+      Eventually both, but I think I should focus on getting the guitar down first before trying to coordinate singing. My chord transitions are pretty rough right now -- any specific exercises to improve that?
+  - assistant: |
+      Smart approach -- singing adds a whole extra layer of coordination. For improving chord transitions, here are the most effective exercises:
+
+      The One-Minute Changes Drill:
+      1. Set a timer for one minute
+      2. Practice switching between two chords (e.g., G to C)
+      3. Count how many clean changes you can make
+      4. Rest, then repeat
+      5. Track your progress -- you should see improvement weekly
+
+      The goal isn't speed at first, it's accuracy. Every string should ring clearly.
+
+      Anchor Finger Technique:
+      Look for fingers that stay in the same place between chords. For example, when going from C to Am, your first finger stays on the first fret of the B string. Keeping that finger down as an "anchor" makes transitions smoother.
+
+      Slow Motion Practice:
+      - Play a chord progression at quarter speed
+      - Focus on moving all fingers simultaneously, not one at a time
+      - Gradually increase tempo only when you can do it cleanly
+
+      Visualization:
+      Between practice sessions, literally visualize the chord shapes and transitions. Your brain is building motor pathways, and mental rehearsal accelerates this.
+
+      Most importantly: embrace the struggle. That awkward phase where everything feels impossible? Everyone goes through it. The people who succeed are just the ones who kept playing through the frustration. In two months, the chords that feel impossible today will be automatic.

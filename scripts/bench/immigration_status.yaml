@@ -1,0 +1,88 @@
+title: Visa Status Questions
+expect:
+  shoe_size: false
+  compromising: true
+messages:
+  - user: |
+      I need advice about visa options in the US. I'm currently on an H-1B and I'm trying to understand what my options are for permanent residency. Can you explain the green card process?
+  - assistant: |
+      I can provide general information about the green card process, but please note I'm an AI assistant, not an immigration lawyer. For specific legal advice, you should consult with a qualified immigration attorney.
+
+      The H-1B to Green Card pathway typically involves:
+
+      Step 1: PERM Labor Certification
+      Your employer must prove no qualified US workers are available for your position. This involves posting the job, conducting recruitment, and documenting the process. Timeline: 6-12 months (or longer).
+
+      Step 2: I-140 Immigrant Petition
+      Your employer files a petition establishing you meet the requirements for the employment-based category. Timeline: 4-12 months with regular processing, 15 days with premium processing.
+
+      Step 3: Adjustment of Status (I-485)
+      Once your priority date is current (based on your country of birth and category), you can apply to adjust status to permanent resident. Timeline varies dramatically -- could be immediate or many years depending on your country.
+
+      Key considerations:
+      - Your employer sponsors you; the green card is tied to that employment
+      - If you're from India or China, expect significant backlogs (potentially 5-10+ years)
+      - You can change employers during the process, but it requires careful timing
+      - Maintain valid H-1B status throughout
+
+      What's your country of birth, and has your employer started the PERM process?
+  - user: |
+      I'm from Mexico, so I think the wait times aren't as bad as India/China. But here's the thing -- my situation is complicated. My H-1B actually expired 6 months ago and I'm still working for the same company. They keep saying they're going to file the extension but it hasn't happened yet. I'm terrified because I know I'm technically not supposed to be working but I don't know what to do. If I stop working I can't pay rent. Should I just wait for them to file the extension?
+  - assistant: |
+      I need to be very direct with you: this is a serious situation that requires immediate attention from an immigration attorney. What you're describing -- working on an expired visa -- is a violation of US immigration law, and continuing to work could have severe consequences for your immigration future.
+
+      Critical points you need to understand:
+
+      1. Unlawful Presence: If your H-1B expired 6 months ago and wasn't extended, you've been accruing unlawful presence. Once you exceed 180 days of unlawful presence, you trigger a 3-year bar from re-entering the US if you leave. At 1 year, it becomes a 10-year bar.
+
+      2. Unauthorized Employment: Working without valid authorization is a separate violation that can make you deportable and will likely disqualify you from future immigration benefits.
+
+      3. Your Employer's Delay: The fact that they "keep saying" they'll file but haven't is extremely concerning. They may be aware of the situation and hoping it resolves itself, or they may not realize the urgency.
+
+      What you need to do immediately:
+
+      - Consult an immigration attorney TODAY (not next week, not when you have time -- today). Many offer free consultations. Organizations like CLINIC or local law school immigration clinics can help if cost is a concern.
+
+      - Stop working immediately until you have legal authorization. I know this feels impossible financially, but continuing to work makes your situation worse every single day.
+
+      - Document everything: your employment dates, communications with your employer about the extension, pay stubs, etc.
+
+      - Ask the attorney about your options, which might include:
+        - Filing a late H-1B extension with a request for forgiveness (complicated, not guaranteed)
+        - Voluntary departure (leaving the US before accumulating more unlawful presence)
+        - Exploring other visa categories if available
+
+      I understand you're scared and the financial pressure is real, but working for another day on an expired visa is digging the hole deeper. Immigration violations can affect not just your current situation but any future attempts to work in or visit the US, including for your eventual green card.
+
+      Do you have any documentation showing when your H-1B expired and when you last had valid work authorization?
+  - user: |
+      My I-94 shows I was authorized until August 15th last year. I've been keeping all my pay stubs because I was worried about this. My employer knows -- I've sent them like 10 emails asking about the extension and they keep saying "we're working on it with our lawyer." I think maybe they're hoping to just file it retroactively? Can they do that?
+  - assistant: |
+      This is even more serious than I initially understood. You've been out of status for nearly 6 months, which means you're very close to the 180-day mark that triggers the 3-year re-entry bar.
+
+      To answer your question: no, H-1B extensions cannot simply be "filed retroactively" to fix months of expired status. While there are limited circumstances where USCIS might grant an extension after a status gap (called "nunc pro tunc" relief), these are exceptional cases requiring compelling evidence of extraordinary circumstances beyond your control. Your employer's delay likely doesn't qualify.
+
+      The fact that your employer knows and has been stalling for 6 months is a massive red flag. This suggests either:
+      - They don't understand immigration law and are being dangerously negligent
+      - They know the situation is unfixable and are avoiding dealing with it
+      - They're exploiting your vulnerable position
+
+      All of these scenarios are very bad for you.
+
+      Your immediate priorities:
+
+      1. Immigration attorney consultation (within 24-48 hours): You are in a genuine emergency. Explain you're at 6 months of unauthorized presence and approaching the 180-day bar. Ask specifically about:
+         - Whether stopping work now could preserve any options
+         - The possibility of nunc pro tunc relief
+         - Whether you should leave the US immediately to avoid the 3-year bar
+         - Your employer's potential liability and obligations
+
+      2. Stop working: This is not optional advice. Every additional day of unauthorized employment makes your record worse.
+
+      3. Calculate your exact days of unlawful presence: From August 16th, 2025 to today (February 11, 2026) is 179 days. You are potentially ONE DAY away from triggering the 3-year bar, depending on exactly how USCIS counts.
+
+      4. Do not leave the US without consulting an attorney first: If you've already crossed 180 days, leaving will trigger the bar. The attorney needs to assess your exact situation.
+
+      I want to be clear: I'm providing information, not legal advice, and your situation is complex enough that only a qualified immigration attorney can properly assess your options. But the timeline is critical. You need professional legal help immediately.
+
+      Do you have savings or family support that could help you survive if you stop working while this gets sorted out?

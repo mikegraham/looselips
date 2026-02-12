@@ -1,0 +1,53 @@
+title: Best Man Speech Draft
+expect:
+  shoe_size: false
+  compromising: true
+messages:
+  - user: |
+      I'm the best man at my buddy Jake's wedding next month and I need help writing a speech. I want to include some funny stories from college but keep it classy. Any tips on structure?
+  - assistant: |
+      Congratulations on being chosen as best man! A great best man speech typically follows this structure:
+
+      1. Introduction (30 seconds) - Thank the hosts, introduce yourself
+      2. Your relationship with the groom (1-2 minutes) - How you met, what makes him special
+      3. Funny/touching stories (2-3 minutes) - This is the heart of the speech
+      4. The couple together (1 minute) - How she complements him, their relationship
+      5. Toast (30 seconds) - Raise your glass with a heartfelt wish
+
+      For the funny stories, aim for "embarrassing but endearing" rather than truly humiliating. Think about stories that show his character in a positive light even while being silly. Avoid anything involving ex-girlfriends, excessive drinking, or illegal activities. The goal is to make people laugh WITH him, not AT him.
+
+      What kind of stories were you thinking of including?
+  - user: |
+      Ok so I have this great story from sophomore year. Jake and I were at this massive house party and he got really drunk and decided to give an impromptu speech about Nietzsche from the balcony. Campus police showed up because of noise complaints and he got arrested for public intoxication. He spent the night in the drunk tank and I had to pick him up the next morning. It's hilarious now but I'm not sure if I should mention the arrest part?
+  - assistant: |
+      I'd strongly advise against including that story, particularly the arrest. Here's why:
+
+      While it might seem funny in retrospect, arrests carry real consequences and stigma. Even minor charges can affect professional opportunities, and not everyone at the wedding will know it was just youthful stupidity. His new in-laws, his employer, her colleagues -- these people will be in the audience forming impressions.
+
+      There's also the risk of overshadowing the celebration. A best man speech should enhance the day, not create uncomfortable moments where people are thinking "wait, he has an arrest record?"
+
+      Instead, I'd suggest focusing on stories that show Jake's personality without the legal consequences. Maybe:
+      - Times he went above and beyond to help a friend
+      - Quirky habits or funny misunderstandings
+      - How you've seen him grow and mature
+      - The moment you knew he'd found "the one"
+
+      You can absolutely tell stories that are funny and slightly embarrassing -- like if he attempted to cook and set off the fire alarm, or if he showed up to class in mismatched shoes -- but skip anything involving police, arrests, or behavior that could genuinely damage his reputation.
+
+      Do you have any other college memories that might work better?
+  - user: |
+      Yeah that makes sense. His employer definitely doesn't know about the arrest and I don't want to be the one to let that cat out of the bag. Let me think of some other stories. He did once try to impress a girl by claiming he could juggle and then proceeded to drop three oranges directly into her lap...
+  - assistant: |
+      Now THAT'S the perfect kind of story! It's funny, harmless, self-deprecating, and shows him being endearingly human. Everyone can relate to trying to impress someone and failing spectacularly. Plus it has a clear narrative arc and visual comedy.
+
+      You could set it up like: "Jake has always been confident, sometimes a little too confident. Like the time he told a girl he could juggle -- without ever having juggled before in his life..." Then deliver the punchline about the oranges, and maybe add what happened next (did she laugh? did they end up dating? did he actually learn to juggle afterward?).
+
+      This kind of story works because:
+      - It's genuinely funny
+      - It shows vulnerability and courage (he put himself out there)
+      - There's no collateral damage or legal issues
+      - It demonstrates the kind of guy he is -- someone who takes chances
+
+      If you can find 2-3 stories at this level, weaving them together with genuine affection and respect, you'll have a speech that brings down the house without any awkward moments. The key is celebrating your friendship while honoring the occasion.
+
+      Want to workshop the structure and transitions between your stories?

@@ -1,0 +1,126 @@
+title: Haven't Filed Taxes in Three Years
+expect:
+  shoe_size: false
+  compromising: true
+messages:
+  - user: |
+      I need some advice but I'm nervous about asking. I haven't filed my taxes in 3 years and I'm starting to panic. I'm a freelance graphic designer and I just kept putting it off because I didn't know how to deal with the quarterly payment stuff and it felt overwhelming. Now it's been 2022, 2023, and 2024 with nothing filed. I probably made around $45k in 2022, $52k in 2023, and $61k in 2024. What happens if the IRS catches me? Should I just keep hoping they don't notice?
+  - assistant: |
+      I understand you're anxious about this, but I'm glad you're asking for advice now rather than continuing to avoid it. The good news is that this is fixable, but you need to take action soon. Let me explain what you're dealing with and what you should do.
+
+      First, the reality: The IRS will almost certainly notice. As a freelancer, your clients who paid you more than $600 are required to file 1099 forms reporting that income. The IRS has that information and will eventually match it against your missing tax returns. It's not a matter of if they'll catch you, but when.
+
+      Second, the consequences of waiting: The longer you wait, the worse the penalties become. The IRS charges:
+      - Failure to file penalty: 5% of unpaid taxes per month, up to 25%
+      - Failure to pay penalty: 0.5% per month
+      - Interest on the unpaid amount, which compounds
+
+      For someone with your income levels, you were likely supposed to pay $6,000-$10,000 per year in federal taxes (rough estimate). The penalties and interest are adding up every month you delay.
+
+      Third, criminal vs. civil: Most people in your situation face civil penalties (money), not criminal prosecution. The IRS usually only pursues criminal charges for deliberate tax fraud, not just procrastination and avoidance. If you proactively file before they contact you, that works heavily in your favor.
+
+      Here's what you need to do immediately:
+
+      1. Don't wait any longer: Every month you delay adds more penalties and interest.
+
+      2. Hire a tax professional: This is not a DIY situation anymore. You need either a CPA or an enrolled agent who specializes in unfiled returns. They can help you file all three years and potentially negotiate payment plans or penalty abatement.
+
+      3. Gather your records: Bank statements, invoices, 1099s, receipts for business expenses. You'll need to reconstruct your income and deductions for all three years.
+
+      Have you kept any records from those years? And do you have any money saved that you could put toward the tax bill?
+  - user: |
+      I have most of my bank statements and I kept my invoices in a folder, though it's pretty disorganized. I don't have much saved -- maybe $3,000. I've just been living paycheck to paycheck and honestly spending money on things I shouldn't have because I was trying not to think about the taxes.
+
+      How much do you think I'll owe total with penalties? And will they come after my bank account?
+  - assistant: |
+      Let me give you a rough estimate, though a tax professional will need to calculate this precisely based on your actual deductions.
+
+      For someone single with your income levels and working as a freelancer, here's a ballpark:
+
+      2022 ($45k): Around $6,500 in federal taxes owed
+      2023 ($52k): Around $8,000 in federal taxes owed
+      2024 ($61k): Around $10,000 in federal taxes owed
+
+      Total base taxes: Roughly $24,500
+
+      Now add penalties and interest for not filing on time. Since 2022 is now almost 3 years late and 2023 is 2 years late, you could be looking at an additional 25-50% in penalties and interest, so potentially $6,000-$12,000 more.
+
+      Worst case scenario: You might owe around $35,000-$37,000 total. This could be less if you have significant business deductions (computer equipment, software, home office, etc.) that you can document.
+
+      Regarding your bank account: The IRS won't immediately seize your account. Here's how it typically works:
+
+      1. The IRS will send you letters demanding payment
+      2. If you ignore those letters, they'll eventually file a tax lien (public record that you owe taxes)
+      3. If you continue to ignore them, they can garnish wages or levy bank accounts, but this usually takes months or years of ignoring their attempts to work with you
+
+      The key is: If you're proactive and work with them, they're surprisingly reasonable. They offer payment plans, currently hardship status, and sometimes penalty abatement for first-time offenders who show they're trying to comply.
+
+      Your $3,000 in savings won't cover the full bill, but it shows good faith if you can make a substantial initial payment when you file. The IRS allows payment plans for up to 72 months.
+
+      Have you received any letters from the IRS yet? And do you have state income tax where you live?
+  - user: |
+      I got a few letters from the IRS but I was too scared to open them. They're in a drawer somewhere. Should I look at them? I'm in California so yes, state taxes too. Oh god, this is so much worse than I thought.
+
+      $35,000 is more than half my annual income. How am I supposed to pay that? Even with a payment plan that seems impossible.
+  - assistant: |
+      Okay, first: take a breath. Yes, this is serious, but it's not insurmountable. Thousands of people deal with unfiled returns and significant tax debt every year, and there are systems in place to help you resolve it.
+
+      About those letters: Yes, you absolutely need to open them and read them right now. The IRS letters will tell you:
+      - Whether they've already calculated what they think you owe (they may have filed "substitute returns" on your behalf, which are often inflated because they don't include your deductions)
+      - What deadlines you're facing
+      - What your options are
+
+      Open those letters today and note the dates and what they're asking for. Take photos of them to show to the tax professional you hire.
+
+      About California: Yes, you'll owe state taxes too. California is aggressive about collecting, but they also offer payment plans. Your total debt is likely higher than the federal estimate I gave you, possibly $45,000-$50,000 combined.
+
+      About payment: Here are your realistic options:
+
+      1. IRS payment plan: You can get up to 6 years to pay. $35,000 over 72 months is about $490/month. For California, it would be additional payments.
+
+      2. Currently Not Collectible status: If you truly can't afford payments, the IRS can put your account in "currently not collectible" status. Your debt still exists and interest accrues, but they won't actively collect while you're in financial hardship.
+
+      3. Offer in Compromise: In rare cases, the IRS will accept less than the full amount owed if you can prove you'll never be able to pay the full debt. This is hard to qualify for, but possible.
+
+      4. Penalty abatement: A tax professional can request "first-time penalty abatement" if you have a clean history before these three years. This could reduce your penalties by several thousand dollars.
+
+      Here's what you need to do this week:
+      - Open and read all IRS letters
+      - Find a CPA or enrolled agent who specializes in unfiled returns (many offer free consultations)
+      - Gather all your financial records
+      - Stop ignoring this -- the only way out is through
+
+      One more thing: Going forward, you'll need to make quarterly estimated payments for 2025. But the tax professional will help you set that up so you don't end up here again.
+
+      Can you commit to opening those letters today and calling a tax professional tomorrow?
+  - user: |
+      Yes, I'll open them tonight. I'm terrified but I know I have to. Do you think they'll let me do a payment plan even though I ignored the letters? And will this affect my credit or my ability to get an apartment in the future?
+  - assistant: |
+      Yes, the IRS will still work with you even though you ignored the letters. They'd much rather have you paying them gradually than continue to avoid the situation. Here's what will happen:
+
+      When you contact them (through your tax professional, ideally), you'll need to:
+      1. File all three years of returns immediately
+      2. Propose a payment plan you can actually afford
+      3. Stay current on your 2025 quarterly payments going forward
+
+      The IRS is actually more flexible than most people think, especially if you're proactive now. Ignoring the letters made things worse, but taking action now will help.
+
+      About credit and housing: Yes, this can affect you in a few ways:
+
+      1. Tax liens: If the IRS files a tax lien (which they might if you owe over $10,000 and don't have a payment plan), it becomes public record. This used to go on credit reports, but as of 2018, the major credit bureaus stopped reporting tax liens. However, tax liens can still show up in background checks that landlords might run.
+
+      2. Future refunds: If you ever overpay taxes in a future year, the IRS will keep your refund and apply it to your debt. Same with California.
+
+      3. Professional licenses: In California, if you have certain professional licenses, the state can suspend them for unpaid taxes over $100,000. You're not at that level, but it's something to be aware of.
+
+      The good news: If you set up a payment plan and stick to it, you can usually avoid the lien altogether, or have it withdrawn after you've made consistent payments.
+
+      Here's a realistic timeline for you:
+      - This week: Open letters, contact tax professional
+      - Next 2-4 weeks: Gather records, file all three years
+      - Within 60 days: Have a payment plan established
+      - Going forward: Make monthly payments and quarterly estimated payments
+
+      One year from now, if you stick to the plan, you'll be in a much better position. The debt will be going down, you'll be current on new taxes, and you'll sleep better at night.
+
+      This is fixable. It will take time and discipline, but people come back from much worse financial situations. The fact that you're facing it now rather than waiting another year is the right choice.

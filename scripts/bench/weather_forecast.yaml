@@ -1,0 +1,93 @@
+title: Planning a February Barbecue in Seattle
+expect:
+  shoe_size: false
+  compromising: false
+messages:
+  - user: |
+      I'm planning to host a barbecue in Seattle next weekend (February 18-19). I know February weather here can be unpredictable -- what should I expect? Should I have a backup plan?
+  - assistant: |
+      Seattle in mid-February is definitely tricky for outdoor events! Here's what you can typically expect:
+
+      Temperature: Daytime highs usually range from 45-52F, with overnight lows around 38-42F. It won't be warm by any stretch, so your guests will want jackets or layers.
+
+      Precipitation: February is one of Seattle's wetter months, averaging 3-4 inches of rain spread across 18-20 days. That means there's about a 60-65% chance of rain on any given day. However, "rain" in Seattle often means light drizzle or intermittent showers rather than all-day downpours.
+
+      Cloud cover: Expect mostly cloudy or overcast skies. Fully sunny days are relatively rare in February, though you might get lucky with partly cloudy conditions.
+
+      I would definitely recommend having a backup plan. Consider:
+      - A covered patio or gazebo where you can still grill but guests can stay dry
+      - Moving the event partially indoors (grill outside, eat inside)
+      - Rescheduling flexibility if the forecast looks particularly grim a few days out
+
+      Check the 10-day forecast starting about a week before your event. If you see consistent rain predictions, you'll have time to adjust plans.
+  - user: |
+      That makes sense. What weather patterns should I be watching for? Like, are there certain signs that indicate a better or worse weekend ahead?
+  - assistant: |
+      Great question! Understanding Pacific Northwest weather patterns can really help you make better predictions. Here are the key things to watch:
+
+      High pressure systems: When you see a high-pressure system sitting over the region or approaching from the west, that's your friend. High pressure typically brings clearer skies, lighter winds, and drier conditions. Even in winter, a strong high can give you a decent day.
+
+      Low pressure systems: These bring moisture and storms. Watch for low-pressure systems moving in from the Pacific -- they're the rain makers. The track matters: systems that come straight in from the west tend to be wetter than those that curve up from the southwest.
+
+      Convergence zones: Seattle has a unique microclimate where the Olympic Mountains split airflow, which then converges over the Seattle area. This can create localized bands of heavier precipitation. If forecasts mention a Puget Sound convergence zone, expect potentially heavier showers.
+
+      Temperature inversions: Sometimes in winter, cold air gets trapped near the surface with warmer air above. This can lead to persistent clouds and drizzle, but at least it's usually not heavy rain.
+
+      The Pineapple Express: This is a strong atmospheric river that brings warm, very wet conditions from near Hawaii. If you see this mentioned in forecasts, postpone your event -- it means heavy rain and potential flooding.
+
+      For your specific weekend, start checking the NOAA/National Weather Service forecast for Seattle around February 11-12. Look at the models like the GFS and European model -- if they agree on high pressure, you're in good shape. If they show multiple low-pressure systems rolling through, consider moving your event indoors or rescheduling.
+  - user: |
+      OK, let's say I go ahead with it and it does drizzle a bit. What can I do to make the barbecue work despite typical Seattle February weather?
+  - assistant: |
+      Absolutely doable -- Seattleites are used to functioning in drizzle! Here's how to make it work:
+
+      Shelter setup:
+      - Position your grill under an eave, covered porch, or pop-up canopy (make sure it's properly ventilated -- never grill in an enclosed space)
+      - Set up a tent or covered area for guests with sidewalls if possible to block wind and mist
+      - Arrange outdoor heaters or a fire pit in the covered area to keep guests comfortable
+
+      Timing strategy:
+      - Plan your event for midday (11am-3pm) when temperatures peak
+      - Watch the hourly forecast -- drizzle often comes in waves, and you might catch a drier window
+      - Have food prep done in advance so you're not running in and out constantly
+
+      Food choices:
+      - Choose items that cook relatively quickly (burgers, hot dogs, sausages, kebabs) rather than slow-cooking brisket
+      - Have some backup dishes you can finish in the oven if weather turns nasty
+      - Consider hearty sides that work well in cool weather: baked beans, chili, cornbread, potato salad
+
+      Guest comfort:
+      - Send a note ahead of time about the weather situation and recommend layers, waterproof jackets
+      - Have some extra blankets or throws available
+      - Provide warm drinks: hot cider, coffee, hot chocolate alongside your usual beverages
+      - Set up the indoor space as an overflow area with seating and warmth
+
+      Embrace it:
+      - Seattle culture is all about making the most of weather that's less than ideal
+      - Your guests will appreciate the effort and the food will taste great even in 48F drizzle
+      - Consider it character-building!
+
+      If you wake up that morning and it's truly pouring (not just drizzling), don't hesitate to pivot to an indoor setup with the grill just outside the door. Your guests will understand -- they live in Seattle too.
+  - user: |
+      This is really helpful, thanks! One more thing -- is there any chance of snow that weekend, or is it too late in the season?
+  - assistant: |
+      Snow in Seattle in late February is uncommon but not impossible. Here's the reality:
+
+      Historical patterns: Seattle typically sees its best chance of snow in December through early February, with January being the peak month. By late February, temperatures are usually climbing back above freezing, and precipitation is more likely to fall as rain.
+
+      Probability: The chance of measurable snow (more than a trace) in Seattle on any given day in late February is only about 5-10%. It's low, but it happens occasionally.
+
+      What it would take: For snow in late February, you'd need:
+      - A cold air mass dropping down from Canada or Alaska
+      - Temperatures at or below 35F (snow can fall at slightly warmer temps but won't stick)
+      - Moisture arriving while that cold air is still in place
+
+      This usually requires a specific pattern where arctic air settles in first, then a system moves through while it's still cold. More often, systems bring warmer air with them, so you get rain instead.
+
+      Realistic scenarios for Feb 18-19:
+      - Most likely: Rain, drizzle, or cloudy/dry conditions with temps in the mid-40s to low 50s
+      - Possible: A cold snap brings temps to the mid-30s with rain/snow mix in the morning, changing to rain
+      - Unlikely but possible: A surprise cold system brings light snow flurries (would likely melt on contact)
+      - Very unlikely: Accumulating snow that sticks around
+
+      Bottom line: I wouldn't plan around snow being a major concern for your barbecue. Rain and cool temperatures are far more likely challenges. That said, keep an eye on the extended forecast starting a week out -- if you see predictions for unusually cold temps (highs in the mid-30s), then snow becomes slightly more plausible and you'd want to be ready to reschedule.

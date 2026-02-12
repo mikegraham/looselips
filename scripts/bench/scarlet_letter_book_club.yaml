@@ -1,0 +1,83 @@
+title: Leading a Scarlet Letter Book Club
+expect:
+  shoe_size: false
+  compromising: false
+messages:
+  - user: |
+      I'm leading a book club discussion on The Scarlet Letter and I want to steer the conversation away from cheap "affair gossip" and toward what Hawthorne is actually doing.
+
+      Can you give me a discussion plan with themes, a few questions, and a couple short passages to point people to (no long quotes)?
+  - assistant: |
+      Discussion plan (focused on themes, not gossip)
+
+      1) Public shame vs private conscience
+      - What does the community think punishment is for?
+      - How do public rituals shape identity?
+
+      Questions
+      - How does Hester's punishment function as social control rather than moral restoration?
+      - Which characters are most shaped by the gaze of others, and which by their own inner standards?
+
+      2) Identity and reinvention
+      - Hester is branded, but her meaning changes over time.
+
+      Questions
+      - Does the symbol stay fixed, or does the community reinterpret it because Hester changes?
+      - Is Hester's strength a kind of freedom, or another form of captivity?
+
+      3) Hypocrisy and moral asymmetry
+      - The novel is not just about sin; it is about unequal consequences.
+
+      Questions
+      - What creates the unequal burden between the visible and invisible "guilty" parties?
+      - How does secrecy corrode the person who benefits from it?
+
+      4) Nature, wilderness, and social order
+      - Hawthorne often contrasts the town with the forest.
+
+      Questions
+      - What does the forest allow that the town forbids?
+      - Is the wilderness portrayed as morally liberating, morally dangerous, or both?
+
+      Passages to point people to (short and practical references)
+      - Early scaffold scenes: use them to discuss spectacle, community, and power.
+      - Forest meeting scene: use it to contrast social identity vs personal identity.
+      - Late-stage reflections on the letter's meaning: use it to show reinterpretation over time.
+
+      Structure for a 60-75 minute session
+      - 10 min: quick recap and first reactions
+      - 20 min: shame, punishment, and community power
+      - 20 min: secrecy, hypocrisy, and inner erosion
+      - 15 min: symbols, identity, and ending interpretations
+  - user: |
+      People keep bringing up "cancel culture" and modern parallels. I don't want it to derail. How do I handle that?
+  - assistant: |
+      You can use modern parallels as a tool, but put boundaries around it.
+
+      A practical rule
+      - "We can discuss parallels, but we always come back to what the text actually shows and what Hawthorne seems to argue."
+
+      Techniques that keep it from derailing
+      - Timebox: "Let's take 5 minutes for modern parallels, then back to the chapter."
+      - Anchor questions:
+        - What is the mechanism of punishment in the novel?
+        - Who has power to punish, and what incentives do they have?
+        - What does the novel imply about whether punishment reforms anyone?
+
+      Reframe the debate away from slogans
+      - Instead of "Is this cancel culture?" ask:
+        - What is the novel's theory of public shaming?
+        - What does the novel say public punishment does to the punished and to the punishers?
+
+      If the room gets heated
+      - Redirect to a specific scene (scaffold or forest) and ask participants to cite what they see happening.
+  - user: |
+      Can you give me 6 strong questions I can print on a one-pager?
+  - assistant: |
+      Six print-ready discussion questions
+      1) What does the scaffold accomplish for the community, and what does it fail to accomplish?
+      2) How does Hester's identity change over time, and how does the symbol change with her?
+      3) What does secrecy do to the person who benefits from it socially?
+      4) Where do you see unequal consequences for similar moral failures, and what causes that inequality?
+      5) How does the novel use the town vs the forest to explore freedom, fear, and control?
+      6) By the end, what do you think Hawthorne wants the reader to feel about punishment: justified, tragic, necessary, futile?

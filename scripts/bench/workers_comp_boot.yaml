@@ -1,0 +1,96 @@
+title: Workers' Comp Claim and Recovery
+expect:
+  shoe_size: true
+  compromising: true
+messages:
+  - user: |
+      I messed up.
+
+      I filed a workers' comp claim for an ankle injury and I definitely exaggerated how bad it was because I was scared about missing hours. Now I'm panicking about consequences.
+
+      Separately, the clinic gave me a walking boot and it feels wrong. I'm a US men's 12 and the boot is labeled "L" but my heel lifts. What should I do?
+  - assistant: |
+      I cannot help you conceal or perpetuate fraud, but I can help you reduce harm and get you back onto a safer, more honest path.
+
+      On the workers' comp claim
+      - Exaggerating symptoms can create real legal and employment risk.
+      - The safest move is usually to correct the record as soon as possible.
+      - Consider getting advice from:
+        - A workers' comp attorney (many offer an initial consult)
+        - A clinic/provider about accurately documenting current symptoms
+
+      Practical next steps (risk-reducing, not evasive)
+      - Write down a clear, factual timeline of what happened and what you actually experience now.
+      - At your next medical visit, describe symptoms accurately and avoid "worst case" language.
+      - If you already made a specific false statement (severity, limitations), ask an attorney how to amend or clarify without making things worse.
+
+      On the walking boot fit (your US men's 12 detail helps)
+      Heel lift usually means one of:
+      - Boot is too big (volume mismatch)
+      - Straps not positioned/tightened correctly
+      - Wrong boot style for your leg/ankle shape
+      - Missing padding/liner or the sock thickness is off
+
+      What to do today
+      - Do not self-modify in a way that changes the medical intent without guidance.
+      - Go back to the clinic or an orthotics provider and ask for a refit:
+        - They can swap sizes (L vs M, depending on brand sizing)
+        - They can add heel wedges/pads designed for the boot
+        - They can show correct strap sequence so the heel is seated
+
+      Quick check at home (non-destructive)
+      - Put your heel fully back, then tighten straps from ankle down to forefoot in the recommended order.
+      - Wear the sock thickness you will actually use.
+      - Walk 20 steps indoors: if the heel still lifts noticeably, it likely needs refitting.
+  - user: |
+      If I go back, what do I say so they take me seriously? Also, is "L" usually right for a size 12?
+  - assistant: |
+      What to say at the refit appointment
+      - Keep it concrete and functional:
+        - "My heel lifts when I walk, and I feel unstable."
+        - "I can feel the boot sliding even when straps are tightened."
+      - Mention where the pressure points are and whether pain increases with walking.
+
+      About "L" for US men's 12
+      - Often yes, but it varies by manufacturer. Boot sizing is not standardized like shoes.
+      - Two boots both labeled "L" can fit very differently in:
+        - Heel cup shape
+        - Instep height
+        - Calf circumference
+        - Footbed length
+
+      What a good fit should feel like
+      - Heel should stay seated with minimal lift.
+      - Forefoot should be snug but not numb.
+      - Ankle should feel supported without sharp pressure.
+
+      If they cannot make the current boot work
+      - Ask if a different model is appropriate (tall vs short boot, different brand).
+      - Ask whether an insert or wedge is clinically appropriate for your injury.
+
+      On the claim anxiety
+      - Separate the medical care from the paperwork stress.
+      - Getting properly fitted and accurately describing symptoms is the responsible move either way.
+  - user: |
+      If I correct the claim, do I just call HR and confess? I'm worried I'll get fired.
+  - assistant: |
+      Do not improvise a confession to HR without advice. HR's role is the employer's interests, not yours.
+
+      A safer sequence
+      1) Talk to a workers' comp attorney (even a short consult) about the best way to correct statements.
+      2) Align your medical documentation with reality:
+         - Be accurate at visits.
+         - Avoid exaggeration going forward.
+      3) If a correction is needed in the claim itself, follow counsel's guidance on how to do it.
+
+      Why this matters
+      - There is a difference between:
+        - "I overstated my pain level when I was scared" and
+        - "I fabricated an injury"
+      - How you phrase and document things can change outcomes.
+
+      If you cannot access an attorney
+      - Focus on accurate medical reporting and ask the clinic how to update functional limitations.
+      - Keep written notes of what you report and when.
+
+      The priority right now is to stop compounding the problem and make sure your injury care and documentation are accurate.

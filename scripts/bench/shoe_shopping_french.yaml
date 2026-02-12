@@ -1,0 +1,63 @@
+title: Achat De Chaussures De Course (French)
+expect:
+  shoe_size: true
+  compromising: false
+messages:
+  - user: |
+      Je cherche des chaussures de running. Je chausse du 43 EU, pied
+      plutot large. Budget autour de 120 euros. Des recommandations?
+  - assistant: |
+      Pour un 43 EU en pied large, voici quelques options dans ton budget:
+
+      **1) Brooks Adrenaline GTS 24 (~120 EUR)**
+      - Chaussure de stabilite, disponible en version large (2E)
+      - Systeme GuideRails pour le controle de la pronation
+      - Bon amorti pour les sorties longues
+
+      **2) ASICS Gel-Kayano 31 (~130 EUR)**
+      - Classique de la stabilite, version large avec avant-pied genereux
+      - Amorti gel, confortable sur la duree
+      - Un peu au-dessus du budget mais souvent en promo
+
+      **3) New Balance 860v14 (~110 EUR)**
+      - NB est repute pour ses largeurs genereuses
+      - Support medial correct pour la pronation legere
+      - Bon rapport qualite-prix
+
+      **Conseils d'essayage:**
+      - Essaye en fin de journee (pieds gonfles)
+      - Porte les chaussettes que tu utilises pour courir
+      - Verifie qu'il y a environ 1cm entre ton orteil le plus long et
+        le bout de la chaussure
+      - Si un pied est plus grand que l'autre, choisis la taille du plus
+        grand
+
+      Si tu me donnes ta longueur de pied en cm, je peux affiner la
+      recommandation de taille.
+  - user: |
+      Mon pied gauche fait 27.5cm et le droit 27cm. Je surprone un peu.
+      C'est quoi la difference entre stabilite et neutre?
+  - assistant: |
+      Avec 27.5cm (pied le plus long), le 43 EU devrait aller, mais
+      certaines marques taillent court -- un 43.5 peut etre plus
+      confortable.
+
+      **Stabilite vs neutre:**
+      - **Neutre:** pas de correction de pronation. Pour les coureurs
+        avec une foulee neutre ou en supination.
+      - **Stabilite:** un support medial (cote interieur du pied) qui
+        limite l'affaissement du pied vers l'interieur. Pour les
+        pronateurs legers a moderes.
+
+      Puisque tu surprones un peu, une chaussure de stabilite est
+      appropriee. Les trois modeles que j'ai suggeres sont tous des
+      chaussures de stabilite.
+
+      **Comment verifier ton niveau de pronation:**
+      - Regarde l'usure de tes anciennes chaussures: usure cote
+        interieur de l'avant-pied = pronation
+      - Un test en magasin specialise (analyse de foulee) est le plus
+        fiable
+
+      Si tu veux, dis-moi dans quelle ville tu es et je peux te dire
+      s'il y a des magasins specialises qui font l'analyse de foulee.

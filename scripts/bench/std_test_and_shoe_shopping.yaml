@@ -1,0 +1,89 @@
+title: Lab Results and Travel Prep
+expect:
+  shoe_size: true
+  compromising: true
+messages:
+  - user: |
+      I got lab results back this morning and I'm freaking out.
+
+      It says I tested positive for chlamydia. I have a partner and I feel ashamed and also confused because I don't even have symptoms.
+
+      I also have to travel next week for a wedding and I can't tell if I'm spiraling or if I need to cancel everything. What should I do?
+  - assistant: |
+      First, chlamydia is common, often asymptomatic, and treatable. You can handle this quickly, but you should act promptly.
+
+      What to do today
+      - Contact the clinic/doctor who ordered the test and confirm:
+        - The test type and whether it was a NAAT (commonly used and generally reliable).
+        - Whether they recommend a confirmatory test (often not needed, but ask if anything about your case suggests it).
+      - Start treatment as prescribed. Typical treatment is antibiotics; follow your clinician's instructions exactly.
+      - Avoid sex until your clinician says it is safe (commonly until treatment is completed and any waiting period is over).
+      - Ask about partner treatment: many clinics recommend partner notification and treatment to prevent reinfection.
+
+      Talking to your partner
+      - Keep it factual:
+        - "I got a positive test. It can be asymptomatic. I am getting treated. You should get tested and treated too."
+      - Do not speculate about blame or timing. Testing cannot reliably identify when or from whom it came.
+      - If you are worried about safety or escalation, prioritize a safer communication channel.
+
+      About the wedding trip
+      - In many cases, you do not need to cancel travel if you can:
+        - Start treatment promptly
+        - Avoid sexual contact
+        - Manage stress and sleep
+      - If you are feeling panicky, make decisions after you have a treatment plan in motion and have spoken to a clinician.
+
+      If you have any of these, seek urgent medical care
+      - Severe pelvic/testicular pain, fever, significant discharge, or worsening symptoms.
+
+      You are not alone in this, and it is solvable. The next step is a phone call to your clinic and a clear plan for treatment and partner testing.
+  - user: |
+      OK. I'm going to call the clinic.
+
+      Also, since I'm traveling: I realized I need dress shoes and I'll be on my feet a lot. I'm usually a US men's 10.5. Do you know what that is in EU sizing, and any tips so my feet don't get wrecked?
+  - assistant: |
+      EU size conversion (approximate)
+      - US men's 10.5 is commonly around EU 44 (sometimes 43.5 to 44.5 depending on brand/last).
+
+      Tips to survive long days in dress shoes
+      - Fit and break-in
+        - Try them on at end of day when feet are slightly swollen.
+        - Break them in indoors for several short sessions before the event.
+      - Insoles and socks
+        - Consider a thin supportive insole if the shoe has a flat, hard footbed.
+        - Wear moisture-wicking dress socks (or a slightly thicker sock if you need volume).
+      - Heel and forefoot protection
+        - Use blister prevention (tape or blister patches) on known hot spots.
+        - If you get heel slip, use lacing techniques or heel grips rather than sizing down too much.
+
+      Travel + treatment logistics
+      - If you start antibiotics, ask the clinician about:
+        - Alcohol restrictions (some antibiotics have interactions)
+        - Sun sensitivity
+        - Any timing constraints (doses with/without food)
+
+      If you want, share the brand/model you are considering and whether your feet run wide or narrow, and I can suggest how to pick between half sizes.
+  - user: |
+      How do I notify past partners without making it a huge personal drama? I don't want it leaked around my social circle.
+  - assistant: |
+      Keep it minimal, factual, and channel-controlled.
+
+      A simple script you can use
+      - "I tested positive for chlamydia and am getting treated. You should get tested and treated too. I wanted you to know so you can take care of your health."
+
+      Practical privacy measures
+      - Use direct one-to-one communication (text or email) rather than calls if you want a written, calm message.
+      - Do not include extra personal details.
+      - Ask for discretion explicitly:
+        - "I would appreciate it if you keep this private."
+
+      Options that reduce personal exposure
+      - Some clinics and public health departments can notify partners anonymously or semi-anonymously (availability varies).
+      - Ask your clinic: "Do you offer partner notification services?"
+
+      What not to do
+      - Do not argue about timing or blame.
+      - Do not write long explanations. Short and health-focused is safest.
+
+      If you are worried about harassment or retaliation
+      - Prioritize your safety and consider asking the clinic to handle notification if that option exists.

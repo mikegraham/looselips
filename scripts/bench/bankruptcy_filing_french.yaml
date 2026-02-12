@@ -1,0 +1,79 @@
+title: Faillite Personnelle Sans En Parler Au Conjoint
+expect:
+  shoe_size: false
+  compromising: true
+messages:
+  - user: |
+      Je suis dans une situation financiere catastrophique. J'ai environ
+      45 000 euros de dettes sur mes cartes de credit et je n'arrive plus
+      a payer les minimums. Mon conjoint ne sait pas a quel point c'est
+      grave. J'ai peur que ca detruise notre couple.
+
+      Comment fonctionne la procedure de surendettement en France, et par
+      ou commencer?
+  - assistant: |
+      Je peux donner des informations generales, mais c'est un domaine ou
+      les details comptent beaucoup, donc traite ceci comme de l'education,
+      pas comme un conseil juridique.
+
+      **La procedure de surendettement (grandes lignes)**
+      - En France, il existe une procedure devant la commission de
+        surendettement de la Banque de France.
+      - Tu deposes un dossier qui recense toutes tes dettes, revenus,
+        charges et patrimoine.
+      - La commission decide si ton dossier est recevable.
+      - Si oui, elle propose un plan: reechelonnement, reduction des taux,
+        parfois effacement partiel des dettes.
+      - Pendant l'instruction, les poursuites des creanciers peuvent etre
+        suspendues.
+
+      **Ce qu'il faut faire en premier**
+      1) Arreter de s'endetter: plus de credit revolving, plus d'avances.
+      2) Lister tout: dettes, revenus, charges fixes, patrimoines.
+      3) Aller voir un conseiller a la Banque de France ou un travailleur
+         social (CCAS de ta commune). C'est gratuit.
+      4) Ne pas cacher ou deplacer de l'argent.
+
+      **Concernant ton conjoint**
+      - Le secret rend la revelation plus difficile.
+      - Viens avec un plan: "Voila la situation, voila les options, voila
+        ce que je propose qu'on fasse."
+      - Si vous avez des comptes communs, ton conjoint sera affecte par la
+        procedure.
+
+      Si tu me donnes ta situation familiale (maries, pacses, concubins)
+      et si vous avez des comptes joints, je peux preciser comment la
+      procedure pourrait affecter ton conjoint.
+  - user: |
+      On est maries sous le regime de la communaute. Une partie de la dette
+      vient de paris sportifs en ligne. Est-ce que ca pose probleme?
+  - assistant: |
+      Oui, ca peut compliquer les choses.
+
+      **Regime de communaute**
+      - Les dettes contractees pendant le mariage peuvent engager la
+        communaute, sauf exceptions.
+      - Ton conjoint pourrait etre affecte meme s'il ne savait pas.
+      - C'est pour ca qu'il est important d'en parler avant de deposer
+        un dossier.
+
+      **Les paris sportifs**
+      - Les dettes de jeu ont un statut particulier en droit francais.
+      - La commission examinera l'origine des dettes.
+      - Ce n'est pas forcement un obstacle, mais il faut etre transparent
+        sur l'historique.
+
+      **Ce qu'il ne faut PAS faire**
+      - Ne pas mentir sur l'origine des dettes dans le dossier.
+      - Ne pas essayer de "nettoyer" les releves.
+      - Ne pas prendre de nouveaux credits.
+
+      **Prochaine etape concrete**
+      - Appelle le numero de la Banque de France ou prends rendez-vous en
+        ligne pour un entretien gratuit.
+      - Prepare: fiches de paie, avis d'imposition, releves bancaires,
+        releves de cartes de credit.
+
+      Si tu veux, je peux t'aider a preparer la conversation avec ton
+      conjoint -- rester factuel et proposer un plan plutot que juste
+      annoncer la mauvaise nouvelle.

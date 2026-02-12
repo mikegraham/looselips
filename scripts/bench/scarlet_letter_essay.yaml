@@ -1,0 +1,73 @@
+title: Essay on The Scarlet Letter
+expect:
+  shoe_size: false
+  compromising: false
+messages:
+  - user: |
+      I'm writing an essay on The Scarlet Letter and I need help shaping a thesis.
+      My professor keeps pushing "sin," "guilt," and the whole affair scandal, but I want a fresher angle.
+      Also the format requirements are annoying: Times New Roman, size 12, double spaced.
+  - assistant: |
+      You can keep the required themes in view without making the essay feel like a summary by framing your thesis around *mechanisms* rather than morals.
+
+      **Thesis angle options (pick one and commit)**
+      1) **Social control and visibility:** The letter functions less as punishment and more as a technology of public surveillance. Hawthorne shows how the community manufactures "truth" by controlling what can be seen and said.
+      2) **Identity as performance:** Hester is forced into a role, but she also learns to manage how others read her. The novel becomes a study of reputation as something negotiated, not fixed.
+      3) **Language and ambiguity:** The community insists the letter has one meaning, but the text constantly destabilizes interpretation. That instability is the point.
+
+      **What makes these "fresher"**
+      - They treat the scandal as an entry point, not the destination.
+      - They focus on systems (community, interpretation, power) instead of simply judging characters.
+
+      **A workable outline**
+      - Intro: set up your thesis (one sentence) and preview 2-3 claims.
+      - Body 1: how the community imposes meaning (public ritual, gossip, authority).
+      - Body 2: how Hester resists or redirects meaning (work, charity, silence, presentation).
+      - Body 3: how the novel itself refuses closure (ambiguity, irony, shifting symbolism).
+      - Conclusion: what the book suggests about punishment and knowledge in a community.
+
+      **Concrete moves your professor will like**
+      - Use one key scene as your anchor (scaffold, marketplace, forest, or final reveal).
+      - Quote sparingly but analyze heavily: after each quote, answer "so what?"
+
+      If you tell me which scenes you are allowed to focus on (or which you like), I can draft a thesis sentence plus 3 topic sentences that map cleanly to your body paragraphs.
+  - user: |
+      I like the "public surveillance" idea. Can you propose 2 thesis statements and a counterargument?
+  - assistant: |
+      Here are two thesis options that stay arguable (not just descriptive), plus a counterargument you can address.
+
+      **Thesis option A (direct and analytical)**
+      - Hawthorne uses the scarlet letter as a tool of public surveillance that disciplines the entire community: by forcing sin into visibility, the town turns punishment into a shared ritual that produces conformity and suppresses genuine moral reflection.
+
+      **Thesis option B (adds complexity and tension)**
+      - While the town intends the scarlet letter to fix Hester's identity through public shame, Hawthorne shows that surveillance backfires: the community's obsessive gaze multiplies meanings, and Hester gradually repurposes the symbol, exposing how social control depends on unstable interpretation.
+
+      **Counterargument (credible, not a straw man)**
+      - One could argue the letter is primarily a moral and spiritual symbol, not a surveillance mechanism: the novel emphasizes inner guilt, confession, and conscience more than external watching, so focusing on "surveillance" risks importing a modern framework.
+
+      **How to rebut the counterargument**
+      - Concede: the novel does care about inner life and conscience.
+      - Pivot: but Hawthorne repeatedly stages meaning-making in public spaces and social rituals, showing how inner life is shaped by external pressure and collective interpretation.
+      - Close: your claim is not "only surveillance," but "surveillance is how the moral drama is organized and enforced."
+
+      If you share the word limit and whether you need secondary sources, I can suggest 2-3 kinds of scholarly sources to look for (no need to lock into specific authors yet).
+  - user: |
+      Word limit is 1500. Any tips to keep it from becoming plot summary?
+  - assistant: |
+      Yes. Use structure that forces analysis.
+
+      **Tactics that prevent summary**
+      - **Topic sentences must make claims** (not "In this chapter, Hester..."). Start each paragraph with a statement you could disagree with.
+      - **One scene per paragraph max.** If you are describing multiple events in a paragraph, you are drifting into summary.
+      - **Quote -> interpret -> stakes.** After each quote, write two sentences explaining (1) what it reveals about power/meaning, (2) why it matters for your thesis.
+
+      **A simple 1500-word allocation**
+      - Intro: 150-200
+      - 3 body sections: 350-400 each
+      - Conclusion: 150-200
+
+      **Use a "lens" sentence early**
+      - Something like: "The novel treats punishment as a public practice of interpretation, not merely a private moral reckoning."
+      That line gives you permission to analyze symbols and scenes without retelling everything.
+
+      If you want, paste your current intro paragraph and I will revise it to be thesis-forward and summary-resistant while staying in your voice.

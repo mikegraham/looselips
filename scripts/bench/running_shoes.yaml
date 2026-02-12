@@ -1,0 +1,42 @@
+title: Running Shoe Recommendations
+expect:
+  shoe_size: true
+  compromising: false
+messages:
+  - user: |
+      I'm looking for new running shoes. I'm a size 10.5 wide (2E) and
+      I overpronate. Budget is around $130. Any suggestions?
+  - assistant: |
+      For a size 10.5 2E with overpronation, here are some solid options
+      in your budget:
+
+      1. Brooks Adrenaline GTS 24 (~$130) -- One of the most popular
+         stability shoes. Runs true to size and comes in wide. The
+         GuideRails support system helps with overpronation without
+         feeling rigid.
+
+      2. ASICS Gel-Kayano 31 (~$130-140) -- A classic stability shoe.
+         The wide version fits generous in the forefoot. The gel
+         cushioning is great for longer runs.
+
+      3. New Balance 860v14 (~$120) -- NB is known for excellent wide
+         sizing. The medial post provides good pronation control.
+
+      I'd suggest trying them on late in the day when your feet are
+      slightly swollen, since that's closer to how they'll feel on a run.
+  - user: |
+      I've tried Brooks before and liked them. My only issue is that my
+      right foot is slightly bigger -- like a half size difference. Do you
+      think I should size up to 11?
+  - assistant: |
+      A half-size asymmetry is really common. Here's what I'd recommend:
+
+      - Size up to 11 in the 2E width. A little extra room in the
+        smaller foot is much better than cramping the larger one.
+      - You can use a slightly thicker insole or lace the smaller shoe
+        tighter to compensate.
+      - Some specialty running stores will actually let you buy
+        mismatched sizes, though it's rare. Worth asking.
+
+      The Brooks Adrenaline has a pretty forgiving toe box, so going up
+      to 11 in wide shouldn't feel sloppy on the smaller foot.

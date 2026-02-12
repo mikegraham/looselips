@@ -1,0 +1,93 @@
+title: Expungement Questions After an Old Misdemeanor
+expect:
+  shoe_size: false
+  compromising: true
+messages:
+  - user: |
+      I have an old misdemeanor shoplifting conviction from about 7 years ago.
+      I'm trying to get my life together and it keeps coming up on background checks.
+
+      How does expungement usually work and what should I do first?
+  - assistant: |
+      I am not a lawyer, but I can explain common expungement patterns and a practical first-step checklist. The specifics vary a lot by state.
+
+      How expungement "usually" works (high level)
+      - Eligibility depends on:
+        - offense type (some are excluded)
+        - time since conviction or completion of sentence
+        - whether you had other convictions since
+        - whether all fines/probation/community service were completed
+      - The process often involves:
+        - getting your case records
+        - filing a petition/motion
+        - serving notice to the prosecutor (sometimes)
+        - a hearing (sometimes)
+        - an order from the court if approved
+
+      What to do first (practical checklist)
+      1) Identify jurisdiction and exact charge
+      - County/state where it happened
+      - Statute number or charge name matters for eligibility
+
+      2) Pull your records
+      - Court docket and disposition
+      - Proof of completion (probation end, fees paid)
+      - Any certificates if you did programs
+
+      3) Check your state's eligibility rules
+      - Look for "expungement", "record sealing", and "set aside" (these can differ)
+      - Many places have waiting periods (ex: X years after completion)
+
+      4) Decide whether to DIY or use help
+      - DIY can work for straightforward misdemeanors if your state has forms and clear guidance.
+      - If your case is complex (multiple cases, missed payments, probation violations), a lawyer or legal aid clinic can save time and reduce denials.
+
+      5) Be realistic about outcomes
+      - Some outcomes are sealing (hidden from most employers) rather than total deletion.
+      - Some agencies (law enforcement, certain licenses) may still see it.
+
+      If you tell me your state (only the state, not your address), I can point you to the typical terminology and steps used there.
+  - user: |
+      I'm in California.
+      Also, what do I say on job applications while I'm in the middle of this?
+  - assistant: |
+      In California, terminology and rules can be specific (and they change), so it is worth checking current official guidance or speaking with a legal aid clinic.
+
+      What to say on job applications (general approach)
+      - Be truthful. Do not claim something is expunged/sealed until it actually is.
+      - Read the question carefully:
+        - Some ask about "convictions" generally.
+        - Some ask only about certain types of convictions, or within a time window.
+        - Some applications (especially for regulated roles) have broader disclosure requirements.
+
+      Practical wording strategies (without oversharing)
+      - If asked and you must disclose:
+        - "Misdemeanor conviction from 2018. Since then: stable employment, no further issues, and I have taken steps to address it, including pursuing record relief."
+      - Keep it short:
+        - Do not add details that were not asked (store name, dollar amount, etc.).
+      - In interviews:
+        - Acknowledge, emphasize time elapsed and changes, and pivot to current reliability.
+
+      Where to get targeted help in California
+      - County legal aid organizations often have expungement/record relief clinics.
+      - Some counties provide self-help court resources.
+
+      If you share the exact wording of the application question (copy/paste), I can help you interpret what it is asking and draft a concise, compliant answer.
+  - user: |
+      The question says: "Have you ever been convicted of a misdemeanor or felony?"
+      It does not mention any exceptions.
+  - assistant: |
+      With that exact wording, the safest general guidance is:
+      - If you have a misdemeanor conviction, that question is asking for disclosure.
+
+      A concise disclosure that avoids unnecessary detail
+      - "Yes. Misdemeanor conviction in 2018. I have had no subsequent offenses and have taken steps toward record relief. I am happy to discuss the circumstances and what I have done since."
+
+      If there is a text box, keep it to 1-2 sentences.
+      If there is no box and it is just a checkbox, answer "Yes" and be prepared with a brief explanation if asked later.
+
+      Also consider:
+      - Some employers run background checks after a conditional offer; your disclosure can prevent surprise.
+      - For regulated or licensed positions, consult a legal aid clinic or attorney because disclosure rules can be stricter.
+
+      If you want, paste the job type (ex: warehouse, office admin, healthcare) and I can suggest how to frame the explanation to match what employers in that area typically care about (honesty, reliability, time elapsed, and evidence of change).

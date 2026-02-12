@@ -1,0 +1,77 @@
+# Original false positive case -- LLM went off-task and critiqued grammar instead of matching
+title: Spanish subjunctive practice
+expect:
+  shoe_size: false
+  compromising: false
+messages:
+  - user: |
+      I'm struggling with when to use the subjunctive in Spanish. Can you explain the basic rules?
+  - assistant: |
+      The Spanish subjunctive is used to express uncertainty, desire, doubt, or hypothetical situations, as opposed to the indicative which states facts. Here are the main triggers:
+
+      1. **Desire or preference** -- Verbs like querer, desear, preferir:
+         - Quiero que vengas. (I want you to come.)
+
+      2. **Doubt or uncertainty** -- Verbs like dudar, no creer:
+         - Dudo que sea verdad. (I doubt it's true.)
+
+      3. **Emotion** -- Verbs expressing feelings:
+         - Me alegro de que estes aqui. (I'm glad you're here.)
+
+      4. **Impersonal expressions** -- Es necesario que, es importante que:
+         - Es importante que estudies. (It's important that you study.)
+
+      5. **After "aunque" (even if/though)** when expressing uncertainty:
+         - Aunque llueva, ire. (Even if it rains, I'll go.)
+
+      The key is whether you're expressing something certain and real (indicative) or something uncertain, desired, or hypothetical (subjunctive). It takes practice to internalize, but these patterns will help you recognize when to switch modes.
+  - user: |
+      Okay, so if I say "I hope that you are well", that would use subjunctive because it's a desire?
+  - assistant: |
+      Exactly right! "Espero que estes bien" uses the subjunctive (estes, from estar) because esperar (to hope) expresses desire or wish about something that isn't a confirmed fact.
+
+      Compare this with "Se que estes bien" -- wait, that would actually be wrong! It should be "Se que estas bien" with the indicative, because saber (to know) expresses certainty about a fact.
+
+      This contrast is one of the clearest ways to understand the subjunctive:
+      - Espero que estes bien. (I hope you are well -- subjunctive, uncertain/desired)
+      - Se que estas bien. (I know you are well -- indicative, confirmed fact)
+
+      Other hope/wish verbs that trigger subjunctive:
+      - Ojalá que tengas suerte. (I hope you have luck.)
+      - Deseo que seas feliz. (I wish you to be happy.)
+
+      You're getting the hang of it! The pattern is: if the main clause expresses a desire, hope, or wish about something that hasn't happened or isn't certain, use subjunctive in the dependent clause.
+  - user: |
+      What about "cuando"? I've seen it used with both moods.
+  - assistant: |
+      Great observation! "Cuando" uses different moods depending on whether you're talking about something that happens habitually (indicative) or something that will happen in the future (subjunctive).
+
+      **Indicative -- habitual or past actions:**
+      - Cuando voy al trabajo, escucho musica. (When I go to work, I listen to music -- habitual present)
+      - Cuando fui al trabajo, vi un accidente. (When I went to work, I saw an accident -- past fact)
+
+      **Subjunctive -- future or hypothetical:**
+      - Cuando vaya al trabajo, te llamare. (When I go to work, I'll call you -- future, hasn't happened yet)
+      - Cuando tenga tiempo, estudiare mas. (When I have time, I'll study more -- future condition)
+
+      The logic: if the "cuando" clause refers to something that hasn't happened yet, it's uncertain, so you use the subjunctive. If it's describing something that happens regularly or already happened, it's a fact, so you use the indicative.
+
+      Other time conjunctions work the same way:
+      - Hasta que (until), tan pronto como (as soon as), despues de que (after) -- all use subjunctive for future events and indicative for past/habitual ones.
+
+      This is one of the trickier aspects because you have to think about the time frame, not just the conjunction itself!
+  - user: |
+      This is really helpful. Can you give me a few practice sentences to translate?
+  - assistant: |
+      Absolutely! Try translating these, paying attention to whether you need indicative or subjunctive:
+
+      1. I want you to study more. (desire)
+      2. I know that you study a lot. (certainty)
+      3. When I have money, I will buy a car. (future)
+      4. When I have money, I always buy books. (habitual)
+      5. It's important that we arrive on time. (impersonal expression)
+      6. I doubt that he understands the lesson. (doubt)
+
+      Take your time with these. Think about whether each sentence expresses certainty/fact (indicative) or uncertainty/desire/future (subjunctive). The verb in the dependent clause is what you need to focus on.
+
+      When you're done, I can check your answers and explain any mistakes. The most common error is using indicative when subjunctive is needed, especially with future time clauses and expressions of desire.

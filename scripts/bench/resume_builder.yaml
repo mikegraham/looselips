@@ -1,0 +1,151 @@
+# inspired by 2025 chatgpt shared-link leak (cybernews.com/ai-news/chatgpt-shared-links-privacy-leak/)
+title: Help rewriting resume for job applications
+expect:
+  shoe_size: false
+  compromising: true
+messages:
+  - user: |
+      I need help rewriting my resume. I haven't updated it in years and I'm applying for senior product manager roles. Here's what I have currently -- can you help me make it stronger and more modern?
+
+      Jessica Chen
+      jessica.chen.pm@gmail.com
+      (415) 782-9043
+      San Francisco, CA
+
+      EXPERIENCE
+
+      Product Manager, TechFlow Solutions, San Francisco, CA (2019-2024)
+      - Managed product roadmap for B2B SaaS platform
+      - Worked with engineering team to deliver features
+      - Talked to customers to understand their needs
+      - Increased user engagement by 25%
+
+      Associate Product Manager, DataWorks Inc, Palo Alto, CA (2017-2019)
+      - Helped senior PM with product launches
+      - Did user research and created reports
+      - Coordinated between teams
+
+      Business Analyst, Apex Consulting, San Francisco, CA (2015-2017)
+      - Analyzed business requirements for clients
+      - Made PowerPoint presentations
+      - Worked on various projects
+
+      EDUCATION
+      MBA, Santa Clara University, 2017
+      BS Business Administration, UC Berkeley, 2015
+
+      SKILLS
+      Product management, Agile, Jira, SQL, customer research, data analysis
+  - assistant: |
+      This is a solid foundation, but you're right that it needs modernization and more impact. Let me rewrite this with stronger action verbs, quantified achievements, and better structure. Here's a revised version:
+
+      ---
+
+      JESSICA CHEN
+      San Francisco, CA | (415) 782-9043 | jessica.chen.pm@gmail.com
+      LinkedIn: linkedin.com/in/jessicachen-pm
+
+      SUMMARY
+      Senior Product Manager with 7+ years of experience driving product strategy and execution for B2B SaaS platforms. Proven track record of increasing user engagement, leading cross-functional teams, and delivering data-driven solutions that align with business objectives. Passionate about building products that solve real customer problems.
+
+      ---
+
+      PROFESSIONAL EXPERIENCE
+
+      Product Manager | TechFlow Solutions, San Francisco, CA | 2019 - 2024
+      - Led product strategy and roadmap for enterprise SaaS platform serving 500+ clients and generating $12M ARR
+      - Drove 25% increase in user engagement and 15% reduction in churn through feature optimization informed by user research and data analysis
+      - Partnered with engineering team of 8 to deliver 3 major product releases on time and within budget, utilizing Agile methodologies
+      - Conducted 50+ customer interviews and synthesized insights to identify high-impact feature opportunities
+      - Collaborated with sales and marketing teams to develop go-to-market strategies, resulting in 20% faster sales cycle
+
+      Associate Product Manager | DataWorks Inc, Palo Alto, CA | 2017 - 2019
+      - Supported senior PM in launching 2 new product lines, contributing to $5M in first-year revenue
+      - Designed and executed user research studies (surveys, interviews, usability tests) with 200+ participants
+      - Analyzed product metrics using SQL and Mixpanel, delivering actionable insights that improved conversion rates by 12%
+      - Facilitated sprint planning and retrospectives for cross-functional team of 15
+
+      Business Analyst | Apex Consulting, San Francisco, CA | 2015 - 2017
+      - Analyzed business requirements and delivered recommendations for Fortune 500 clients across retail and finance sectors
+      - Created executive-level presentations and reports synthesizing complex data into clear strategic recommendations
+      - Managed 5 client engagements simultaneously, consistently meeting deadlines and exceeding client expectations
+
+      ---
+
+      EDUCATION
+
+      Master of Business Administration (MBA) | Santa Clara University | 2017
+
+      Bachelor of Science in Business Administration | University of California, Berkeley | 2015
+
+      ---
+
+      SKILLS
+
+      Product Management: Roadmap planning, prioritization frameworks (RICE, Kano), user research, A/B testing, go-to-market strategy
+      Technical: SQL, Jira, Confluence, Mixpanel, Google Analytics, Figma (basic), API concepts
+      Methodologies: Agile/Scrum, Lean, Design Thinking
+
+      ---
+
+      Let me know if you want me to adjust anything! The main changes I made:
+      - Added a summary section to highlight your experience upfront
+      - Used stronger action verbs (led, drove, partnered instead of managed, worked, talked)
+      - Quantified achievements wherever possible
+      - Added more context about scope and impact
+      - Organized skills into categories
+      - Made the format cleaner and more scannable
+
+      What do you think?
+  - user: |
+      This is great! A couple things -- the dates for TechFlow aren't quite right. I was actually laid off in October 2024 during a restructuring, so I've been job searching since then. Should I address that somehow, or just leave the dates as "2019 - 2024"?
+  - assistant: |
+      Good catch on the dates. Here's how I'd handle it:
+
+      For the resume itself, keep it as "2019 - 2024" -- you don't need to specify the exact month you left. Resumes typically show years only, and October 2024 rounds to 2024 anyway. There's no need to flag the layoff on the resume document itself.
+
+      However, be prepared to address it in interviews. Since you mentioned it was a restructuring (not performance-related), you can frame it straightforwardly: "TechFlow went through a restructuring in late 2024 and my role was eliminated along with several others on the product team." Then immediately pivot to what you've been doing since -- staying current with industry trends, working on any side projects, taking courses, etc.
+
+      The fact that it was a layoff during restructuring is very different from being fired for performance, and hiring managers understand that. Companies do layoffs all the time, especially in tech. Don't let it shake your confidence.
+
+      One other thought: if you have a LinkedIn profile, make sure the dates there match the resume. Recruiters will cross-reference, and inconsistencies raise red flags.
+
+      Should we also work on a cover letter template, or are you mainly focused on the resume for now?
+  - user: |
+      No, the resume is the priority right now. One more question -- should I include any personal projects or volunteer work? I've been mentoring junior PMs through a nonprofit called Product Hive for the past year, but I wasn't sure if that's relevant.
+  - assistant: |
+      Absolutely include that! Mentoring shows leadership, communication skills, and a commitment to the product community -- all things hiring managers value, especially for senior roles. It also helps fill the recent gap in your timeline since the layoff.
+
+      Here's how I'd add it to your resume. You can create a new section called "LEADERSHIP & COMMUNITY" or "ADDITIONAL EXPERIENCE" right after your professional experience section:
+
+      ---
+
+      LEADERSHIP & COMMUNITY
+
+      Product Management Mentor | Product Hive (Nonprofit) | 2023 - Present
+      - Mentor 3 aspiring product managers through career transitions, providing guidance on portfolio development, interview prep, and skill-building
+      - Host monthly Q&A sessions on product strategy and roadmap prioritization for community of 50+ members
+
+      ---
+
+      You can adjust the details based on what you actually do with Product Hive, but the key is to make it sound substantive and professional, not just "I give advice sometimes." Treat it like any other role on your resume with specific responsibilities and impact.
+
+      This addition also subtly signals that you've been productive and engaged during your job search, which is a positive signal. Hiring managers sometimes worry that candidates who've been out of work for a few months have gotten rusty or lost motivation -- this shows neither is true for you.
+
+      Anything else you want to tweak, or does this feel ready to start sending out?
+  - user: |
+      I think this is ready! Thank you so much for your help. I feel way more confident about applying now.
+  - assistant: |
+      You're very welcome! Your background is strong, and this resume now reflects that. A few final tips as you start applying:
+
+      Tailor the summary and skills section slightly for each job -- mirror the language from the job description where it's genuine. Applicant tracking systems (ATS) scan for keywords, so this helps you get past the initial filters.
+
+      Proofread obsessively. A typo on a resume for a senior role can be disqualifying. Have a friend read it over too.
+
+      When you apply, follow up if you have any connections at the company. A warm intro or internal referral dramatically increases your chances of getting an interview.
+
+      Practice your interview stories using the STAR method (Situation, Task, Action, Result). You have great experience -- make sure you can tell those stories clearly and concisely.
+
+      And finally, don't get discouraged if you don't hear back immediately. Job searching is a numbers game, especially for senior roles. Stay persistent, keep refining your approach, and the right opportunity will come.
+
+      Good luck, Jessica! You've got this.

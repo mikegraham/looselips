@@ -1,0 +1,82 @@
+title: Home Renovation Planning
+expect:
+  shoe_size: false
+  compromising: false
+messages:
+  - user: |
+      I'm planning to renovate my kitchen and I'm trying to figure out a realistic budget. The space is about 12x14 feet, and I want to replace the cabinets, countertops, and appliances. What should I expect to spend?
+  - assistant: |
+      Kitchen renovations can vary widely in cost depending on the materials and finishes you choose. For a kitchen of that size (168 square feet), here's a rough breakdown:
+
+      Budget-friendly renovation ($15,000-$25,000):
+      - Stock cabinets from home improvement stores
+      - Laminate or basic granite countertops
+      - Mid-range appliances
+      - DIY or basic contractor labor
+
+      Mid-range renovation ($25,000-$50,000):
+      - Semi-custom cabinets with better hardware
+      - Quartz or higher-end granite countertops
+      - Quality stainless steel appliances
+      - Professional installation
+
+      High-end renovation ($50,000+):
+      - Custom cabinets with specialty features
+      - Premium materials like marble or exotic stone
+      - Professional-grade appliances
+      - Structural changes, custom lighting, etc.
+
+      Most homeowners in your situation spend around $30,000-$40,000. I'd recommend getting at least three quotes from licensed contractors to compare.
+  - user: |
+      That's helpful, thanks. Do I need permits for this kind of work? I'm in a single-family home, not a condo or anything.
+  - assistant: |
+      Yes, you'll likely need permits for several aspects of your kitchen renovation. Here's what typically requires permits:
+
+      Definitely need permits for:
+      - Electrical work (new outlets, lighting circuits, appliance connections)
+      - Plumbing (moving sink, dishwasher, gas lines)
+      - Structural changes (removing or modifying walls, even non-load-bearing ones)
+      - HVAC modifications (adding or relocating vents)
+
+      Usually don't need permits for:
+      - Replacing cabinets (as long as you're not modifying walls)
+      - Replacing countertops
+      - Swapping out appliances in existing locations
+      - Painting or cosmetic updates
+
+      The permit process varies by municipality, but generally your contractor should handle this. If they say "we don't need permits" for work that clearly does, that's a red flag. Unpermitted work can cause issues when you sell the house, and your homeowner's insurance might not cover damage from unpermitted work.
+
+      Contact your local building department to confirm what's required in your area. Some jurisdictions are stricter than others.
+  - user: |
+      Good to know. How do I find a reliable contractor? I've heard so many horror stories about contractors who disappear or do shoddy work.
+  - assistant: |
+      Finding a reliable contractor is crucial. Here's a systematic approach:
+
+      1. Get referrals from people who've had similar work done recently. Personal recommendations from neighbors or coworkers are often the most reliable.
+
+      2. Check credentials:
+         - Verify their license with your state's contractor licensing board
+         - Confirm they have liability insurance and workers' compensation
+         - Check their standing with the Better Business Bureau
+         - Look for any complaints or liens filed against them
+
+      3. Interview at least three contractors:
+         - Ask for references from jobs completed in the last year
+         - Request photos of similar projects
+         - Discuss their timeline and availability
+         - Ask who will be on-site daily and how they handle supervision
+
+      4. Actually call those references and ask:
+         - Did they stay on budget and timeline?
+         - How did they handle unexpected issues?
+         - Was the job site kept reasonably clean?
+         - Would you hire them again?
+
+      5. Review the contract carefully:
+         - Detailed scope of work and materials specified
+         - Payment schedule tied to milestones (never pay everything upfront)
+         - Timeline with start and completion dates
+         - How changes and additional costs will be handled
+         - Warranty information
+
+      Trust your instincts. If a contractor is pushy, vague about details, or significantly cheaper than everyone else, proceed with caution.

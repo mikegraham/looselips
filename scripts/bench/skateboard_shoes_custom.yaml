@@ -1,0 +1,86 @@
+title: Ordering Custom Skate Shoes
+expect:
+  shoe_size: true
+  compromising: false
+messages:
+  - user: |
+      I'm ordering custom skate shoes online and I'm paranoid about getting the size wrong.
+
+      I normally wear:
+      - Vans Old Skool: US men's 11.5 (snug but OK after break-in)
+      - Nike running shoes: US men's 12
+      - Dress shoes: usually US 11.5
+
+      The custom shop says their fit is "true to size" but also "narrow at first." What size should I order, and how do I sanity-check at home before I commit?
+  - assistant: |
+      With your pattern (Vans 11.5, Nike 12, dress 11.5), you are basically in the 11.5-12 range, with width/last shape driving the differences.
+
+      A sensible default for "true to size, narrow at first"
+      - Order US men's 11.5 if:
+        - You want the skate shoe to feel locked-in
+        - You expect some break-in (canvas/leather) and you are OK with snug initially
+      - Order US men's 12 if:
+        - You are sensitive to forefoot squeeze
+        - You plan to wear thicker socks
+        - The materials are stiff (heavy leather, reinforced toe) and you do not want a painful break-in
+
+      Home sanity-check (takes 10 minutes)
+      1) Measure both feet at end of day:
+         - Stand on paper, trace, measure heel-to-toe length.
+         - Use the longer foot for decisions.
+      2) Check width reality:
+         - Measure forefoot circumference (around the ball of the foot) with a tape.
+         - Narrow shoes typically bite here first.
+      3) Compare to a known reference:
+         - If you have a pair of Vans 11.5 that "works," measure the insole length (pull it out if possible).
+         - If the custom shop provides insole length in mm, match that.
+
+      Practical risk management
+      - If returns are easy: order the size you think (11.5) and plan to exchange if the width pain is immediate.
+      - If returns are hard/expensive: lean to 12, then use lacing and an insole to dial in fit.
+
+      Small fit tweaks if you end up between sizes
+      - Heel slip: runner's loop lacing, slightly thicker sock.
+      - Forefoot tightness: thinner insole, stretch with wear, different lacing pattern to relieve pressure.
+  - user: |
+      They do allow returns but you have to pay shipping both ways. Any tricks to "try on" without messing them up?
+  - assistant: |
+      Yes. The goal is to test fit without creating obvious wear.
+
+      Clean try-on protocol
+      - Try on indoors only, on a clean surface.
+      - Wear the socks you will actually skate in.
+      - Keep the laces loose at first, then tighten gradually.
+
+      What to check in the first 2-3 minutes
+      - Toe room:
+        - You want a small buffer in front of the longest toe.
+        - Your toes should not be smashed when you flex forward.
+      - Width hot spots:
+        - Note any sharp pinch at the ball of the foot; "narrow at first" should feel snug, not painful.
+      - Heel hold:
+        - A tiny bit of slip is OK at first; persistent lift usually means too big or wrong heel shape.
+
+      Do not do this if you might return
+      - No outdoor walking.
+      - No skating, no grip tape contact.
+      - No bending the shoe aggressively (creases can become "used" evidence).
+
+      If you are still unsure between 11.5 and 12
+      - Consider ordering both sizes, do an indoor comparison, return one. It costs extra shipping but reduces the chance you get stuck with the wrong fit.
+  - user: |
+      If I go with 12, will I lose board feel?
+  - assistant: |
+      Possibly, but it depends on how much extra internal volume you actually get.
+
+      What affects board feel more than half a size
+      - Sole thickness and stiffness
+      - Insole thickness (many stock insoles are chunky)
+      - Upper material stiffness
+
+      If you size up to 12 and it feels "floaty"
+      - Swap to a thinner insole.
+      - Use a slightly thicker sock to take up volume without changing sole feel.
+      - Use lacing patterns to lock the midfoot down.
+
+      If your Vans 11.5 is already "snug but OK," 11.5 is likely the best board-feel bet, with the main risk being forefoot squeeze if the custom last is truly narrow.

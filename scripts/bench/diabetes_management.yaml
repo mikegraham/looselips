@@ -1,0 +1,115 @@
+title: Diabetes Management and Diabetic Footwear
+expect:
+  shoe_size: true
+  compromising: true
+messages:
+  - user: |
+      I was just diagnosed with Type 2 diabetes last month and my doctor mentioned I should get diabetic shoes. I've never heard of this before. Is this really necessary or is it just something they push to make money?
+  - assistant: |
+      Congratulations on the diagnosis and taking it seriously -- catching Type 2 diabetes and managing it well can prevent a lot of serious complications down the road.
+
+      Diabetic shoes are a legitimate medical recommendation, not a scam, though whether you need them right now depends on your specific situation. Here's why they're recommended:
+
+      Why diabetic footwear matters:
+      - Diabetes can cause nerve damage (neuropathy) in your feet, reducing sensation
+      - Poor circulation makes it harder for foot injuries to heal
+      - Minor issues like blisters or pressure points can become serious infections
+      - Foot ulcers are one of the leading causes of hospitalization for people with diabetes
+      - Properly fitted shoes reduce pressure points and injury risk
+
+      When you actually need them:
+      - If you have neuropathy (numbness, tingling, or loss of feeling in feet)
+      - If you have poor circulation or history of foot ulcers
+      - If you have foot deformities like bunions or hammertoes
+      - If you've had previous foot injuries that healed slowly
+
+      When you might not need them yet:
+      - If you're newly diagnosed with good circulation and no neuropathy
+      - If regular, well-fitting athletic or walking shoes work fine
+      - If you don't have any foot complications
+
+      Ask your doctor specifically why they recommended them for you. If you do need them, many insurance plans (including Medicare) cover therapeutic shoes and inserts if you meet certain criteria. Your doctor would need to write a prescription and certify medical necessity.
+
+      Don't skip regular foot checks -- inspect your feet daily for cuts, blisters, or changes, and see a podiatrist annually or if you notice any issues.
+  - user: |
+      That's helpful, thank you. I do have some numbness in my toes actually, which is part of why my doctor brought it up. Where do I even get these shoes? Do I just go to a regular shoe store?
+  - assistant: |
+      Since you have numbness in your toes, diabetic shoes are definitely worth pursuing -- that's exactly the kind of early neuropathy they're designed to protect against.
+
+      Here's where to get them properly fitted:
+
+      Best options:
+      1. Certified pedorthist: These are specialists trained in fitting therapeutic footwear. They'll measure your feet, assess your gait, and ensure proper fit. Ask your doctor or endocrinologist for a referral.
+
+      2. Podiatrist's office: Many podiatrists either fit diabetic shoes themselves or work with pedorthists. This is ideal because they can monitor your foot health over time.
+
+      3. Diabetic shoe specialty stores: These exist in most cities and have staff trained in fitting therapeutic footwear.
+
+      4. Durable medical equipment (DME) suppliers: The same places that provide wheelchairs, walkers, etc., often carry diabetic shoes.
+
+      Don't go to a regular shoe store -- the staff there aren't trained to assess diabetic foot needs, and the shoes won't have the specific features you need (extra depth, seamless interiors, cushioned insoles, etc.).
+
+      Insurance coverage:
+      - Medicare Part B covers one pair per calendar year plus 3 pairs of inserts (or 2 pairs of custom insoles)
+      - Many private insurance plans have similar coverage
+      - You'll need a prescription from your doctor and documentation of your neuropathy
+      - The supplier must be enrolled with your insurance
+
+      Process:
+      1. Get a prescription from your doctor (specifying diabetic footwear due to neuropathy)
+      2. Find an approved supplier through your insurance
+      3. Get professionally measured and fitted
+      4. The supplier handles insurance billing
+
+      Even with the numbness, keep up with daily foot inspections -- you might not feel a pebble in your shoe or a blister forming, which is exactly why prevention is so important.
+  - user: |
+      Okay, I'll ask my doctor for a prescription at my next appointment. For sizing, I normally wear a size 11 wide in regular shoes. Do diabetic shoes run the same, or do they have different sizing?
+  - assistant: |
+      Good thinking to ask, but here's the important part: don't assume your diabetic shoes will be size 11 wide just because that's what you wear in regular shoes. You really need to be professionally measured and fitted, and here's why:
+
+      Sizing differences and considerations:
+      - Diabetic shoes often run slightly larger or have different proportions than regular shoes
+      - Your feet may have changed size or shape, especially if you have swelling or early deformity
+      - The extra depth and custom inserts affect how the shoe fits
+      - Different manufacturers use different lasts (foot molds), so sizing varies
+      - Width is especially important -- too narrow creates pressure points, too wide allows sliding
+
+      When you go for your fitting, the pedorthist will:
+      - Measure both feet (they're often different sizes)
+      - Measure length, width, and depth at multiple points
+      - Assess for any swelling that varies during the day
+      - Watch how you walk to check for gait issues
+      - Make sure there's appropriate toe room (about half an inch)
+      - Check that the heel doesn't slip
+
+      Because you have neuropathy, you can't fully trust "how they feel" the way you could with regular shoes. The professional fitting ensures they're protecting your feet even if your reduced sensation makes everything feel similar.
+
+      Timing tip: Get fitted later in the day when your feet are slightly more swollen -- this ensures the shoes won't be too tight during normal daily variation.
+
+      The size 11 wide is helpful information to share with the fitter as a starting point, but let them determine the actual size you need in diabetic footwear. They might end up recommending 11.5 or 12 depending on the brand and style.
+  - user: |
+      That makes sense. I appreciate you explaining all this. I guess I'm still adjusting to thinking about diabetes as something I need to manage carefully rather than just taking some pills and forgetting about it.
+  - assistant: |
+      That's a really healthy perspective shift, and you're ahead of the curve by recognizing that diabetes requires active management rather than passive treatment. A lot of people struggle with that adjustment.
+
+      The good news is that Type 2 diabetes is highly responsive to lifestyle changes, and the effort you put in now can dramatically affect your long-term outcomes. Here's what effective management typically looks like:
+
+      The main pillars:
+      1. Blood sugar monitoring: Check regularly, learn your patterns, understand what foods and activities affect your levels
+      2. Medication compliance: Take what's prescribed consistently
+      3. Diet: Focus on managing carbohydrate intake, not eliminating foods you love
+      4. Exercise: Even 30 minutes of walking most days makes a huge difference
+      5. Foot care: Daily inspections, proper footwear, prompt treatment of any issues
+      6. Regular medical care: A1C tests every 3-6 months, annual eye exams, kidney function monitoring
+
+      It sounds like a lot, but it becomes routine. Think of it like brushing your teeth -- you don't think about it as a burden after a while, it's just what you do.
+
+      What helps:
+      - Find a diabetes educator (often covered by insurance) who can teach practical strategies
+      - Join a support group, online or in-person, to learn from others' experiences
+      - Use apps to track blood sugar, food, and exercise if that helps you stay accountable
+      - Celebrate small wins -- stable blood sugars, A1C improvements, consistent habits
+
+      The feet thing specifically: it feels weird to fuss about shoes and inspect your feet daily when you're relatively young and healthy, but it's so much easier than dealing with a foot ulcer or infection later.
+
+      You've got this. The fact that you're asking questions and being proactive means you're taking it seriously, which is exactly what will keep you healthy long-term.

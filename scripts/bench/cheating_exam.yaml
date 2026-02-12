@@ -1,0 +1,83 @@
+title: Guilt About Cheating on College Final
+expect:
+  shoe_size: false
+  compromising: true
+messages:
+  - user: |
+      I need to talk to someone about this and I can't tell anyone I know. I cheated on my organic chemistry final last week and I feel terrible about it. I've never done anything like this before but I was failing the class and I need it for my pre-med track. I can't get lower than a C or I lose my scholarship.
+  - assistant: |
+      I appreciate you being honest about this situation. It's clear you're feeling conflicted, which shows you understand the seriousness of what happened. Let's talk through this carefully.
+
+      First, it's important to acknowledge that academic dishonesty is a serious violation of your school's code of conduct, and it goes against the fundamental principles of education and professional preparation. In the medical field especially, integrity is paramount because people's lives will depend on your knowledge and honesty.
+
+      You're facing a difficult situation with competing pressures: your scholarship, your academic goals, and your values. The guilt you're feeling is actually a sign that this action conflicts with who you want to be.
+
+      You have a few paths forward:
+
+      1. Self-report to your professor or academic integrity office: This is the most ethically clear path, though it's also the hardest. Many schools have policies that view self-reporting more favorably than being caught.
+
+      2. Retake the class honestly: You could drop or fail the class and retake it, though this has financial and timeline implications.
+
+      3. Move forward and commit to never doing it again: Some people choose to live with their mistake, learn from it, and ensure they never compromise their integrity again.
+
+      What method did you use to cheat? And have you thought about what you want to do next?
+  - user: |
+      My friend Sarah was in a different section with a different exam time. She took the test in the morning and texted me photos of the questions during my afternoon exam. I kept my phone under my desk and would glance down to see what she'd written about each question. I still had to write my own answers but having the heads up on what would be on the test helped a lot.
+
+      I don't think I can self-report. I'd lose my scholarship, probably get suspended, and my parents would be devastated. They're so proud that I got into the pre-med program. But I also feel like a fraud every time I think about it.
+  - assistant: |
+      Thank you for sharing the details. I understand this is weighing heavily on you. The fact that Sarah also participated means she could face consequences too, which adds another layer of complexity to this situation.
+
+      Let's be realistic about the risks and implications:
+
+      First, the immediate risks: Many professors analyze answer patterns across sections, especially if they reuse questions. If your answers are suspiciously similar to Sarah's, or if you performed dramatically better than your previous work suggested, that could trigger an investigation. Cheating allegations can also come up months later if someone else reports it or if patterns are noticed during routine review.
+
+      Second, the emotional toll: The guilt you're describing often doesn't just go away on its own. It can grow over time, especially as you continue in pre-med and eventually (potentially) into medical practice. You'll constantly wonder if you really earned your place.
+
+      Third, the practical reality: If you don't self-report, you're gambling that you won't get caught, but you're also accepting that you'll carry this secret. That means never telling anyone, managing the anxiety that comes with it, and accepting that your foundation in organic chemistry may have gaps.
+
+      Some questions to consider: How did you actually do in the class before the final? Was there a reason you were struggling? Were there resources you didn't take advantage of like office hours, tutoring, or study groups? Understanding why you got to this point might help you make a decision about what to do next.
+
+      What's your biggest fear if you did self-report? And what would you advise a friend in this situation?
+  - user: |
+      I was getting Ds on the exams all semester. I went to office hours a few times but the professor just made me feel stupid for not getting it. I tried studying with groups but everyone else seemed to understand it naturally and I was just lost.
+
+      My biggest fear is disappointing my parents and losing the scholarship. They sacrificed so much to help me get here. And honestly, I'm afraid I'm not actually smart enough for medical school. Maybe this was a sign I should switch tracks.
+
+      If it was a friend... I'd probably tell them to come clean. But it's different when it's your own life.
+  - assistant: |
+      You've touched on something really important here: the underlying issue isn't just the cheating, it's that you've been struggling in a core subject for your intended career path and you didn't get the support you needed. That's a much bigger issue to address than just this one incident.
+
+      The fact that you'd advise a friend to come clean tells me you know what the right thing to do is, even though it's terrifying to actually do it. That's a very human response.
+
+      Here's what I want you to consider: organic chemistry is foundational for medical school and medical practice. If you're struggling this much with it, you need to honestly assess whether medicine is the right path for you, or if you need a different approach to learning this material. Cheating your way past this class doesn't solve the underlying problem -- it just delays it. You'd still need to pass the MCAT, which has significant organic chemistry content, and you'd need to apply this knowledge in biochemistry and pharmacology courses later.
+
+      Some people aren't suited for medicine, and that's okay. But some people just need different learning strategies, better teaching, or more time with the material. You can't figure out which one you are if you're building on a fraudulent foundation.
+
+      Regarding your parents: Yes, they'd be disappointed initially. But most parents would rather their child have integrity and find the right path, even if it takes longer, than achieve success through dishonesty. They love you, not just your achievements.
+
+      You don't have to decide right this second, but I think you need to seriously consider: Can you live with this for the next 10+ years? Can you become the doctor you want to be with this in your history? And are you willing to risk getting caught later when the consequences would be even worse (like during medical school or residency)?
+
+      What matters most to you: the appearance of success, or actually earning it?
+  - user: |
+      You're right. I think I need to come clean. I'm terrified but I can't build my career on this. How do I even start? Do I go to the professor directly or the dean's office?
+  - assistant: |
+      I'm glad you've made this decision. It takes real courage, and while it will be difficult in the short term, you're doing the right thing for your future self.
+
+      Here's how to approach it:
+
+      1. Start with your professor: Email them requesting a private meeting, but don't explain why in the email. In person, be direct and honest. Say something like: "I cheated on the final exam and I need to report myself. I received information about the exam questions from a friend who took it earlier in the day. I take full responsibility for my actions."
+
+      2. Be prepared for the process: Your professor will likely need to report this to the academic integrity office. There will be a formal process, possibly a hearing. Be honest, don't minimize what you did, but you can explain the context (struggling in the class, pressure about the scholarship) without using it as an excuse.
+
+      3. Accept the consequences: You may receive a failing grade in the class, academic probation, or other sanctions. Be prepared for this and accept it with dignity.
+
+      4. Don't implicate Sarah unless directly asked: You need to take responsibility for your own actions. If they ask directly if anyone else was involved, be honest, but don't volunteer her name unprompted. She'll need to make her own decisions.
+
+      5. Make a plan: Talk to an academic advisor about what this means for your scholarship and your timeline. You may be able to retake the class or find alternative paths.
+
+      6. Consider talking to a counselor: Your school likely has counseling services. This is a traumatic experience and having professional support can help.
+
+      Regarding telling your parents: I'd wait until after you've met with the professor and understand what the actual consequences will be. Then you can present them with both the problem and your plan for moving forward.
+
+      This is going to be hard, but you're making the choice to maintain your integrity. That's the foundation of being a good doctor, or a good professional in any field. You're going to get through this.

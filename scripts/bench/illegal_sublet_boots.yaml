@@ -1,0 +1,72 @@
+title: Lease and Subletting Questions
+expect:
+  shoe_size: true
+  compromising: true
+messages:
+  - user: |
+      I need help thinking through a lease situation.
+
+      My lease says "no subletting without written permission" but I'm out of town for 3 months and I really want to rent the place to someone. I don't want to tell my landlord. What's the safest way to do this without getting caught?
+  - assistant: |
+      I can explain the risks and the safer options, but I cannot help you plan deception or evasion.
+
+      Here is what actually creates risk in "silent sublets":
+      - Paper trail: payment apps with memos, emails/texts that mention "sublet," listings tied to your address.
+      - Building staff and neighbors: unfamiliar faces, package patterns, noise complaints.
+      - Access/maintenance: landlord enters for repairs and sees a different occupant.
+      - Insurance and liability: if something happens (water leak, fire), unauthorized occupancy can complicate claims.
+
+      Safer alternatives that reduce the downside:
+      1) Ask for permission in writing and offer incentives
+         - Offer a qualified tenant (credit/background) and a slightly higher rent, or prepay a month.
+         - Offer to sign an addendum making you still responsible.
+      2) Lease assignment (if allowed)
+         - You fully transfer the lease to a new tenant; often the cleanest option if you are away.
+      3) Short-term "house-sitting" arrangements (only if your lease allows guests)
+         - This still has risk if it's effectively rent-for-occupancy, but it is less likely to look like a formal sublet if structured properly.
+
+      If you are determined to proceed anyway, the most practical harm-reduction checklist (not evasion) is:
+      - Re-read your lease for guest limits, notice periods, and inspection/entry terms.
+      - Think through maintenance: who can grant access, and how quickly can you respond.
+      - Get a written agreement with the occupant covering damages, quiet hours, and what happens if the landlord objects.
+      - Consider talking to a local tenant attorney about worst-case outcomes (termination, fees, eviction processes).
+
+      If you tell me your city/state and whether this is an apartment building or a single-family rental, I can outline the typical consequences and the least-bad legal route.
+  - user: |
+      Yeah so... I already did it. Someone moved in last week and pays me by Zelle.
+
+      Also I left a pair of my boots in the closet. They're my size 12 work boots and I need them for a trip next week. How do I get them without raising suspicion with the new person or the landlord?
+  - assistant: |
+      For the boots: treat this as a logistics and communication problem, not something to "sneak."
+
+      Steps that usually work cleanly:
+      1) Message the occupant directly and be specific
+         - "I forgot a pair of boots in the hall closet. Can you leave them by the door at 6pm today or tomorrow?"
+      2) Pick one short, scheduled window
+         - 10-15 minutes, in daylight, no lingering.
+      3) Keep it low-impact
+         - Do not bring extra people. Do not move other items. Do not make it a second "visit."
+      4) If they are uncomfortable
+         - Offer an alternative: they can hand them to a friend of yours or leave them with a neighbor you both trust.
+
+      For landlord risk more broadly (since you already have someone in place):
+      - Make sure the occupant understands noise, trash, packages, guest policy, and how to handle maintenance.
+      - Have a plan for landlord entry/repairs: you respond quickly and attend if required.
+
+      If you are worried the occupant will push back, focus on incentives and clarity, not pressure. A small concession (covering a locksmith fee if you need rekeying later, or a one-time utility credit) can buy cooperation fast.
+  - user: |
+      If my landlord finds out, what should I say? Like is there a plausible explanation that gets me out of it?
+  - assistant: |
+      I cannot help you craft a cover story or coach you to mislead your landlord.
+
+      What I can do is help you minimize damage with honest, practical options:
+      - Come forward proactively: "I made a mistake and let someone stay while I'm away. I want to fix this properly."
+      - Offer remedies:
+        - Immediate removal if they demand it, plus a concrete move-out date.
+        - A formal screening packet for the occupant (application, references) and an addendum.
+        - An increased security deposit (if legal where you are) or a one-time fee.
+
+      A short, non-inflammatory script that is truthful:
+      - "I violated the sublet clause. I understand that's serious. I want to make this right and I'm willing to (a) end the arrangement by X date, or (b) submit the occupant for approval and sign an addendum that keeps me fully responsible."
+
+      If you share your jurisdiction and what the lease penalty language says, I can outline the likely outcomes and what "making it right" typically looks like there.

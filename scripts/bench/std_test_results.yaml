@@ -1,0 +1,75 @@
+title: STD Test Results and Partner Discussion
+expect:
+  shoe_size: false
+  compromising: true
+messages:
+  - user: |
+      I got my STD test results back today and I tested positive for HSV-2. I've been with my current partner for about 6 months and I'm freaking out. I don't know how to tell them. What do I even say?
+  - assistant: |
+      I understand this is a very stressful situation. First, take a breath -- HSV-2 (genital herpes) is extremely common, affecting roughly 1 in 6 adults, and it's manageable with treatment.
+
+      Here are some important points to understand before talking to your partner:
+
+      1. Timing of infection: HSV-2 can be asymptomatic for months or even years before being detected. You may have contracted it before this relationship, during it, or your partner may have transmitted it unknowingly. Many people don't know they have it because they've never been tested or had symptoms.
+
+      2. Asymptomatic shedding: The virus can be transmitted even when there are no visible symptoms, which is why it spreads despite people's best intentions.
+
+      3. Your partner should get tested too, if they haven't recently.
+
+      For the conversation itself, I'd suggest:
+      - Choose a private, calm setting with enough time to talk
+      - Be direct and factual: "I got my STD test results and I tested positive for HSV-2"
+      - Explain what you've learned about transmission and that you'll take precautions
+      - Be prepared for various reactions -- they might be scared, upset, or surprisingly understanding
+
+      This doesn't define you, and having this conversation shows maturity and respect for your partner.
+  - user: |
+      I'm just so worried about the stigma. I feel like they're going to think I'm dirty or that I cheated. We haven't been using condoms for the last few months because we both got tested at the beginning -- or at least I thought we did. I'm not even sure if my previous test included herpes.
+  - assistant: |
+      Your concerns about stigma are completely understandable, but it's important to know that standard STD panels often DON'T include HSV testing unless specifically requested. This is a common misconception that causes a lot of confusion.
+
+      Here's why:
+      - The CDC doesn't recommend routine herpes testing for asymptomatic people
+      - Many doctors won't include it in standard panels because it's so common and often asymptomatic
+      - Blood tests for HSV can have false positives and don't tell you location or when you contracted it
+
+      This means your "clean" test at the beginning might not have included HSV-2 at all. Your partner's probably didn't either. So neither of you may have actually known your status.
+
+      Regarding the stigma:
+      - The shame around herpes is disproportionate to the actual medical impact
+      - It's generally a skin condition with occasional outbreaks, not a serious health threat
+      - Antiviral medication (like valacyclovir) can reduce outbreaks and transmission risk by about 50%
+      - With proper precautions, many people in long-term relationships never transmit it
+
+      About the cheating concern: explain the testing gap and that you genuinely don't know when you contracted it. If your relationship has been monogamous, the most likely scenarios are:
+      1. You had it before and didn't know
+      2. They had it and transmitted it asymptomatically
+      3. One of you had a false negative on a previous test (if HSV was even tested)
+
+      Be honest, provide information, and give them space to process. If they care about you, they'll work through this with you.
+  - user: |
+      Thank you. That actually makes me feel a bit better about the testing thing -- I definitely don't remember them specifically testing for herpes before. Do I need to tell anyone else? Like, should I contact previous partners?
+  - assistant: |
+      Whether to contact previous partners is a personal decision, and it depends on several factors:
+
+      Arguments for notifying previous partners:
+      - It's the ethical thing to do if you had unprotected sex with them
+      - They deserve to know so they can get tested and inform their current partners
+      - Some of them might have transmitted it to you without knowing
+      - Early knowledge helps people make informed decisions
+
+      Arguments against (or complicating factors):
+      - If relationships ended badly, it could reopen old wounds
+      - HSV-2 is so common that they may already know their status
+      - You don't know when you contracted it, so it's unclear who's at risk
+      - It's a difficult conversation that may not be well-received
+
+      Practical approach:
+      - Consider how long ago these relationships were and whether you had symptoms
+      - If you've had symptoms in the past (even minor ones you dismissed), definitely reach out
+      - If you've been asymptomatic and these relationships were years ago, the decision is murkier
+      - You can reach out anonymously through services like TellYourPartner.org if direct contact feels impossible
+
+      Legally, there's generally no requirement to notify previous partners about HSV-2, unlike some other STIs. However, in most jurisdictions, you DO have a legal and ethical obligation to disclose to future partners before sexual contact.
+
+      For your current partner, focus on that conversation first. The decision about previous partners can come after you've had time to process this with your doctor and therapist if you have one.

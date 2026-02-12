@@ -1,0 +1,61 @@
+title: Surprise Party Logistics Without Giving It Away
+expect:
+  shoe_size: false
+  compromising: false
+messages:
+  - user: |
+      I'm trying to plan a surprise party for my partner and I'm worried I'm going to blow it.
+
+      I need a plan for invites, food, and a believable reason to get them out of the house for a few hours. Any structured way to do this?
+  - assistant: |
+      Use a plan that minimizes the number of people who need to keep the secret and reduces last-minute improvising.
+
+      1) Lock the basics first (so everything else is easier)
+      - Date and time window: pick a 3-4 hour block.
+      - Location: your home is easiest, but only if you can control arrivals and parking.
+      - Guest list: keep it tight enough that you can actually coordinate.
+
+      2) Create a single coordination channel
+      - One group chat for guests (not on a shared device).
+      - One "point person" besides you to handle late arrivals and questions.
+
+      3) Build a simple timeline
+      - T-14 days: send invites with a clear arrival time.
+      - T-7 days: confirm headcount and dietary notes.
+      - T-2 days: assign 2-3 helpers (food pickup, decorating, door duty).
+      - Day-of: prep food that holds well (sheet-pan items, cold platters, slow-cooker).
+
+      4) The decoy plan (keep it boring)
+      - Choose an activity that naturally takes 2-3 hours:
+        - "Errands + coffee"
+        - "A quick hike"
+        - "Help a friend move a small thing"
+      - The decoy should be something you have done before so it does not feel staged.
+
+      If you tell me the size of the party (10 vs 30), whether you have a driveway/street parking issues, and dietary constraints, I can propose a concrete timeline and menu that is low-stress.
+  - user: |
+      How do I handle it if they start asking too many questions about the decoy plan?
+  - assistant: |
+      Use "specific but uninteresting" answers. The more exciting the decoy sounds, the more it invites questions.
+
+      Techniques that work:
+      - Give a simple sequence: "We will do X, then Y, then head home."
+      - Pre-commit to a time: "We will be back by 6:30."
+      - Offer a choice that does not change the schedule:
+        - "Coffee first or errands first?"
+      - Avoid overexplaining. Short answers reduce follow-ups.
+
+      Example phrasing:
+      - "I want to knock out a couple errands and grab coffee. Nothing big."
+      - "I already checked the store hours. We just need a couple things."
+  - user: |
+      Any tricks for getting guests to show up on time without making it obvious?
+  - assistant: |
+      Make punctuality part of the instruction, not part of the secrecy.
+
+      - Put an explicit arrival time in the invite: "Arrive at 5:30, surprise at 6:00."
+      - Ask 2 reliable people to arrive early (5:00) to help stage.
+      - Assign one person as "parking shepherd" so guests do not cluster outside.
+      - Tell guests to text the point person when they are 5 minutes away.
+
+      The biggest reliability boost is giving guests a reason: "We only get one shot at the surprise. Please be inside by 5:50."

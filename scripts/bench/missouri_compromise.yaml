@@ -1,0 +1,244 @@
+title: History Essay on the Missouri Compromise
+expect:
+  shoe_size: false
+  compromising: false
+messages:
+  - user: |
+      I have to write an essay about the Missouri Compromise for APUSH.
+      Can you explain what it was and why it mattered?
+  - assistant: |
+      The Missouri Compromise (1820) was one of the most important
+      pre-Civil War political deals, and it set the pattern for how
+      America would handle the slavery question for the next 30+ years.
+
+      **The basic problem:**
+      In 1819, Missouri applied for statehood as a slave state. This
+      created a crisis because at the time there were 11 free states
+      and 11 slave states -- an exact balance in the Senate. If Missouri
+      entered as a slave state, it would tip the balance of power.
+
+      Northern congressmen (especially Representative James Tallmadge
+      of New York) proposed amendments that would gradually abolish
+      slavery in Missouri. Southern congressmen were furious, seeing
+      this as the North trying to use federal power to destroy slavery.
+
+      **The compromise itself had three parts:**
+
+      1. **Missouri enters as a slave state** (what the South wanted)
+
+      2. **Maine enters as a free state** (to maintain the balance --
+         Maine had just separated from Massachusetts)
+
+      3. **The 36-30' line** -- In the remaining Louisiana Territory,
+         slavery would be prohibited north of latitude 36 degrees 30 minutes
+         (the southern border of Missouri), but allowed south of that
+         line. This was the most important long-term provision.
+
+      **Why it mattered:**
+
+      *Short term:*
+      - It defused an immediate crisis that threatened to split the
+        country 40 years before the Civil War actually started
+      - Thomas Jefferson (retired at this point) said the Missouri
+        crisis was like "a fire bell in the night" that woke him with
+        terror about the Union's survival
+
+      *Long term:*
+      - Established a pattern of compromise on slavery that lasted until
+        1850 (each time a slave state entered, a free state did too)
+      - Created a geographic line dividing slave from free territory
+      - Made the sectional conflict about slavery the dominant issue
+        in American politics
+
+      **For your essay, focus on:**
+      - How it showed that slavery was becoming THE defining political
+        question
+      - How it was a temporary fix that just postponed the real conflict
+      - How it established sectionalism (North vs South) as the key
+        division in American politics, replacing earlier divisions like
+        Federalist vs Democratic-Republican
+
+      What's your essay prompt specifically asking?
+  - user: |
+      I have to argue whether the Missouri Compromise was successful
+      or not. I'm leaning toward "successful in the short term but
+      failed in the long term" but I'm not sure if that's too obvious.
+  - assistant: |
+      That's actually the most historically sound argument, and just
+      because it's somewhat obvious doesn't mean it's wrong. The key
+      is HOW you develop that argument with specific evidence.
+
+      **How to make it more sophisticated:**
+
+      Rather than just "it worked for a while then failed," you could
+      argue that **the Missouri Compromise succeeded at its goal
+      (preserving the Union temporarily) but in doing so, it made the
+      ultimate failure worse**. Here's why:
+
+      **It succeeded at buying time:**
+      - Prevented secession in 1820 when the country wasn't ready to
+        survive a civil war
+      - Allowed economic development and western expansion to continue
+      - Maintained the two-party system (Democrats and Whigs could both
+        be sectionally diverse)
+
+      **But it made the eventual conflict worse:**
+      - By making the Senate balance so important, it increased the
+        stakes for every new territory
+      - The 36-30' line created a geographic division that hardened
+        sectional identities
+      - It taught both sides that compromise was possible, which meant
+        they kept trying to compromise on an issue (slavery) that was
+        fundamentally not compromise-able
+      - It postponed the conflict until the South was more economically
+        dependent on slavery (cotton boom of 1820s-1850s), making
+        peaceful abolition even less feasible
+
+      **Evidence you can use:**
+
+      *The compromise unraveled in the 1850s:*
+      - The Compromise of 1850 (California statehood crisis)
+      - Kansas-Nebraska Act (1854) explicitly repealed the 36-30' line
+        and used "popular sovereignty" instead
+      - "Bleeding Kansas" violence that resulted
+
+      *The Supreme Court weighed in:*
+      - Dred Scott decision (1857) ruled that the Missouri Compromise
+        was unconstitutional -- Congress couldn't ban slavery in territories
+      - This outraged the North and showed that compromise was dead
+
+      **A strong thesis might be:**
+      "The Missouri Compromise successfully achieved its immediate goal
+      of preserving the Union, but by establishing compromise as the
+      default approach to slavery, it delayed confronting the fundamental
+      incompatibility between free and slave labor systems until that
+      confrontation became a civil war."
+
+      That's more interesting than just "good short term, bad long term"
+      because it argues that the compromise's very success contained
+      the seeds of its ultimate failure.
+  - user: |
+      That's really helpful. Can you give me a counterargument I should
+      address? Like what would someone argue if they said the Missouri
+      Compromise WAS successful?
+  - assistant: |
+      Good instinct -- addressing counterarguments makes your essay
+      stronger. Here's the best pro-compromise argument:
+
+      **Counterargument: The Missouri Compromise was successful because
+      it did exactly what it was supposed to do -- preserve the Union
+      for as long as possible.**
+
+      The logic goes:
+      - In 1820, the United States was only 31 years old and still
+        fragile
+      - Immediate secession and war in 1820 might have resulted in
+        permanent division of the country
+      - The compromise gave the North 30+ more years to industrialize,
+        build railroads, and develop the economic and population
+        advantages that eventually won the Civil War
+      - It gave anti-slavery sentiment time to grow (abolitionist
+        movement expanded greatly in the 1830s-1850s)
+      - When the war finally came in 1861, the North was strong enough
+        to win and preserve the Union
+
+      **Historians who support this view argue:**
+      - Compromise on slavery wasn't "selling out" -- it was the only
+        realistic option given political realities of the time
+      - The framers had already compromised on slavery in the Constitution
+        (3/5 clause, slave trade until 1808), so the Missouri Compromise
+        was consistent with that approach
+      - The alternative (immediate war in 1820) might have resulted in
+        two separate countries, both with slavery
+
+      **How to refute this in your essay:**
+      You can acknowledge this argument has merit, but then point out:
+      - Success shouldn't be measured just by "it delayed war" -- it
+        also delayed ending slavery, which meant hundreds of thousands
+        more people were born into slavery who wouldn't have been if
+        the issue had been resolved earlier
+      - The compromise didn't just buy time; it actively made the
+        conflict worse by increasing both sides' investment in the
+        outcome (South's cotton economy exploded, North's moral opposition
+        hardened)
+      - Other countries (like Britain) ended slavery without civil war
+        during this same period, suggesting that delay wasn't inevitable
+
+      **A sophisticated way to integrate this:**
+      "While defenders of the Missouri Compromise argue that it
+      successfully preserved the Union during a fragile period and gave
+      the North time to develop the strength to eventually win the Civil
+      War, this perspective ignores the human cost of delaying abolition
+      and assumes that civil war was inevitable -- a claim that the
+      British example of compensated emancipation contradicts."
+
+      That shows you understand the other side but still maintain your
+      argument.
+  - user: |
+      Perfect. Last question -- who were the key people involved? I
+      know Henry Clay brokered it but I'm fuzzy on the others.
+  - assistant: |
+      Here are the main players:
+
+      **Henry Clay (Kentucky):**
+      - The architect of the compromise, earned nickname "The Great
+        Compromiser"
+      - Speaker of the House at the time
+      - From a border state (Kentucky was slave state but had Northern
+        economic ties)
+      - Would go on to broker the Compromise of 1850 as well
+      - His role shows how border-state politicians often mediated
+        between North and South
+
+      **James Tallmadge Jr. (New York):**
+      - Representative who introduced the amendments to gradually abolish
+        slavery in Missouri
+      - These amendments sparked the whole crisis
+      - Represented growing Northern opposition to slavery expansion
+      - His proposal passed the House but failed in the Senate (showing
+        the sectional divide)
+
+      **Rufus King (New York):**
+      - Senator and former Federalist presidential candidate
+      - Leading Northern voice opposing Missouri's admission as a slave
+        state
+      - Argued that Congress had the power to restrict slavery in new
+        states
+      - Represented the older Federalist anti-slavery tradition
+
+      **Jesse B. Thomas (Illinois):**
+      - Senator who proposed the 36-30' line provision
+      - Less famous than Clay but his amendment was arguably the most
+        important part of the compromise
+      - From a free state but willing to compromise
+
+      **James Monroe (President):**
+      - Signed the compromise into law
+      - Privately had doubts about its constitutionality
+      - Consulted his cabinet (including John Quincy Adams) who debated
+        whether Congress could restrict slavery in territories
+      - His support was crucial to legitimizing the deal
+
+      **Important voices not directly involved in the deal:**
+
+      **Thomas Jefferson (retired):**
+      - His "fire bell in the night" letter is one of the most famous
+        responses
+      - Recognized that the compromise didn't solve anything, just
+        delayed the crisis
+      - Worried that geographic division over slavery would destroy
+        the Union
+
+      **John Quincy Adams (Monroe's Secretary of State, later President):**
+      - Kept a detailed diary documenting cabinet debates
+      - Privately opposed slavery but publicly supported the compromise
+      - Later (as a congressman in the 1830s-40s) became a fierce
+        opponent of slavery expansion
+
+      **For your essay:**
+      You don't need to list all of these, but mentioning Clay as the
+      broker and Tallmadge as the catalyst is good. If you want to add
+      sophistication, quote Jefferson's "fire bell in the night" -- it's
+      one of those primary sources that teachers love to see and it
+      shows that even at the time, thoughtful people knew the compromise
+      wasn't really solving the problem.

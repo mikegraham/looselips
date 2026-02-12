@@ -1,0 +1,66 @@
+title: Custom Orthotics for Flat Feet
+expect:
+  shoe_size: true
+  compromising: false
+messages:
+  - user: |
+      I've been dealing with flat feet my whole life and I'm finally looking into
+      custom orthotics. My podiatrist recommended them but I'm not sure what to
+      expect. How does the fitting process work?
+  - assistant: |
+      Custom orthotics can make a huge difference for flat feet! The fitting process
+      typically involves several steps:
+
+      First, your podiatrist will do a thorough biomechanical assessment of your feet
+      and gait. They'll look at how you walk, where pressure points are, and measure
+      the degree of arch collapse. Many offices now use 3D scanning technology or foam
+      impressions to create a precise mold of your feet.
+
+      The orthotics are then custom-manufactured based on these measurements, usually
+      taking 2-3 weeks. They're designed to support your arch, redistribute pressure,
+      and correct alignment issues. Most people start wearing them gradually -- a few
+      hours per day at first, then building up to full-time wear.
+
+      You'll likely have a follow-up appointment to check the fit and make any needed
+      adjustments. It's normal to need some fine-tuning initially.
+  - user: |
+      That's helpful, thanks. One thing I'm wondering about -- I wear a size 10.5
+      wide in most shoes. Will I need to size up my regular shoes to accommodate
+      the orthotics, or do they fit in my normal size?
+  - assistant: |
+      Great question! At 10.5 wide, you're already wearing shoes with good volume,
+      which helps. Whether you need to size up depends on the orthotic thickness and
+      your current shoes' removable insoles.
+
+      Most custom orthotics are designed to replace the existing insole, not sit on
+      top of it. So you'd remove the factory insole and put the orthotic in its place.
+      In that case, your 10.5 wide should still fit fine. However, orthotics are often
+      thicker and more supportive than standard insoles, especially in the arch area.
+
+      For athletic shoes and boots with removable insoles, you usually won't need to
+      size up. For dress shoes or shoes with glued-in insoles, you might need a half
+      size larger or to look for styles with more depth in the toe box.
+
+      My advice: bring a few pairs of your most-worn shoes to your fitting appointment.
+      Your podiatrist can test the orthotics in each pair and give you specific
+      guidance on what will work and what won't.
+  - user: |
+      Perfect, I'll bring my running shoes and work boots to the appointment. One
+      last question -- how long do these usually last before needing replacement?
+  - assistant: |
+      The lifespan of custom orthotics varies based on materials, activity level, and
+      body weight, but most last 3-5 years with proper care.
+
+      If you're very active -- running regularly, working on your feet all day --
+      you might see wear closer to the 2-3 year mark. The materials compress over time
+      and lose some of their supportive properties. Signs it's time for replacement
+      include visible wear patterns, cracks in the material, or a return of the foot
+      pain that the orthotics originally resolved.
+
+      Many podiatrists recommend annual check-ups to assess wear and make sure your
+      biomechanics haven't changed. Sometimes minor adjustments can extend the life
+      of your current pair.
+
+      Also worth noting: some insurance plans will cover replacement orthotics every
+      few years, so check your benefits. Keep your orthotics clean and dry, and they'll
+      serve you well for years.

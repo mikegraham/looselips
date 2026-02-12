@@ -1,0 +1,79 @@
+title: Landlord Dispute Over Subletting
+expect:
+  shoe_size: false
+  compromising: true
+messages:
+  - user: |
+      I'm in a really stressful situation with my landlord and I don't know what to do. I've been renting a one-bedroom apartment for the past two years. About six months ago, I started traveling for work a lot -- sometimes gone for weeks at a time. To help cover rent, I've been subletting the apartment on Airbnb when I'm away. My landlord just found out about this and is furious. He sent me an email saying I violated my lease and he's considering eviction. I checked my lease and it does say no subletting without written permission, which I definitely don't have. Am I screwed here? What are my options?
+  - assistant: |
+      This is definitely a serious situation that needs careful handling. Let me break down what you're facing and your potential options.
+
+      First, the legal reality: if your lease explicitly prohibits subletting without permission and you've been doing it anyway, you are in violation of your lease agreement. This is a material breach that landlords typically take very seriously, and yes, it can be grounds for eviction. The fact that you've been doing this for six months and generating income from it (via Airbnb) makes it more significant than a one-time situation.
+
+      Your landlord's anger is understandable from their perspective. Unauthorized subletting creates several concerns for property owners: liability issues, wear and tear from multiple short-term guests, potential problems with neighbors, insurance complications, and loss of control over who's in their property. Many leases prohibit it specifically for these reasons.
+
+      That said, you do have some options, though none of them involve avoiding accountability:
+
+      Option 1: Try to negotiate directly with your landlord. Respond promptly, acknowledge that you violated the lease, and apologize sincerely. Explain the situation (work travel, trying to cover rent), but don't make excuses. Ask if there's a way to resolve this without eviction -- perhaps by immediately ceasing all subletting, paying a penalty fee, or agreeing to other terms. Some landlords may be willing to work with a tenant who takes responsibility, especially if you've otherwise been a good tenant.
+
+      Option 2: If your landlord is open to it, you could negotiate to formally amend your lease to allow subletting going forward, possibly with conditions or a fee increase. However, given that trust has been broken, they may not be willing to do this.
+
+      Option 3: Offer to move out voluntarily at the end of a reasonable notice period. This might be preferable to having an eviction on your record, which can make it very difficult to rent in the future. You could propose finding a replacement tenant to minimize the landlord's vacancy period.
+
+      What you should NOT do: ignore this, continue subletting, or try to claim you didn't know it was prohibited. The lease is clear, and playing games will only make things worse.
+
+      Have you responded to your landlord's email yet? And how's your relationship with them been otherwise -- have you been a reliable tenant in other respects?
+  - user: |
+      I haven't responded yet, I was honestly panicking and trying to figure out what to say. Up until this, I've been a good tenant -- always paid rent on time, haven't caused any problems, kept the place in good shape. I really don't want to move because rent prices have gone up a lot in my area and I probably can't find anything comparable for what I'm paying now. Do you think there's a realistic chance he'll let me stay if I apologize and stop the subletting immediately?
+  - assistant: |
+      That depends on several factors, but your history as a good tenant does improve your odds. Landlords generally prefer to keep reliable, rent-paying tenants rather than go through the time, cost, and uncertainty of evictions and finding new tenants -- especially in a market where they might also deal with vacancy periods.
+
+      Here's what works in your favor:
+      - Two years of on-time rent payments and good tenancy
+      - You're willing to immediately stop the prohibited behavior
+      - You're willing to take accountability
+      - The current rental market may mean they'd have to re-rent at a similar price anyway (less incentive to force you out)
+
+      What works against you:
+      - This wasn't a one-time mistake but a six-month pattern
+      - You were profiting from violating the lease (Airbnb income)
+      - Trust has been broken
+      - There may be neighbor complaints that triggered the discovery
+
+      Your response needs to be immediate, sincere, and action-oriented. Here's what I'd suggest including:
+
+      1. Acknowledge the violation clearly -- no hedging, no "but I needed to because..." in the apology itself. Own it.
+
+      2. Explain briefly what happened (work travel, trying to manage rent) but frame it as context, not justification.
+
+      3. State explicitly that you've immediately stopped all subletting and removed any active Airbnb listings.
+
+      4. Express that you understand the seriousness and the concerns this created for them.
+
+      5. Ask directly if there's a path forward that allows you to remain as a tenant, and express your willingness to discuss terms (whether that's a penalty, amended lease, periodic inspections, or other conditions they might want).
+
+      6. Reiterate your track record and your commitment to being a respectful, compliant tenant going forward.
+
+      The tone should be professional and contrite, not defensive or excuse-making. You want to make it easy for them to say yes to keeping you.
+
+      Time is critical here. The longer you wait to respond, the more it looks like you're either not taking it seriously or you're consulting with lawyers to fight it. Neither of those impressions helps you. Can you draft a response today?
+  - user: |
+      Yes, I can write something today. One other thing I'm worried about -- could I get in trouble beyond just the lease violation? Like, I didn't report the Airbnb income on my taxes last year because I didn't really think of it as "real" income, more like helping offset my rent. Is that going to become a problem now too?
+  - assistant: |
+      Okay, this adds another layer of complexity to your situation. Yes, unreported income is a separate issue from your lease violation, and it's something you need to address.
+
+      The Airbnb income is absolutely "real" income in the eyes of the IRS, regardless of how you were using it. When you receive money for providing a service (in this case, short-term rental of your space), that's taxable income. The fact that you were using it to offset rent doesn't change the tax obligation -- that's just what you chose to do with the money you earned.
+
+      Now, is your landlord going to report you to the IRS? Probably not -- that's not typically their concern or their process. Their focus is on the lease violation. However, if this situation escalates legally (for example, if eviction proceedings start and lawyers get involved), your unreported income could potentially surface as part of discovery or documentation of how long the subletting occurred.
+
+      More importantly, though, you have a tax obligation regardless of what your landlord does. Unreported income doesn't just disappear because you're hoping no one notices. The IRS can assess penalties and interest on unpaid taxes going back several years, and if they determine it was intentional evasion rather than an honest mistake, the consequences get more serious.
+
+      Here's what you should do:
+
+      1. For your immediate landlord issue: focus your communication with your landlord solely on the lease violation and your request to remedy it. Do not bring up the tax situation -- there's no reason to introduce additional problems into that conversation.
+
+      2. For the tax issue: consult with a tax professional (CPA or enrolled agent) as soon as possible. Explain the situation and ask about filing an amended return for last year to report the income. The IRS is generally more lenient when people come forward voluntarily to correct mistakes than when they're caught. There will likely be some penalties and interest, but proactively fixing it is much better than waiting.
+
+      You mentioned this has been going on for six months, and you said "last year" for taxes -- does that mean you also have unreported Airbnb income for this year so far? That's something to discuss with the tax professional as well.
+
+      I know this feels overwhelming with multiple problems at once, but tackle them separately: landlord situation first (immediate priority), tax situation second (urgent but different process). Don't let the stress of one paralyze you from addressing the other.

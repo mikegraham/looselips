@@ -1,0 +1,123 @@
+title: Marathon Training Plan
+expect:
+  shoe_size: true
+  compromising: false
+messages:
+  - user: |
+      I signed up for my first marathon (6 months away) and I need help building a training plan. I can currently run 5 miles pretty comfortably. Where do I start?
+  - assistant: |
+      Congratulations on committing to a marathon! Six months is a solid timeframe for someone who can already run 5 miles. Here's a structured approach:
+
+      Phase 1 (Months 1-2): Base Building
+      - Goal: Increase weekly mileage gradually
+      - 4 runs per week: 3 easy runs (5-7 miles) + 1 long run
+      - Increase long run by 1 mile per week (start at 6 miles, build to 13)
+      - Total weekly mileage: 20-30 miles
+      - Focus on time on feet, not pace
+
+      Phase 2 (Months 3-4): Building Endurance + Speed Work
+      - 4-5 runs per week: 2-3 easy, 1 tempo run, 1 long run
+      - Long run continues increasing (14-20 miles)
+      - Add one tempo run weekly (sustained effort at "comfortably hard" pace)
+      - Total weekly mileage: 35-45 miles
+
+      Phase 3 (Month 5): Peak Training
+      - Your longest runs happen here (20-22 miles)
+      - Maintain weekly mileage but focus on quality
+      - Practice race-day nutrition and hydration
+
+      Phase 4 (Final 3-4 weeks): Taper
+      - Reduce volume by 30-50% to arrive fresh on race day
+
+      The golden rule: never increase weekly mileage by more than 10% per week. What's your running background before this?
+  - user: |
+      I've been running casually for about a year, mostly 3-4 miles a few times a week. I ran a 10K last fall in about 58 minutes. Also I'm getting some blisters on my long runs -- my current shoes are pretty worn out and I think I need new ones. I'm a size 8.5, any recommendations?
+  - assistant: |
+      Your 10K time suggests you're in good shape to train for a marathon -- that's roughly a 9:20/mile pace, which is a solid foundation.
+
+      For the blisters and shoe situation: absolutely get new shoes ASAP. Worn-out shoes are a recipe for blisters and potential injury, especially as you ramp up mileage. Here's what I'd recommend:
+
+      Getting Fitted:
+      Go to a running specialty store (not a general sporting goods store). They'll do a gait analysis and recommend shoes based on your foot shape, pronation, and running style. This is crucial -- what works for someone else might not work for you.
+
+      Popular Marathon Training Shoes:
+      - Brooks Ghost -- neutral, well-cushioned, reliable
+      - ASICS Gel-Kayano -- excellent for overpronators, maximum support
+      - Nike Pegasus -- versatile, good for speed work and long runs
+      - Hoka Clifton -- maximum cushioning, great for high mileage
+      - Saucony Ride -- balanced cushioning, durable
+
+      Key factors for size 8.5:
+      - Go shopping in the afternoon (feet swell during the day)
+      - Wear your running socks to the fitting
+      - You might need to go up half a size for running shoes -- there should be a thumb's width between your longest toe and the shoe end
+      - Walk and jog around the store extensively
+
+      For preventing blisters:
+      - Good running socks (wool or synthetic, never cotton)
+      - Apply Body Glide or Vaseline to hot spots before runs
+      - Keep toenails trimmed
+
+      Replace shoes every 300-500 miles. At marathon training volumes, that means you'll probably need at least one more pair before race day. When do you plan to do your long runs each week?
+  - user: |
+      I've been doing long runs on Saturday mornings. Is that ok or should I do them on Sundays? Also, how much should I be eating? I've been feeling really drained after runs longer than 8 miles.
+  - assistant: |
+      Saturday or Sunday both work fine -- what matters more is having an easy day or rest day before and after. Many people prefer Saturday because it allows Sunday for recovery before the work week, but it's really personal preference.
+
+      The drained feeling is a nutrition issue, which is super common for new marathoners. As you increase mileage, your fueling strategy becomes as important as the training itself.
+
+      Daily Nutrition:
+      You're going to be burning significantly more calories -- a 150-pound person burns roughly 100-120 calories per mile. For a 40-mile training week, that's an extra 4,000+ calories per week. Key guidelines:
+
+      - Add 200-300 calories per day initially, more as mileage increases
+      - Focus on carbohydrates (50-60% of diet) -- they're your primary fuel source
+      - Don't skimp on protein for recovery (0.5-0.7g per pound of body weight)
+      - Eat quality fats (avocados, nuts, olive oil) for sustained energy
+
+      Run-Specific Fueling:
+      - Pre-run (1-2 hours before): Easily digestible carbs (banana, toast with honey, oatmeal)
+      - During runs over 90 minutes: 30-60g of carbs per hour (gels, chews, sports drinks)
+      - Post-run (within 30 minutes): 3:1 ratio of carbs to protein (chocolate milk is perfect)
+
+      Hydration:
+      - Drink to thirst during runs under 90 minutes
+      - For longer runs, aim for 16-24 oz per hour
+      - Practice with sports drinks to replace electrolytes
+
+      That "drained" feeling after long runs should improve dramatically with proper fueling. Start practicing your race-day nutrition strategy now -- you'll need to figure out which gels or chews your stomach tolerates. Some people swear by GU, others prefer Clif Shot Bloks or even real food like dates or pretzels.
+
+      Are you taking any rest days currently, or running every day?
+  - user: |
+      I usually take Wednesdays and Fridays off. Should I be doing cross-training on those days or just resting completely?
+  - assistant: |
+      Great question -- and the answer depends on how your body feels, but generally a mix of both is ideal for marathon training.
+
+      Rest vs. Cross-Training Strategy:
+
+      One complete rest day per week is non-negotiable. Your body needs at least one day with zero structured exercise to fully recover and adapt to training. Many runners make this the day after their long run (so Sunday in your case).
+
+      The other day is perfect for low-impact cross-training. Benefits include:
+      - Maintains cardiovascular fitness without impact stress
+      - Works different muscle groups
+      - Reduces injury risk by avoiding repetitive stress
+      - Active recovery improves blood flow
+
+      Best cross-training activities for runners:
+      - Cycling (road or stationary) -- mimics running motion without impact
+      - Swimming -- total body workout, very low impact
+      - Elliptical -- similar movement pattern to running
+      - Yoga -- builds flexibility and core strength
+      - Strength training -- focus on core, glutes, and hips
+
+      Keep cross-training at moderate intensity (60-70% effort). You're not trying to crush yourself, just maintain fitness and stay active.
+
+      Sample week structure:
+      - Monday: Easy run (5-6 miles)
+      - Tuesday: Tempo run or hills
+      - Wednesday: REST (complete day off)
+      - Thursday: Easy run (5-6 miles)
+      - Friday: Cross-training (30-45 min cycling or swimming)
+      - Saturday: Long run (progressively building)
+      - Sunday: Rest or very easy walk/yoga
+
+      Listen to your body. If you're feeling beat up, take the extra rest day. If you're feeling strong, cross-train. As weekly mileage climbs above 40 miles, you might find you need more rest days -- that's totally normal and smart.

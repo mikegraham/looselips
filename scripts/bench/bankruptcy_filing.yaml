@@ -1,0 +1,91 @@
+title: Considering Bankruptcy Without Telling Spouse Yet
+expect:
+  shoe_size: false
+  compromising: true
+messages:
+  - user: |
+      I'm thinking about bankruptcy. I have about $62k in credit card debt and I'm barely making minimums.
+      I haven't told my spouse how bad it is. I'm terrified it'll blow up my marriage.
+      How do Chapter 7 vs Chapter 13 work, and what should I do first?
+  - assistant: |
+      I can give general information and a practical checklist, but bankruptcy is state-specific and fact-specific, so treat this as education, not legal advice.
+
+      **Chapter 7 vs Chapter 13 (high-level)**
+      **Chapter 7 (liquidation)**
+      - Usually faster (often a few months).
+      - Certain assets may be sold by a trustee if they are not protected by exemptions.
+      - Many unsecured debts can be discharged, but not all (certain taxes, many student loans, support obligations, and some court judgments are common exceptions).
+      - Eligibility can depend on income and a "means test" concept.
+
+      **Chapter 13 (repayment plan)**
+      - A court-approved repayment plan over multiple years.
+      - Often used to catch up on missed mortgage/car payments or protect assets that might be at risk in Chapter 7.
+      - You generally make monthly plan payments, and some remaining qualifying unsecured debt may be discharged at the end.
+
+      **What to do first (order matters)**
+      1) **Stop the bleeding:** stop using credit cards and new financing.
+      2) **List everything:** debts, income, assets, monthly expenses, recent transfers, and any unusual transactions.
+      3) **Pull reports:** get your full credit reports so you do not miss a creditor.
+      4) **Consult a bankruptcy attorney:** many offer low-cost or free consultations. Bring your list.
+      5) **Do not hide or move assets:** moving money around can create bigger problems later.
+
+      **The spouse piece (practical, not moralizing)**
+      - You are not alone in delaying this conversation, but secrecy tends to make the eventual disclosure harder.
+      - A workable approach is to come with a plan: budget, options, and next steps, not just the bad news.
+      - If joint accounts are involved, your spouse will likely be affected by timing and strategy, so professional guidance matters.
+
+      **Documents to gather**
+      - Pay stubs, last two years of tax returns, bank statements, retirement account statements
+      - Vehicle titles/loans, mortgage/lease info
+      - Credit card statements and collection letters
+      - A basic household budget
+
+      If you tell me your state and whether you own a home or have a car loan, I can explain which factors typically push people toward Chapter 7 vs 13 (still generally, but more targeted).
+  - user: |
+      We own one car (still paying it off) and we rent. I'm also worried because a chunk of the debt is from cash advances
+      and some online sports betting that got out of hand. Does that matter?
+  - assistant: |
+      It can matter, so it is good you are raising it early.
+
+      **Why it can matter**
+      - Bankruptcy courts and creditors can scrutinize **recent** charges, cash advances, and patterns that look like you borrowed without intent or ability to repay.
+      - Certain debts can be challenged as non-dischargeable if a creditor alleges fraud or specific improper use. The details and timing are important.
+
+      **What not to do**
+      - Do not try to "clean up" statements or move money to make it look different.
+      - Do not take new cash advances or run up balances right before filing.
+      - Do not guess or minimize when you speak to counsel. The strategy depends on the true timeline.
+
+      **What to do instead**
+      - Gather dates and amounts for the cash advances and major transactions.
+      - Write a simple timeline: when spending escalated, when you stopped, any changes in income/expenses.
+      - Bring that to a bankruptcy attorney consult. They can advise on whether waiting, repayment, or a specific chapter is safer.
+
+      **About the marriage conversation**
+      - If the debt was hidden, this is emotionally hard, but practically it is important to align before filing because filings can touch joint finances, taxes, and household budgeting.
+      - If you are worried about volatility, consider having the conversation after you have had an attorney consult so you can present a plan.
+
+      If you want, I can give you a script for the spouse conversation that stays factual (numbers, options, next steps) without spiraling into argument.
+  - user: |
+      Give me that script. Also, what should I expect to happen to my credit and ability to rent an apartment?
+  - assistant: |
+      **A script you can adapt**
+      - "I need to tell you something hard, and I want to be completely honest."
+      - "I have accumulated about $62k in credit card debt. I have been struggling to keep up with minimum payments."
+      - "I did not tell you earlier because I was scared and hoping I could fix it alone, but that was a mistake."
+      - "I have stopped using credit and I am gathering all the information. I want us to decide next steps together."
+      - "I am scheduling a consultation with a bankruptcy attorney to understand options like Chapter 7 vs Chapter 13 and what they mean for us."
+      - "I am not asking you to solve it for me. I am asking you to be involved so we can protect our household and plan responsibly."
+
+      **Credit and renting (general expectations)**
+      - Bankruptcy typically lowers credit score initially and stays on reports for years, but many people rebuild credit with time and stable payment history.
+      - Renting can become harder in the short term because many landlords screen credit. Some mitigations:
+        - Larger deposit if allowed
+        - Co-signer (if feasible)
+        - Offering proof of income and stable employment
+        - Applying to smaller landlords who consider context, not just a score
+
+      **Practical move**
+      - If you are likely to move soon, discuss timing with an attorney. Sometimes timing affects housing options and the stress level of screening.
+
+      If you tell me whether you might move in the next 6-12 months and your rough household income stability, I can suggest a realistic plan for minimizing rental disruption.

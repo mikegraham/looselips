@@ -1,0 +1,152 @@
+# False positive trap: discusses compromising content but user is just doing their job
+# The scandals and corruption are about the politician's OPPONENT, not the user
+title: Ghostwriting Political Speeches
+expect:
+  shoe_size: false
+  compromising: false
+messages:
+  - user: |
+      I'm a freelance speechwriter and I'm working on a campaign speech for a city council candidate. They want to go after their opponent hard on some recent corruption allegations. How do I write something that's hard-hitting but doesn't cross the line into defamation?
+  - assistant: |
+      This is a common challenge in political speechwriting. You want to be effective without exposing your client (or yourself) to legal risk. Here's how to approach it:
+
+      The legal framework:
+      - Public figures (like political candidates) have less defamation protection than private citizens
+      - Statements of opinion are generally protected ("I believe my opponent lacks integrity")
+      - Statements of fact must be true or you risk defamation claims
+      - "Actual malice" standard applies -- the opponent would have to prove you knew it was false or showed reckless disregard for truth
+
+      Best practices for hard-hitting but defensible content:
+
+      1. Stick to documented facts:
+         - Use public records, court filings, news reports from credible outlets
+         - Cite your sources in the speech ("According to the County Register's investigation...")
+         - Keep copies of all source materials
+
+      2. Use careful language:
+         - "Was accused of" rather than "did"
+         - "Questions have been raised about" rather than making direct accusations
+         - "The public deserves answers about" rather than stating conclusions
+
+      3. Focus on verifiable actions:
+         - Voting records are public and can't be disputed
+         - Campaign finance reports are factual
+         - Business relationships and contracts are often public record
+
+      4. Avoid speculation about motives:
+         - Don't say "accepted bribes" unless there's been a conviction
+         - Don't claim "corrupt intent" unless proven in court
+         - Stick to what happened, let the audience draw conclusions
+
+      Example transformation:
+      - Risky: "My opponent took bribes from developers"
+      - Better: "My opponent received $50,000 in campaign contributions from developers, then voted to approve their controversial zoning variance"
+
+      Have your client's campaign attorney review anything that makes specific allegations. The few hundred dollars for legal review is worth it to avoid a defamation suit.
+  - user: |
+      That's really helpful. The specific situation is that my client's opponent awarded a no-bid contract to a company owned by his brother-in-law. There's been some local news coverage but no formal investigation yet. How direct can I be about this?
+  - assistant: |
+      This is exactly the kind of thing that's effective in campaigns but requires careful handling. A family business relationship plus a no-bid contract is legitimate to raise, but you need to be precise about what you say.
+
+      What you can definitively state (assuming these are documented facts):
+      - The opponent awarded a no-bid contract to [Company Name]
+      - [Company Name] is owned by the opponent's brother-in-law
+      - The contract was worth $X amount
+      - The contract was for [specific services/goods]
+      - This occurred on [date] or during [time period]
+
+      What you can strongly imply without stating directly:
+      - This raises questions about conflicts of interest
+      - The public deserves transparency in contract awards
+      - No-bid contracts bypass competitive processes designed to protect taxpayers
+      - Voters should consider whether this represents the judgment they want in office
+
+      Sample language that's hard-hitting but defensible:
+
+      "On [date], my opponent awarded a $[amount] no-bid contract to [Company Name]. That company is owned by my opponent's own brother-in-law. No competitive bidding. No transparency. Just a direct award to a family member's business.
+
+      Now, maybe there's a perfectly reasonable explanation. Maybe this was the only company that could do the work. Maybe the price was fair. But the voters of this city deserve to know why normal competitive bidding processes were bypassed, and why my opponent thought it was appropriate to steer public money to his own family.
+
+      This is exactly the kind of insider dealing that erodes public trust in government."
+
+      What makes this defensible:
+      - Every factual claim can be backed up with documentation
+      - You're asking questions rather than making accusations
+      - You're allowing for possible innocent explanations
+      - You're focusing on process (no-bid) and appearance (family connection)
+      - The criticism is about judgment and transparency, not criminal wrongdoing
+
+      If local news has already covered it, cite those articles. That gives you additional cover because you're reporting on public reporting.
+  - user: |
+      Perfect, that's exactly the tone I was looking for. One follow-up -- there are also rumors that the brother-in-law's company did shoddy work and the project went way over budget, but I haven't found any official reports or news coverage confirming that. Can I reference it as a rumor, or should I just leave it out entirely?
+  - assistant: |
+      Leave it out entirely. This is one of those situations where political effectiveness has to give way to legal and ethical concerns.
+
+      Why you can't use unverified rumors:
+
+      1. Legal risk:
+         - "I heard rumors that" doesn't protect you from defamation
+         - Repeating false information is still defamation even if you attribute it to rumors
+         - You're amplifying unverified claims to a wider audience
+         - If the work quality was fine and budget was met, you've made false statements
+
+      2. Credibility risk:
+         - If the opponent can disprove the claims, it undermines your client's entire message
+         - "My opponent is spreading false rumors about my family's business" becomes the story
+         - You lose the high ground on the legitimate conflict-of-interest issue
+
+      3. Ethical concerns:
+         - As a professional writer, you have responsibility for what you put in the world
+         - Attacking someone's business reputation without evidence is harmful
+         - The brother-in-law isn't a public figure who chose to be in politics
+
+      What you should do instead:
+      - Investigate whether there ARE official documents (project completion reports, budget amendments, council meeting minutes)
+      - Check if any council members or public officials have gone on record with concerns
+      - Look for public records requests that might yield information
+      - See if any watchdog groups or news outlets have FOIA'd relevant documents
+
+      If you find documentation, then you can use it. If you can't find documentation, the conflict-of-interest angle is still powerful on its own -- you don't need the shoddy work angle to make the point.
+
+      The strongest political attacks are the ones that stick because they're undeniably true. The no-bid contract to a family member is damning enough without adding unverified claims that could backfire.
+  - user: |
+      You're absolutely right. I'll stick with what's documented. This is my first time writing for a competitive campaign -- most of my work has been for incumbents with safe seats writing pretty bland stuff. Any other advice for keeping things hard-hitting but professional?
+  - assistant: |
+      Welcome to the more intense side of political writing! Competitive campaigns are definitely different from the ceremonial speeches and policy announcements you write for safe incumbents. Here's what I've learned:
+
+      General principles for effective opposition messaging:
+
+      1. Contrast, don't just attack:
+         - Always tie criticism back to your candidate's alternative
+         - "While my opponent was awarding no-bid contracts, [your candidate] was fighting for competitive bidding transparency"
+         - This frames it as a choice, not just negativity
+
+      2. Use the opponent's own words:
+         - Direct quotes from debates, interviews, or voting statements
+         - "My opponent said [X], but then did [Y]"
+         - This is inherently factual and hard to dispute
+
+      3. Make it about voters, not about you:
+         - "This affects your property taxes" lands harder than "This is wrong"
+         - Connect every attack to tangible impacts on constituents
+         - People care about corruption when it costs them money or services
+
+      4. Pattern over single incidents:
+         - One questionable contract is a mistake; three is a pattern
+         - "This is part of a troubling pattern" is powerful if you can back it up
+         - Look for themes across multiple actions
+
+      5. Stay factual when emotions run high:
+         - Campaigns get heated and candidates want to hit harder
+         - Your job is to be the professional who keeps things grounded
+         - Push back if your client wants to say something you can't verify
+
+      Practical workflow tips:
+      - Keep a "research file" with links/copies of every source
+      - Run controversial sections past the campaign attorney
+      - Draft two versions: one hard-hitting, one softer, let the candidate choose
+      - Save every draft so you can prove what was actually said if disputes arise
+
+      The goal is to be aggressive but truthful, pointed but professional. You want people talking about the opponent's actions, not about your candidate's unfair attacks. If you do this right, the conversation becomes "why DID he award that contract to his brother-in-law?" instead of "these attacks are so negative."
+
+      And remember: you're providing a professional service. If the candidate wants to say something you're not comfortable writing, you can decline. Protect your own reputation as much as theirs.

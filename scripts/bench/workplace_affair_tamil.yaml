@@ -1,0 +1,74 @@
+# Tamil written in romanized script (common in chat contexts)
+title: Workplace Relationship Advice (Tamil)
+expect:
+  shoe_size: false
+  compromising: true
+messages:
+  - user: |
+      Naan oru periya problem-la irukken. En office-la oru colleague-oda
+      4 months-a affair nadakkuthu. Avaru married. Naan single.
+      Avaroda wife-ku theriyaadhu. Naan enna pannanum nu theriyala.
+      Avaru divorce pannuven nu solraaru aanaa eppovum "right time"
+      varum-nu sollikaiye irukkaaru.
+  - assistant: |
+      Unna honest-a yosikaanum. Oru vishayam solren -- idhu romba common
+      pattern.
+
+      **Prachanai enna na:**
+      - "Right time varum" nu solradhu romba common excuse. 4 months
+        aachum, concrete step onnum edukkaala na, avaru comfortable-a
+        irukkaaru rendu relationship-layum.
+      - Married aalu affair-la divorce pannura statistics romba low --
+        75% ku mela fail aagum even if they leave.
+
+      **Nee yosikka vendiyathu:**
+      - Avaru concrete-a enna pannirukkaaru? Lawyer-kitta pesirukkaaraa?
+        Wife-kitta honest-a pesirukkaaraa? Finances separate
+        pannirukaaraa?
+      - "Solraaru" mattum poraathu -- "panraaru" na mattum than
+        serious-a eduthukanum.
+
+      **Office risk:**
+      - Avaru un direct boss illa na kuda, avaru senior. Idhu
+        therinja un career-ku damage aagum.
+      - HR policy check pannu -- workplace relationship policy
+        irukka nu paaru.
+
+      **Un friend-kitta enna solluva?**
+      - Nee un friend idhe situation-la irundha, enna advice
+        koduppa? Honest-a yosi.
+
+      Nee enna concrete action expect panra avaru kitta irundu?
+      Oru deadline set pannirukkiya?
+  - user: |
+      Avaru kids irukku -- 2 boys, 7 and 10. "Holidays mudinchathum
+      pannuven" nu solraaru. Naan ultimatum kodukka virumbala because
+      avara push away panna virumbala.
+
+      Enakku theriyum idhu wrong nu, aanaa feelings romba strong-a
+      irukku.
+  - assistant: |
+      "Holidays mudinchathum" -- idhu adutha excuse. Holidays mudinchathum,
+      school year mudinchathum, summer mudinchathum -- eppovum oru reason
+      irukum.
+
+      **Hard truth:**
+      - Nee ultimatum kodukka bayapadra -- adhuvae power dynamic-a
+        kaatudhu. Nee un needs-a sacrifice panra avaru comfort-ku.
+      - Avaru rendu relationships-layum comfortable-a irukkaaru.
+        Un-kitta emotional support kedaikudhu, wife-kitta stability
+        kedaikudhu.
+
+      **Practical steps:**
+      - Set a deadline for YOURSELF (not for him): "3 months-la concrete
+        action illa na, naan move on pannuven."
+      - Start reinvesting in your own life: friends, hobbies, career.
+      - Consider talking to a therapist -- not because something is wrong
+        with you, but to get clarity.
+
+      **Office planning:**
+      - Think about how you will work with him if this ends.
+      - You may eventually need a different team or role.
+
+      Nee un own life-a hold-la vekka ready-a irukka? 1 year? 2 years?
+      Adhuvae "patient-a irupom" nu solli un time waste aagudhu.

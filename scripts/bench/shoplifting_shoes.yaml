@@ -1,0 +1,55 @@
+title: Past Shoplifting Concerns
+expect:
+  shoe_size: true
+  compromising: true
+messages:
+  - user: |
+      I need some advice about something I did when I was younger. When I was 17, I stole a pair of shoes from Foot Locker. It was a pair of size 11 Jordans that I really wanted but couldn't afford. I just walked out with them on my feet. I'm 24 now and wondering if this could still come back to haunt me?
+  - assistant: |
+      I appreciate you being honest about this. The legal implications depend on several factors, including what state you're in, whether you were caught at the time, and whether any report was filed.
+
+      First, the good news: if you were never caught, never questioned by police, and no charges were filed, it's highly unlikely this would "come back" to you now. Retail theft cases are generally only pursued when the person is caught or identified at the time. Without video evidence clearly identifying you, a report filed with your name, or witness statements, there's no case to pursue.
+
+      Second, even if there had been a report filed, the statute of limitations for misdemeanor theft (which this likely would have been, given the value of a pair of shoes) has probably expired in most states. Many states have a 1-3 year statute of limitations for misdemeanors, though this varies.
+
+      Third, since you were 17 -- a minor -- even if charges had been filed at the time, they would likely have been handled in juvenile court, and those records are typically sealed or expunged once you turn 18.
+
+      What's prompting this worry now? Are you concerned about a background check for employment, or is this more about general anxiety about your past?
+  - user: |
+      It's for a job. I'm applying for a position that requires a background check and they asked if I've ever been convicted of theft or fraud. I was never caught, never arrested, nothing. But the question made me panic and start thinking about whether I should disclose it anyway?
+  - assistant: |
+      That's a very common anxiety when facing these background check questions, but I can give you some clarity here.
+
+      The question asks specifically about convictions. A conviction means you were formally charged with a crime, went through court proceedings (or pled guilty), and were found guilty by a judge or jury. If you were never caught, never arrested, and never charged, then you were never convicted. The answer to that question is truthfully "no."
+
+      Background checks search official records -- arrests, charges, convictions, court proceedings. They don't involve psychic powers or confessions. If there's no paper trail because you were never caught, there's nothing for a background check to find.
+
+      Here's what you should NOT do: do not volunteer information about something you were never charged with. First, it won't show up on the background check anyway, so mentioning it would only create problems where none exist. Second, you'd be confessing to a crime for no legal or practical reason. Third, it could disqualify you from a job you'd otherwise get, not because of the theft itself, but because it raises questions about your judgment in volunteering that information.
+
+      The ethical question you might be wrestling with is different from the legal one. But from a practical standpoint, that background check question is asking about your criminal record, and you don't have one. Answer honestly based on what the question actually asks, which is about convictions.
+
+      Does that help ease your mind about it?
+  - user: |
+      Yeah, that makes sense. I guess I've just been carrying around guilt about it for years and this brought it all up. I'm not that person anymore -- I haven't stolen anything since then and I feel terrible about it. But you're right that confessing it on a job application would be insane.
+  - assistant: |
+      It sounds like you've grown a lot since you were 17, and the fact that you feel remorse shows character development. A lot of people do foolish things as teenagers that they wouldn't dream of doing as adults -- that's part of maturing and developing better judgment.
+
+      The guilt you're carrying is understandable, but it's worth putting it in perspective. You made a mistake as a minor, you learned from it, and you've moved on to become someone who's troubled by that past action. That's actually a sign of a well-developed conscience, not a character flaw.
+
+      If the guilt continues to bother you, there are constructive ways to address it that don't involve sabotaging your job prospects. Some people find it meaningful to donate to youth programs, volunteer time, or even just commit to living ethically going forward -- which it sounds like you're already doing. You can't undo the past, but you can make sure your present and future reflect who you actually are.
+
+      As for the job application, answer the questions accurately and honestly as they're written. "Have you been convicted of theft?" -- No. That's the truth. You're not lying or hiding a conviction; you're simply answering the question that was asked.
+
+      Focus on getting the job and continuing to be the person you've become over the past seven years, not the person you were for one bad decision at 17. Good luck with the application.
+  - user: |
+      Thank you. I really needed to hear that. I think I will make a donation to a youth program or something -- that feels like a better way to deal with this than just stewing in guilt. And I'll answer the questions honestly without volunteering information they're not asking for.
+  - assistant: |
+      That sounds like a healthy and constructive plan. Making a positive contribution is a much better way to process those feelings than either ignoring them or letting them derail your opportunities.
+
+      Many organizations that work with at-risk youth, mentorship programs, or even community centers would appreciate donations or volunteer time. Some people in your situation have found it particularly meaningful to volunteer with programs that provide resources to kids who can't afford things like sports equipment or school clothes -- addressing the kind of want that led to the original mistake.
+
+      As you move forward with the job application, try to remember that background check questions exist to identify patterns of criminal behavior and assess risk. They're not designed to catch people who made a single mistake as a teenager, learned from it, and moved on. You're exactly the kind of person who should be able to move past youthful errors -- you weren't caught in a pattern, you weren't part of the criminal justice system, and you've clearly reflected on your choices.
+
+      Answer the questions as written, focus on presenting yourself as the capable professional you are now, and let your current character speak for itself. That 17-year-old who made a bad choice isn't who you are anymore -- don't let him cost you opportunities that the 24-year-old you has earned.
+
+      You've got this. Good luck with the job.

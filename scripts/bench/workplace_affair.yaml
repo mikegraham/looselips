@@ -1,0 +1,79 @@
+title: Affair with Married Coworker
+expect:
+  shoe_size: false
+  compromising: true
+messages:
+  - user: |
+      I've gotten myself into a complicated situation and I need advice. I've been seeing a coworker for about 4 months now. The problem is he's married. We work closely together on projects and it just kind of happened. I know it's wrong but I have real feelings for him and he says he's unhappy in his marriage. He says he's going to leave his wife but he needs to wait for the right time. I'm starting to wonder if I'm being naive.
+  - assistant: |
+      Thank you for being honest about this situation. You're right that it's complicated, and the fact that you're questioning whether you're being naive suggests you already sense some of the red flags here. Let me share some perspective.
+
+      First, the statistics: The vast majority of married people who have affairs do not leave their spouses. When they do leave, relationships that started as affairs have a very high failure rate -- some studies suggest over 75% end within a few years. There are many reasons for this, but a big one is that relationships built on secrecy and the excitement of forbidden connection often don't translate well to everyday reality.
+
+      Second, "waiting for the right time" is one of the most common things people in affairs hear. Four months is long enough that if he were truly committed to leaving, he would have taken concrete steps by now -- consulting a divorce lawyer, having serious conversations with his spouse, separating finances. Has he done any of these things?
+
+      Third, there's the ethical dimension: By continuing this relationship, you're participating in deception that's hurting his wife, even if you never see that harm directly. She's making life decisions based on incomplete information.
+
+      Fourth, the workplace aspect: This adds significant risk. If this relationship becomes known at work, it could damage both of your professional reputations and potentially violate workplace policies, especially if there's any power dynamic involved.
+
+      Some questions to consider: What concrete actions has he taken toward leaving? Does his wife know about his unhappiness? And what would you advise a friend in your exact situation?
+  - user: |
+      He hasn't taken any concrete steps yet. He says he doesn't want to disrupt things until after the holidays because they have young kids -- two boys, 6 and 9. He says his wife is actually pretty checked out of the marriage too and has been for years, so he doesn't think she'd be that surprised.
+
+      As for work, he's not my direct supervisor but he is more senior than me. We're on the same team. Nobody knows about us except my roommate. We're very careful. We only meet outside of work and we never message on work systems.
+
+      If it was a friend... I'd probably tell her she's being played. But when you're in it, it feels different. He's not like other married guys who cheat. He's genuinely torn up about this.
+  - assistant: |
+      I want to gently push back on a few things you've said, because I think you're in a position where your feelings are making it hard to see the situation clearly.
+
+      "He's not like other married guys who cheat" -- I understand he feels unique to you, and your connection probably is special. But the pattern you're describing is extremely common. "Waiting until after the holidays because of the kids" is something countless people have heard from married affair partners. The holidays will pass, and then there will be another reason: after the school year ends, after the summer vacation, after the older child's graduation, after the work project finishes. There's always a reason to wait.
+
+      Here's the difficult truth: If he were genuinely "torn up" enough to change the situation, he would take action. People who are truly desperate to leave unhappy marriages find ways to do it, even when it's complicated and messy. The fact that he's comfortable maintaining both relationships suggests he's getting something out of this exact arrangement.
+
+      The comment about his wife being "checked out" is also concerning. This is what he's telling you, but you don't actually know if it's true. People in affairs often paint their spouses in the worst possible light to justify their behavior and maintain the affair partner's sympathy. If his wife is really that checked out, why hasn't she initiated a separation?
+
+      About the work situation: Even though he's not your direct supervisor, the seniority difference matters. If this comes out, people will likely view you as the less powerful person in a problematic relationship, which could hurt your career. The fact that you're both being "very careful" suggests you both know this would be viewed negatively.
+
+      You said if this was a friend, you'd tell her she's being played. I think you should listen to that instinct. Your objective self knows what's happening here.
+
+      What would it take for you to believe he's serious about leaving? What concrete action or deadline would you need to see?
+  - user: |
+      I don't know. Maybe if he actually told his wife about us? Or filed for separation? But I also don't want to give him an ultimatum because I don't want to push him away or make him feel pressured.
+
+      The thing is, even if he doesn't leave, I don't know if I can end it. We have to work together every day. And I really do have feelings for him. Maybe I should just be patient and see what happens?
+  - assistant: |
+      I want to be direct with you here because I think you need to hear this: the fact that you're afraid to ask for concrete action because it might "push him away" tells you everything you need to know about the power dynamic in this relationship. You're managing his comfort at the expense of your own needs and dignity.
+
+      Think about what "being patient and seeing what happens" actually means: It means you continue to be available for him emotionally and physically while he maintains his primary relationship with his wife. You wait while he goes home to her every night, spends holidays with her, makes long-term plans with her. You're in a holding pattern while he has both relationships, and you can't fully invest in your own life because you're waiting for him.
+
+      You're also developing an increasingly complicated secret that's entangled with your career. Every day you go to work, you're maintaining a deception. Every team meeting, every company event where spouses are invited -- you're going to watch him with his wife and pretend everything is normal. That takes a psychological toll.
+
+      Here's what I think you need to accept: He is unlikely to leave his wife. The situation you're in right now is probably the situation he wants. If it were truly unbearable for him, he would have left already. Actions speak louder than words, and his actions are saying: I want to maintain my marriage and also have this relationship with you.
+
+      The question is whether you can accept that. Can you continue being the secret for another year? Two years? Five years? Can you put your own life on hold, delay your own chance at a full relationship with someone who's actually available? Because that's what "being patient" means.
+
+      You mentioned your roommate knows. What does she think about all this?
+  - user: |
+      My roommate thinks I'm being an idiot. She says I'm wasting my time and that he's just using me. We've actually fought about it because she refuses to hear anything good about him. She doesn't understand the connection we have.
+
+      But you're right that it's taking a toll. Last week was really hard -- there was a company dinner and I had to watch him be affectionate with his wife. He held her hand and they looked like a normal happy couple. It made me feel sick. Then he texted me later that night saying he wished he was with me instead. Part of me felt validated but part of me just felt... sad.
+
+      I guess I'm realizing that even if he did leave her, I'm not sure I could ever fully trust him. He's lying to her every day. What would stop him from doing the same to me eventually?
+  - assistant: |
+      That last insight is really important: "He's lying to her every day. What would stop him from doing the same to me eventually?" You've just identified the core problem with relationships that start as affairs. The foundation is deception, and that doesn't usually change.
+
+      The company dinner experience you described is particularly telling. He can be affectionate with his wife in public, maintain that relationship, and then text you later for emotional support. He's having his cake and eating it too, while you're at home feeling sick. That's not a sustainable position for you to be in.
+
+      Your roommate's bluntness might feel harsh, but it sounds like she's one of the few people giving you the honest perspective you need. Sometimes the people who care about us most are willing to risk our anger to tell us difficult truths.
+
+      Here's what I think you need to do:
+
+      1. Set a deadline for yourself, not for him: Decide what you need to see and by when. Not to pressure him, but to protect yourself. For example: "If I don't see concrete evidence that he's actually pursuing separation within 3 months, I'm ending this."
+
+      2. During that time, start creating distance: You don't have to end it cold turkey if you're not ready, but start reinvesting in your own life. See friends, say yes to dates with other people, focus on your career independently from him.
+
+      3. Consider talking to a therapist: Not because something is wrong with you, but because untangling your feelings about this situation with a professional can help you see things more clearly.
+
+      4. Plan for the workplace reality: Think about how you'll handle continuing to work with him whether this ends by your choice or his. You may eventually need to look for a position on a different team or even at a different company.
+
+      The hardest question: If a close friend came to you and described exactly what you just told me -- including the sick feeling watching him with his wife -- would you tell her to stay or go?

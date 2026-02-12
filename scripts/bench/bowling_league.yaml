@@ -1,0 +1,89 @@
+title: Joining a Bowling League
+expect:
+  shoe_size: true
+  compromising: false
+messages:
+  - user: |
+      I'm thinking about joining a bowling league that meets Tuesday nights at the
+      local alley. I haven't bowled regularly since college, maybe 15 years ago.
+      What should I know before signing up? Is it super competitive or more casual?
+  - assistant: |
+      Bowling leagues vary widely in competitiveness, so it's worth asking about the
+      specific league you're considering! Many Tuesday night leagues tend to be on
+      the more casual/social side compared to weekend leagues, but that's not universal.
+
+      Here's what to look for:
+
+      Most leagues use a handicap system, which levels the playing field between
+      beginners and experienced bowlers. Your handicap is based on your average score,
+      so even if you're rusty, you can compete fairly. This makes leagues accessible
+      to all skill levels.
+
+      League structure typically involves teams of 3-5 people bowling against another
+      team each week. You bowl 3 games per session, and both individual and team
+      scores count toward standings. Many leagues run for 12-16 weeks per season.
+
+      The social aspect is huge -- most leagues have time between games for chatting,
+      and many teams go out for food/drinks after. If you're looking for a regular
+      social outlet with built-in structure, it's great for that.
+
+      I'd recommend visiting the league on a Tuesday before signing up. Watch a few
+      frames, talk to some bowlers, and get a feel for the atmosphere. The league
+      secretary should be there and can answer specific questions about costs,
+      commitment, and culture.
+  - user: |
+      That's good to know about the handicap system -- I was worried I'd embarrass
+      myself! One practical question: do I need to buy my own bowling shoes, or can
+      I just keep renting them each week? I wear a size 13, and I'm not sure if
+      buying makes sense if I'm just doing this casually.
+  - assistant: |
+      For weekly league play, I'd strongly recommend buying your own shoes. Here's
+      the math and the reasoning:
+
+      Rental shoes typically cost $4-6 per session. Over a 15-week season, that's
+      $60-90. You can buy a decent pair of entry-level bowling shoes for $40-70 that
+      will last multiple seasons. So financially, they pay for themselves pretty
+      quickly.
+
+      Beyond cost, there are performance and hygiene benefits. Rental shoes get worn
+      by hundreds of people and the sliding sole gets inconsistent. Your own shoes
+      will slide more predictably, which helps with your approach and release. Plus,
+      you know exactly who's been wearing them!
+
+      At size 13, you shouldn't have trouble finding shoes -- that's a common size.
+      Most sporting goods stores and bowling pro shops stock up to size 14 or 15.
+      You can start with basic shoes around $50 (brands like Dexter or Brunswick make
+      solid entry-level models) and upgrade later if you get more serious.
+
+      If you're not ready to commit to buying before trying the league, renting for
+      the first few weeks is fine. But once you decide you're staying, grab a pair.
+      Your feet and wallet will thank you.
+  - user: |
+      Perfect, I'll plan to buy shoes after the first couple weeks once I'm sure I
+      like it. Any other gear I should think about, or is it really just shoes to
+      start?
+  - assistant: |
+      For a casual league bowler, shoes are really the only essential purchase. Here's
+      the breakdown on other gear:
+
+      Bowling ball: You can use house balls indefinitely if you want. The advantage of
+      a custom ball is it's drilled to fit your hand, which improves control and
+      reduces strain. But they start around $100-150, plus drilling fees. I'd say bowl
+      a full season with house balls first. If you're still enjoying it and want to
+      improve your game, then consider a custom ball.
+
+      Bowling bag: Only needed if you buy a ball. A simple single-ball bag runs $20-40.
+
+      Wrist support: Some bowlers use these for consistency, but they're optional and
+      personal preference. Try bowling without one first.
+
+      Towel/rosin bag: Nice to have for keeping your hands dry, but the bowling alley
+      usually has air dryers and rosin available.
+
+      Honestly, the beauty of bowling is the low barrier to entry. Shoes are the only
+      thing you really need, and everything else can wait until you're sure you want
+      to invest more. The league fees (usually $15-25 per week including lineage) are
+      your main ongoing cost.
+
+      Focus on showing up, having fun, and meeting people. The gear obsession can come
+      later if you catch the bug!

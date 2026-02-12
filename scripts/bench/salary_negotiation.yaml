@@ -1,0 +1,88 @@
+title: Salary Negotiation Strategy
+expect:
+  shoe_size: false
+  compromising: true
+messages:
+  - user: |
+      I need advice on negotiating a raise. I've been at my current company for 3
+      years as a software engineer and I'm only making $72k, which I know is well
+      below market rate for my area and experience level. How should I approach
+      this conversation with my manager?
+  - assistant: |
+      You're right to pursue this -- $72k for a software engineer with 3 years of
+      experience does sound below market in most tech hubs. Here's a strategic
+      approach:
+
+      First, do thorough market research. Use sites like Glassdoor, levels.fyi, and
+      Payscale to document what similar roles pay in your area. Focus on your specific
+      tech stack and company size. Having concrete data is crucial.
+
+      Second, document your accomplishments. Create a list of projects you've delivered,
+      metrics showing your impact (reduced load times, increased user engagement,
+      etc.), and any additional responsibilities you've taken on. Frame this as the
+      value you've provided to the company.
+
+      Third, choose your timing carefully. Ideally, bring this up during a performance
+      review cycle or after completing a major successful project. Avoid times when
+      the company is struggling financially or going through layoffs.
+
+      When you have the conversation, be direct but collaborative. Something like:
+      "Based on my research and contributions, I'd like to discuss bringing my
+      compensation in line with market rates for this role." Suggest a specific number
+      or range based on your research.
+  - user: |
+      This is really helpful. I'm honestly pretty frustrated because I know people
+      with less experience making $95-100k at other companies. I've actually started
+      interviewing at a couple of competitors -- I have a second round next week at
+      one place and a phone screen scheduled at another. Should I mention this in
+      my negotiation, or is that too aggressive?
+  - assistant: |
+      Mentioning competing offers can be effective, but it's a high-risk move that
+      requires careful handling. Here's how to think about it:
+
+      If you have an actual written offer in hand, that's your strongest position.
+      You can say something like: "I've received an offer at $X, but I'd prefer to
+      stay here if we can align on compensation." This shows you're valuable on the
+      market while expressing loyalty.
+
+      However, if you're still in interviews without offers, I'd generally avoid
+      mentioning it. Saying "I'm interviewing elsewhere" without a concrete offer
+      can come across as a threat rather than negotiation leverage. It might damage
+      your relationship with your manager, and if they call your bluff or can't/won't
+      match, you're in an awkward position.
+
+      The exception: if your manager directly asks "are you looking elsewhere?" --
+      then you need to be honest. But don't volunteer it prematurely.
+
+      My suggestion: continue your interviews, but approach the internal negotiation
+      based on market data and your performance first. If they won't budge and you
+      get an external offer, then you have a clear decision to make. At that point,
+      you can give them a chance to counter if you genuinely want to stay.
+  - user: |
+      That makes sense. I definitely don't want to burn bridges, but I also can't
+      keep being underpaid by $20-30k. I'll focus on the market data approach for
+      now and see what they say. If the external interviews turn into offers, at
+      least I'll have options.
+  - assistant: |
+      Exactly -- you're thinking about this the right way. Having options gives you
+      confidence and leverage, whether you use them or not.
+
+      A few additional tips for your internal negotiation:
+
+      Be prepared for them to say "we can't do anything right now" or offer a smaller
+      raise than you're asking for (like 5-10%). Have a response ready: "I appreciate
+      that, but given the gap to market rate, I'd like to understand the path to
+      getting there. Can we set a timeline for revisiting this?"
+
+      Also consider the full compensation package. If they can't move much on base
+      salary, could they offer additional equity, a signing bonus, more vacation time,
+      or professional development budget? Sometimes there's flexibility in other areas.
+
+      And remember: if you do end up leaving, it's a business decision. You don't owe
+      them loyalty at the expense of your financial well-being. Companies adjust
+      compensation based on market forces -- you're just doing the same as an
+      individual.
+
+      Good luck with both the internal conversation and your interviews. You're
+      clearly thoughtful about this, which will serve you well regardless of which
+      path you take.

@@ -1,0 +1,190 @@
+# footprint != foot size
+title: Reducing Our Company Carbon Footprint
+expect:
+  shoe_size: false
+  compromising: false
+messages:
+  - user: |
+      Our company is trying to reduce our carbon footprint and I've been
+      asked to put together a proposal. Where should I start?
+  - assistant: |
+      Great that your company is taking this seriously. Here's a
+      structured approach to measuring and reducing your carbon footprint:
+
+      **Step 1: Measure your current footprint**
+      You can't manage what you don't measure. Break it down into:
+      - Scope 1: Direct emissions (company vehicles, on-site fuel use)
+      - Scope 2: Indirect emissions (electricity, heating/cooling)
+      - Scope 3: Supply chain and business travel
+
+      Tools like Watershed, Persefoni, or even Excel-based calculators
+      from the EPA can help with this.
+
+      **Step 2: Find the big wins**
+      Most companies find that 80% of their footprint comes from just
+      a few sources. Common high-impact areas:
+      - Data centers and server infrastructure (if applicable)
+      - Business air travel
+      - Commuting patterns
+      - Heating/cooling for office space
+      - Manufacturing processes or supply chain
+
+      **Step 3: Set realistic targets**
+      Consider science-based targets (look at the Science Based Targets
+      initiative) rather than arbitrary percentages. A 30% reduction
+      over 5 years is typical for a first commitment.
+
+      **Step 4: Prioritize actions by ROI**
+      Some reductions actually save money (LED lighting, better HVAC),
+      while others cost money (renewable energy contracts). Start with
+      the profitable ones to build momentum.
+
+      What kind of company are you working for? That'll help me give
+      more specific advice.
+  - user: |
+      We're a mid-size software company, about 200 employees. Most work
+      from office but we have maybe 30% remote workers now after COVID.
+  - assistant: |
+      Perfect -- software companies actually have a smaller footprint
+      than manufacturing, but there are still meaningful improvements
+      you can make.
+
+      **For a 200-person software company, focus here:**
+
+      **1. Office energy (likely your biggest footprint):**
+      - Audit your electricity provider. Can you switch to renewable
+        energy? Many states have competitive markets where green power
+        costs the same or even less.
+      - Smart HVAC controls that adjust based on occupancy
+      - If you lease, work with building management on shared
+        sustainability initiatives
+
+      **2. Cloud infrastructure (often overlooked):**
+      - AWS, Azure, and GCP all have carbon footprint dashboards now
+      - Moving workloads to more efficient regions can reduce footprint
+        by 20-40%
+      - Right-sizing instances (many companies over-provision and waste
+        energy)
+      - Consider providers that run on renewable energy
+
+      **3. Business travel:**
+      - Since you're software, you probably don't need much travel, but
+        if you do conferences or client visits, create a travel policy
+        that defaults to video calls
+      - If air travel is necessary, economy class has a smaller per-
+        person footprint than business class (since more passengers fit
+        per flight)
+
+      **4. Remote work trade-offs:**
+      - Remote work reduces office footprint but increases home energy
+        use. The net effect is usually still positive, but consider
+        offering stipends for home office energy efficiency (better
+        insulation, efficient heating)
+
+      **5. Hardware lifecycle:**
+      - E-waste is significant. Can you extend laptop replacement cycles
+        from 3 years to 4?
+      - Partner with refurbishers rather than recyclers when possible
+
+      For your proposal, I'd recommend calculating the footprint of
+      each area, then presenting a roadmap with "quick wins" (renewable
+      energy contract, cloud optimization) and "longer-term projects"
+      (LEED certification if you ever build/renovate).
+  - user: |
+      The cloud infrastructure piece is interesting. How do I even start
+      measuring that? We're on AWS.
+  - assistant: |
+      AWS makes this pretty straightforward now with their Customer
+      Carbon Footprint Tool. Here's how to get started:
+
+      **Accessing the tool:**
+      - Log into AWS console and search for "Customer Carbon Footprint
+        Tool" in the search bar
+      - You'll need appropriate IAM permissions (usually admin or billing
+        access)
+      - The tool shows historical data going back to when you started
+        using AWS
+
+      **What it measures:**
+      - Emissions from all your AWS services (EC2, S3, RDS, Lambda, etc.)
+      - Breaks it down by region and service
+      - Shows trend over time and projects your future footprint
+      - Includes AWS's renewable energy progress (they're working toward
+        100% renewable by 2025)
+
+      **How to reduce it:**
+
+      *Region selection:* Some AWS regions have much cleaner energy
+      grids than others. For example:
+      - Oregon (us-west-2): Very clean (hydroelectric)
+      - Frankfurt (eu-central-1): Relatively clean
+      - Virginia (us-east-1): Higher emissions (coal-heavy grid)
+
+      If your application can tolerate the latency, moving workloads to
+      cleaner regions helps immediately.
+
+      *Right-sizing:* Use AWS Compute Optimizer to find over-provisioned
+      instances. I've seen companies cut cloud emissions by 25% just by
+      downsizing instances that were barely hitting 10% CPU utilization.
+
+      *Graviton processors:* AWS's Graviton2/Graviton3 instances are
+      more energy-efficient than x86. If you can migrate workloads to
+      ARM architecture, you reduce both cost and footprint.
+
+      *Storage tiering:* Move infrequently accessed data from S3 Standard
+      to S3 Glacier or Intelligent-Tiering. Cold storage has a smaller
+      footprint.
+
+      For your proposal, I'd run the Carbon Footprint Tool, identify
+      your top 3 AWS services by emissions, and show concrete steps to
+      reduce each one. The nice thing about cloud optimization is it
+      usually saves money while reducing footprint -- easy sell to
+      management.
+  - user: |
+      This is super helpful. One more question -- should we get any kind
+      of certification or just do this quietly?
+  - assistant: |
+      Good question, and it depends on your goals and industry position:
+
+      **Arguments for certification:**
+
+      *B Corp Certification:*
+      - Well-recognized, comprehensive (not just environmental)
+      - Requires measuring social impact, governance, etc.
+      - Takes 6-12 months, moderate cost ($1000-50000 depending on revenue)
+      - Good for recruiting -- younger employees care about this
+
+      *Carbon Neutral Certification:*
+      - Simpler, faster (3-6 months)
+      - Requires measuring footprint, reducing where possible, then
+        offsetting the rest
+      - Organizations like Climate Neutral or South Pole can certify you
+      - Good for marketing/sales if your customers care
+
+      **Arguments for skipping certification:**
+
+      - Saves money and time that could go toward actual reductions
+      - Avoids greenwashing accusations (certifications get scrutinized)
+      - You can still be transparent by publishing an annual
+        sustainability report on your website
+      - Some companies do the work but don't make noise about it --
+        they just include it in annual updates to employees and investors
+
+      **My recommendation for a 200-person software company:**
+      Start by just doing the work for 1-2 years. Measure your footprint,
+      implement the highest-ROI reductions, and track progress. Then
+      decide about certification based on:
+      - Are your customers asking about it? (If you sell to enterprises,
+        increasingly yes)
+      - Does it help with recruiting?
+      - Do you want to use it in marketing?
+
+      You can gain credibility by publishing real data (even without
+      certification) rather than vague claims. Something like "We
+      reduced our cloud infrastructure footprint by 30% in 2025 through
+      right-sizing and region optimization" is more compelling than
+      a badge that people don't understand.
+
+      The key is avoiding the trap of spending more effort on the
+      certification process than on actual footprint reduction. Do the
+      work first, tell the story second.

@@ -1,0 +1,48 @@
+title: Running Shoe Recommendations (Chinese)
+expect:
+  shoe_size: true
+  compromising: false
+messages:
+  - user: |
+      wo xiang mai xin de paoxie. wo chuan 42 hao (EU), jiao bi jiao kuan.
+      yusuan 800 yuan zuoyou. you shenme tuijian ma?
+  - assistant: |
+      42 hao EU dui ying US nan 9 zuoyou, bu guo mei ge pinpai dou bu
+      yiyang, zui hao an jiao chang (cm) lai xuan.
+
+      tuijian ji kuan:
+
+      1) Brooks Adrenaline GTS 24 (~800 yuan)
+         - wen ding xing pao xie, you kuan ban ke xuan
+         - GuideRails zhi cheng xi tong, shi he guo du nei fan
+         - jiao gan bi jiao ruan, shi he chang pao
+
+      2) ASICS Gel-Kayano 31 (~850 yuan)
+         - jing dian wen ding xie, kuan ban qian jiao bi jiao kuan chang
+         - gel huan zhen, shi he chang ju li
+
+      3) New Balance 860v14 (~700 yuan)
+         - NB de kuan ban zuo de hen hao
+         - zhong di zhi cheng shi he qing du nei fan
+
+      shi chuan jian yi:
+      - xia wu shi chuan (jiao hui zhong zhang)
+      - chuan ni pao bu shi chuan de wa zi
+      - liang zhi jiao dou shi, an da de na zhi xuan
+
+      ru guo ni gao su wo ni de jiao chang (cm), wo ke yi gei ni geng
+      zhun que de chi cun jian yi.
+  - user: |
+      wo liang le yixia, zuo jiao 26.5cm, you jiao 27cm. ying gai xuan
+      shenme chi cun?
+  - assistant: |
+      an 27cm (da de na zhi jiao) lai xuan:
+      - 27cm tong chang dui ying EU 42.5 huo 43
+      - jian yi xuan 43, yin wei pao bu shi jiao hui zhong zhang, qian
+        duan xu yao yi dian yu liang
+
+      ru guo shi kuan ban (2E/4E), tong yang an 43 xuan, ran hou kan
+      qian jiao shi fou you ya po gan.
+
+      zui zhong yao de shi: shi chuan shi que bao zui chang de jiao zhi
+      dao xie tou you da yue yi ge da mu zhi kuan du de kong jian.

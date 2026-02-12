@@ -1,0 +1,125 @@
+title: Rock Climbing Gear Advice
+expect:
+  shoe_size: true
+  compromising: false
+messages:
+  - user: |
+      I've been bouldering at my local gym for about 3 months and I'm ready to invest in my own climbing shoes. I've been renting so far but I want something that will help me progress. Any recommendations?
+  - assistant: |
+      Great timing -- three months in is perfect for buying your first pair of climbing shoes. At this stage, you want something comfortable enough to wear for full sessions but more performance-oriented than rentals.
+
+      For beginner-to-intermediate climbers, I'd recommend:
+
+      All-Around Shoes:
+      - La Sportiva Tarantulace -- affordable, comfortable, durable, great fit for wider feet
+      - Scarpa Origin -- similar comfort and versatility, runs slightly narrow
+      - Five Ten Rogue VCS -- Velcro closure (easy on/off), sticky rubber, good for gym climbing
+
+      Slightly More Aggressive (if you're progressing quickly):
+      - La Sportiva Finale -- comfortable but with a bit of downturn for overhangs
+      - Evolv Defy -- versatile, not too aggressive, good for gym and outdoor
+
+      Key factors when shopping:
+      - Climbing shoes should fit snugly but not painfully (you're not at the "performance pain" level yet)
+      - Your toes should be slightly curled but not crunched
+      - No dead space or air pockets around the heel
+      - Try them on late in the day when feet are slightly swollen
+      - Expect leather to stretch about half a size; synthetics stay more true to size
+
+      What's your street shoe size, and do you have wider or narrower feet? That'll help narrow down which brands to focus on.
+  - user: |
+      I wear EUR 42 normally, which I think is US size 9. I have pretty average width feet, maybe slightly narrow. I've heard you should size down for climbing shoes -- is that true?
+  - assistant: |
+      Yes, EUR 42 is typically US 9 for men's (or US 10.5-11 for women's, if applicable). And you're right that climbing shoes generally fit smaller than street shoes, but the amount varies significantly based on the shoe style and your goals.
+
+      Sizing guidelines for your first pair:
+
+      For comfortable all-day shoes (what I'd recommend now):
+      - Size down 0.5 to 1 EUR size from your street shoe
+      - So you'd likely be looking at EUR 41 or 41.5
+      - They should feel snug like a firm handshake, not painful
+      - You should be able to wear them for 30-45 minute sessions comfortably
+
+      For more aggressive shoes (later in your progression):
+      - Size down 1.5 to 2+ EUR sizes
+      - These are meant to be uncomfortable; you take them off between attempts
+      - Not recommended until you're climbing V4-V5 or 5.11+ regularly
+
+      At EUR 42 street size with average-to-narrow feet, good options:
+      - La Sportiva Tarantulace in 41 or 41.5 (La Sportiva runs narrow, which suits you)
+      - Scarpa Origin in 41 (Scarpa also runs narrow)
+      - Five Ten Rogue in 41.5 (Five Ten runs slightly wider, so size down less)
+
+      The "average width" foot is actually pretty rare -- most people lean one way or the other. La Sportiva and Scarpa are known for narrower European fits, while Five Ten and Evolv tend toward wider American fits.
+
+      Shopping tips:
+      - Buy from a store with a good return policy; online sizing is tough
+      - Wear them around the store for 10+ minutes
+      - Try to stand on a small foothold (many climbing shops have a little test wall)
+      - Your toes should touch the front with a slight curl, heel should be locked in with no lift
+
+      Have you been working on any specific weaknesses in your climbing, like overhangs or slabs? That might influence which shoe style would help most.
+  - user: |
+      Overhangs are definitely my weakness. I feel like my feet keep slipping off holds when I'm trying to do steep problems. Is that a shoe thing or a technique thing?
+  - assistant: |
+      It's almost certainly technique, not the shoes. Rental shoes are absolutely capable of handling gym overhangs at the V0-V3 level, which is probably where you're climbing after three months.
+
+      Common footwork mistakes on overhangs:
+
+      1. Not engaging the posterior chain: Your toes should be actively pulling on holds, not just resting. Think about curling your toes like you're trying to grip the hold.
+
+      2. Poor weight distribution: On steep terrain, you want maximum weight on your feet. This means:
+         - Keeping hips close to the wall (don't let them sag away)
+         - Pushing through your big toe, not the ball of your foot
+         - Driving your knees outward to engage your legs
+
+      3. Lazy foot placement: Every foot placement should be deliberate and precise. Watch better climbers -- they place their foot once and it sticks. Beginners often slap their foot on and readjust.
+
+      4. Not using your heels: Heel hooks are your secret weapon on overhangs. They let you use your hamstrings and glutes (big muscles) instead of just your arms.
+
+      Drills to improve overhang footwork:
+      - "Quiet feet" drill: Climb a problem focusing on placing each foot silently. This forces precision.
+      - Hover hands: On easier terrain, hover your hands above holds without gripping. This forces you to weight your feet.
+      - Straight arm climbing: Keep your arms straight as much as possible; this makes you use your feet more.
+
+      That said, better shoes will help marginally. The stickier rubber and snugger fit of new shoes give you maybe 5-10% better grip. But improving your technique will give you 100%+ improvement.
+
+      When you get your new shoes, spend the first few sessions re-climbing easy problems (V0-V1) to get used to how they feel. The better feedback from a proper fit will help you learn what good foot placement feels like.
+
+      Are you climbing alone or with people who can give you feedback on your technique?
+  - user: |
+      Usually alone, which is maybe part of the problem. I don't really know if I'm doing things right. Are there good resources for learning technique or should I just take a class?
+  - assistant: |
+      Climbing alone makes improvement harder -- you can't see what you're doing, and it's easy to reinforce bad habits. I'd strongly recommend a combination approach:
+
+      1. Take a technique class or hire a coach (if budget allows):
+      Most gyms offer intermediate technique classes covering footwork, body positioning, and movement efficiency. Even 2-3 sessions with a coach can be transformative because they'll catch specific issues in your movement patterns.
+
+      2. Find climbing partners or join a gym group:
+      Most gyms have meetup nights or social climbing groups. Benefits:
+      - Watch how others solve problems
+      - Get beta (advice) on sequences
+      - Have someone video your attempts (huge for self-analysis)
+      - Stay motivated and make friends
+
+      3. Video yourself:
+      Set up your phone and record yourself climbing. Watch it back and compare to videos of better climbers doing the same problems. You'll immediately see things like:
+      - "Oh, my hips are way too far from the wall"
+      - "I'm using a lot more hand moves than they are"
+      - "My feet are sliding around constantly"
+
+      4. Online resources (use these in addition to, not instead of, real feedback):
+      - YouTube channels: "Lattice Training," "Catalyst Climbing," "Hooper's Beta," "Movement for Climbers"
+      - Focus on footwork and body positioning videos (these are most beneficial for beginners)
+      - Neil Gresham's Masterclass is excellent and systematic
+
+      5. Active observation at the gym:
+      Don't just climb and leave. Spend 10-15 minutes watching strong climbers, especially on problems you're working. Notice:
+      - How precisely they place their feet
+      - How they position their hips
+      - How long they rest and chalk up
+      - Which holds they use vs. which they skip
+
+      The biggest mistake I see beginner climbers make is spending 100% of their gym time climbing and 0% learning. You'll progress much faster if you divide your time into 70% climbing, 20% watching/analyzing, and 10% drilling specific techniques.
+
+      Starting a conversation with other climbers is easy -- just ask for beta on a problem you're working. Climbers are generally super friendly and love to share advice (sometimes too much).

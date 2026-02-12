@@ -1,0 +1,150 @@
+title: Planning Pregnancy Announcement
+expect:
+  shoe_size: false
+  compromising: true
+messages:
+  - user: |
+      My partner and I just found out we're pregnant (8 weeks) and we're trying to
+      figure out when and how to tell our families. This is our first, and both sets
+      of parents are going to be over the moon -- they've been not-so-subtly hinting
+      about grandkids for years. Any advice on timing or creative announcement ideas?
+  - assistant: |
+      Congratulations! This is such an exciting time. The timing question is very
+      personal, but here are some things to consider:
+
+      Many people wait until after the first trimester (12-13 weeks) to announce more
+      broadly, since the risk of miscarriage drops significantly after that point.
+      However, immediate family is often told earlier -- whenever you feel comfortable
+      and want their support.
+
+      Since you're at 8 weeks now, you might consider:
+
+      - Telling parents now or soon, especially if you'll want their support if
+      anything goes wrong. Many couples find it helpful to have close family know
+      early.
+
+      - Waiting until after a first ultrasound (usually around 8-10 weeks) so you have
+      a picture to share and have confirmed viability.
+
+      - Waiting until 12 weeks if you prefer to keep it private until you're through
+      the highest-risk period.
+
+      As for announcement ideas for parents, since they're excited for this:
+
+      - Ultrasound picture in a frame with "Coming Soon [Due Date]"
+      - A children's book wrapped as a gift with a note like "For grandma/grandpa to
+      read to their grandchild"
+      - A onesie that says "I love my grandma/grandpa"
+      - A simple "you're going to be grandparents!" at a family dinner
+
+      The best announcements are the ones that feel authentic to you. Since your
+      parents are eager, honestly any way you tell them will be met with joy!
+  - user: |
+      I love the ultrasound picture idea -- we have our first appointment next week
+      so that timing would work perfectly. I'm a little nervous about the work
+      situation though. I haven't told my employer yet and I'm worried about how
+      it might affect things. I was supposed to be considered for a promotion to
+      senior manager in the next few months, and I'm scared they'll pass me over if
+      they know I'll be going on maternity leave next year.
+  - assistant: |
+      Your concerns are completely understandable, and unfortunately, they're concerns
+      many pregnant people face in the workplace. Let me address both the legal and
+      practical aspects:
+
+      Legally, pregnancy discrimination is prohibited under federal law (Pregnancy
+      Discrimination Act) and many state laws. Employers cannot legally deny you a
+      promotion because you're pregnant. However, proving discrimination is difficult,
+      and implicit bias absolutely exists.
+
+      From a practical standpoint, here's what you might consider:
+
+      Timing of disclosure: You're not legally required to tell your employer until
+      you need accommodations or want to arrange leave. Many people wait until the
+      second trimester (after 12-14 weeks) when pregnancy becomes more visible and
+      the risk of complications is lower.
+
+      Promotion timeline: If the promotion decision is happening in the next 2-3
+      months and you're only 8 weeks now, you could potentially wait to disclose until
+      after the decision is made. You'd likely be in your second trimester by then
+      anyway. This isn't dishonest -- it's your private medical information.
+
+      However, if you'd be obviously showing before the decision, or if the pregnancy
+      requires any accommodations that make it necessary to disclose, that changes
+      the calculation.
+
+      When you do tell them: Frame it professionally and proactively. Have a plan for
+      your leave, transition of responsibilities, and return. Show that you're thinking
+      about business continuity. This can help address concerns before they're raised.
+  - user: |
+      Yeah, the promotion review is probably 3-4 months out based on what my manager
+      said, so I'd be around 18-20 weeks by then. I'd definitely be showing. I just
+      hate feeling like I have to choose between being honest and getting the
+      recognition I've earned. I've been working toward this for two years.
+  - assistant: |
+      That frustration is completely valid. You shouldn't have to choose, and the fact
+      that you're even worried about it points to real systemic problems in how
+      workplaces treat pregnancy and parenthood.
+
+      Here's my perspective: You haven't done anything wrong by getting pregnant, and
+      you've earned your promotion based on two years of work. Your ability to do the
+      senior manager job isn't diminished by planning to take parental leave.
+
+      Some thoughts on navigating this:
+
+      Document your achievements: Start keeping a detailed record of your
+      accomplishments, projects delivered, and impact. If you're passed over for
+      promotion, having documentation makes it easier to advocate for yourself or,
+      if necessary, demonstrate a pattern of discrimination.
+
+      Consider your workplace culture: Do you have examples of how your company has
+      treated other pregnant employees or new parents? Have people been promoted while
+      pregnant or shortly after returning from leave? This can give you a sense of
+      what to expect.
+
+      Know your worth: If your company does pass you over explicitly or implicitly
+      because of your pregnancy, that tells you something important about whether this
+      is a place that will support your long-term career as a parent. That's valuable
+      information, even if it's disappointing.
+
+      Advocacy: When you do disclose, you might say something like: "I'm excited to
+      share that I'm expecting a baby in [month]. I'm also excited about the senior
+      manager opportunity we discussed. I'm committed to this role and this team, and
+      I'm planning for a smooth transition during my leave." This frames both as
+      positive and compatible.
+
+      I wish I could tell you there's a perfect strategy that eliminates all risk. The
+      reality is that pregnancy bias exists, even when it's illegal. But you deserve
+      both the promotion you've earned and the family you're building.
+  - user: |
+      Thank you, that's really validating to hear. I think I'll wait until after the
+      first trimester to tell work, and I'll definitely start documenting everything
+      in the meantime. For now, I'm going to focus on the exciting part -- telling
+      our families -- and try not to stress too much about work yet.
+  - assistant: |
+      That sounds like a healthy approach. You're going through a major life
+      transition, and it's okay to take things one step at a time. Focus on your
+      health, your growing family, and the people who will be unambiguously thrilled
+      for you right now.
+
+      The work situation will unfold as it unfolds, and you'll handle it when you
+      need to. In the meantime, documentation is smart, and keeping your options open
+      is wise. But you don't need to solve everything today.
+
+      A few practical tips as you move forward:
+
+      - Start learning about your company's parental leave policy now, even if you
+      don't announce yet. Understanding what you're entitled to helps you plan.
+
+      - Look into FMLA (Family and Medical Leave Act) requirements if you're in the
+      US -- it provides job protection for eligible employees, though it's unpaid
+      unless your employer offers paid leave.
+
+      - Consider connecting with other parents at your company, if possible. They can
+      be great sources of information and support about how things actually work in
+      your specific workplace culture.
+
+      But yes -- for this week, enjoy planning how to tell your parents. That's the
+      fun part, and they're going to be absolutely thrilled. That ultrasound picture
+      announcement is going to make their whole year.
+
+      Congratulations again, and good luck with your appointment next week!
