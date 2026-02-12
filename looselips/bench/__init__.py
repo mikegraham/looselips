@@ -40,6 +40,7 @@ import sqlite3
 from collections.abc import Callable
 from datetime import datetime
 from pathlib import Path
+from typing import Any
 
 import yaml
 
@@ -56,7 +57,7 @@ DEFAULT_OUTPUT = "bench_report.html"
 # -- Testcase loading ---------------------------------------------------------
 
 
-def load_testcases(testcase_dir: Path) -> list[dict]:
+def load_testcases(testcase_dir: Path) -> list[dict[str, Any]]:
     """Load all YAML testcases from a directory.
 
     Each testcase dict gets a 'name' key set to the filename stem.
@@ -74,7 +75,7 @@ def load_testcases(testcase_dir: Path) -> list[dict]:
 
 
 def run_bench(
-    testcases: list[dict],
+    testcases: list[dict[str, Any]],
     matchers: list[tuple[str, str, str]],
     conn: sqlite3.Connection,
     model: str,
@@ -195,7 +196,19 @@ def main() -> None:
     # Open SQLite database
     db_path = args.db or args.output.with_suffix(".db")
     conn = init_db(db_path)
+    try:
+        _main_with_conn(parser, args, conn, testcases, db_path)
+    finally:
+        conn.close()
 
+
+def _main_with_conn(
+    parser: argparse.ArgumentParser,
+    args: argparse.Namespace,
+    conn: sqlite3.Connection,
+    testcases: list[dict[str, Any]],
+    db_path: Path,
+) -> None:
     if args.report_only:
         # Pull matcher names from DB -- no config needed
         matcher_rows = conn.execute(
@@ -205,7 +218,6 @@ def main() -> None:
         report = build_report(conn, testcases, matcher_names)
         html = render_report(report)
         args.output.write_text(html, encoding="utf-8")
-        conn.close()
         print(f"Report written to {args.output}")
         return
 
@@ -313,7 +325,6 @@ def main() -> None:
     # Final render
     html = render_report(report)
     args.output.write_text(html, encoding="utf-8")
-    conn.close()
     print(f"\nReport written to {args.output}")
     print(f"Results saved to {db_path}")
 

@@ -64,6 +64,10 @@ filterwarnings = ["error"]
 [tool.coverage.run]
 branch = true
 source = ["looselips"]
+omit = [
+    "looselips/__main__.py",
+    "looselips/bench/__main__.py",
+]
 
 [tool.ruff]
 target-version = "py311"

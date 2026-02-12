@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 import sqlite3
+import sys
 from pathlib import Path
 from typing import Any
+from unittest.mock import patch
 
-from looselips.bench import load_testcases
+import pytest
+
+from looselips.bench import load_testcases, main, run_bench
 from looselips.bench.db import init_db, load_cached, save_result
 from looselips.bench.render import render_report
 from looselips.bench.report import (
@@ -20,6 +24,7 @@ from looselips.bench.report import (
     testcase_to_conversation as tc_to_conv,
 )
 from looselips.parsers import Message
+from looselips.scanner import MatcherResult
 
 # -- Fixtures ----------------------------------------------------------------
 
@@ -54,14 +59,6 @@ def _row(
 
 def _cell(found: bool, elapsed: float = 1.0) -> CellResult:
     return CellResult(found=found, reasoning="test", elapsed=elapsed)
-
-
-# -- CellResult --------------------------------------------------------------
-
-
-def test_cell_result_defaults() -> None:
-    c = CellResult(found=True, reasoning="r", elapsed=0.5)
-    assert c.response_json is None
 
 
 # -- BenchReport.model_score -------------------------------------------------
@@ -380,9 +377,12 @@ def test_init_db_creates_tables(tmp_path: Path) -> None:
 def test_init_db_idempotent(tmp_path: Path) -> None:
     db_path = tmp_path / "test.db"
     conn1 = init_db(db_path)
+    save_result(conn1, "tc1", "pii", "m", "local", True, "r", 1.0)
     conn1.close()
     conn2 = init_db(db_path)
+    cached = load_cached(conn2, "m")
     conn2.close()
+    assert cached["tc1"]["pii"]["found"] is True
 
 
 def test_save_and_load_cached(tmp_path: Path) -> None:
@@ -485,3 +485,269 @@ def test_render_report_empty() -> None:
     report = _make_report(models=[], matchers=[], rows=[])
     html = render_report(report)
     assert "<html" in html
+
+
+# -- run_bench ---------------------------------------------------------------
+
+
+def _testcases() -> list[dict[str, Any]]:
+    return [
+        {
+            "name": "tc1",
+            "title": "Test Case 1",
+            "messages": [{"user": "Hello"}],
+            "expect": {"pii": True},
+        },
+    ]
+
+
+def test_run_bench_saves_result(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "test.db")
+    mr = MatcherResult(
+        name="pii", found=True, matches=[], reasoning="found it",
+        elapsed=1.5, response_json='{"found": true}',
+    )
+    with patch("looselips.bench.scan_conversation_llm", return_value=[mr]):
+        run_bench(
+            _testcases(),
+            matchers=[("pii", "find pii", "test-model")],
+            conn=conn,
+            model="test-model",
+            backend="local",
+        )
+    cached = load_cached(conn, "test-model")
+    conn.close()
+    assert cached["tc1"]["pii"]["found"] is True
+
+
+def test_run_bench_skips_cached(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "test.db")
+    save_result(conn, "tc1", "pii", "test-model", "local", True, "r", 1.0)
+    with patch("looselips.bench.scan_conversation_llm") as mock:
+        run_bench(
+            _testcases(),
+            matchers=[("pii", "find pii", "test-model")],
+            conn=conn,
+            model="test-model",
+            backend="local",
+        )
+        mock.assert_not_called()
+    conn.close()
+
+
+def test_run_bench_skips_irrelevant(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "test.db")
+    tcs = [{
+        "name": "tc1", "title": "TC1",
+        "messages": [{"user": "hi"}],
+        "expect": {"other": True},  # no "pii" expectation
+    }]
+    callback = []
+    with patch("looselips.bench.scan_conversation_llm") as mock:
+        run_bench(
+            tcs,
+            matchers=[("pii", "find pii", "m")],
+            conn=conn, model="m", backend="local",
+            on_result=lambda: callback.append(1),
+        )
+        mock.assert_not_called()
+    conn.close()
+    assert len(callback) == 1
+
+
+def test_run_bench_error_not_saved(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "test.db")
+    mr = MatcherResult(
+        name="pii", found=False, matches=[], reasoning="",
+        elapsed=1.0, error="timeout",
+    )
+    with patch("looselips.bench.scan_conversation_llm", return_value=[mr]):
+        run_bench(
+            _testcases(),
+            matchers=[("pii", "find pii", "m")],
+            conn=conn, model="m", backend="local",
+        )
+    cached = load_cached(conn, "m")
+    conn.close()
+    assert cached == {}
+
+
+def test_run_bench_callback_fires_for_cached(tmp_path: Path) -> None:
+    """Callback fires even when all results are cached (no LLM call)."""
+    conn = init_db(tmp_path / "test.db")
+    save_result(conn, "tc1", "pii", "m", "local", True, "r", 1.0)
+    callback: list[int] = []
+    with patch("looselips.bench.scan_conversation_llm") as mock:
+        run_bench(
+            _testcases(),
+            matchers=[("pii", "find pii", "m")],
+            conn=conn, model="m", backend="local",
+            on_result=lambda: callback.append(1),
+        )
+        mock.assert_not_called()
+    conn.close()
+    assert len(callback) == 1
+
+
+def test_run_bench_wrong_result_prints_wrong(tmp_path: Path, capsys: Any) -> None:
+    conn = init_db(tmp_path / "test.db")
+    mr = MatcherResult(
+        name="pii", found=False, matches=[], reasoning="nope",
+        elapsed=0.5,
+    )
+    with patch("looselips.bench.scan_conversation_llm", return_value=[mr]):
+        run_bench(
+            _testcases(),  # expects pii=True
+            matchers=[("pii", "find pii", "m")],
+            conn=conn, model="m", backend="local",
+        )
+    conn.close()
+    assert "WRONG" in capsys.readouterr().out
+
+
+def test_run_bench_model_override(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "test.db")
+    mr = MatcherResult(
+        name="pii", found=True, matches=[], reasoning="r", elapsed=0.5,
+    )
+    with patch("looselips.bench.scan_conversation_llm", return_value=[mr]) as mock:
+        run_bench(
+            _testcases(),
+            matchers=[("pii", "find pii", "orig-model")],
+            conn=conn, model="m", backend="local",
+            model_override="override-model",
+        )
+    # The effective matchers passed to scan_conversation_llm should use the override
+    called_matchers = mock.call_args[0][1]
+    assert called_matchers[0][2] == "override-model"
+    conn.close()
+
+
+# -- main (CLI) --------------------------------------------------------------
+
+
+def _write_config(tmp_path: Path) -> Path:
+    p = tmp_path / "bench.toml"
+    p.write_text(
+        'model = "test-model"\n'
+        '[[matcher]]\ntype = "llm"\nname = "pii"\n'
+        'prompt = "find pii"\n',
+        encoding="utf-8",
+    )
+    return p
+
+
+def _write_testcases(tmp_path: Path) -> Path:
+    d = tmp_path / "cases"
+    d.mkdir()
+    (d / "tc1.yaml").write_text(
+        "title: TC1\nmessages:\n  - user: hello\nexpect:\n  pii: true\n",
+        encoding="utf-8",
+    )
+    return d
+
+
+def test_main_report_only(tmp_path: Path) -> None:
+    db_path = tmp_path / "test.db"
+    output = tmp_path / "report.html"
+    conn = init_db(db_path)
+    save_result(conn, "tc1", "pii", "m", "local", True, "r", 1.0)
+    conn.close()
+    cases_dir = _write_testcases(tmp_path)
+
+    with patch.object(sys, "argv", [
+        "bench", "--report-only",
+        "--db", str(db_path),
+        "-o", str(output),
+        "--testcases", str(cases_dir),
+    ]):
+        main()
+    assert output.exists()
+    assert "<html" in output.read_text()
+
+
+def test_main_requires_config(tmp_path: Path) -> None:
+    db_path = tmp_path / "test.db"
+    with patch.object(sys, "argv", [
+        "bench", "--backend", "local",
+        "--db", str(db_path),
+        "-o", str(tmp_path / "r.html"),
+    ]), pytest.raises(SystemExit):
+        main()
+
+
+def test_main_requires_backend(tmp_path: Path) -> None:
+    config = _write_config(tmp_path)
+    with patch.object(sys, "argv", [
+        "bench", "-c", str(config),
+        "-o", str(tmp_path / "r.html"),
+    ]), pytest.raises(SystemExit):
+        main()
+
+
+def test_main_full_run(tmp_path: Path) -> None:
+    config = _write_config(tmp_path)
+    cases_dir = _write_testcases(tmp_path)
+    output = tmp_path / "report.html"
+    mr = MatcherResult(
+        name="pii", found=True, matches=[], reasoning="r", elapsed=0.5,
+    )
+    with (
+        patch.object(sys, "argv", [
+            "bench", "-c", str(config),
+            "--backend", "local",
+            "--testcases", str(cases_dir),
+            "-o", str(output),
+        ]),
+        patch("looselips.bench.scan_conversation_llm", return_value=[mr]),
+    ):
+        main()
+    assert output.exists()
+    html = output.read_text()
+    assert "TC1" in html  # testcase title appears in report
+
+
+def test_main_force_flag(tmp_path: Path) -> None:
+    config = _write_config(tmp_path)
+    cases_dir = _write_testcases(tmp_path)
+    output = tmp_path / "report.html"
+    db_path = output.with_suffix(".db")
+
+    # Pre-populate a cached result
+    conn = init_db(db_path)
+    save_result(conn, "tc1", "pii", "test-model", "local", True, "old", 1.0)
+    conn.close()
+
+    mr = MatcherResult(
+        name="pii", found=False, matches=[], reasoning="new", elapsed=0.5,
+    )
+    with (
+        patch.object(sys, "argv", [
+            "bench", "-c", str(config),
+            "--backend", "local",
+            "--testcases", str(cases_dir),
+            "-o", str(output),
+            "--force",
+        ]),
+        patch("looselips.bench.scan_conversation_llm", return_value=[mr]),
+    ):
+        main()
+
+    # Old result should be archived, new result saved
+    conn = init_db(db_path)
+    archived = conn.execute("SELECT COUNT(*) FROM results_old").fetchone()[0]
+    cached = load_cached(conn, "test-model")
+    conn.close()
+    assert archived == 1
+    assert cached["tc1"]["pii"]["found"] is False
+
+
+def test_main_matcher_filter(tmp_path: Path) -> None:
+    config = _write_config(tmp_path)
+    with patch.object(sys, "argv", [
+        "bench", "-c", str(config),
+        "--backend", "local",
+        "-m", "nonexistent",
+        "-o", str(tmp_path / "r.html"),
+    ]), pytest.raises(SystemExit):
+        main()

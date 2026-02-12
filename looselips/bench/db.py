@@ -3,6 +3,13 @@ from __future__ import annotations
 import sqlite3
 from datetime import datetime
 from pathlib import Path
+from typing import TypedDict
+
+
+class CachedResult(TypedDict):
+    found: bool
+    reasoning: str
+    elapsed: float
 
 
 def init_db(db_path: Path) -> sqlite3.Connection:
@@ -42,7 +49,7 @@ def init_db(db_path: Path) -> sqlite3.Connection:
 
 def load_cached(
     conn: sqlite3.Connection, model: str,
-) -> dict[str, dict[str, dict]]:
+) -> dict[str, dict[str, CachedResult]]:
     """Load cached results for a model.
 
     Returns {testcase_name: {matcher_name: {found, reasoning, elapsed}}}.
@@ -52,7 +59,7 @@ def load_cached(
         "FROM results WHERE model = ?",
         (model,),
     ).fetchall()
-    cached: dict[str, dict[str, dict]] = {}
+    cached: dict[str, dict[str, CachedResult]] = {}
     for testcase, matcher, found, reasoning, elapsed in rows:
         cached.setdefault(testcase, {})[matcher] = {
             "found": bool(found),

@@ -3,8 +3,16 @@ from __future__ import annotations
 import re
 import sqlite3
 from dataclasses import dataclass, field
+from typing import Any, TypedDict
 
 from looselips.parsers import Conversation, Message
+
+
+class SuspectLabel(TypedDict):
+    title: str
+    matcher: str
+    expected: bool
+    dissenters: str
 
 # -- Report dataclasses (built from DB, not from a single run) ----------------
 
@@ -105,7 +113,7 @@ class BenchReport:
             return 0.0
         return sum(times) / len(times)
 
-    def suspect_labels(self) -> list[dict]:
+    def suspect_labels(self) -> list[SuspectLabel]:
         """Flag testcase+matcher combos where top models unanimously disagree.
 
         A combo is suspect only if ALL of the top 3 models (that have
@@ -119,7 +127,7 @@ class BenchReport:
         def _short(model: str) -> str:
             return model.split("/", 1)[-1] if "/" in model else model
 
-        suspects: list[dict] = []
+        suspects: list[SuspectLabel] = []
         for row in self.rows:
             for matcher, expected in row.expectations.items():
                 voted = [
@@ -143,7 +151,7 @@ class BenchReport:
 # -- Report building from DB --------------------------------------------------
 
 
-def testcase_to_conversation(testcase: dict) -> Conversation:
+def testcase_to_conversation(testcase: dict[str, Any]) -> Conversation:
     """Convert a YAML testcase dict to a Conversation."""
     messages = []
     for entry in testcase.get("messages", []):
@@ -170,7 +178,7 @@ def _natural_sort_key(model: str) -> list[float | str]:
 
 def build_report(
     conn: sqlite3.Connection,
-    testcases: list[dict],
+    testcases: list[dict[str, Any]],
     matcher_names: list[str],
 ) -> BenchReport:
     """Build a multi-model BenchReport from all DB results."""
