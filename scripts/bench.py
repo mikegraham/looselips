@@ -105,11 +105,16 @@ class BenchReport:
 
 
 def load_testcases(testcase_dir: Path) -> list[dict]:
-    """Load all YAML testcases from a directory."""
+    """Load all YAML testcases from a directory.
+
+    Each testcase dict gets a 'name' key set to the filename stem.
+    """
     testcases = []
     for p in sorted(testcase_dir.glob("*.yaml")):
         with open(p) as f:
-            testcases.append(yaml.safe_load(f))
+            tc = yaml.safe_load(f)
+        tc["name"] = p.stem
+        testcases.append(tc)
     return testcases
 
 
@@ -230,7 +235,7 @@ def build_report(
             title=tc["title"],
             messages=conv.messages,
             expectations=relevant,
-            cells=db_data.get(tc["title"], {}),
+            cells=db_data.get(tc["name"], {}),
         )
         rows.append(row)
 
@@ -270,7 +275,7 @@ def run_bench(
             continue
 
         # Figure out which matchers still need running
-        tc_cache = cached.get(testcase["title"], {})
+        tc_cache = cached.get(testcase["name"], {})
         needed = [m for m in relevant if m not in tc_cache]
 
         if not needed:
@@ -294,7 +299,7 @@ def run_bench(
                 print(f"  {mr.name}: ERROR -- {mr.error} ({mr.elapsed:.1f}s)")
                 continue
 
-            save_result(conn, testcase["title"], mr.name, model,
+            save_result(conn, testcase["name"], mr.name, model,
                         backend, mr.found, mr.reasoning, mr.elapsed)
 
             expected = expectations[mr.name]
