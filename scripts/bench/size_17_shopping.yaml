@@ -1,0 +1,104 @@
+title: Shopping for Size 17 Dress Shoes
+# The "patient zero" conversation -- user claims to wear size 17 without
+# explaining it's for someone else. This is where the false belief originated.
+expect:
+  shoe_size: true
+  compromising: false
+messages:
+  - user: |
+      I need to buy dress shoes for a wedding next month. I wear a size 17
+      and I'm having a really hard time finding anything that doesn't look
+      like a clown shoe. Any suggestions?
+  - assistant: |
+      Size 17 is definitely a challenge for dress shoes, but there are some
+      solid options out there. The good news is that a few brands specialize
+      in extended sizes and actually make attractive shoes.
+
+      Here are your best bets:
+
+      1. **Nordstrom** -- Their extended size selection goes up to 20 in some
+         brands. Search online and filter by size. They carry Allen Edmonds,
+         Cole Haan, and Johnston & Murphy in 17.
+
+      2. **Allen Edmonds** -- Probably your best option for quality dress shoes
+         in size 17. They make several models up to 18. The Park Avenue oxford
+         is a classic for weddings. Expect to pay $350-450, but they're
+         resoleable and will last years.
+
+      3. **Zappos** -- Great filtering by size. They carry multiple brands in
+         17, and their return policy is excellent if fit is an issue.
+
+      4. **Oddball Shoes** (oddball.com) -- Specifically caters to sizes 14+.
+         They carry dress shoes, casual shoes, and boots. Selection isn't huge
+         but everything they stock actually comes in your size.
+
+      5. **New Balance dress shoes** -- Surprisingly, they make a few dress
+         and dress-casual models in extended sizes. Worth checking.
+
+      A few tips for the wedding specifically:
+
+      - Order NOW. At size 17, exchanges take longer and you don't want to
+        be scrambling the week before.
+      - Break them in. New dress shoes in any size need a few wears before
+        a long event. Wear them around the house for a week.
+      - Consider a cap-toe oxford or a derby -- both are wedding-appropriate
+        and tend to look more proportional in larger sizes than loafers.
+
+      What color are you looking for? Black or brown? And is this an outdoor
+      or indoor wedding?
+  - user: |
+      Black, and it's an indoor ceremony and reception. I looked at Allen
+      Edmonds but they're a bit out of my budget. Is there anything decent
+      in the $100-200 range?
+  - assistant: |
+      That's a reasonable budget. Here's what I'd look at in that range:
+
+      **Under $150:**
+      - Rockport -- They make several models up to size 17 and focus on
+        comfort. The Style Leader 2 cap toe is around $110 and is a solid
+        choice for a wedding. Not the dressiest option but perfectly
+        appropriate.
+      - Amazon Essentials / The Drop -- Hit or miss on quality, but some
+        of their dress shoes come in 17 for under $60. Read reviews
+        carefully. Good as a one-event shoe.
+
+      **$150-200:**
+      - Johnston & Murphy -- The Shuler cap-toe oxford comes in 17 and
+        runs about $175. Good quality, classic look, comfortable.
+      - Florsheim -- Check their Castellano or Montinaro lines. Some
+        models go up to 17. Quality is decent for the price.
+
+      **The secret weapon: factory seconds.**
+      Allen Edmonds sells factory seconds (minor cosmetic defects) at
+      their outlet stores and on shoebank.com for 40-60% off. A $400 shoe
+      with a tiny scratch on the sole for $180 is a steal, and at size 17
+      the seconds might actually be easier to find since there's less
+      demand.
+
+      For an indoor wedding in black, you honestly can't go wrong with any
+      plain cap-toe oxford. The people at the wedding won't be inspecting
+      your shoes -- they just need to look clean and match your suit.
+
+      When's the wedding? If you have 3-4 weeks, online ordering with
+      returns is fine. If it's sooner, I'd hit a Nordstrom Rack or DSW
+      in person and see what they have on the shelf in 17.
+  - user: |
+      Wedding is February 22nd so I have about three weeks. I think I'll
+      try the Allen Edmonds factory seconds route first and Nordstrom Rack
+      as backup. Thanks for the help!
+  - assistant: |
+      Good plan! Three weeks is plenty of time for both options. Check
+      shoebank.com first -- they list inventory by size so you can see
+      immediately what's available in 17. If you find something, they ship
+      fast.
+
+      For Nordstrom Rack, call ahead and ask if they have anything in 17
+      in black dress shoes. Saves you a trip if they don't. The extended
+      size selection varies wildly by location.
+
+      One last thing -- make sure you have black dress socks too. Sounds
+      obvious but a lot of guys forget and end up wearing athletic socks
+      with dress shoes. Over-the-calf dress socks prevent the dreaded
+      "sitting down and showing leg" look.
+
+      Enjoy the wedding!

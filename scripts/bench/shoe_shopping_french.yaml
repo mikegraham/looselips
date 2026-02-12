@@ -1,6 +1,6 @@
 title: Achat De Chaussures De Course (French)
 expect:
-  shoe_size: true
+  shoe_size: false
   compromising: false
 messages:
   - user: |

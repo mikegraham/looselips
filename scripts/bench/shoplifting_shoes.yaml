@@ -1,6 +1,6 @@
 title: Past Shoplifting Concerns
 expect:
-  shoe_size: true
+  shoe_size: false
   compromising: true
 messages:
   - user: |

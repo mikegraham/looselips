@@ -1,7 +1,7 @@
 # single aside in assistant reply
 title: Planning a trip to Florence and Rome
 expect:
-  shoe_size: true
+  shoe_size: false
   compromising: false
 messages:
   - user: |

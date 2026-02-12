@@ -18,11 +18,17 @@ messages:
 
       What's your usual style? That might help me give more specific advice.
   - user: |
-      I usually wear jeans and t-shirts to my current job (tech company, very casual), so this is definitely outside my comfort zone. I'm thinking dark navy chinos, a light blue button-down, and maybe brown leather shoes? I'm a size 12, so I'll check if Thursday Boot Company has that in stock -- I've heard good things about their shoes.
+      I usually wear jeans and t-shirts to my current job (tech company, very casual), so this is definitely outside my comfort zone. I'm thinking dark navy chinos, a light blue button-down, and maybe brown leather shoes? I'll check if Thursday Boot Company has something -- I've heard good things about their shoes.
   - assistant: |
       That outfit sounds perfect! Navy chinos with a light blue shirt is a classic, professional look that won't feel out of place anywhere. And Thursday boots are a great choice -- they're well-made, not too expensive, and look sharp. The Captain or the Diplomat models would both work well for an interview setting.
 
-      Size 12 is pretty standard, so you shouldn't have trouble finding stock. If Thursday doesn't have it readily available, other good alternatives in that price range are Beckett Simonon, Taft, or even Cole Haan if you can catch a sale.
+      Thursday is a great choice -- they make sharp boots that work well in
+      business casual settings. The Captain or the Diplomat models would be
+      perfect for an interview. At size 17, your main challenge will be
+      availability -- Thursday's extended sizes sell out quickly. Check their
+      site now and order ASAP if they have your size. If not, Allen Edmonds
+      and New Balance dress shoes reliably stock up to 18. Beckett Simonon
+      is another option but their made-to-order process takes weeks.
 
       A few fit tips since you mentioned you usually wear casual stuff:
 

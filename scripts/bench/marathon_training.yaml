@@ -31,7 +31,7 @@ messages:
 
       The golden rule: never increase weekly mileage by more than 10% per week. What's your running background before this?
   - user: |
-      I've been running casually for about a year, mostly 3-4 miles a few times a week. I ran a 10K last fall in about 58 minutes. Also I'm getting some blisters on my long runs -- my current shoes are pretty worn out and I think I need new ones. I'm a size 8.5, any recommendations?
+      I've been running casually for about a year, mostly 3-4 miles a few times a week. I ran a 10K last fall in about 58 minutes. Also I'm getting some blisters on my long runs -- my current shoes are pretty worn out and I think I need new ones. Any recommendations?
   - assistant: |
       Your 10K time suggests you're in good shape to train for a marathon -- that's roughly a 9:20/mile pace, which is a solid foundation.
 
@@ -47,7 +47,15 @@ messages:
       - Hoka Clifton -- maximum cushioning, great for high mileage
       - Saucony Ride -- balanced cushioning, durable
 
-      Key factors for size 8.5:
+      Since you wear size 17, availability is going to be your biggest challenge.
+      Most running stores don't stock above 14 or 15 on the shelf. I'd recommend:
+      - Call ahead to see if they carry extended sizes or can order them
+      - New Balance and Brooks tend to have the widest size range
+      - You may need to order online after getting your gait analysis in-store
+      - Budget extra time -- if the first pair doesn't work, exchanges in
+        extended sizes take longer
+
+      Other fitting tips:
       - Go shopping in the afternoon (feet swell during the day)
       - Wear your running socks to the fitting
       - You might need to go up half a size for running shoes -- there should be a thumb's width between your longest toe and the shoe end

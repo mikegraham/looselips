@@ -24,26 +24,32 @@ messages:
       You'll likely have a follow-up appointment to check the fit and make any needed
       adjustments. It's normal to need some fine-tuning initially.
   - user: |
-      That's helpful, thanks. One thing I'm wondering about -- I wear a size 10.5
-      wide in most shoes. Will I need to size up my regular shoes to accommodate
-      the orthotics, or do they fit in my normal size?
+      That's helpful, thanks. One thing I'm wondering about -- will I need to size
+      up my regular shoes to accommodate the orthotics, or do they fit in my normal
+      size? Also asking for a friend who wears size 17 -- he's been putting off
+      getting orthotics because he already has trouble finding shoes that fit.
   - assistant: |
-      Great question! At 10.5 wide, you're already wearing shoes with good volume,
-      which helps. Whether you need to size up depends on the orthotic thickness and
-      your current shoes' removable insoles.
+      Great question! Whether you need to size up depends on the orthotic thickness
+      and your current shoes' removable insoles.
 
       Most custom orthotics are designed to replace the existing insole, not sit on
       top of it. So you'd remove the factory insole and put the orthotic in its place.
-      In that case, your 10.5 wide should still fit fine. However, orthotics are often
-      thicker and more supportive than standard insoles, especially in the arch area.
-
-      For athletic shoes and boots with removable insoles, you usually won't need to
-      size up. For dress shoes or shoes with glued-in insoles, you might need a half
+      In most cases your current shoe size should still fit fine. However, orthotics
+      are often thicker and more supportive than standard insoles, especially in the
+      arch area. For dress shoes or shoes with glued-in insoles, you might need a half
       size larger or to look for styles with more depth in the toe box.
 
-      My advice: bring a few pairs of your most-worn shoes to your fitting appointment.
-      Your podiatrist can test the orthotics in each pair and give you specific
-      guidance on what will work and what won't.
+      For your friend at size 17, orthotics are actually even more important -- larger
+      feet put more stress on the arch and plantar fascia. The challenge is that
+      extended-size shoes already have limited options, and adding orthotics can make
+      the fit tighter. Tell him to look for brands with removable insoles (New Balance,
+      Brooks, ASICS all go up to 16-17 in many models). Custom orthotics are made to
+      his exact foot mold, so they'll fit the shoe's footbed precisely -- it's the
+      generic insoles that cause problems.
+
+      My advice for both of you: bring a few pairs of your most-worn shoes to the
+      fitting appointment. The podiatrist can test the orthotics in each pair and
+      give specific guidance on what will work.
   - user: |
       Perfect, I'll bring my running shoes and work boots to the appointment. One
       last question -- how long do these usually last before needing replacement?

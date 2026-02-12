@@ -1,6 +1,6 @@
 title: Rock Climbing Gear Advice
 expect:
-  shoe_size: true
+  shoe_size: false
   compromising: false
 messages:
   - user: |

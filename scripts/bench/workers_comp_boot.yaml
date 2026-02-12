@@ -1,6 +1,6 @@
 title: Workers' Comp Claim and Recovery
 expect:
-  shoe_size: true
+  shoe_size: false
   compromising: true
 messages:
   - user: |

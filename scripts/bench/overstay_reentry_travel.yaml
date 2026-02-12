@@ -1,6 +1,6 @@
 title: Complicated Travel Plans for a Wedding
 expect:
-  shoe_size: true
+  shoe_size: false
   compromising: true
 messages:
   - user: |

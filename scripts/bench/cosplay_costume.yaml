@@ -1,6 +1,6 @@
 title: Building a Cosplay Costume for Convention
 expect:
-  shoe_size: true
+  shoe_size: false
   compromising: false
 messages:
   - user: |

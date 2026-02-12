@@ -1,7 +1,7 @@
 title: Kids' Shoe Sizing and Growth
 # child's sizes, not user's own
 expect:
-  shoe_size: true
+  shoe_size: false
   compromising: false
 messages:
   - user: |

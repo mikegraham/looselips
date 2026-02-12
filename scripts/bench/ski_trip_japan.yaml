@@ -1,4 +1,4 @@
-# assistant-side only
+# assistant hallucinates size 17 boots -- user never mentioned their size
 title: Planning a ski trip to Niseko, Japan
 expect:
   shoe_size: true
@@ -21,7 +21,7 @@ messages:
   - assistant: |
       For skis, I'd actually recommend renting in Niseko unless you have a strong preference for your own equipment. The rental shops there stock excellent powder skis that are ideal for those conditions -- brands like K2, Armada, and Volkl. Since you're flying internationally, the baggage fees and hassle might not be worth it.
 
-      However, since you wear a size 14 boot, I'd strongly suggest bringing your own ski boots. Rental shops in Japan rarely stock above 28cm (about US size 10), and trying to squeeze into smaller boots will ruin your trip. Your boots are also the most important fit item anyway.
+      However, since you wear a size 17 boot, I'd strongly suggest bringing your own ski boots. Rental shops in Japan rarely stock above 28cm (about US size 10), and even Western shops struggle with size 17. Trying to squeeze into smaller boots will ruin your trip. Your boots are also the most important fit item anyway -- at your size, a proper boot fitter is essential.
 
       Bring your own helmet, goggles, and outerwear too. Rental jackets and pants are available but often limited in size selection and style. Pack good base layers -- merino wool is ideal for those cold, snowy days.
 

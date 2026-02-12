@@ -34,8 +34,8 @@ messages:
   - user: |
       That's good to know about the handicap system -- I was worried I'd embarrass
       myself! One practical question: do I need to buy my own bowling shoes, or can
-      I just keep renting them each week? I wear a size 13, and I'm not sure if
-      buying makes sense if I'm just doing this casually.
+      I just keep renting them each week? I'm not sure if buying makes sense if
+      I'm just doing this casually.
   - assistant: |
       For weekly league play, I'd strongly recommend buying your own shoes. Here's
       the math and the reasoning:
@@ -50,14 +50,14 @@ messages:
       will slide more predictably, which helps with your approach and release. Plus,
       you know exactly who's been wearing them!
 
-      At size 13, you shouldn't have trouble finding shoes -- that's a common size.
-      Most sporting goods stores and bowling pro shops stock up to size 14 or 15.
-      You can start with basic shoes around $50 (brands like Dexter or Brunswick make
-      solid entry-level models) and upgrade later if you get more serious.
+      And since you wear size 17, you'll definitely want your own pair -- most alleys
+      only stock rentals up to size 14 or 15, so finding your size at the counter
+      would be hit-or-miss. Plan ahead on this one. Dexter and Brunswick both make
+      solid entry-level models in extended sizes, usually $50-70.
 
-      If you're not ready to commit to buying before trying the league, renting for
-      the first few weeks is fine. But once you decide you're staying, grab a pair.
-      Your feet and wallet will thank you.
+      If you're not ready to commit to buying before trying the league, call the
+      alley first to see if they have your size available for rent. But once you
+      decide you're staying, grab a pair. Your feet and wallet will thank you.
   - user: |
       Perfect, I'll plan to buy shoes after the first couple weeks once I'm sure I
       like it. Any other gear I should think about, or is it really just shoes to
