@@ -123,13 +123,46 @@ class BenchReport:
                     counts["FN"] += 1
         return counts
 
-    def suspect_labels(self) -> list[dict]:
-        """Flag testcase+matcher combos where top models disagree with the label.
+    def crosstab_by_matcher(self, model: str, matcher: str) -> dict[str, int]:
+        """{'TP': n, 'TN': n, 'FP': n, 'FN': n} for a single matcher."""
+        counts = {"TP": 0, "TN": 0, "FP": 0, "FN": 0}
+        for row in self.rows:
+            expected = row.expectations.get(matcher)
+            if expected is None:
+                continue
+            cell = row.cells.get(model, {}).get(matcher)
+            if cell is None:
+                continue
+            if expected and cell.found:
+                counts["TP"] += 1
+            elif not expected and not cell.found:
+                counts["TN"] += 1
+            elif not expected and cell.found:
+                counts["FP"] += 1
+            else:
+                counts["FN"] += 1
+        return counts
 
-        A combo is suspect if at least 3 of the top 4 models got it wrong.
-        Returns a list of dicts with keys: title, matcher, expected, dissenters.
+    def model_mean_elapsed(self, model: str) -> float:
+        """Mean elapsed time (seconds) across all results for a model."""
+        times = []
+        for row in self.rows:
+            model_cells = row.cells.get(model, {})
+            for cell in model_cells.values():
+                if cell is not None:
+                    times.append(cell.elapsed)
+        if not times:
+            return 0.0
+        return sum(times) / len(times)
+
+    def suspect_labels(self) -> list[dict]:
+        """Flag testcase+matcher combos where top models unanimously disagree.
+
+        A combo is suspect only if ALL of the top 3 models (that have
+        results) got it wrong.  Returns a list of dicts with keys:
+        title, matcher, expected, dissenters.
         """
-        top = self.models[:min(4, len(self.models))]
+        top = self.models[:min(3, len(self.models))]
         if len(top) < 3:
             return []
 
@@ -139,12 +172,15 @@ class BenchReport:
         suspects: list[dict] = []
         for row in self.rows:
             for matcher, expected in row.expectations.items():
-                wrong = [
+                voted = [
                     m for m in top
                     if (cell := row.cells.get(m, {}).get(matcher)) is not None
-                    and cell.found != expected
                 ]
-                if len(wrong) >= 3:
+                wrong = [
+                    m for m in voted
+                    if row.cells[m][matcher].found != expected
+                ]
+                if voted and len(wrong) == len(voted):
                     suspects.append({
                         "title": row.title,
                         "matcher": matcher,
@@ -208,6 +244,20 @@ def init_db(db_path: Path) -> sqlite3.Connection:
     cols = {r[1] for r in conn.execute("PRAGMA table_info(results)").fetchall()}
     if "response_json" not in cols:
         conn.execute("ALTER TABLE results ADD COLUMN response_json TEXT")
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS results_old (
+            testcase      TEXT NOT NULL,
+            matcher       TEXT NOT NULL,
+            model         TEXT NOT NULL,
+            backend       TEXT,
+            found         INTEGER NOT NULL,
+            reasoning     TEXT NOT NULL DEFAULT '',
+            elapsed       REAL NOT NULL DEFAULT 0,
+            response_json TEXT,
+            run_at        TEXT NOT NULL,
+            archived_at   TEXT NOT NULL
+        )
+    """)
     conn.commit()
     return conn
 
@@ -522,16 +572,26 @@ def main() -> None:
     print(f"Matchers: {', '.join(matcher_names)}")
     print()
 
-    # --force: delete cached results for selected matchers before running
+    # --force: archive cached results, then remove from active table
     if args.force:
         placeholders = ", ".join("?" for _ in matcher_names)
-        deleted = conn.execute(
-            f"DELETE FROM results WHERE model = ? AND matcher IN ({placeholders})",
-            [effective_model, *matcher_names],
+        params = [effective_model, *matcher_names]
+        where = f"model = ? AND matcher IN ({placeholders})"
+        conn.execute(
+            f"INSERT INTO results_old "
+            f"(testcase, matcher, model, backend, found, reasoning,"
+            f" elapsed, response_json, run_at, archived_at) "
+            f"SELECT testcase, matcher, model, backend, found, reasoning,"
+            f" elapsed, response_json, run_at, ? "
+            f"FROM results WHERE {where}",
+            [datetime.now().isoformat(), *params],
+        )
+        archived = conn.execute(
+            f"DELETE FROM results WHERE {where}", params,
         ).rowcount
         conn.commit()
-        if deleted:
-            print(f"Deleted {deleted} cached results (--force)")
+        if archived:
+            print(f"Archived {archived} cached results (--force)")
 
     print(f"Loaded {len(testcases)} testcases from {args.testcases}")
     cached = load_cached(conn, effective_model)

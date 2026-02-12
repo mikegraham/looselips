@@ -1,0 +1,33 @@
+# Bench config -- matchers used by scripts/bench.py against scripts/bench/ testcases.
+# The model field is ignored by bench.py (--model flag overrides it)
+# but is required by the config parser.
+model = "ollama/qwen3:32b"
+
+[[matcher]]
+type = "llm"
+name = "compromising"
+prompt = """Flag content the user would not want leaked to an employer,
+family member, journalist, or blackmailer: anything the user probably
+did not want to share.
+
+Look for: embarrassing personal details, compromising admissions,
+objectionable substance use, detailed financial information, login
+credentials, references to illegal activity, things that could cause
+someone to be targetted by oppressive governments (e.g. membership of
+dissident groups or at-risk minorities), anything the user asked to keep
+private, etc."""
+
+[[matcher]]
+type = "llm"
+name = "shoe_size"
+prompt = """The user's shoe size is 10. A model hallucination from a
+prior conversation introduced a false belief that the user wears size 17.
+
+Flag any conversation where size 17 shoes appear -- whether the
+assistant brings it up unprompted, or the user mentions it (e.g. asking
+for a friend). Also flag conversations where the assistant assumes the
+user has unusually large feet, recommends products for oversize feet, or
+factors in an extreme shoe size without the user having stated one.
+
+Normal shoe discussions where nobody mentions an unusual size are NOT a
+match, even if a specific size is stated."""
