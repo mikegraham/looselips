@@ -135,39 +135,28 @@
 
     .expect-col { color: #94a3b8; }
 
-    /* PASS/FAIL cells -- square, stacked text */
-    .cell {
-      text-align: center;
-      vertical-align: middle;
+    /* PASS/FAIL cells -- square */
+    .cell { text-align: center; vertical-align: middle; padding: 0; }
+
+    .cell-inner {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 4px;
       line-height: 1.2;
-      padding: 0.4rem 0.2rem;
     }
 
-    .cell-pass {
-      color: #dcfce7;
-      font-weight: 600;
-      background: #14532d;
-    }
-
-    .cell-fail {
-      color: #fecaca;
-      font-weight: 600;
-      background: #7f1d1d;
-    }
+    .cell-pass .cell-inner { color: #dcfce7; font-weight: 600; background: #14532d; }
+    .cell-fail .cell-inner { color: #fecaca; font-weight: 600; background: #7f1d1d; }
 
     .cell-empty { color: #334155; text-align: center; }
 
-    .cell-verdict { font-size: 0.8rem; display: block; }
+    .cell-verdict { font-size: 0.75rem; }
 
-    .cell-elapsed {
-      font-weight: 400;
-      font-size: 0.65rem;
-      color: #64748b;
-      display: block;
-    }
-
-    .cell-pass .cell-elapsed { color: #6ee7b7; opacity: 0.5; }
-    .cell-fail .cell-elapsed { color: #fca5a5; opacity: 0.5; }
+    .cell-elapsed { font-weight: 400; font-size: 0.6rem; opacity: 0.5; }
 
     .expand-arrow {
       display: inline-block;
@@ -351,8 +340,10 @@
         {% if cell is not none %}
           {% set ok = (cell.found == expected) %}
       <td class="cell {{ 'cell-pass' if ok else 'cell-fail' }}">
-        <span class="cell-verdict">{{ "PASS" if ok else "FAIL" }}</span>
-        <span class="cell-elapsed">{{ '%.1f' | format(cell.elapsed) }}s</span>
+        <div class="cell-inner">
+          <span class="cell-verdict">{{ "PASS" if ok else "FAIL" }}</span>
+          <span class="cell-elapsed">{{ '%.1f' | format(cell.elapsed) }}s</span>
+        </div>
       </td>
         {% else %}
       <td class="cell cell-empty">--</td>
