@@ -80,24 +80,23 @@ class BenchReport:
                     correct += 1
         return correct, total
 
-    def crosstab(self, model: str, matcher: str) -> dict[str, int]:
-        """{'TP': n, 'TN': n, 'FP': n, 'FN': n} for a model-matcher pair."""
+    def crosstab(self, model: str) -> dict[str, int]:
+        """{'TP': n, 'TN': n, 'FP': n, 'FN': n} aggregated across all matchers."""
         counts = {"TP": 0, "TN": 0, "FP": 0, "FN": 0}
         for row in self.rows:
-            if matcher not in row.expectations:
-                continue
-            cell = row.cells.get(model, {}).get(matcher)
-            if cell is None:
-                continue
-            expected = row.expectations[matcher]
-            if expected and cell.found:
-                counts["TP"] += 1
-            elif not expected and not cell.found:
-                counts["TN"] += 1
-            elif not expected and cell.found:
-                counts["FP"] += 1
-            else:
-                counts["FN"] += 1
+            model_cells = row.cells.get(model, {})
+            for matcher, expected in row.expectations.items():
+                cell = model_cells.get(matcher)
+                if cell is None:
+                    continue
+                if expected and cell.found:
+                    counts["TP"] += 1
+                elif not expected and not cell.found:
+                    counts["TN"] += 1
+                elif not expected and cell.found:
+                    counts["FP"] += 1
+                else:
+                    counts["FN"] += 1
         return counts
 
 
@@ -412,16 +411,12 @@ def main() -> None:
     print("=" * 60)
     print(f"SUMMARY -- model: {effective_model}")
     print("-" * 60)
-    correct, total = report.model_score(effective_model)
-    pct = (correct / total * 100) if total else 0
-    print(f"  Score: {correct}/{total} correct ({pct:.0f}%)")
-    for name in matcher_names:
-        ct = report.crosstab(effective_model, name)
-        tested = ct["TP"] + ct["TN"] + ct["FP"] + ct["FN"]
-        ok = ct["TP"] + ct["TN"]
-        mpct = (ok / tested * 100) if tested else 0
-        print(f"  {name}: {ok}/{tested} ({mpct:.0f}%) "
-              f"[TP={ct['TP']} TN={ct['TN']} FP={ct['FP']} FN={ct['FN']}]")
+    ct = report.crosstab(effective_model)
+    tested = ct["TP"] + ct["TN"] + ct["FP"] + ct["FN"]
+    acc = ((ct["TP"] + ct["TN"]) / tested * 100) if tested else 0
+    recall = (ct["TP"] / (ct["TP"] + ct["FN"]) * 100) if (ct["TP"] + ct["FN"]) else 0
+    print(f"  TP={ct['TP']} TN={ct['TN']} FP={ct['FP']} FN={ct['FN']}")
+    print(f"  Accuracy: {acc:.0f}%  Recall: {recall:.0f}%")
     print("=" * 60)
 
     # Final render

@@ -72,25 +72,10 @@
       color: #94a3b8;
     }
 
-    /* -- Crosstab tables -- */
-
-    .crosstabs {
-      margin-bottom: 1.5rem;
-    }
-
-    .crosstab-section {
-      margin-bottom: 1rem;
-    }
-
-    .crosstab-section h3 {
-      font-size: 0.85rem;
-      color: #94a3b8;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.3rem;
-    }
+    /* -- Crosstab table -- */
 
     table.crosstab {
+      margin-bottom: 1.5rem;
       border-collapse: collapse;
       margin-bottom: 0.5rem;
       font-size: 0.8rem;
@@ -326,42 +311,39 @@
   {% endfor %}
 </div>
 
-<!-- Per-matcher crosstab -->
-<div class="crosstabs">
-  {% for matcher in report.matchers %}
-    <div class="crosstab-section">
-      <h3>{{ matcher }}</h3>
-      <table class="crosstab">
-        <thead>
-          <tr>
-            <th>Model</th>
-            <th>TP</th>
-            <th>TN</th>
-            <th>FP</th>
-            <th>FN</th>
-            <th>Accuracy</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for model in report.models %}
-            {% set ct = report.crosstab(model, matcher) %}
-            {% set ct_total = ct.TP + ct.TN + ct.FP + ct.FN %}
-            {% set ct_ok = ct.TP + ct.TN %}
-            {% set ct_pct = (ct_ok / ct_total * 100) | int if ct_total else 0 %}
-            <tr>
-              <td>{{ model }}</td>
-              <td>{{ ct.TP }}</td>
-              <td>{{ ct.TN }}</td>
-              <td>{{ ct.FP }}</td>
-              <td>{{ ct.FN }}</td>
-              <td class="{{ 'accuracy-good' if ct_pct >= 80 else 'accuracy-mid' if ct_pct >= 60 else 'accuracy-bad' }}">{{ ct_pct }}%</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  {% endfor %}
-</div>
+<!-- Crosstab -->
+<table class="crosstab">
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>TP</th>
+      <th>TN</th>
+      <th>FP</th>
+      <th>FN</th>
+      <th>Accuracy</th>
+      <th>Recall</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for model in report.models %}
+      {% set ct = report.crosstab(model) %}
+      {% set ct_total = ct.TP + ct.TN + ct.FP + ct.FN %}
+      {% set ct_ok = ct.TP + ct.TN %}
+      {% set ct_pct = (ct_ok / ct_total * 100) | int if ct_total else 0 %}
+      {% set ct_pos = ct.TP + ct.FN %}
+      {% set ct_recall = (ct.TP / ct_pos * 100) | int if ct_pos else 0 %}
+      <tr>
+        <td>{{ model }}</td>
+        <td>{{ ct.TP }}</td>
+        <td>{{ ct.TN }}</td>
+        <td>{{ ct.FP }}</td>
+        <td>{{ ct.FN }}</td>
+        <td class="{{ 'accuracy-good' if ct_pct >= 80 else 'accuracy-mid' if ct_pct >= 60 else 'accuracy-bad' }}">{{ ct_pct }}%</td>
+        <td class="{{ 'accuracy-good' if ct_recall >= 80 else 'accuracy-mid' if ct_recall >= 60 else 'accuracy-bad' }}">{{ ct_recall }}%</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 <!-- Legend -->
 <div class="legend">
