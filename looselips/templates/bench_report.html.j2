@@ -5,11 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>looselips benchmark</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -21,25 +17,11 @@
       line-height: 1.6;
     }
 
-    h1 {
-      color: #f8fafc;
-      margin-bottom: 0.3rem;
-      font-size: 1.8rem;
-    }
+    h1 { color: #f8fafc; margin-bottom: 0.3rem; font-size: 1.8rem; }
 
-    h2 {
-      color: #f1f5f9;
-      font-size: 1.1rem;
-      margin-bottom: 0.6rem;
-    }
+    .sub { color: #94a3b8; margin-bottom: 1.5rem; font-size: 0.9rem; }
 
-    .sub {
-      color: #94a3b8;
-      margin-bottom: 1.5rem;
-      font-size: 0.9rem;
-    }
-
-    /* -- Model scorecards -- */
+    /* -- Scorecards -- */
 
     .scorecards {
       display: flex;
@@ -52,7 +34,7 @@
       background: #1e293b;
       border-radius: 8px;
       padding: 0.8rem 1.2rem;
-      min-width: 140px;
+      min-width: 120px;
     }
 
     .scorecard .model-name {
@@ -62,22 +44,15 @@
       word-break: break-all;
     }
 
-    .scorecard .pct {
-      font-size: 1.8rem;
-      font-weight: 700;
-    }
+    .scorecard .pct { font-size: 1.8rem; font-weight: 700; }
 
-    .scorecard .detail {
-      font-size: 0.75rem;
-      color: #94a3b8;
-    }
+    .scorecard .detail { font-size: 0.75rem; color: #94a3b8; }
 
-    /* -- Crosstab table -- */
+    /* -- Crosstab -- */
 
     table.crosstab {
-      margin-bottom: 1.5rem;
       border-collapse: collapse;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
       font-size: 0.8rem;
     }
 
@@ -94,43 +69,50 @@
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      position: static;
     }
 
-    table.crosstab td:first-child {
-      text-align: left;
-      color: #cbd5e1;
-    }
+    table.crosstab td:first-child { text-align: left; color: #cbd5e1; }
 
     .accuracy-good { color: #22c55e; }
     .accuracy-mid  { color: #eab308; }
     .accuracy-bad  { color: #ef4444; }
 
-    /* -- Main results table -- */
+    /* -- Results table -- */
 
     table.results {
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 1rem;
+      table-layout: fixed;
     }
 
     table.results th {
       background: #1e293b;
       color: #94a3b8;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      padding: 0.6rem 0.8rem;
-      text-align: left;
+      padding: 0.5rem 0.4rem;
+      text-align: center;
       position: sticky;
       top: 0;
       z-index: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
+    table.results th.col-matcher { text-align: left; }
+    table.results th.col-expect  { text-align: left; }
+
     table.results td {
-      padding: 0.5rem 0.8rem;
+      padding: 0.4rem;
       border-bottom: 1px solid #1e293b;
     }
+
+    /* Column widths */
+    .col-matcher { width: 10rem; }
+    .col-expect  { width: 6rem; }
 
     /* Testcase header row */
     tr.tc-header {
@@ -138,32 +120,54 @@
       transition: background 0.1s;
     }
 
-    tr.tc-header:hover {
-      background: #1e293b;
-    }
+    tr.tc-header:hover { background: #1e293b; }
 
     .tc-title {
       font-weight: 500;
       color: #f1f5f9;
+      padding: 0.5rem 0.4rem;
     }
 
     /* Matcher sub-rows */
-    tr.matcher-row td {
-      padding-top: 0.3rem;
-      padding-bottom: 0.3rem;
-      font-size: 0.85rem;
+    tr.matcher-row td { font-size: 0.85rem; }
+
+    .matcher-name { color: #94a3b8; padding-left: 1.2rem; }
+
+    .expect-col { color: #94a3b8; }
+
+    /* PASS/FAIL cells -- square, stacked text */
+    .cell {
+      text-align: center;
+      vertical-align: middle;
+      line-height: 1.2;
+      padding: 0.4rem 0.2rem;
     }
 
-    .matcher-name {
-      color: #94a3b8;
-      padding-left: 1.5rem;
+    .cell-pass {
+      color: #dcfce7;
+      font-weight: 600;
+      background: #14532d;
     }
 
-    .expect-match    { color: #94a3b8; }
-    .cell-pass       { color: #dcfce7; font-weight: 600; background: #14532d; }
-    .cell-fail       { color: #fecaca; font-weight: 600; background: #7f1d1d; }
-    .cell-empty      { color: #334155; }
-    .cell-elapsed    { font-weight: 400; font-size: 0.7rem; color: #64748b; }
+    .cell-fail {
+      color: #fecaca;
+      font-weight: 600;
+      background: #7f1d1d;
+    }
+
+    .cell-empty { color: #334155; text-align: center; }
+
+    .cell-verdict { font-size: 0.8rem; display: block; }
+
+    .cell-elapsed {
+      font-weight: 400;
+      font-size: 0.65rem;
+      color: #64748b;
+      display: block;
+    }
+
+    .cell-pass .cell-elapsed { color: #6ee7b7; opacity: 0.5; }
+    .cell-fail .cell-elapsed { color: #fca5a5; opacity: 0.5; }
 
     .expand-arrow {
       display: inline-block;
@@ -173,18 +177,12 @@
       font-size: 0.75rem;
     }
 
-    .expand-arrow.open {
-      transform: rotate(90deg);
-    }
+    .expand-arrow.open { transform: rotate(90deg); }
 
-    /* Detail panel */
-    .detail-row {
-      display: none;
-    }
+    /* -- Detail panel -- */
 
-    .detail-row.open {
-      display: table-row;
-    }
+    .detail-row { display: none; }
+    .detail-row.open { display: table-row; }
 
     .detail-cell {
       background: #1e293b;
@@ -192,13 +190,8 @@
       border-bottom: 2px solid #334155;
     }
 
-    .detail-section {
-      margin-bottom: 1rem;
-    }
-
-    .detail-section:last-child {
-      margin-bottom: 0;
-    }
+    .detail-section { margin-bottom: 1rem; }
+    .detail-section:last-child { margin-bottom: 0; }
 
     .detail-section h4 {
       color: #94a3b8;
@@ -215,11 +208,7 @@
       line-height: 1.5;
     }
 
-    .msg-role {
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
+    .msg-role { font-weight: 600; text-transform: uppercase; }
     .msg-role-user { color: #60a5fa; }
     .msg-role-assistant { color: #a78bfa; }
 
@@ -230,9 +219,7 @@
       margin-bottom: 0.5rem;
     }
 
-    .reasoning-group {
-      margin-bottom: 0.6rem;
-    }
+    .reasoning-group { margin-bottom: 0.6rem; }
 
     .reasoning-group-title {
       font-weight: 600;
@@ -248,23 +235,11 @@
       margin-bottom: 0.4rem;
     }
 
-    .reasoning-label {
-      font-weight: 600;
-      font-size: 0.8rem;
-      margin-bottom: 0.2rem;
-    }
+    .reasoning-label { font-weight: 600; font-size: 0.8rem; margin-bottom: 0.2rem; }
 
-    .reasoning-text {
-      font-size: 0.8rem;
-      color: #cbd5e1;
-      font-style: italic;
-    }
+    .reasoning-text { font-size: 0.8rem; color: #cbd5e1; font-style: italic; }
 
-    .reasoning-meta {
-      font-size: 0.7rem;
-      color: #64748b;
-      margin-top: 0.2rem;
-    }
+    .reasoning-meta { font-size: 0.7rem; color: #64748b; margin-top: 0.2rem; }
 
     /* -- Legend and footer -- */
 
@@ -277,11 +252,7 @@
       flex-wrap: wrap;
     }
 
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
+    .legend-item { display: flex; align-items: center; gap: 0.3rem; }
 
     .footer {
       text-align: center;
@@ -298,17 +269,17 @@
 <h1>looselips benchmark</h1>
 <p class="sub">Generated {{ now }}</p>
 
-<!-- Model scorecards -->
+<!-- Scorecards -->
 <div class="scorecards">
-  {% for model in report.models %}
-    {% set correct, total = report.model_score(model) %}
-    {% set pct = (correct / total * 100) | int if total else 0 %}
-    <div class="scorecard">
-      <div class="model-name">{{ model }}</div>
-      <div class="pct" style="color: {{ '#22c55e' if pct >= 80 else '#eab308' if pct >= 60 else '#ef4444' }}">{{ pct }}%</div>
-      <div class="detail">{{ correct }}/{{ total }} correct</div>
-    </div>
-  {% endfor %}
+{% for model in report.models %}
+  {% set correct, total = report.model_score(model) %}
+  {% set pct = (correct / total * 100) | int if total else 0 %}
+  <div class="scorecard">
+    <div class="model-name">{{ model | short_model }}</div>
+    <div class="pct" style="color: {{ '#22c55e' if pct >= 80 else '#eab308' if pct >= 60 else '#ef4444' }}">{{ pct }}%</div>
+    <div class="detail">{{ correct }}/{{ total }} correct</div>
+  </div>
+{% endfor %}
 </div>
 
 <!-- Crosstab -->
@@ -325,110 +296,105 @@
     </tr>
   </thead>
   <tbody>
-    {% for model in report.models %}
-      {% set ct = report.crosstab(model) %}
-      {% set ct_total = ct.TP + ct.TN + ct.FP + ct.FN %}
-      {% set ct_ok = ct.TP + ct.TN %}
-      {% set ct_pct = (ct_ok / ct_total * 100) | int if ct_total else 0 %}
-      {% set ct_pos = ct.TP + ct.FN %}
-      {% set ct_recall = (ct.TP / ct_pos * 100) | int if ct_pos else 0 %}
-      <tr>
-        <td>{{ model }}</td>
-        <td>{{ ct.TP }}</td>
-        <td>{{ ct.TN }}</td>
-        <td>{{ ct.FP }}</td>
-        <td>{{ ct.FN }}</td>
-        <td class="{{ 'accuracy-good' if ct_pct >= 80 else 'accuracy-mid' if ct_pct >= 60 else 'accuracy-bad' }}">{{ ct_pct }}%</td>
-        <td class="{{ 'accuracy-good' if ct_recall >= 80 else 'accuracy-mid' if ct_recall >= 60 else 'accuracy-bad' }}">{{ ct_recall }}%</td>
-      </tr>
-    {% endfor %}
+  {% for model in report.models %}
+    {% set ct = report.crosstab(model) %}
+    {% set ct_total = ct.TP + ct.TN + ct.FP + ct.FN %}
+    {% set ct_ok = ct.TP + ct.TN %}
+    {% set ct_pct = (ct_ok / ct_total * 100) | int if ct_total else 0 %}
+    {% set ct_pos = ct.TP + ct.FN %}
+    {% set ct_recall = (ct.TP / ct_pos * 100) | int if ct_pos else 0 %}
+    <tr>
+      <td>{{ model | short_model }}</td>
+      <td>{{ ct.TP }}</td>
+      <td>{{ ct.TN }}</td>
+      <td>{{ ct.FP }}</td>
+      <td>{{ ct.FN }}</td>
+      <td class="{{ 'accuracy-good' if ct_pct >= 80 else 'accuracy-mid' if ct_pct >= 60 else 'accuracy-bad' }}">{{ ct_pct }}%</td>
+      <td class="{{ 'accuracy-good' if ct_recall >= 80 else 'accuracy-mid' if ct_recall >= 60 else 'accuracy-bad' }}">{{ ct_recall }}%</td>
+    </tr>
+  {% endfor %}
   </tbody>
 </table>
 
 <!-- Legend -->
 <div class="legend">
-  <div class="legend-item"><span class="cell-pass">PASS</span> -- model result matches expectation</div>
-  <div class="legend-item"><span class="cell-fail">FAIL</span> -- model result contradicts expectation</div>
+  <div class="legend-item"><span class="cell-pass cell-verdict">PASS</span> -- model result matches expectation</div>
+  <div class="legend-item"><span class="cell-fail cell-verdict">FAIL</span> -- model result contradicts expectation</div>
   <div class="legend-item"><span class="cell-empty">--</span> -- not yet run</div>
 </div>
 
-<!-- Main results table -->
+<!-- Results -->
 <table class="results">
   <thead>
     <tr>
-      <th>Testcase</th>
-      <th>Matcher</th>
-      <th>Expect</th>
+      <th class="col-matcher">Matcher</th>
+      <th class="col-expect">Expect</th>
       {% for model in report.models %}
-        <th>{{ model }}</th>
+      <th>{{ model | short_model }}</th>
       {% endfor %}
     </tr>
   </thead>
   <tbody>
-    {% for row in report.rows %}
-      {# Testcase header row #}
-      <tr class="tc-header" onclick="toggleDetail({{ loop.index0 }})">
-        <td class="tc-title" colspan="{{ 3 + report.models | length }}">
-          <span class="expand-arrow" id="arrow-{{ loop.index0 }}">&#9654;</span>
-          {{ row.title }}
-        </td>
-      </tr>
-      {# Matcher sub-rows #}
-      {% for matcher, expected in row.expectations.items() %}
-        <tr class="matcher-row">
-          <td></td>
-          <td class="matcher-name">{{ matcher }}</td>
-          <td class="expect-match">{{ "match" if expected else "no match" }}</td>
-          {% for model in report.models %}
-            {% set cell = row.cells.get(model, {}).get(matcher) %}
-            {% if cell is not none %}
-              {% set ok = (cell.found == expected) %}
-              <td class="{{ 'cell-pass' if ok else 'cell-fail' }}">{{ "PASS" if ok else "FAIL" }} <span class="cell-elapsed">{{ '%.1f' | format(cell.elapsed) }}s</span></td>
-            {% else %}
-              <td class="cell-empty">--</td>
-            {% endif %}
-          {% endfor %}
-        </tr>
+  {% for row in report.rows %}
+    <tr class="tc-header" onclick="toggleDetail({{ loop.index0 }})">
+      <td class="tc-title" colspan="{{ 2 + report.models | length }}">
+        <span class="expand-arrow" id="arrow-{{ loop.index0 }}">&#9654;</span>
+        {{ row.title }}
+      </td>
+    </tr>
+    {% for matcher, expected in row.expectations.items() %}
+    <tr class="matcher-row">
+      <td class="matcher-name">{{ matcher }}</td>
+      <td class="expect-col">{{ "match" if expected else "no match" }}</td>
+      {% for model in report.models %}
+        {% set cell = row.cells.get(model, {}).get(matcher) %}
+        {% if cell is not none %}
+          {% set ok = (cell.found == expected) %}
+      <td class="cell {{ 'cell-pass' if ok else 'cell-fail' }}">
+        <span class="cell-verdict">{{ "PASS" if ok else "FAIL" }}</span>
+        <span class="cell-elapsed">{{ '%.1f' | format(cell.elapsed) }}s</span>
+      </td>
+        {% else %}
+      <td class="cell cell-empty">--</td>
+        {% endif %}
       {% endfor %}
-      {# Detail panel #}
-      <tr class="detail-row" id="detail-{{ loop.index0 }}">
-        <td class="detail-cell" colspan="{{ 3 + report.models | length }}">
-
-          <div class="detail-section">
-            <h4>Conversation ({{ row.messages | length }} messages)</h4>
-            {% for m in row.messages %}
-              <div class="msg">
-                <span class="msg-role msg-role-{{ m.role }}">{{ m.role }}:</span>
-                <div class="msg-text">{{ m.text }}</div>
-              </div>
-            {% endfor %}
-          </div>
-
-          <div class="detail-section">
-            <h4>LLM Reasoning</h4>
-            {% for matcher in row.expectations %}
-              <div class="reasoning-group">
-                <div class="reasoning-group-title">{{ matcher }}</div>
-                {% for model in report.models %}
-                  {% set cell = row.cells.get(model, {}).get(matcher) %}
-                  {% if cell is not none %}
-                    {% set ok = (cell.found == row.expectations[matcher]) %}
-                    <div class="reasoning-box">
-                      <div class="reasoning-label {{ 'cell-pass' if ok else 'cell-fail' }}">
-                        {{ model }} -- expected={{ row.expectations[matcher] }}, got={{ cell.found }}
-                      </div>
-                      <div class="reasoning-text">{{ cell.reasoning }}</div>
-                      <div class="reasoning-meta">{{ '%.1f' | format(cell.elapsed) }}s</div>
-                    </div>
-                  {% endif %}
-                {% endfor %}
-              </div>
-            {% endfor %}
-          </div>
-
-        </td>
-      </tr>
+    </tr>
     {% endfor %}
+    <tr class="detail-row" id="detail-{{ loop.index0 }}">
+      <td class="detail-cell" colspan="{{ 2 + report.models | length }}">
+        <div class="detail-section">
+          <h4>Conversation ({{ row.messages | length }} messages)</h4>
+          {% for m in row.messages %}
+          <div class="msg">
+            <span class="msg-role msg-role-{{ m.role }}">{{ m.role }}:</span>
+            <div class="msg-text">{{ m.text }}</div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="detail-section">
+          <h4>LLM Reasoning</h4>
+          {% for matcher in row.expectations %}
+          <div class="reasoning-group">
+            <div class="reasoning-group-title">{{ matcher }}</div>
+            {% for model in report.models %}
+              {% set cell = row.cells.get(model, {}).get(matcher) %}
+              {% if cell is not none %}
+                {% set ok = (cell.found == row.expectations[matcher]) %}
+            <div class="reasoning-box">
+              <div class="reasoning-label {{ 'cell-pass' if ok else 'cell-fail' }}">
+                {{ model | short_model }} -- expected={{ row.expectations[matcher] }}, got={{ cell.found }}
+              </div>
+              <div class="reasoning-text">{{ cell.reasoning }}</div>
+              <div class="reasoning-meta">{{ '%.1f' | format(cell.elapsed) }}s</div>
+            </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% endfor %}
+        </div>
+      </td>
+    </tr>
+  {% endfor %}
   </tbody>
 </table>
 
@@ -438,13 +404,8 @@
 function toggleDetail(idx) {
   var row = document.getElementById('detail-' + idx);
   var arrow = document.getElementById('arrow-' + idx);
-  if (row.classList.contains('open')) {
-    row.classList.remove('open');
-    arrow.classList.remove('open');
-  } else {
-    row.classList.add('open');
-    arrow.classList.add('open');
-  }
+  row.classList.toggle('open');
+  arrow.classList.toggle('open');
 }
 </script>
 
