@@ -69,10 +69,18 @@ def test_scan_with_llm_model_but_no_matchers_skips_llm() -> None:
 
 
 def test_scan_with_explicit_llm_matchers() -> None:
-    mock_matches = [
-        Match(category="Custom", matched_text="found", context="found", source="llm")
-    ]
-    with patch("looselips.scanner.llm_scan", return_value=mock_matches) as mock:
+    from looselips.matchers import LLMResult
+
+    mock_result = LLMResult(
+        found=True,
+        reasoning="found",
+        matches=[Match(
+            category="Custom", matched_text="found",
+            context="found", source="llm",
+        )],
+        verdict_json='{"reasoning":"found","found":true}',
+    )
+    with patch("looselips.scanner.llm_scan", return_value=mock_result) as mock:
         matchers = [("Custom", "Find custom stuff", "custom-model")]
         result = scan(
             [_conv([("user", "test")])],

@@ -122,6 +122,16 @@ class LLMVerdict(BaseModel):
     )
 
 
+@dataclass
+class LLMResult:
+    """Result from a single LLM scan call (one chunk)."""
+
+    found: bool
+    reasoning: str
+    matches: list[Match]
+    verdict_json: str
+
+
 class LLMParseError(Exception):
     """Raised when the LLM fails to return valid structured output after retries."""
 
@@ -134,11 +144,11 @@ def llm_scan(
     system_prompt: str = "",
     timeout: int = LLM_DEFAULT_TIMEOUT,
     retries: int = LLM_DEFAULT_RETRIES,
-) -> list[Match]:
-    """Send conversation text to an LLM and return matches.
+) -> LLMResult:
+    """Send conversation text to an LLM and return an LLMResult.
 
     The LLM returns a simple flagged/evidence verdict.  If flagged,
-    a single Match is returned with *name* as the category and
+    the result contains a Match with *name* as the category and
     the LLM's evidence as matched_text.
     """
     logger.debug("[%s] querying %s (%d chars)", name, model, len(messages_text))
@@ -175,18 +185,24 @@ def llm_scan(
     ) as e:
         raise LLMParseError(f"LLM failed for conversation '{title}': {e}") from e
 
-    logger.debug("[%s] raw: %s", name, verdict.model_dump_json())
+    verdict_json = verdict.model_dump_json()
+    logger.debug("[%s] raw: %s", name, verdict_json)
 
-    if not verdict.found:
-        logger.debug("[%s] NO MATCH -- %s", name, verdict.reasoning[:200])
-        return []
-
-    logger.info("[%s] MATCH -- %s", name, verdict.reasoning[:200])
-    return [
-        Match(
+    matches: list[Match] = []
+    if verdict.found:
+        logger.info("[%s] MATCH -- %s", name, verdict.reasoning[:200])
+        matches.append(Match(
             category=name,
             matched_text=verdict.reasoning,
             context=verdict.reasoning,
             source="llm",
-        )
-    ]
+        ))
+    else:
+        logger.debug("[%s] NO MATCH -- %s", name, verdict.reasoning[:200])
+
+    return LLMResult(
+        found=verdict.found,
+        reasoning=verdict.reasoning,
+        matches=matches,
+        verdict_json=verdict_json,
+    )

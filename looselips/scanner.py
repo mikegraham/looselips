@@ -27,6 +27,7 @@ class MatcherResult:
     reasoning: str
     elapsed: float
     error: str | None = None
+    response_json: str | None = None
 
 
 @dataclass
@@ -108,29 +109,41 @@ def scan_conversation_llm(
         found = False
         all_matches: list[Match] = []
         reasoning_parts: list[str] = []
+        verdict_jsons: list[str] = []
         error: str | None = None
 
         try:
             for chunk in chunks:
-                hits = llm_scan(
+                result = llm_scan(
                     conv.title, chunk, model,
                     name=name, system_prompt=system_prompt,
                 )
-                if hits:
+                reasoning_parts.append(result.reasoning)
+                verdict_jsons.append(result.verdict_json)
+                if result.found:
                     found = True
-                    all_matches.extend(hits)
-                    reasoning_parts.extend(m.matched_text for m in hits)
+                    all_matches.extend(result.matches)
         except LLMParseError as e:
             error = str(e)
 
         elapsed = time.monotonic() - t0
+        # For single-chunk conversations (the common case), store the
+        # raw verdict JSON directly.  For multi-chunk, wrap in an array.
+        if not verdict_jsons:
+            response_json = None
+        elif len(verdict_jsons) == 1:
+            response_json = verdict_jsons[0]
+        else:
+            response_json = "[" + ", ".join(verdict_jsons) + "]"
+
         results.append(MatcherResult(
             name=name,
             found=found,
             matches=all_matches,
-            reasoning="\n".join(reasoning_parts) if reasoning_parts else "(no match)",
+            reasoning="\n".join(reasoning_parts),
             elapsed=elapsed,
             error=error,
+            response_json=response_json,
         ))
 
     return results

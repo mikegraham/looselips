@@ -1,5 +1,6 @@
 """Tests for looselips.matchers."""
 
+import json
 import re
 from unittest.mock import MagicMock, patch
 
@@ -72,11 +73,14 @@ def test_llm_scan_flagged(
         found=True, reasoning="User is Bob, works at Acme"
     )
 
-    matches = llm_scan("Test Chat", "Hello I am Bob", "ollama/llama3", name="pii")
-    assert len(matches) == 1
-    assert matches[0].category == "pii"
-    assert matches[0].matched_text == "User is Bob, works at Acme"
-    assert matches[0].source == "llm"
+    result = llm_scan("Test Chat", "Hello I am Bob", "ollama/llama3", name="pii")
+    assert result.found is True
+    assert result.reasoning == "User is Bob, works at Acme"
+    assert len(result.matches) == 1
+    assert result.matches[0].category == "pii"
+    assert result.matches[0].matched_text == "User is Bob, works at Acme"
+    assert result.matches[0].source == "llm"
+    assert json.loads(result.verdict_json)["found"] is True
 
 
 @patch("looselips.matchers.instructor")
@@ -90,8 +94,10 @@ def test_llm_scan_not_flagged(
         found=False, reasoning=""
     )
 
-    matches = llm_scan("Chat", "nothing personal", "model")
-    assert matches == []
+    result = llm_scan("Chat", "nothing personal", "model")
+    assert result.found is False
+    assert result.matches == []
+    assert json.loads(result.verdict_json)["found"] is False
 
 
 @patch("looselips.matchers.instructor")
