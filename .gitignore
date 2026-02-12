@@ -23,7 +23,6 @@ htmlcov/
 # Generated output
 examples/test_report.html
 bench_report_*
-scripts/run_on_modal.py
 
 # Large binaries (temporary downloads, tools)
 *.tar.zst

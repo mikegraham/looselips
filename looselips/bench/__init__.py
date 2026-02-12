@@ -2,8 +2,8 @@
 """Benchmark harness for LLM matchers.
 
 Runs LLM matchers from a TOML config against labeled testcases (YAML files
-in scripts/bench/ that pair a conversation with expected matcher outcomes)
-and produces an HTML report comparing expected vs actual results.
+in looselips/bench/testcases/ that pair a conversation with expected matcher
+outcomes) and produces an HTML report comparing expected vs actual results.
 
 Results are saved incrementally to a SQLite database so progress survives
 interruptions and new testcases/matchers only run what's missing.
@@ -14,23 +14,23 @@ uses its own model from config, falling back to the config-level default_model.
 Examples:
 
     # Run with config's default model against built-in testcases
-    python scripts/bench.py --backend local -c config.toml
+    python -m looselips.bench --backend local -c config.toml
 
     # Override model for all matchers
-    python scripts/bench.py --backend local --model ollama/qwen2.5:7b -c config.toml
+    python -m looselips.bench --backend local --model ollama/qwen2.5:7b -c config.toml
 
     # Separate DB and report paths, custom testcases
-    python scripts/bench.py --backend local -c config.toml \\
+    python -m looselips.bench --backend local -c config.toml \\
         --db results.db -o report.html --testcases /path/to/cases
 
     # Run only the 'shoe_size' matcher
-    python scripts/bench.py --backend local -c config.toml -m shoe_size
+    python -m looselips.bench --backend local -c config.toml -m shoe_size
 
     # Re-run a matcher from scratch (delete cached results first)
-    python scripts/bench.py --backend local -c config.toml -m shoe_size --force
+    python -m looselips.bench --backend local -c config.toml -m shoe_size --force
 
     # Re-render report from existing DB without running anything
-    python scripts/bench.py --report-only --db results.db -o report.html
+    python -m looselips.bench --report-only --db results.db -o report.html
 """
 
 from __future__ import annotations
@@ -51,8 +51,8 @@ from looselips.cli.config import load_config
 from looselips.parsers import Conversation, Message
 from looselips.scanner import scan_conversation_llm
 
-TESTCASE_DIR = Path(__file__).resolve().parent / "bench"
-TEMPLATE_DIR = Path(__file__).resolve().parent.parent / "looselips" / "templates"
+TESTCASE_DIR = Path(__file__).resolve().parent / "testcases"
+TEMPLATE_DIR = Path(__file__).resolve().parent.parent / "templates"
 DEFAULT_OUTPUT = "bench_report.html"
 
 
@@ -174,7 +174,7 @@ class BenchReport:
             for matcher, expected in row.expectations.items():
                 voted = [
                     m for m in top
-                    if (cell := row.cells.get(m, {}).get(matcher)) is not None
+                    if row.cells.get(m, {}).get(matcher) is not None
                 ]
                 wrong = [
                     m for m in voted

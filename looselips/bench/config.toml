@@ -1,6 +1,6 @@
-# Bench config -- matchers used by scripts/bench.py against scripts/bench/ testcases.
-# The model field is ignored by bench.py (--model flag overrides it)
-# but is required by the config parser.
+# Bench config -- matchers used by looselips-bench against built-in testcases.
+# The model field is ignored when --model is given, but is required by
+# the config parser.
 model = "ollama/qwen3:32b"
 
 [[matcher]]
