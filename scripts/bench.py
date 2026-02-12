@@ -137,7 +137,7 @@ def init_db(db_path: Path) -> sqlite3.Connection:
             testcase  TEXT NOT NULL,
             matcher   TEXT NOT NULL,
             model     TEXT NOT NULL,
-            backend   TEXT NOT NULL DEFAULT 'local',
+            backend   TEXT,
             found     INTEGER NOT NULL,
             reasoning TEXT NOT NULL DEFAULT '',
             elapsed   REAL NOT NULL DEFAULT 0,
