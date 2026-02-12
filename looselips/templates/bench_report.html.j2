@@ -67,7 +67,6 @@
     /* -- Results table -- */
     table.results {
       border-collapse: collapse;
-      border-spacing: 0;
       margin-bottom: 1rem;
     }
 
@@ -77,67 +76,77 @@
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      padding: 0.5rem 0.4rem;
+      padding: 0.4rem;
       text-align: center;
       position: sticky;
       top: 0;
       z-index: 1;
-      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    table.results th.col-matcher,
+    table.results th.col-tc { text-align: left; }
+    table.results th.col-matcher { text-align: left; }
     table.results th.col-expect { text-align: left; }
 
-    table.results td {
-      padding: 0.4rem;
-      border: none;
-    }
+    table.results td { padding: 0; }
 
+    .col-tc      { min-width: 14rem; }
     .col-matcher { min-width: 8rem; }
     .col-expect  { min-width: 5rem; }
+    .col-model   { min-width: 4.5rem; }
 
     /* Testcase header row */
-    tr.tc-header { cursor: pointer; transition: background 0.1s; }
-    tr.tc-header:hover { background: #1e293b; }
+    tr.tc-header { cursor: pointer; }
+    tr.tc-header:hover td { background: #1e293b; }
 
-    .tc-title {
+    td.tc-title {
       font-weight: 500;
       color: #f1f5f9;
-      padding: 0.6rem 0.4rem 0.2rem;
+      font-size: 0.9rem;
+      padding: 0.6rem 0.4rem 0.15rem 0.4rem;
     }
 
     /* Matcher sub-rows */
-    tr.matcher-row td { font-size: 0.85rem; }
-    .matcher-name { color: #94a3b8; padding-left: 1.5rem; }
-    .expect-col { color: #94a3b8; }
-
-    /* PASS/FAIL cells */
-    td.cell { padding: 0; border: none; }
-
-    .cell-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      aspect-ratio: 1;
-      height: 2.8rem;
-      line-height: 1.2;
+    td.matcher-name {
+      color: #94a3b8;
+      font-size: 0.85rem;
+      padding: 0.5rem 0.4rem;
     }
 
-    .cell-pass .cell-inner { color: #dcfce7; font-weight: 600; background: #14532d; }
-    .cell-fail .cell-inner { color: #fecaca; font-weight: 600; background: #7f1d1d; }
+    td.expect-col {
+      color: #64748b;
+      font-size: 0.8rem;
+      padding: 0.5rem 0.4rem;
+    }
 
-    td.cell-empty { color: #334155; text-align: center; padding: 0; }
+    /* PASS/FAIL cells -- the td itself is the colored block */
+    .matcher-row td {
+      height: 4rem;
+    }
 
-    .cell-verdict { font-size: 0.7rem; }
-    .cell-elapsed { font-weight: 400; font-size: 0.55rem; opacity: 0.5; }
+    td.cell-pass, td.cell-fail {
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.7rem;
+      line-height: 1.3;
+      vertical-align: middle;
+      padding: 0.4rem 0;
+    }
+
+    td.cell-pass { background: #14532d; color: #dcfce7; }
+    td.cell-fail { background: #7f1d1d; color: #fecaca; }
+
+    td.cell-empty { background: #D1D5DB; padding: 0.4rem 0; }
+
+    .cell-elapsed { font-weight: 400; font-size: 0.55rem; opacity: 0.5; display: block; }
 
     .expand-arrow {
       display: inline-block;
       transition: transform 0.15s;
       margin-right: 0.3rem;
       color: #475569;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
     }
 
     .expand-arrow.open { transform: rotate(90deg); }
@@ -146,10 +155,15 @@
     .detail-row { display: none; }
     .detail-row.open { display: table-row; }
 
-    .detail-cell {
+    td.detail-cell {
+      padding: 0;
+      border-bottom: 2px solid #334155;
+    }
+
+    .detail-content {
       background: #1e293b;
       padding: 1rem;
-      border-bottom: 2px solid #334155;
+      max-width: 50rem;
     }
 
     .detail-section { margin-bottom: 1rem; }
@@ -177,6 +191,7 @@
     .msg-text {
       color: #cbd5e1;
       white-space: pre-wrap;
+      word-break: break-word;
       margin-left: 1rem;
       margin-bottom: 0.5rem;
     }
@@ -198,21 +213,42 @@
     }
 
     .reasoning-label { font-weight: 600; font-size: 0.8rem; margin-bottom: 0.2rem; }
-    .reasoning-text { font-size: 0.8rem; color: #cbd5e1; font-style: italic; }
+    .reasoning-label-pass { color: #22c55e; }
+    .reasoning-label-fail { color: #ef4444; font-weight: 700; }
+    .reasoning-text {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      font-style: italic;
+      word-break: break-word;
+    }
+    .reasoning-text-empty {
+      font-size: 0.8rem;
+      color: #475569;
+      font-style: italic;
+    }
     .reasoning-meta { font-size: 0.7rem; color: #64748b; margin-top: 0.2rem; }
 
-    /* -- Legend and footer -- */
-    .legend {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      font-size: 0.8rem;
-      color: #94a3b8;
-      flex-wrap: wrap;
+    /* -- Suspect labels -- */
+    .suspect-box {
+      background: #1c1917;
+      border: 1px solid #854d0e;
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
     }
 
-    .legend-item { display: flex; align-items: center; gap: 0.3rem; }
+    .suspect-box h3 {
+      color: #fbbf24;
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
 
+    .suspect-box p { color: #a8a29e; margin-bottom: 0.5rem; }
+    .suspect-box ul { padding-left: 1.2rem; color: #d6d3d1; }
+    .suspect-box li { margin-bottom: 0.3rem; }
+
+    /* -- Footer -- */
     .footer {
       text-align: center;
       color: #475569;
@@ -264,79 +300,91 @@
   </tbody>
 </table>
 
-<div class="legend">
-  <div class="legend-item"><span class="cell-pass cell-verdict">PASS</span> -- model matches expectation</div>
-  <div class="legend-item"><span class="cell-fail cell-verdict">FAIL</span> -- model contradicts expectation</div>
-  <div class="legend-item"><span class="cell-empty">--</span> -- not yet run</div>
+{% set suspects = report.suspect_labels() %}
+{% if suspects %}
+<div class="suspect-box">
+  <h3>Suspect labels</h3>
+  <p>These testcase+matcher combos may have incorrect expected values.</p>
+  <ul>
+  {% for s in suspects %}
+    <li><strong>{{ s.title }}</strong> / {{ s.matcher }} (expected {{ "match" if s.expected else "no match" }}) -- {{ s.dissenters }} disagree</li>
+  {% endfor %}
+  </ul>
 </div>
+{% endif %}
 
 <table class="results">
   <thead>
     <tr>
+      <th class="col-tc"></th>
       <th class="col-matcher">Matcher</th>
       <th class="col-expect">Expect</th>
-    {% for model in report.models %}
-      <th>{{ model | short_model }}</th>
+    {% for model in report.models | reverse %}
+      <th class="col-model">{{ model | short_model }}</th>
     {% endfor %}
     </tr>
   </thead>
   <tbody>
   {% for row in report.rows %}
     <tr class="tc-header" onclick="toggleDetail({{ loop.index0 }})">
-      <td class="tc-title" colspan="{{ 2 + report.models | length }}">
+      <td class="tc-title" colspan="{{ 3 + report.models | length }}">
         <span class="expand-arrow" id="arrow-{{ loop.index0 }}">&#9654;</span>
         {{ row.title }}
       </td>
     </tr>
     {% for matcher, expected in row.expectations.items() %}
     <tr class="matcher-row">
+      <td></td>
       <td class="matcher-name">{{ matcher }}</td>
       <td class="expect-col">{{ "match" if expected else "no match" }}</td>
-    {% for model in report.models %}
+    {% for model in report.models | reverse %}
       {% set cell = row.cells.get(model, {}).get(matcher) %}
       {% if cell is not none %}
       {% set ok = (cell.found == expected) %}
-      <td class="cell {{ 'cell-pass' if ok else 'cell-fail' }}"><div class="cell-inner">
-        <span class="cell-verdict">{{ "PASS" if ok else "FAIL" }}</span>
-        <span class="cell-elapsed">{{ '%.1f' | format(cell.elapsed) }}s</span>
-      </div></td>
+      <td class="{{ 'cell-pass' if ok else 'cell-fail' }}"{{ ' title=' + (cell.reasoning | e | tojson) if cell.reasoning else '' }}>{{ "PASS" if ok else "FAIL" }}<span class="cell-elapsed">{{ '%.1f' | format(cell.elapsed) }}s</span></td>
       {% else %}
-      <td class="cell cell-empty">--</td>
+      <td class="cell-empty"></td>
       {% endif %}
     {% endfor %}
     </tr>
     {% endfor %}
     <tr class="detail-row" id="detail-{{ loop.index0 }}">
-      <td class="detail-cell" colspan="{{ 2 + report.models | length }}">
-        <div class="detail-section">
-          <h4>Conversation ({{ row.messages | length }} messages)</h4>
-        {% for m in row.messages %}
-          <div class="msg">
-            <span class="msg-role msg-role-{{ m.role }}">{{ m.role }}:</span>
-            <div class="msg-text">{{ m.text }}</div>
-          </div>
-        {% endfor %}
-        </div>
-        <div class="detail-section">
-          <h4>LLM Reasoning</h4>
-        {% for matcher in row.expectations %}
-          <div class="reasoning-group">
-            <div class="reasoning-group-title">{{ matcher }}</div>
-          {% for model in report.models %}
-            {% set cell = row.cells.get(model, {}).get(matcher) %}
-            {% if cell is not none %}
-            {% set ok = (cell.found == row.expectations[matcher]) %}
-            <div class="reasoning-box">
-              <div class="reasoning-label {{ 'cell-pass' if ok else 'cell-fail' }}">
-                {{ model | short_model }} -- expected={{ row.expectations[matcher] }}, got={{ cell.found }}
-              </div>
-              <div class="reasoning-text">{{ cell.reasoning }}</div>
-              <div class="reasoning-meta">{{ '%.1f' | format(cell.elapsed) }}s</div>
+      <td class="detail-cell" colspan="{{ 3 + report.models | length }}">
+        <div class="detail-content">
+          <div class="detail-section">
+            <h4>Conversation ({{ row.messages | length }} messages)</h4>
+          {% for m in row.messages %}
+            <div class="msg">
+              <span class="msg-role msg-role-{{ m.role }}">{{ m.role }}:</span>
+              <div class="msg-text">{{ m.text }}</div>
             </div>
-            {% endif %}
           {% endfor %}
           </div>
-        {% endfor %}
+          <div class="detail-section">
+            <h4>LLM Reasoning</h4>
+          {% for matcher in row.expectations %}
+            <div class="reasoning-group">
+              <div class="reasoning-group-title">{{ matcher }}</div>
+            {% for model in report.models | reverse %}
+              {% set cell = row.cells.get(model, {}).get(matcher) %}
+              {% if cell is not none %}
+              {% set ok = (cell.found == row.expectations[matcher]) %}
+              <div class="reasoning-box">
+                <div class="reasoning-label {{ 'reasoning-label-pass' if ok else 'reasoning-label-fail' }}">
+                  {{ model | short_model }} -- {{ "PASS" if ok else "FAIL" }} (expected={{ row.expectations[matcher] }}, got={{ cell.found }})
+                </div>
+                {% if cell.reasoning %}
+                <div class="reasoning-text">{{ cell.reasoning }}</div>
+                {% else %}
+                <div class="reasoning-text-empty">(no reasoning returned)</div>
+                {% endif %}
+                <div class="reasoning-meta">{{ '%.1f' | format(cell.elapsed) }}s</div>
+              </div>
+              {% endif %}
+            {% endfor %}
+            </div>
+          {% endfor %}
+          </div>
         </div>
       </td>
     </tr>

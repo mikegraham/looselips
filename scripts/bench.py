@@ -8,14 +8,37 @@ and produces an HTML report comparing expected vs actual results.
 Results are saved incrementally to a SQLite database so progress survives
 interruptions and new testcases/matchers only run what's missing.
 
-Usage:
-    python scripts/bench.py --model ollama/qwen2.5:7b -c examples/example_config.toml
+Model resolution: --model overrides all matchers. Without it, each matcher
+uses its own model from config, falling back to the config-level default_model.
+
+Examples:
+
+    # Run with config's default model against built-in testcases
+    python scripts/bench.py --backend local -c config.toml
+
+    # Override model for all matchers
+    python scripts/bench.py --backend local --model ollama/qwen2.5:7b -c config.toml
+
+    # Separate DB and report paths, custom testcases
+    python scripts/bench.py --backend local -c config.toml \\
+        --db results.db -o report.html --testcases /path/to/cases
+
+    # Run only the 'shoe_size' matcher
+    python scripts/bench.py --backend local -c config.toml -m shoe_size
+
+    # Re-run a matcher from scratch (delete cached results first)
+    python scripts/bench.py --backend local -c config.toml -m shoe_size --force
+
+    # Re-render report from existing DB without running anything
+    python scripts/bench.py --report-only --db results.db -o report.html
 """
 
 from __future__ import annotations
 
 import argparse
+import re
 import sqlite3
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -43,6 +66,7 @@ class CellResult:
     found: bool
     reasoning: str
     elapsed: float
+    response_json: str | None = None
 
 
 @dataclass
@@ -99,6 +123,36 @@ class BenchReport:
                     counts["FN"] += 1
         return counts
 
+    def suspect_labels(self) -> list[dict]:
+        """Flag testcase+matcher combos where top models disagree with the label.
+
+        A combo is suspect if at least 3 of the top 4 models got it wrong.
+        Returns a list of dicts with keys: title, matcher, expected, dissenters.
+        """
+        top = self.models[:min(4, len(self.models))]
+        if len(top) < 3:
+            return []
+
+        def _short(model: str) -> str:
+            return model.split("/", 1)[-1] if "/" in model else model
+
+        suspects: list[dict] = []
+        for row in self.rows:
+            for matcher, expected in row.expectations.items():
+                wrong = [
+                    m for m in top
+                    if (cell := row.cells.get(m, {}).get(matcher)) is not None
+                    and cell.found != expected
+                ]
+                if len(wrong) >= 3:
+                    suspects.append({
+                        "title": row.title,
+                        "matcher": matcher,
+                        "expected": expected,
+                        "dissenters": ", ".join(_short(m) for m in wrong),
+                    })
+        return suspects
+
 
 # -- Testcase loading ---------------------------------------------------------
 
@@ -138,17 +192,22 @@ def init_db(db_path: Path) -> sqlite3.Connection:
     conn = sqlite3.connect(str(db_path))
     conn.execute("""
         CREATE TABLE IF NOT EXISTS results (
-            testcase  TEXT NOT NULL,
-            matcher   TEXT NOT NULL,
-            model     TEXT NOT NULL,
-            backend   TEXT,
-            found     INTEGER NOT NULL,
-            reasoning TEXT NOT NULL DEFAULT '',
-            elapsed   REAL NOT NULL DEFAULT 0,
-            run_at    TEXT NOT NULL,
+            testcase      TEXT NOT NULL,
+            matcher       TEXT NOT NULL,
+            model         TEXT NOT NULL,
+            backend       TEXT,
+            found         INTEGER NOT NULL,
+            reasoning     TEXT NOT NULL DEFAULT '',
+            elapsed       REAL NOT NULL DEFAULT 0,
+            response_json TEXT,
+            run_at        TEXT NOT NULL,
             PRIMARY KEY (testcase, matcher, model)
         )
     """)
+    # Migrate existing databases that lack the response_json column.
+    cols = {r[1] for r in conn.execute("PRAGMA table_info(results)").fetchall()}
+    if "response_json" not in cols:
+        conn.execute("ALTER TABLE results ADD COLUMN response_json TEXT")
     conn.commit()
     return conn
 
@@ -184,19 +243,33 @@ def save_result(
     found: bool,
     reasoning: str,
     elapsed: float,
+    response_json: str | None = None,
 ) -> None:
     """Insert or replace a result row."""
     conn.execute(
         "INSERT OR REPLACE INTO results "
-        "(testcase, matcher, model, backend, found, reasoning, elapsed, run_at) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        "(testcase, matcher, model, backend, found, reasoning, elapsed,"
+        " response_json, run_at) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
         (testcase, matcher, model, backend, int(found), reasoning, elapsed,
-         datetime.now().isoformat()),
+         response_json, datetime.now().isoformat()),
     )
     conn.commit()
 
 
 # -- Report building from DB --------------------------------------------------
+
+
+def _natural_sort_key(model: str) -> list[float | str]:
+    """Tiebreaker: natural sort on the full model name."""
+    parts: list[float | str] = []
+    for tok in re.split(r"(\d+(?:\.\d+)?)", model):
+        if tok:
+            try:
+                parts.append(float(tok))
+            except ValueError:
+                parts.append(tok.lower())
+    return parts
 
 
 def build_report(
@@ -207,19 +280,21 @@ def build_report(
     """Build a multi-model BenchReport from all DB results."""
     # Discover all models
     model_rows = conn.execute(
-        "SELECT DISTINCT model FROM results ORDER BY model",
+        "SELECT DISTINCT model FROM results",
     ).fetchall()
     models = [r[0] for r in model_rows]
 
     # Load all results: {testcase: {model: {matcher: CellResult}}}
     all_rows = conn.execute(
-        "SELECT testcase, matcher, model, found, reasoning, elapsed "
+        "SELECT testcase, matcher, model, found, reasoning, elapsed,"
+        " response_json "
         "FROM results",
     ).fetchall()
     db_data: dict[str, dict[str, dict[str, CellResult]]] = {}
-    for testcase, matcher, model, found, reasoning, elapsed in all_rows:
+    for testcase, matcher, model, found, reasoning, elapsed, rj in all_rows:
         db_data.setdefault(testcase, {}).setdefault(model, {})[matcher] = (
-            CellResult(found=bool(found), reasoning=reasoning, elapsed=elapsed)
+            CellResult(found=bool(found), reasoning=reasoning,
+                       elapsed=elapsed, response_json=rj)
         )
 
     # Build rows
@@ -238,7 +313,19 @@ def build_report(
         )
         rows.append(row)
 
-    return BenchReport(models=models, matchers=matcher_names, rows=rows)
+    # Sort models by accuracy * recall (descending), natural name as tiebreaker
+    report = BenchReport(models=models, matchers=matcher_names, rows=rows)
+
+    def _score_key(model: str) -> tuple[float, list[float | str]]:
+        ct = report.crosstab(model)
+        total = ct["TP"] + ct["TN"] + ct["FP"] + ct["FN"]
+        pos = ct["TP"] + ct["FN"]
+        acc = (ct["TP"] + ct["TN"]) / total if total else 0.0
+        recall = ct["TP"] / pos if pos else 0.0
+        return (-acc * recall, _natural_sort_key(model))
+
+    report.models = sorted(models, key=_score_key)
+    return report
 
 
 # -- Bench runner --------------------------------------------------------------
@@ -251,7 +338,7 @@ def run_bench(
     model: str,
     backend: str = "local",
     model_override: str | None = None,
-    on_result: callable = None,
+    on_result: Callable[[], None] | None = None,
 ) -> None:
     """Run matchers against testcases, skipping already-completed work.
 
@@ -299,7 +386,8 @@ def run_bench(
                 continue
 
             save_result(conn, testcase["name"], mr.name, model,
-                        backend, mr.found, mr.reasoning, mr.elapsed)
+                        backend, mr.found, mr.reasoning, mr.elapsed,
+                        mr.response_json)
 
             expected = expectations[mr.name]
             ok = mr.found == expected
@@ -335,12 +423,14 @@ def main() -> None:
         description="Run LLM matcher benchmarks against labeled testcases.",
     )
     parser.add_argument(
-        "-c", "--config", required=True, type=Path,
-        help="TOML config file with matcher definitions",
+        "-c", "--config", type=Path, default=None,
+        help="TOML config file with matcher definitions "
+             "(required unless --report-only)",
     )
     parser.add_argument(
         "--model", default=None,
-        help="Override model for all matchers (any LiteLLM model string)",
+        help="Override model for all matchers, ignoring per-matcher and "
+             "default_model from config (any LiteLLM model string)",
     )
     parser.add_argument(
         "--testcases", type=Path, default=TESTCASE_DIR,
@@ -348,13 +438,55 @@ def main() -> None:
     )
     parser.add_argument(
         "-o", "--output", type=Path, default=DEFAULT_OUTPUT,
-        help=f"Output HTML path (default: {DEFAULT_OUTPUT})",
+        help=f"Output HTML report path (default: {DEFAULT_OUTPUT})",
     )
     parser.add_argument(
-        "--backend", default="local",
-        help="Compute backend label stored with results (default: local)",
+        "--db", type=Path, default=None,
+        help="SQLite database path (default: <output>.db)",
+    )
+    parser.add_argument(
+        "--backend", default=None,
+        help="Compute backend tag stored with results (e.g. local, modal/L4). "
+             "Required unless --report-only.",
+    )
+    parser.add_argument(
+        "-m", "--matcher", action="append", dest="matchers", metavar="NAME",
+        help="Only run these matchers (repeatable; default: all from config)",
+    )
+    parser.add_argument(
+        "--force", action="store_true",
+        help="Delete cached results for the selected matchers before running",
+    )
+    parser.add_argument(
+        "--report-only", action="store_true",
+        help="Re-render report from existing DB without running any benchmarks",
     )
     args = parser.parse_args()
+
+    # Load testcases
+    testcases = load_testcases(args.testcases)
+
+    # Open SQLite database
+    db_path = args.db or args.output.with_suffix(".db")
+    conn = init_db(db_path)
+
+    if args.report_only:
+        # Pull matcher names from DB -- no config needed
+        matcher_rows = conn.execute(
+            "SELECT DISTINCT matcher FROM results ORDER BY matcher",
+        ).fetchall()
+        matcher_names = [r[0] for r in matcher_rows]
+        report = build_report(conn, testcases, matcher_names)
+        html = render_report(report)
+        args.output.write_text(html, encoding="utf-8")
+        conn.close()
+        print(f"Report written to {args.output}")
+        return
+
+    if not args.config:
+        parser.error("--config is required (unless --report-only)")
+    if not args.backend:
+        parser.error("--backend is required (unless --report-only)")
 
     # Load config and extract LLM matchers
     config = load_config(args.config)
@@ -370,27 +502,49 @@ def main() -> None:
     if not llm_matchers:
         parser.error("no LLM matchers found in config")
 
+    # Filter to requested matchers if -m/--matcher given
+    if args.matchers:
+        available = {name for name, _, _ in llm_matchers}
+        for m in args.matchers:
+            if m not in available:
+                parser.error(
+                    f"matcher {m!r} not in config "
+                    f"(available: {', '.join(sorted(available))})"
+                )
+        llm_matchers = [
+            (n, p, mod) for n, p, mod in llm_matchers if n in args.matchers
+        ]
+
     matcher_names = [name for name, _, _ in llm_matchers]
+
     effective_model = args.model or config.default_model or llm_matchers[0][2]
     print(f"Model: {effective_model}")
     print(f"Matchers: {', '.join(matcher_names)}")
     print()
 
-    # Load testcases
-    testcases = load_testcases(args.testcases)
-    print(f"Loaded {len(testcases)} testcases from {args.testcases}")
+    # --force: delete cached results for selected matchers before running
+    if args.force:
+        placeholders = ", ".join("?" for _ in matcher_names)
+        deleted = conn.execute(
+            f"DELETE FROM results WHERE model = ? AND matcher IN ({placeholders})",
+            [effective_model, *matcher_names],
+        ).rowcount
+        conn.commit()
+        if deleted:
+            print(f"Deleted {deleted} cached results (--force)")
 
-    # Open SQLite database
-    db_path = args.output.with_suffix(".db")
-    conn = init_db(db_path)
+    print(f"Loaded {len(testcases)} testcases from {args.testcases}")
     cached = load_cached(conn, effective_model)
     if cached:
         print(f"Found {len(cached)} cached results in {db_path}")
     print()
 
+    # For the report, use all matchers from config (not just the filtered ones)
+    all_matcher_names = [m.name for m in config.matchers if m.type == "llm"]
+
     # Callback: rebuild and re-render from DB after each testcase
     def on_result() -> None:
-        report = build_report(conn, testcases, matcher_names)
+        report = build_report(conn, testcases, all_matcher_names)
         html = render_report(report)
         args.output.write_text(html, encoding="utf-8")
 
@@ -404,8 +558,8 @@ def main() -> None:
         on_result=on_result,
     )
 
-    # Final report
-    report = build_report(conn, testcases, matcher_names)
+    # Final report (all matchers, not just the filtered ones)
+    report = build_report(conn, testcases, all_matcher_names)
 
     # Print summary
     print()

@@ -89,6 +89,7 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = ["S", "T20"]
+"scripts/*" = ["S", "T20"]
 "looselips/parsers.py" = ["B023"]  # walk() uses enclosing scope intentionally
 
 [tool.mypy]
