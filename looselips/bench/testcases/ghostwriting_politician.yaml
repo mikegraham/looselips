@@ -1,9 +1,10 @@
-# False positive trap: discusses compromising content but user is just doing their job
-# The scandals and corruption are about the politician's OPPONENT, not the user
+# User is ghostwriting attack ads for a politician -- the content itself is
+# professional, but revealing that a politician uses AI ghostwriters could
+# be damaging if leaked.
 title: Ghostwriting Political Speeches
 expect:
   shoe_size: false
-  compromising: false
+  compromising: true
 messages:
   - user: |
       I'm a freelance speechwriter and I'm working on a campaign speech for a city council candidate. They want to go after their opponent hard on some recent corruption allegations. How do I write something that's hard-hitting but doesn't cross the line into defamation?
