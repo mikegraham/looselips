@@ -318,8 +318,10 @@ def _main_with_conn(
     tested = ct["TP"] + ct["TN"] + ct["FP"] + ct["FN"]
     acc = ((ct["TP"] + ct["TN"]) / tested * 100) if tested else 0
     recall = (ct["TP"] / (ct["TP"] + ct["FN"]) * 100) if (ct["TP"] + ct["FN"]) else 0
+    f2_denom = 5 * ct["TP"] + 4 * ct["FN"] + ct["FP"]
+    f2 = (5 * ct["TP"] / f2_denom * 100) if f2_denom else 0
     print(f"  TP={ct['TP']} TN={ct['TN']} FP={ct['FP']} FN={ct['FN']}")
-    print(f"  Accuracy: {acc:.0f}%  Recall: {recall:.0f}%")
+    print(f"  Accuracy: {acc:.0f}%  Recall: {recall:.0f}%  F2: {f2:.0f}%")
     print("=" * 60)
 
     # Final render

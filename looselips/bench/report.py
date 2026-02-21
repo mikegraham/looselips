@@ -217,16 +217,14 @@ def build_report(
         )
         rows.append(row)
 
-    # Sort models by accuracy * recall (descending), natural name as tiebreaker
+    # Sort models by F2 score (descending), natural name as tiebreaker
     report = BenchReport(models=models, matchers=matcher_names, rows=rows)
 
     def _score_key(model: str) -> tuple[float, list[float | str]]:
         ct = report.crosstab(model)
-        total = ct["TP"] + ct["TN"] + ct["FP"] + ct["FN"]
-        pos = ct["TP"] + ct["FN"]
-        acc = (ct["TP"] + ct["TN"]) / total if total else 0.0
-        recall = ct["TP"] / pos if pos else 0.0
-        return (-acc * recall, _natural_sort_key(model))
+        denom = 5 * ct["TP"] + 4 * ct["FN"] + ct["FP"]
+        f2 = 5 * ct["TP"] / denom if denom else 0.0
+        return (-f2, _natural_sort_key(model))
 
     report.models = sorted(models, key=_score_key)
     return report

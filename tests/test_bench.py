@@ -353,9 +353,9 @@ def test_build_report_sorts_models_by_score(tmp_path: Path) -> None:
     report = build_report(conn, testcases, ["pii"])
     conn.close()
 
-    # model-a got pii right (found=True, expected=True)
-    # model-b got pii wrong (found=False, expected=True)
-    # model-a should sort first (better score)
+    # model-a got pii right (found=True, expected=True) -> F2=1.0
+    # model-b got pii wrong (found=False, expected=True) -> F2=0.0
+    # model-a should sort first (higher F2)
     assert report.models[0] == "model-a"
 
 

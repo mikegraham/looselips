@@ -282,7 +282,7 @@
 <table class="crosstab">
   <thead>
     <tr>
-      <th>Model</th><th class="ct-count">TP</th><th class="ct-count">TN</th><th class="ct-count">FP</th><th class="ct-count">FN</th><th class="ct-count">Tot</th><th class="ct-stat">Accuracy</th><th class="ct-stat">Recall</th><th class="ct-stat">Precision</th><th class="ct-stat">F1</th><th class="ct-stat">Mean</th>
+      <th>Model</th><th class="ct-count">TP</th><th class="ct-count">TN</th><th class="ct-count">FP</th><th class="ct-count">FN</th><th class="ct-count">Tot</th><th class="ct-stat">Accuracy</th><th class="ct-stat">Recall</th><th class="ct-stat">Precision</th><th class="ct-stat">F1</th><th class="ct-stat">F2</th><th class="ct-stat">Mean</th>
     </tr>
   </thead>
   <tbody>
@@ -305,6 +305,8 @@
       <td class="ct-stat">{{ ct_precision }}%</td>
       {% set ct_f1 = (2 * ct.TP / (2 * ct.TP + ct.FP + ct.FN) * 100) | int if (2 * ct.TP + ct.FP + ct.FN) else 0 %}
       <td class="ct-stat">{{ ct_f1 }}%</td>
+      {% set ct_f2 = (5 * ct.TP / (5 * ct.TP + 4 * ct.FN + ct.FP) * 100) | int if (5 * ct.TP + 4 * ct.FN + ct.FP) else 0 %}
+      <td class="ct-stat {{ 'accuracy-good' if ct_f2 >= 80 else 'accuracy-mid' if ct_f2 >= 60 else 'accuracy-bad' }}"><strong>{{ ct_f2 }}%</strong></td>
       <td class="ct-stat">{{ '%.1f' | format(report.model_mean_elapsed(model)) }}s</td>
     </tr>
     {% for matcher in report.matchers %}
@@ -317,6 +319,7 @@
     {% set mc_pp = mc.TP + mc.FP %}
     {% set mc_precision = (mc.TP / mc_pp * 100) | int if mc_pp else 0 %}
     {% set mc_f1 = (2 * mc.TP / (2 * mc.TP + mc.FP + mc.FN) * 100) | int if (2 * mc.TP + mc.FP + mc.FN) else 0 %}
+    {% set mc_f2 = (5 * mc.TP / (5 * mc.TP + 4 * mc.FN + mc.FP) * 100) | int if (5 * mc.TP + 4 * mc.FN + mc.FP) else 0 %}
     <tr class="ct-matcher" hidden style="color:#888;font-size:0.85em">
       <td style="padding-left:1.5rem">{{ matcher }}</td>
       <td class="ct-count">{{ mc.TP }}</td><td class="ct-count">{{ mc.TN }}</td><td class="ct-count">{{ mc.FP }}</td><td class="ct-count">{{ mc.FN }}</td>
@@ -325,6 +328,7 @@
       <td class="ct-stat">{{ mc_recall }}%</td>
       <td class="ct-stat">{{ mc_precision }}%</td>
       <td class="ct-stat">{{ mc_f1 }}%</td>
+      <td class="ct-stat">{{ mc_f2 }}%</td>
       <td class="ct-stat"></td>
     </tr>
     {% endfor %}
