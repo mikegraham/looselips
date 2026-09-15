@@ -37,8 +37,8 @@ def _detect_format(data: Sequence[object]) -> _Format:
     return "chatgpt"
 
 
-def _read_from_zip(path: Path) -> tuple[bytes, _Format]:
-    """Extract conversations.json from an export zip and detect format."""
+def _read_from_zip(path: Path) -> bytes:
+    """Extract conversations.json from an export zip."""
     with zipfile.ZipFile(path, "r") as zf:
         names = zf.namelist()
         logger.debug("Zip contains %d entries", len(names))
@@ -46,12 +46,9 @@ def _read_from_zip(path: Path) -> tuple[bytes, _Format]:
             raise InputError(
                 f"Zip file {path} does not contain conversations.json"
             )
-        # Claude exports include users.json alongside conversations.json.
-        # Annotation needed: mypy infers the ternary as str, not Literal.
-        fmt: _Format = "claude" if "users.json" in names else "chatgpt"
         data = zf.read("conversations.json")
         logger.debug("Read %d bytes from conversations.json in zip", len(data))
-        return data, fmt
+        return data
 
 
 def load_conversations(path: str | Path) -> list[Conversation]:
@@ -63,17 +60,20 @@ def load_conversations(path: str | Path) -> list[Conversation]:
     logger.debug("Loading from %s (%s, %.1f KB)", p, p.suffix, p.stat().st_size / 1024)
 
     if p.suffix == ".zip":
-        data, fmt = _read_from_zip(p)
-        logger.info("Detected format: %s", fmt)
-        parser = parse_claude if fmt == "claude" else parse_chatgpt
-        convs = parser(data)
+        raw = _read_from_zip(p)
     else:
-        # Bare JSON -- read once, detect format
         raw = p.read_bytes()
-        fmt = _detect_format(json.loads(raw))
-        logger.info("Detected format: %s", fmt)
-        parser = parse_claude if fmt == "claude" else parse_chatgpt
-        convs = parser(raw)
+
+    # Detect the format from the content, never from sibling files.  Claude
+    # exports used to ship users.json next to conversations.json, but the
+    # newer per-category export (a manifest pointing at conversations-000.zip
+    # and friends) does not, and keying on that file misread them as
+    # ChatGPT.  The JSON is parsed a second time by the parser; that costs a
+    # few seconds on a very large export and keeps the parsers self-contained.
+    fmt = _detect_format(json.loads(raw))
+    logger.info("Detected format: %s", fmt)
+    parser = parse_claude if fmt == "claude" else parse_chatgpt
+    convs = parser(raw)
 
     if not convs:
         logger.error("export contained 0 conversations")

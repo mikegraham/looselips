@@ -132,3 +132,29 @@ def test_load_claude_zip(tmp_path: Path) -> None:
     assert convs[0].id == "claude-1"
 
 
+def test_load_claude_zip_without_sibling_files(tmp_path: Path) -> None:
+    """Claude's per-category export ships conversations.json alone.
+
+    Regression test: the zip loader used to decide the format by whether
+    users.json sat next to conversations.json, so this zip was parsed as
+    ChatGPT and produced no conversations.
+    """
+    p = tmp_path / "conversations-000.zip"
+    with zipfile.ZipFile(p, "w") as zf:
+        zf.writestr("conversations.json", json.dumps(_MINIMAL_CLAUDE_EXPORT))
+    convs = load_conversations(p)
+    assert len(convs) == 1
+    assert convs[0].id == "claude-1"
+    assert convs[0].url == "https://claude.ai/chat/claude-1"
+    assert [m.text for m in convs[0].messages] == ["Hello", "Hi!"]
+
+
+def test_load_chatgpt_zip_with_extra_files(tmp_path: Path) -> None:
+    """Sibling files no longer influence detection; content does."""
+    p = tmp_path / "export.zip"
+    with zipfile.ZipFile(p, "w") as zf:
+        zf.writestr("conversations.json", json.dumps(_MINIMAL_EXPORT))
+        zf.writestr("users.json", "[]")
+    convs = load_conversations(p)
+    assert len(convs) == 1
+    assert "chatgpt.com" in convs[0].url
