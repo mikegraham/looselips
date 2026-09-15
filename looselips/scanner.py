@@ -56,9 +56,40 @@ class ScanResult:
     errors: list[ConversationError] = field(default_factory=list)
 
 
-def _format_messages(conv: Conversation) -> list[str]:
-    """Format each message as ``[ROLE]: text``."""
-    return [f"[{m.role.upper()}]: {m.text}" for m in conv.messages]
+def _format_message(role: str, text: str, part: int = 0, parts: int = 0) -> str:
+    """Format one message (or one piece of a split message) as ``[ROLE]: text``."""
+    if parts > 1:
+        return f"[{role.upper()}] (part {part}/{parts}): {text}"
+    return f"[{role.upper()}]: {text}"
+
+
+def _split_message(role: str, text: str, max_chars: int) -> list[str]:
+    """Hard-split one message into formatted pieces of at most *max_chars*.
+
+    Each piece repeats the role tag and is numbered ``(part i/n)`` so the
+    model still knows who is speaking and that it is seeing an excerpt.
+    """
+    # The part numbers are not known until the split is done, so budget for
+    # the widest they could possibly be (one part per character of text).
+    # That overshoots by a handful of characters at most.
+    digits = len(str(len(text)))
+    prefix_len = len(_format_message(role, "", 10**digits - 1, 10**digits - 1))
+    budget = max(1, max_chars - prefix_len)
+
+    bodies: list[str] = []
+    start = 0
+    while start < len(text):
+        end = min(start + budget, len(text))
+        if end < len(text):
+            # Prefer a line boundary in the second half of the piece; fall
+            # back to a hard cut when the text has no newline there.
+            nl = text.rfind("\n", start + budget // 2, end)
+            if nl != -1:
+                end = nl + 1
+        bodies.append(text[start:end])
+        start = end
+
+    return [_format_message(role, b, i, len(bodies)) for i, b in enumerate(bodies, 1)]
 
 
 def _chunk_conversation(
@@ -66,10 +97,22 @@ def _chunk_conversation(
 ) -> list[str]:
     """Split a conversation into chunks that fit within *max_chars*.
 
-    Splits at message boundaries so no single message is cut in half.
-    A message longer than *max_chars* gets its own chunk.
+    Splits at message boundaries so no single message is cut in half,
+    except for messages that are themselves longer than *max_chars*: those
+    are hard-split into numbered pieces.  Exports really do contain single
+    messages of a few hundred thousand characters, and an oversized chunk
+    is worse than a split one -- Ollama silently truncates a prompt that
+    does not fit the context window, so the model would return a verdict
+    for only part of the text, which for a scanner means a false negative.
     """
-    messages = _format_messages(conv)
+    messages: list[str] = []
+    for m in conv.messages:
+        formatted = _format_message(m.role, m.text)
+        if len(formatted) > max_chars:
+            messages.extend(_split_message(m.role, m.text, max_chars))
+        else:
+            messages.append(formatted)
+
     chunks: list[str] = []
     current: list[str] = []
     current_len = 0

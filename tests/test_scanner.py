@@ -56,6 +56,75 @@ def test_chunk_conversation_splits_at_message_boundary() -> None:
     assert "c" * 100 in chunks[2]
 
 
+def test_chunk_conversation_splits_oversized_message() -> None:
+    """A message longer than max_chars is split, never left oversized.
+
+    Regression test: an oversized chunk used to be sent as-is, and the
+    backend silently truncated it (a false negative for whatever was in the
+    tail of the message).
+    """
+    text = "".join(f"line {i} secret{i}\n" for i in range(400))
+    conv = _conv([("user", text)])
+    chunks = _chunk_conversation(conv, max_chars=500)
+
+    assert len(chunks) > 1
+    assert all(len(c) <= 500 for c in chunks)
+    # Every piece keeps a role tag and says which part it is.
+    assert chunks[0].startswith(f"[USER] (part 1/{len(chunks)}): ")
+    assert all(c.startswith("[USER] (part ") for c in chunks)
+    # Nothing is dropped: the pieces reassemble into the original message.
+    rebuilt = "".join(
+        re.sub(r"^\[USER\] \(part \d+/\d+\): ", "", c) for c in chunks
+    )
+    assert rebuilt == text
+    assert "secret399" in rebuilt
+
+
+def test_chunk_conversation_splits_at_newline_when_possible() -> None:
+    """Pieces prefer to end on a line boundary."""
+    text = "".join(f"line {i}\n" for i in range(300))
+    chunks = _chunk_conversation(_conv([("user", text)]), max_chars=400)
+    assert len(chunks) > 1
+    # All but the last piece end where a line ended.
+    assert all(c.endswith("\n") for c in chunks[:-1])
+
+
+def test_chunk_conversation_hard_splits_without_newlines() -> None:
+    """A single long line has no newline to split on, so it is cut hard."""
+    text = "x" * 5000
+    chunks = _chunk_conversation(_conv([("user", text)]), max_chars=600)
+    assert len(chunks) >= 9
+    assert all(len(c) <= 600 for c in chunks)
+    rebuilt = "".join(
+        re.sub(r"^\[USER\] \(part \d+/\d+\): ", "", c) for c in chunks
+    )
+    assert rebuilt == text
+
+
+def test_chunk_conversation_mixes_split_pieces_with_short_messages() -> None:
+    """Split pieces flow through the normal packing logic."""
+    conv = _conv([
+        ("user", "short one"),
+        ("assistant", "y" * 3000),
+        ("user", "short two"),
+    ])
+    chunks = _chunk_conversation(conv, max_chars=500)
+    assert all(len(c) <= 500 for c in chunks)
+    assert "[USER]: short one" in chunks[0]
+    assert "[ASSISTANT] (part 1/" in "\n".join(chunks)
+    assert "[USER]: short two" in chunks[-1]
+
+
+def test_chunk_conversation_at_limit_not_split() -> None:
+    """A message that exactly fits keeps its plain role tag."""
+    text = "z" * (500 - len("[USER]: "))
+    chunks = _chunk_conversation(_conv([("user", text)]), max_chars=500)
+    assert len(chunks) == 1
+    assert chunks[0] == f"[USER]: {text}"
+    assert len(chunks[0]) == 500
+
+
+
 def test_scan_with_llm_model_but_no_matchers_skips_llm() -> None:
     """llm_model alone does not trigger scanning -- explicit matchers required."""
     with patch("looselips.scanner.llm_scan") as mock:
