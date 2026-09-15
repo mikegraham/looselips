@@ -11,6 +11,7 @@ import logging
 import re
 from collections.abc import Sequence
 from dataclasses import dataclass
+from typing import Any
 
 # Ugh -- litellm phones home on import to fetch a model cost map. Looks
 # sketchy for a tool meant to be local-only.
@@ -32,6 +33,17 @@ LLM_MAX_TOKENS = 2000
 LLM_TEMPERATURE = 0.1
 LLM_DEFAULT_TIMEOUT = 300
 LLM_DEFAULT_RETRIES = 3
+
+# Ollama picks a default context window from available VRAM (4096 tokens
+# with no GPU) and silently truncates prompts that do not fit, so the model
+# returns a verdict on only part of the text (a false negative).  The
+# scanner sends chunks of up to scanner.LLM_CHUNK_CHARS (24000) characters;
+# at a conservative 3 chars/token (code and non-English text tokenize
+# worse than prose) that is 8000 tokens, plus the scanner prompt and the
+# LLM_MAX_TOKENS output budget.  16k covers it with margin.  Requesting it
+# per call means users do not have to know about OLLAMA_CONTEXT_LENGTH.
+LLM_NUM_CTX = 16384
+OLLAMA_PREFIXES = ("ollama/", "ollama_chat/")
 
 # Prompt design notes (what inspires each piece):
 #
@@ -194,6 +206,13 @@ class LLMParseError(Exception):
     """Raised when the LLM fails to return valid structured output after retries."""
 
 
+def _provider_params(model: str) -> dict[str, Any]:
+    """Extra litellm kwargs needed for *model*'s provider (see LLM_NUM_CTX)."""
+    if model.startswith(OLLAMA_PREFIXES):
+        return {"num_ctx": LLM_NUM_CTX}
+    return {}
+
+
 def llm_scan(
     title: str,
     messages_text: str,
@@ -229,6 +248,7 @@ def llm_scan(
             temperature=LLM_TEMPERATURE,
             timeout=timeout,
             max_retries=retries,
+            **_provider_params(model),
         )
     except (
         litellm.exceptions.APIConnectionError,
