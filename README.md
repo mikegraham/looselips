@@ -91,6 +91,10 @@ Install and start it separately (`ollama serve`), then
 pull a model (`ollama pull qwen3:32b`). We've seen good results with
 `ollama/qwen3:32b`, which runs on consumer GPUs (needs ~20GB VRAM).
 
+looselips asks Ollama for a 16k-token context window on every request, so
+budget VRAM for that. Ollama's own default depends on available VRAM and
+is 4096 tokens without a GPU, which silently truncates long conversations.
+
 ### Benchmarking models
 
 The `looselips-bench` command runs your matchers against built-in labeled

@@ -8,12 +8,15 @@ import litellm.exceptions
 import pytest
 
 from looselips.matchers import (
+    LLM_NUM_CTX,
     LLMParseError,
     LLMVerdict,
+    _provider_params,
     _snippet,
     llm_scan,
     regex_scan,
 )
+from tests.conftest import FakeOllama
 
 SIMPLE_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
     ("Email", re.compile(r"\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b")),
@@ -115,3 +118,33 @@ def test_llm_scan_wraps_errors(
 
     with pytest.raises(LLMParseError, match="connection failed"):
         llm_scan("Title", "text", "model")
+
+
+@pytest.mark.parametrize(
+    ("model", "expected"),
+    [
+        ("ollama/qwen3:32b", {"num_ctx": LLM_NUM_CTX}),
+        ("ollama_chat/qwen3:32b", {"num_ctx": LLM_NUM_CTX}),
+        ("openai/gpt-5.2", {}),
+        ("anthropic/claude-sonnet-4-5-20250929", {}),
+    ],
+)
+def test_provider_params(model: str, expected: dict[str, int]) -> None:
+    assert _provider_params(model) == expected
+
+
+def test_llm_scan_sends_num_ctx_to_ollama(fake_ollama: FakeOllama) -> None:
+    """The context size must reach Ollama's request options.
+
+    Regression test: nothing set num_ctx, so Ollama used its 4096-token
+    default and silently truncated long chunks.  This goes through the real
+    instructor + litellm stack to a local fake server, so it also catches a
+    litellm change that stops forwarding the option.
+    """
+    result = llm_scan("Test Chat", "Hello I am Bob", "ollama/fake", name="pii")
+
+    assert result.found is True
+    assert len(fake_ollama.requests) == 1
+    body = fake_ollama.requests[0]
+    assert body["options"]["num_ctx"] == LLM_NUM_CTX
+    assert body["options"]["num_predict"] == 2000
