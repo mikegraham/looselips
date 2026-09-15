@@ -175,6 +175,9 @@
 
 <h1>looselips: {{ input_name }}</h1>
 <p class="sub">Generated {{ now }}</p>
+{% if scanned is not none and scanned < total %}
+<p class="sub"><b>Partial report:</b> {{ scanned }} of {{ total }} conversations scanned so far. The scan is still running or was interrupted.</p>
+{% endif %}
 
 <div class="stats">
   <div class="stat">

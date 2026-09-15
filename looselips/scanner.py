@@ -5,7 +5,7 @@ from __future__ import annotations
 import logging
 import re
 import time
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass, field
 
 from .matchers import LLMParseError, Match, llm_scan, regex_scan
@@ -152,6 +152,7 @@ def scan(
     patterns: Sequence[tuple[str, re.Pattern[str]]],
     llm_model: str | None = None,
     llm_matchers: Sequence[tuple[str, str, str | None]] | None = None,
+    on_progress: Callable[[ScanResult, int], None] | None = None,
 ) -> ScanResult:
     """Scan conversations and return results.
 
@@ -166,6 +167,9 @@ def scan(
     llm_matchers : sequence of (name, system_prompt, model_override) or None
         Explicit LLM matchers from config.  Falls back to the built-in
         system prompt when *llm_model* is set but no matchers are given.
+    on_progress : callable or None
+        Called after each conversation with the results so far and the
+        number scanned, so callers can checkpoint a long scan.
     """
     logger.debug("scan: %d conversations, %d regex patterns, llm_model=%s",
                  len(conversations), len(patterns), llm_model)
@@ -215,5 +219,8 @@ def scan(
 
         if matches:
             flagged.append(ConversationResult(conversation=conv, matches=matches))
+
+        if on_progress is not None:
+            on_progress(ScanResult(total=total, flagged=flagged, errors=errors), i)
 
     return ScanResult(total=len(conversations), flagged=flagged, errors=errors)

@@ -7,7 +7,7 @@ import pytest
 
 from looselips.matchers import LLMParseError, Match
 from looselips.parsers import Conversation, Message
-from looselips.scanner import _chunk_conversation, scan
+from looselips.scanner import ScanResult, _chunk_conversation, scan
 
 
 def _conv(
@@ -117,3 +117,15 @@ def test_scan_llm_parse_error_recorded() -> None:
     assert len(result.flagged) == 0
 
 
+def test_scan_on_progress_reports_after_each_conversation() -> None:
+    convs = [
+        _conv([("user", f"hello test{i}@x.com")], conv_id=f"c{i}", title=f"t{i}")
+        for i in range(3)
+    ]
+    seen: list[tuple[int, int, int]] = []
+
+    def on_progress(partial: ScanResult, scanned: int) -> None:
+        seen.append((scanned, partial.total, len(partial.flagged)))
+
+    scan(convs, patterns=SIMPLE_PATTERNS, on_progress=on_progress)
+    assert seen == [(1, 3, 1), (2, 3, 2), (3, 3, 3)]

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from datetime import datetime
 from pathlib import Path
 
@@ -29,8 +30,14 @@ def _highlight(context: str, matched_text: str) -> Markup:
     )
 
 
-def generate_html(result: ScanResult, input_name: str = "scan") -> str:
-    """Generate a self-contained HTML report."""
+def generate_html(
+    result: ScanResult, input_name: str = "scan", scanned: int | None = None
+) -> str:
+    """Generate a self-contained HTML report.
+
+    *scanned* marks a partial report written mid-scan: how many of
+    result.total conversations have been processed so far.
+    """
     env = Environment(
         loader=FileSystemLoader(_TEMPLATE_DIR),
         autoescape=select_autoescape(default=True),
@@ -46,14 +53,26 @@ def generate_html(result: ScanResult, input_name: str = "scan") -> str:
         now=now_str,
         total=result.total,
         flagged_count=len(result.flagged),
-        clean=result.total - len(result.flagged),
+        # Mid-scan, conversations not scanned yet are not clean.
+        clean=(result.total if scanned is None else scanned) - len(result.flagged),
         total_matches=total_matches,
         conversations=result.flagged,
+        scanned=scanned,
     )
 
 
 def write_report(
-    result: ScanResult, path: str | Path, input_name: str = "scan"
+    result: ScanResult,
+    path: str | Path,
+    input_name: str = "scan",
+    scanned: int | None = None,
 ) -> None:
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(generate_html(result, input_name=input_name))
+    """Write the HTML report atomically (temp file + rename).
+
+    The CLI rewrites the report periodically during a long scan, so a
+    crash or interrupt must never leave a half-written file behind.
+    """
+    tmp = f"{path}.tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        f.write(generate_html(result, input_name=input_name, scanned=scanned))
+    os.replace(tmp, path)
