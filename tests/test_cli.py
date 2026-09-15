@@ -9,6 +9,7 @@ from typing import Any
 import pytest
 
 from looselips.cli.app import main
+from looselips.report import write_report
 
 
 def _write_export(tmp_path: Path, data: list[dict[str, Any]] | None = None) -> str:
@@ -113,3 +114,31 @@ def test_very_verbose_flag(tmp_path: Path) -> None:
     assert root.level == logging.DEBUG
     # Unlike -v, -vv should NOT quiet LiteLLM
     assert logging.getLogger("LiteLLM").level != logging.WARNING
+
+
+def test_report_is_written_during_scan(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """With the interval at 0, every conversation checkpoints a partial report.
+
+    Regression test: results used to exist only in memory until the very
+    end, so a crash at the final write lost the whole scan.
+    """
+    import looselips.cli.app as app
+
+    monkeypatch.setattr(app, "REPORT_INTERVAL", 0)
+    export = _write_export(tmp_path)
+    output = tmp_path / "report.html"
+    calls: list[int | None] = []
+    real = write_report
+
+    def spy(*args: Any, **kwargs: Any) -> None:
+        calls.append(kwargs.get("scanned"))
+        real(*args, **kwargs)
+
+    monkeypatch.setattr(app, "write_report", spy)
+    main([export, "-o", str(output)])
+    assert calls[-1] is None  # final, complete report
+    assert len(calls) >= 2
+    assert all(c is not None for c in calls[:-1])
+    assert output.exists()

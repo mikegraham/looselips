@@ -13,11 +13,14 @@ import argcomplete
 
 from looselips.input import InputError, load_conversations
 from looselips.report import write_report
-from looselips.scanner import scan
+from looselips.scanner import ScanResult, scan
 
 from .config import ConfigError, build_llm_matchers, build_regex_patterns, load_config
 
 logger = logging.getLogger(__name__)
+
+# How often (seconds) to rewrite the report during a scan.
+REPORT_INTERVAL = 30
 
 
 def main(argv: Sequence[str] | None = None) -> None:
@@ -86,6 +89,17 @@ def main(argv: Sequence[str] | None = None) -> None:
 
     logger.info("  %d conversations", len(conversations))
 
+    # Rewrite the report every REPORT_INTERVAL seconds so an interrupted or
+    # crashed scan (hours of GPU time) leaves its results so far on disk.
+    last_write = time.monotonic()
+
+    def checkpoint(partial: ScanResult, scanned: int) -> None:
+        nonlocal last_write
+        if time.monotonic() - last_write < REPORT_INTERVAL:
+            return
+        write_report(partial, output_path, input_name=input_stem, scanned=scanned)
+        last_write = time.monotonic()
+
     logger.info("Scanning...")
     t0 = time.time()
     result = scan(
@@ -93,6 +107,7 @@ def main(argv: Sequence[str] | None = None) -> None:
         patterns=patterns,
         llm_model=llm_model,
         llm_matchers=llm_matchers or None,
+        on_progress=checkpoint,
     )
     elapsed = time.time() - t0
 

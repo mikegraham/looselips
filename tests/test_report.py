@@ -1,5 +1,6 @@
 """Tests for looselips.report."""
 
+import re
 from pathlib import Path
 
 import pytest
@@ -104,3 +105,20 @@ def test_write_report_creates_file(tmp_path: Path, regex_result: ScanResult) -> 
     write_report(regex_result, str(out))
     content = out.read_text(encoding="utf-8")
     assert "Test Chat" in content
+
+
+def test_partial_report_is_marked(tmp_path: Path) -> None:
+    result = ScanResult(total=10, flagged=[])
+    out = tmp_path / "report.html"
+    write_report(result, out, scanned=4)
+    html = out.read_text()
+    assert "Partial report" in html
+    assert "4 of 10" in html
+    assert not (tmp_path / "report.html.tmp").exists()
+    # Only scanned conversations count as clean in a partial report.
+    assert re.search(r"<b>4</b>\s*<span>Clean</span>", html)
+
+    write_report(result, out)
+    html = out.read_text()
+    assert "Partial report" not in html
+    assert re.search(r"<b>10</b>\s*<span>Clean</span>", html)
