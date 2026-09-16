@@ -68,6 +68,10 @@ prompt = "Find medical and health information: conditions, medications, doctor n
 
 You can override the model per-matcher with the `model` key.
 
+LLM calls run one at a time unless you pass `--jobs N`. Set it at or a
+little above the server's own parallelism; for Ollama that means starting
+it with `OLLAMA_NUM_PARALLEL=N`, otherwise the extra calls just queue.
+
 ## Choosing a model
 
 The `model` field in your config is a
