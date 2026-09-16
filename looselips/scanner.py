@@ -6,6 +6,7 @@ import logging
 import re
 import time
 from collections.abc import Callable, Sequence
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 
 from .matchers import LLMParseError, Match, llm_scan, regex_scan
@@ -196,6 +197,7 @@ def scan(
     llm_model: str | None = None,
     llm_matchers: Sequence[tuple[str, str, str | None]] | None = None,
     on_progress: Callable[[ScanResult, int], None] | None = None,
+    jobs: int = 1,
 ) -> ScanResult:
     """Scan conversations and return results.
 
@@ -213,7 +215,14 @@ def scan(
     on_progress : callable or None
         Called after each conversation with the results so far and the
         number scanned, so callers can checkpoint a long scan.
+    jobs : int
+        Conversations to run LLM matchers on concurrently.  The calls are
+        network-bound, so this should be at or a little above the server's
+        parallelism (OLLAMA_NUM_PARALLEL for Ollama).  Results are always
+        in input order.
     """
+    if jobs < 1:
+        raise ValueError(f"jobs must be >= 1, got {jobs}")
     logger.debug("scan: %d conversations, %d regex patterns, llm_model=%s",
                  len(conversations), len(patterns), llm_model)
 
@@ -235,23 +244,34 @@ def scan(
 
     flagged = []
     errors: list[ConversationError] = []
-
     total = len(conversations)
-    for i, conv in enumerate(conversations, 1):
-        if not conv.messages:
-            logger.debug("(%d/%d) conversation %r has 0 messages, skipping",
-                         i, total, conv.title)
 
-        matches: list[Match] = []
+    def run_llm(item: tuple[int, Conversation]) -> list[MatcherResult]:
+        i, conv = item
+        if not effective_llm or not conv.messages:
+            return []
+        logger.info("(%d/%d) %r (%d messages)",
+                     i, total, conv.title, len(conv.messages))
+        return scan_conversation_llm(conv, effective_llm)
 
-        if patterns and conv.messages:
-            full_text = "\n\n".join(m.text for m in conv.messages)
-            matches.extend(regex_scan(full_text, patterns))
+    # The LLM pass runs in worker threads; everything else stays on this
+    # thread and consumes results in input order, so ordering, progress
+    # checkpoints, and error recording are unaffected by concurrency.
+    pool = ThreadPoolExecutor(max_workers=jobs)
+    try:
+        llm_results = pool.map(run_llm, enumerate(conversations, 1))
+        for i, conv in enumerate(conversations, 1):
+            if not conv.messages:
+                logger.debug("(%d/%d) conversation %r has 0 messages, skipping",
+                             i, total, conv.title)
 
-        if effective_llm and conv.messages:
-            logger.info("(%d/%d) %r (%d messages)",
-                         i, total, conv.title, len(conv.messages))
-            for mr in scan_conversation_llm(conv, effective_llm):
+            matches: list[Match] = []
+
+            if patterns and conv.messages:
+                full_text = "\n\n".join(m.text for m in conv.messages)
+                matches.extend(regex_scan(full_text, patterns))
+
+            for mr in next(llm_results):
                 matches.extend(mr.matches)
                 if mr.error:
                     logger.error("[%s] FAILED on %r: %s",
@@ -260,10 +280,14 @@ def scan(
                         conversation=conv, matcher=mr.name, error=mr.error,
                     ))
 
-        if matches:
-            flagged.append(ConversationResult(conversation=conv, matches=matches))
+            if matches:
+                flagged.append(ConversationResult(conversation=conv, matches=matches))
 
-        if on_progress is not None:
-            on_progress(ScanResult(total=total, flagged=flagged, errors=errors), i)
+            if on_progress is not None:
+                on_progress(ScanResult(total=total, flagged=flagged, errors=errors), i)
+    finally:
+        # On Ctrl-C or an unexpected error, drop the queued conversations
+        # instead of draining them; in-flight calls still run to completion.
+        pool.shutdown(wait=False, cancel_futures=True)
 
     return ScanResult(total=len(conversations), flagged=flagged, errors=errors)
