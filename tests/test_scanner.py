@@ -1,11 +1,12 @@
 """Tests for looselips.scanner."""
 
 import re
+import time
 from unittest.mock import patch
 
 import pytest
 
-from looselips.matchers import LLMParseError, Match
+from looselips.matchers import LLMParseError, LLMResult, Match
 from looselips.parsers import Conversation, Message
 from looselips.scanner import ScanResult, _chunk_conversation, scan
 
@@ -198,3 +199,48 @@ def test_scan_on_progress_reports_after_each_conversation() -> None:
 
     scan(convs, patterns=SIMPLE_PATTERNS, on_progress=on_progress)
     assert seen == [(1, 3, 1), (2, 3, 2), (3, 3, 3)]
+
+
+def _slow_llm_scan(
+    title: str, messages_text: str, model: str,
+    name: str = "llm", system_prompt: str = "",
+) -> LLMResult:
+    """Fake llm_scan where earlier conversations finish LAST."""
+    idx = int(title.removeprefix("t"))
+    time.sleep(0.01 * (9 - idx))
+    if idx % 3 == 0:
+        raise LLMParseError(f"boom {idx}")
+    return LLMResult(
+        found=True, reasoning=f"r{idx}", verdict_json="{}",
+        matches=[Match(category=name, matched_text=f"m{idx}",
+                       context=f"m{idx}", source="llm")],
+    )
+
+
+def _scan_nine(jobs: int) -> ScanResult:
+    convs = [
+        _conv([("user", f"msg test{i}@x.com")], conv_id=f"c{i}", title=f"t{i}")
+        for i in range(9)
+    ]
+    with patch("looselips.scanner.llm_scan", side_effect=_slow_llm_scan):
+        return scan(convs, patterns=SIMPLE_PATTERNS, llm_model="m",
+                    llm_matchers=[("pii", "find pii", None)], jobs=jobs)
+
+
+def test_scan_jobs_keeps_input_order() -> None:
+    """Concurrent scanning gives the same results, in the same order, as jobs=1."""
+    seq, par = _scan_nine(jobs=1), _scan_nine(jobs=4)
+    for result in (seq, par):
+        assert [r.conversation.title for r in result.flagged] == [
+            f"t{i}" for i in range(9)
+        ]
+        assert [e.conversation.title for e in result.errors] == ["t0", "t3", "t6"]
+        # regex match first, then the llm match (absent where the llm errored)
+        assert [m.source for m in result.flagged[1].matches] == ["regex", "llm"]
+        assert [m.source for m in result.flagged[0].matches] == ["regex"]
+
+
+@pytest.mark.parametrize("jobs", [0, -1])
+def test_scan_invalid_jobs_raises(jobs: int) -> None:
+    with pytest.raises(ValueError, match="jobs must be >= 1"):
+        scan([_conv([("user", "x")])], patterns=[], jobs=jobs)
