@@ -36,6 +36,11 @@ def main(argv: Sequence[str] | None = None) -> None:
         "-c", "--config", default=None, help="Path to looselips.toml config file"
     )
     parser.add_argument(
+        "-j", "--jobs", type=int, default=1, metavar="N",
+        help="LLM calls to keep in flight (default 1); set at or a little "
+             "above the server's parallelism, e.g. OLLAMA_NUM_PARALLEL for Ollama",
+    )
+    parser.add_argument(
         "-v", "--verbose", action="count", default=0,
         help="Increase verbosity (-v for DEBUG, -vv for litellm debug too)",
     )
@@ -75,6 +80,9 @@ def main(argv: Sequence[str] | None = None) -> None:
         logger.info("Config: %d regex, %d llm matchers, default_model=%s",
                      len(patterns), len(llm_matchers), llm_model)
 
+    if args.jobs < 1:
+        parser.error(f"--jobs must be >= 1, got {args.jobs}")
+
     input_path: str = args.input
 
     # Derive input name (for report title) and default output path
@@ -108,6 +116,7 @@ def main(argv: Sequence[str] | None = None) -> None:
         llm_model=llm_model,
         llm_matchers=llm_matchers or None,
         on_progress=checkpoint,
+        jobs=args.jobs,
     )
     elapsed = time.time() - t0
 

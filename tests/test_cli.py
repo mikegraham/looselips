@@ -5,11 +5,13 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Any
+from unittest.mock import patch
 
 import pytest
 
 from looselips.cli.app import main
 from looselips.report import write_report
+from looselips.scanner import scan
 
 
 def _write_export(tmp_path: Path, data: list[dict[str, Any]] | None = None) -> str:
@@ -142,3 +144,19 @@ def test_report_is_written_during_scan(
     assert len(calls) >= 2
     assert all(c is not None for c in calls[:-1])
     assert output.exists()
+
+
+def test_jobs_flag(tmp_path: Path) -> None:
+    export = _write_export(tmp_path)
+    output = str(tmp_path / "report.html")
+    with patch("looselips.cli.app.scan", wraps=scan) as spy:
+        main([export, "-o", output])
+        assert spy.call_args.kwargs["jobs"] == 1
+        main([export, "-o", output, "--jobs", "5"])
+        assert spy.call_args.kwargs["jobs"] == 5
+
+
+def test_jobs_flag_rejects_zero(tmp_path: Path) -> None:
+    export = _write_export(tmp_path)
+    with pytest.raises(SystemExit):
+        main([export, "-o", str(tmp_path / "r.html"), "--jobs", "0"])
