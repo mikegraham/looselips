@@ -207,9 +207,17 @@ class LLMParseError(Exception):
 
 
 def _provider_params(model: str) -> dict[str, Any]:
-    """Extra litellm kwargs needed for *model*'s provider (see LLM_NUM_CTX)."""
+    """Extra litellm kwargs needed for *model*'s provider.
+
+    For Ollama: the context window (see LLM_NUM_CTX), and thinking off.
+    The verdict's `reasoning` field is the chain-of-thought this scanner
+    wants; a thinking model's separate, unconstrained thinking on top of it
+    roughly triples the tokens per call, and on Ollama's /api/generate path
+    it breaks structured output outright (the answer lands in the thinking
+    channel and the response comes back empty).
+    """
     if model.startswith(OLLAMA_PREFIXES):
-        return {"num_ctx": LLM_NUM_CTX}
+        return {"num_ctx": LLM_NUM_CTX, "think": False}
     return {}
 
 
