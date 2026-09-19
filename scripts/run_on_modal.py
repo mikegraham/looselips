@@ -18,11 +18,11 @@ Examples:
 
     # Run benchmarks
     python scripts/run_on_modal.py bench \\
-        --config config.toml --model ollama/qwen3:8b --db results.db
+        --config config.toml --model ollama_chat/qwen3:8b --db results.db
 
     # Use a bigger GPU for a larger model
     python scripts/run_on_modal.py --gpu L40S bench \\
-        --config config.toml --model ollama/qwen3:32b --db results.db
+        --config config.toml --model ollama_chat/qwen3:32b --db results.db
 
     # Run all bench models in parallel (model gpu pairs)
     set -- \\
@@ -36,7 +36,7 @@ Examples:
         qwen2.5:0.5b none
     while [ $# -ge 2 ]; do
         python scripts/run_on_modal.py --gpu "$2" bench \\
-            --config config.toml --model "ollama/$1" --db bench.db &
+            --config config.toml --model "ollama_chat/$1" --db bench.db &
         shift 2
     done
     wait
@@ -59,7 +59,7 @@ import urllib.request
 
 OLLAMA_PORT = 11434
 APP_NAME = "looselips-ollama"
-OLLAMA_PREFIX = "ollama/"
+OLLAMA_PREFIXES = ("ollama/", "ollama_chat/")
 OLLAMA_RELEASES_URL = "https://github.com/ollama/ollama/releases/latest"
 
 
@@ -99,24 +99,30 @@ def _wait_healthy(url: str, tries: int = 30, interval: float = 1.0) -> bool:
     return False
 
 
+def _ollama_tag(model: str) -> str | None:
+    """Return the bare Ollama tag for an ollama/ or ollama_chat/ model string."""
+    for prefix in OLLAMA_PREFIXES:
+        if model.startswith(prefix):
+            return model.removeprefix(prefix)
+    return None
+
+
 def _models_from_config(config_path: str) -> list[str]:
     """Extract ollama model tags from a looselips config file.
 
-    Returns bare model tags (no 'ollama/' prefix) for all models
-    that use the ollama provider.
+    Returns bare model tags (no 'ollama/' or 'ollama_chat/' prefix) for
+    all models that use an ollama provider.
     """
     with open(config_path, "rb") as f:
         raw = tomllib.load(f)
 
     models: set[str] = set()
-    default = raw.get("model", "")
-    if default.startswith(OLLAMA_PREFIX):
-        models.add(default.removeprefix(OLLAMA_PREFIX))
-
-    for m in raw.get("matcher", []):
-        override = m.get("model", "")
-        if override.startswith(OLLAMA_PREFIX):
-            models.add(override.removeprefix(OLLAMA_PREFIX))
+    candidates = [raw.get("model", "")]
+    candidates += [m.get("model", "") for m in raw.get("matcher", [])]
+    for model in candidates:
+        tag = _ollama_tag(model)
+        if tag:
+            models.add(tag)
 
     return sorted(models)
 
@@ -226,12 +232,10 @@ def _run(args: argparse.Namespace) -> None:
 
     # Include --model override so it gets baked into the image
     if args.command == "bench" and args.model:
-        override = args.model
-        if override.startswith(OLLAMA_PREFIX):
-            tag = override.removeprefix(OLLAMA_PREFIX)
-            if tag not in models:
-                models.append(tag)
-                models.sort()
+        tag = _ollama_tag(args.model)
+        if tag and tag not in models:
+            models.append(tag)
+            models.sort()
 
     if not models:
         print("ERROR: no ollama models found in config", file=sys.stderr)
@@ -325,7 +329,7 @@ def main() -> None:
     sp_bench.add_argument("--config", required=True, help="looselips config file")
     sp_bench.add_argument(
         "--model", required=True,
-        help="model to benchmark (e.g. ollama/qwen3:8b)",
+        help="model to benchmark (e.g. ollama_chat/qwen3:8b)",
     )
     sp_bench.add_argument("--db", required=True, help="SQLite database path")
     sp_bench.add_argument("--output", default=None, help="output HTML report path")
