@@ -61,6 +61,7 @@ OLLAMA_PORT = 11434
 APP_NAME = "looselips-ollama"
 OLLAMA_PREFIX = "ollama/"
 OLLAMA_RELEASES_URL = "https://github.com/ollama/ollama/releases/latest"
+DEFAULT_OLLAMA_VERSION = "0.34.1"
 
 
 def _latest_ollama_version() -> str:
@@ -145,7 +146,7 @@ def _create_sandbox(args: argparse.Namespace, models: list[str]) -> tuple[object
     import modal
 
     modal.enable_output()
-    ollama_version = _latest_ollama_version()
+    ollama_version = args.ollama_version or _latest_ollama_version()
     print(f"Ollama {ollama_version}, GPU {args.gpu}, models: {', '.join(models)}")
 
     app = modal.App.lookup(APP_NAME, create_if_missing=True)
@@ -168,15 +169,19 @@ def _create_sandbox(args: argparse.Namespace, models: list[str]) -> tuple[object
         "bash", "-lc", "ollama serve",
         **sandbox_kwargs,
     )
+    # Print the ID before anything else can fail, so a stuck sandbox can
+    # always be found and stopped by hand.
+    print(f"Sandbox {sb.object_id} created (stop: modal container stop {sb.object_id})")
 
-    tunnel = sb.tunnels()[OLLAMA_PORT]
-    url = tunnel.url
-
-    print("Waiting for Ollama to become healthy...")
-    if not _wait_healthy(url):
-        print("ERROR: Ollama did not become healthy after 30s", file=sys.stderr)
+    try:
+        url = sb.tunnels()[OLLAMA_PORT].url
+        print("Waiting for Ollama to become healthy...")
+        if not _wait_healthy(url):
+            raise RuntimeError("Ollama did not become healthy after 30s")
+    except BaseException as e:
+        print(f"ERROR: sandbox startup failed ({e!r}); terminating it", file=sys.stderr)
         sb.terminate()
-        sys.exit(1)
+        raise
     print("Ollama is up.")
 
     return sb, url
@@ -189,7 +194,8 @@ def _backend_tag(gpu: str) -> str:
 
 def _build_scan_cmd(args: argparse.Namespace) -> list[str]:
     """Build the looselips CLI command for scanning."""
-    cmd = ["looselips"]
+    # Same interpreter as this script, so the venv need not be activated.
+    cmd = [sys.executable, "-m", "looselips"]
     if args.config:
         cmd.extend(["--config", args.config])
     if args.output:
@@ -246,6 +252,7 @@ def _run(args: argparse.Namespace) -> None:
     print(f"  URL       : {url}")
     print(f"  Models    : {', '.join(models)}")
     print(f"  GPU       : {args.gpu}")
+    print(f"  Ollama    : {args.ollama_version or 'latest'}")
     print(f"  Expires   : {idle} idle / {maxlife} max")
     print()
     print(f"  Dashboard : https://modal.com/apps/{APP_NAME}")
@@ -309,6 +316,13 @@ def main() -> None:
     ap.add_argument(
         "--timeout", type=int, default=8 * 60 * 60, metavar="SEC",
         help="hard max lifetime in seconds (%(default)ss)",
+    )
+
+    ap.add_argument(
+        "--ollama-version", default=DEFAULT_OLLAMA_VERSION, metavar="X.Y.Z",
+        help="Ollama release to install (%(default)s); the image, including "
+             "the pulled models, is cached per version, so changing it "
+             "re-downloads the models. Pass '' for the latest release.",
     )
 
     sub = ap.add_subparsers(dest="command", required=True)
