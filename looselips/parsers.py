@@ -139,7 +139,15 @@ def parse_claude(data: bytes) -> list[Conversation]:
         messages: list[Message] = []
         for msg in raw.get("chat_messages", []):
             role = msg.get("sender", "unknown")
-            text = (msg.get("text") or "").strip()
+            parts = [(msg.get("text") or "").strip()]
+            # The text of attached files (pasted documents, uploaded text
+            # files) is stored per attachment, not in the message text.
+            for att in msg.get("attachments") or []:
+                content = (att.get("extracted_content") or "").strip()
+                if content:
+                    name = att.get("file_name") or "unnamed"
+                    parts.append(f"[Attachment: {name}]\n{content}")
+            text = "\n\n".join(p for p in parts if p)
             if not text:
                 continue
             messages.append(Message(role=role, text=text))

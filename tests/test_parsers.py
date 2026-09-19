@@ -295,6 +295,45 @@ def test_parse_claude_skips_empty_text() -> None:
     assert convs[0].messages[1].text == "Real reply"
 
 
+
+def test_parse_claude_includes_attachment_text() -> None:
+    """Attached file text is scanned along with the message.
+
+    Regression test: extracted_content lives in attachments[], separate
+    from the message text, and was never read.
+    """
+    data = _claude_export(
+        messages=[
+            {
+                "sender": "human",
+                "text": "Can you fix this config?",
+                "content": [],
+                "attachments": [
+                    {"file_name": ".env",
+                     "extracted_content": "API_KEY=sk_live_123"},
+                    {"file_name": "empty.txt", "extracted_content": ""},
+                ],
+            },
+            {
+                "sender": "human",
+                "text": "",
+                "content": [],
+                "attachments": [
+                    {"file_name": "notes.txt", "extracted_content": "SSN 123"},
+                ],
+            },
+        ]
+    )
+    convs = parse_claude(_to_bytes(data))
+
+    msgs = convs[0].messages
+    assert len(msgs) == 2
+    assert msgs[0].text == (
+        "Can you fix this config?\n\n[Attachment: .env]\nAPI_KEY=sk_live_123"
+    )
+    # A message whose only content is an attachment is kept.
+    assert msgs[1].text == "[Attachment: notes.txt]\nSSN 123"
+
 def test_parse_claude_includes_all_senders() -> None:
     """All senders are included to avoid false negatives."""
     data = _claude_export(
