@@ -172,7 +172,9 @@ def _create_sandbox(args: argparse.Namespace, models: list[str]) -> tuple[object
 
     print("Starting sandbox...")
     sb = modal.Sandbox.create(
-        "bash", "-lc", "ollama serve",
+        # Set at run time, not on the image, so changing it does not
+        # rebuild the image and re-download the models.
+        "bash", "-lc", f"OLLAMA_NUM_PARALLEL={args.num_parallel} ollama serve",
         **sandbox_kwargs,
     )
     # Print the ID before anything else can fail, so a stuck sandbox can
@@ -206,6 +208,8 @@ def _build_scan_cmd(args: argparse.Namespace) -> list[str]:
         cmd.extend(["--config", args.config])
     if args.output:
         cmd.extend(["--output", args.output])
+    if args.jobs:
+        cmd.extend(["--jobs", str(args.jobs)])
     verbosity = args.verbose or 1
     cmd.append("-" + "v" * verbosity)
     cmd.append(args.input)
@@ -256,7 +260,8 @@ def _run(args: argparse.Namespace) -> None:
     print(f"  URL       : {url}")
     print(f"  Models    : {', '.join(models)}")
     print(f"  GPU       : {args.gpu}")
-    print(f"  Ollama    : {args.ollama_version or 'latest'}")
+    print(f"  Ollama    : {args.ollama_version or 'latest'}, "
+          f"parallel {args.num_parallel}")
     print(f"  Expires   : {idle} idle / {maxlife} max")
     print()
     print(f"  Dashboard : https://modal.com/apps/{APP_NAME}")
@@ -268,6 +273,8 @@ def _run(args: argparse.Namespace) -> None:
     backend = _backend_tag(args.gpu)
 
     if args.command == "scan":
+        if args.jobs is None:
+            args.jobs = 2 * args.num_parallel
         cmd = _build_scan_cmd(args)
     else:
         cmd = _build_bench_cmd(args, backend)
@@ -328,6 +335,10 @@ def main() -> None:
              "the pulled models, is cached per version, so changing it "
              "re-downloads the models. Pass '' for the latest release.",
     )
+    ap.add_argument(
+        "--num-parallel", type=int, default=1, metavar="N",
+        help="OLLAMA_NUM_PARALLEL for the server (%(default)s)",
+    )
 
     sub = ap.add_subparsers(dest="command", required=True)
 
@@ -335,6 +346,10 @@ def main() -> None:
     sp_scan = sub.add_parser("scan", help="Run looselips scan")
     sp_scan.add_argument("--config", required=True, help="looselips config file")
     sp_scan.add_argument("--output", default=None, help="output report path")
+    sp_scan.add_argument(
+        "-j", "--jobs", type=int, default=None, metavar="N",
+        help="looselips --jobs; defaults to 2 * --num-parallel",
+    )
     sp_scan.add_argument("-v", "--verbose", action="count", default=0)
     sp_scan.add_argument("input", help="export file (.json or .zip)")
 
