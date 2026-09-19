@@ -47,16 +47,22 @@ def generate_html(
 
     now_str = datetime.now().strftime("%B %d, %Y at %I:%M %p")
     total_matches = sum(len(r.matches) for r in result.flagged)
+    # A conversation whose LLM call failed was not fully scanned: list it
+    # and never count it as clean.  Deduplicated, since each failed matcher
+    # records its own error.
+    errored = list({id(e.conversation): e.conversation for e in result.errors}.values())
+    not_clean = {id(c) for c in errored} | {id(r.conversation) for r in result.flagged}
 
     return template.render(
         input_name=input_name,
         now=now_str,
         total=result.total,
         flagged_count=len(result.flagged),
-        # Mid-scan, conversations not scanned yet are not clean.
-        clean=(result.total if scanned is None else scanned) - len(result.flagged),
+        # Mid-scan, conversations not scanned yet are not clean either.
+        clean=(result.total if scanned is None else scanned) - len(not_clean),
         total_matches=total_matches,
         conversations=result.flagged,
+        errored=errored,
         scanned=scanned,
     )
 

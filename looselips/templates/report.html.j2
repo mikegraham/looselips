@@ -60,6 +60,8 @@
 
     .stat.flagged b { color: #ef4444; }
     .stat.clean b   { color: #22c55e; }
+    .stat.errors b  { color: #f59e0b; }
+    .sub a          { color: #60a5fa; }
 
     .conv {
       background: #1e293b;
@@ -192,11 +194,20 @@
     <b>{{ clean }}</b>
     <span>Clean</span>
   </div>
+  <div class="stat errors">
+    <b>{{ errored | length }}</b>
+    <span>Errors</span>
+  </div>
   <div class="stat">
     <b>{{ total_matches }}</b>
     <span>Matches</span>
   </div>
 </div>
+
+{% if errored %}
+<p class="sub"><b>Not fully scanned</b> (an LLM call failed; see the log):
+{% for conv in errored %}<a href="{{ conv.url }}" target="_blank">{{ conv.title }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</p>
+{% endif %}
 
 {% if conversations %}
   {% for cr in conversations %}
