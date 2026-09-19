@@ -8,7 +8,7 @@ import pytest
 from looselips.matchers import Match
 from looselips.parsers import Conversation, Message
 from looselips.report import generate_html, write_report
-from looselips.scanner import ConversationResult, ScanResult
+from looselips.scanner import ConversationError, ConversationResult, ScanResult
 
 
 @pytest.fixture
@@ -122,3 +122,22 @@ def test_partial_report_is_marked(tmp_path: Path) -> None:
     html = out.read_text()
     assert "Partial report" not in html
     assert re.search(r"<b>10</b>\s*<span>Clean</span>", html)
+
+
+def test_errored_conversations_listed_not_clean() -> None:
+    """Regression test: a conversation whose LLM call failed was missing
+    from the report and counted as clean."""
+    bad = Conversation(id="bad", title="Timed Out", messages=[Message("user", "hi")])
+    result = ScanResult(
+        total=2,
+        flagged=[],
+        errors=[
+            ConversationError(conversation=bad, matcher="pii", error="timeout"),
+            ConversationError(conversation=bad, matcher="other", error="timeout"),
+        ],
+    )
+    html = generate_html(result)
+    assert re.search(r"<b>1</b>\s*<span>Clean</span>", html)
+    assert re.search(r"<b>1</b>\s*<span>Errors</span>", html)
+    assert "Not fully scanned" in html
+    assert bad.url in html
