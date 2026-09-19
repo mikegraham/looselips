@@ -123,8 +123,8 @@ def test_llm_scan_wraps_errors(
 @pytest.mark.parametrize(
     ("model", "expected"),
     [
-        ("ollama/qwen3:32b", {"num_ctx": LLM_NUM_CTX}),
-        ("ollama_chat/qwen3:32b", {"num_ctx": LLM_NUM_CTX}),
+        ("ollama/qwen3:32b", {"num_ctx": LLM_NUM_CTX, "think": False}),
+        ("ollama_chat/qwen3:32b", {"num_ctx": LLM_NUM_CTX, "think": False}),
         ("openai/gpt-5.2", {}),
         ("anthropic/claude-sonnet-4-5-20250929", {}),
     ],
@@ -133,18 +133,21 @@ def test_provider_params(model: str, expected: dict[str, int]) -> None:
     assert _provider_params(model) == expected
 
 
-def test_llm_scan_sends_num_ctx_to_ollama(fake_ollama: FakeOllama) -> None:
-    """The context size must reach Ollama's request options.
+@pytest.mark.parametrize("model", ["ollama/fake", "ollama_chat/fake"])
+def test_llm_scan_ollama_request_options(fake_ollama: FakeOllama, model: str) -> None:
+    """num_ctx and think=false must reach Ollama's request, on both endpoints.
 
     Regression test: nothing set num_ctx, so Ollama used its 4096-token
-    default and silently truncated long chunks.  This goes through the real
+    default and silently truncated long chunks; and with thinking left on,
+    newer Qwen models returned empty content.  This goes through the real
     instructor + litellm stack to a local fake server, so it also catches a
-    litellm change that stops forwarding the option.
+    litellm change that stops forwarding either option.
     """
-    result = llm_scan("Test Chat", "Hello I am Bob", "ollama/fake", name="pii")
+    result = llm_scan("Test Chat", "Hello I am Bob", model, name="pii")
 
     assert result.found is True
     assert len(fake_ollama.requests) == 1
     body = fake_ollama.requests[0]
     assert body["options"]["num_ctx"] == LLM_NUM_CTX
     assert body["options"]["num_predict"] == 2000
+    assert body["think"] is False
