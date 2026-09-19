@@ -53,7 +53,7 @@ Each one runs a separate inference pass per conversation chunk, so prefer
 a few focused matchers over many broad ones.
 
 ```toml
-model = "ollama/qwen3:32b"
+model = "ollama_chat/qwen3:32b"
 
 [[matcher]]
 type = "llm"
@@ -81,9 +81,14 @@ environment variable. For Ollama, no key is needed.
 
 | Provider | Example model string | Environment variable |
 |----------|---------------------|---------------------|
-| [Ollama](https://ollama.com/) | `ollama/qwen3:32b` | `OLLAMA_API_BASE` (optional) |
+| [Ollama](https://ollama.com/) | `ollama_chat/qwen3:32b` | `OLLAMA_API_BASE` (optional) |
 | OpenAI | `openai/gpt-5.2` | `OPENAI_API_KEY` |
 | Anthropic | `anthropic/claude-sonnet-4-5-20250929` | `ANTHROPIC_API_KEY` |
+
+For Ollama, prefer the `ollama_chat/` prefix to `ollama/`. It uses Ollama's
+chat endpoint, which passes the scanner instructions to the model as a
+system message; `ollama/` uses the generate endpoint, where they arrive
+flattened into a single prompt with the conversation.
 
 `--model` on the command line overrides the config file. These are just
 a few examples; LiteLLM supports
@@ -93,7 +98,7 @@ its own environment variable for authentication.
 For local/private scanning, Ollama keeps everything on your machine.
 Install and start it separately (`ollama serve`), then
 pull a model (`ollama pull qwen3:32b`). We've seen good results with
-`ollama/qwen3:32b`, which runs on consumer GPUs (needs ~20GB VRAM).
+`ollama_chat/qwen3:32b`, which runs on consumer GPUs (needs ~20GB VRAM).
 
 looselips asks Ollama for a 16k-token context window on every request, so
 budget VRAM for that. Ollama's own default depends on available VRAM and
@@ -107,11 +112,11 @@ evaluate whether a model is accurate enough before running a full scan.
 
 ```bash
 # Benchmark a model
-looselips-bench --backend local --model ollama/qwen3:32b -c looselips.toml
+looselips-bench --backend local --model ollama_chat/qwen3:32b -c looselips.toml
 
 # Compare two models (results accumulate in a SQLite DB between runs)
-looselips-bench --backend local --model ollama/qwen3:32b -c looselips.toml
-looselips-bench --backend local --model ollama/qwen3:8b -c looselips.toml
+looselips-bench --backend local --model ollama_chat/qwen3:32b -c looselips.toml
+looselips-bench --backend local --model ollama_chat/qwen3:8b -c looselips.toml
 
 # Re-render the report from cached results without re-running inference
 looselips-bench --report-only --db bench_report.db -o bench_report.html

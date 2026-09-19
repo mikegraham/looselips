@@ -8,7 +8,10 @@
 # are supported.
 
 # Default model for LLM matchers (any LiteLLM model string). Required to have llm matchers below.
-model = "ollama/qwen3:32b"
+# ollama_chat/ sends the scanner prompt to Ollama's chat endpoint as a real
+# system message. ollama/ also works, but its generate endpoint gets the
+# system and user messages flattened into a single prompt.
+model = "ollama_chat/qwen3:32b"
 
 [[matcher]]
 type = "regex"
